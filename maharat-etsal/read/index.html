@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مراجعة مهارات الأتصال</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b111a;
+        --bg2: #15202b;
+        --bg3: #223447;
+        --primary: #0284c7;
+        --primary-light: #38bdf8;
+        --gold: #06b6d4;
+        --gold-light: #22d3ee;
+        --purple: #8b5cf6;
+        --purple-light: #a78bfa;
+        --text: #e8ecf1;
+        --text-muted: #8b99a8;
+        --ch1: #38bdf8;
+        --ch2: #8b5cf6;
+        --ch3: #06b6d4;
+        --ch4: #d97706;
+        --ch5: #10b981;
+        --ch6: #ec4899;
+        --ch7: #ef4444;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      /* ═══════════════════════════════════════════
+         HERO
+      ═══════════════════════════════════════════ */
+      .hero {
+        background: var(--bg2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 60px 20px 40px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(6, 182, 212, 0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(6, 182, 212, 0.4);
+        color: var(--gold-light);
+        padding: 8px 24px;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        margin-bottom: 24px;
+        opacity: 0;
+      }
+.hero-badge a span {
+color: var(--gold-light);
+
+}
+      .hero h1 {
+        font-family: "Amiri", serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        color: var(--gold);
+        text-shadow: 0 0 60px rgba(6, 182, 212, 0.35), 0 4px 20px rgba(0, 0, 0, 0.4);
+        margin-bottom: 12px;
+        opacity: 0;
+      }
+
+      .hero > p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 35px;
+        opacity: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TOC
+      ═══════════════════════════════════════════ */
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .toc a {
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      .toc a:hover {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .toc a:nth-child(1) {
+        background: rgba(56, 189, 248, 0.1);
+        border-color: rgba(56, 189, 248, 0.4);
+        color: var(--ch1);
+      }
+      .toc a:nth-child(1):hover {
+        background: rgba(56, 189, 248, 0.2);
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+      }
+
+      .toc a:nth-child(2) {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.4);
+        color: var(--ch2);
+      }
+      .toc a:nth-child(2):hover {
+        background: rgba(139, 92, 246, 0.2);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+      }
+
+      .toc a:nth-child(3) {
+        background: rgba(6, 182, 212, 0.1);
+        border-color: rgba(6, 182, 212, 0.4);
+        color: var(--ch3);
+      }
+      .toc a:nth-child(3):hover {
+        background: rgba(6, 182, 212, 0.2);
+        box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+      }
+
+      .toc a:nth-child(4) {
+        background: rgba(217, 119, 6, 0.1);
+        border-color: rgba(217, 119, 6, 0.4);
+        color: var(--ch4);
+      }
+      .toc a:nth-child(4):hover {
+        background: rgba(217, 119, 6, 0.2);
+        box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+      }
+
+      .toc a:nth-child(5) {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: var(--ch5);
+      }
+      .toc a:nth-child(5):hover {
+        background: rgba(16, 185, 129, 0.2);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+      }
+
+      .toc a:nth-child(6) {
+        background: rgba(236, 72, 153, 0.1);
+        border-color: rgba(236, 72, 153, 0.4);
+        color: var(--ch6);
+      }
+      .toc a:nth-child(6):hover {
+        background: rgba(236, 72, 153, 0.2);
+        box-shadow: 0 8px 25px rgba(236, 72, 153, 0.2);
+      }
+
+      .toc a:nth-child(7) {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: var(--ch7);
+      }
+      .toc a:nth-child(7):hover {
+        background: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+      }
+
+      /* ═══════════════════════════════════════════
+         CONTAINER
+      ═══════════════════════════════════════════ */
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 25px 20px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER
+      ═══════════════════════════════════════════ */
+      .chapter {
+        background: var(--bg2);
+        border-radius: 18px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .chapter:hover {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .chapter-header {
+        padding: 22px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s ease;
+      }
+
+      .chapter-header:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .chapter-num {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        font-weight: 900;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      .chapter-header:hover .chapter-num {
+        transform: scale(1.1);
+      }
+
+      .chapter-header h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex: 1;
+      }
+
+      .toggle-icon {
+        font-size: 1.2rem;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-muted);
+      }
+
+      .chapter.open .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .chapter-body {
+        padding: 0 28px;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .chapter.open .chapter-body {
+        padding-bottom: 28px;
+        max-height: none;
+      }
+
+      /* ═══════════════════════════════════════════
+         SECTIONS
+      ═══════════════════════════════════════════ */
+      .section {
+        margin-bottom: 22px;
+      }
+
+      .section-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-title::before {
+        content: "◆";
+        font-size: 0.6rem;
+        color: var(--gold-light);
+      }
+
+      /* ═══════════════════════════════════════════
+         CARDS
+      ═══════════════════════════════════════════ */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px 18px;
+        border-right: 3px solid;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(4px);
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         LISTS
+      ═══════════════════════════════════════════ */
+      .item-list {
+        list-style: none;
+      }
+
+      .item-list li {
+        padding: 10px 14px;
+        margin-bottom: 8px;
+        background: var(--bg3);
+        border-radius: 10px;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .item-list li:hover {
+        transform: translateX(-4px);
+        background: rgba(34, 52, 71, 0.9);
+      }
+
+      .item-list li::before {
+        content: "✦";
+        font-size: 0.65rem;
+        margin-top: 5px;
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TWO-COL
+      ═══════════════════════════════════════════ */
+      .two-col {
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      @media (max-width: 640px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         HIGHLIGHT
+      ═══════════════════════════════════════════ */
+      .highlight {
+        background: rgba(6, 182, 212, 0.07);
+        border: 1px solid rgba(6, 182, 212, 0.22);
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: 0.88rem;
+        margin-bottom: 16px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      .highlight strong {
+        color: var(--gold-light);
+      }
+
+      .highlight .item-list {
+        margin-top: 8px;
+      }
+
+      /* ═══════════════════════════════════════════
+         STAGES
+      ═══════════════════════════════════════════ */
+      .stages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stage {
+        display: flex;
+        gap: 14px;
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px;
+        align-items: flex-start;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .stage:hover {
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .stage-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .stage-content h4 {
+        font-size: 0.93rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .stage-content p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         DIVIDER
+      ═══════════════════════════════════════════ */
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        margin: 20px 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TEXT HELPERS
+      ═══════════════════════════════════════════ */
+      .text-intro {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .text-conclusion-ch2 {
+        font-size: 0.85rem;
+        color: var(--ch2);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-conclusion-ch3 {
+        font-size: 0.85rem;
+        color: var(--ch3);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-note {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 8px;
+      }
+
+      .text-critical {
+        font-size: 0.85rem;
+        color: var(--ch7);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .text-critical-ch4 {
+        font-size: 0.85rem;
+        color: var(--ch4);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .note-span {
+        color: var(--ch7);
+        font-weight: bold;
+      }
+
+      .cards-single-col {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        .cards-three-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .highlight-mt {
+        margin-top: 15px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER COLORS
+      ═══════════════════════════════════════════ */
+      /* CH1 — Blue */
+      .ch1 .chapter-header { border-top: 3px solid var(--ch1); }
+      .ch1 .chapter-num { background: rgba(56, 189, 248, 0.15); color: var(--ch1); }
+      .ch1 .card { border-color: var(--ch1); }
+      .ch1 .item-list li::before { color: var(--ch1); }
+      .ch1 .stage-num { background: rgba(56, 189, 248, 0.15); color: var(--ch1); }
+
+      /* CH2 — Purple */
+      .ch2 .chapter-header { border-top: 3px solid var(--ch2); }
+      .ch2 .chapter-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+      .ch2 .card { border-color: var(--ch2); }
+      .ch2 .item-list li::before { color: var(--ch2); }
+      .ch2 .stage-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+
+      /* CH3 — Cyan */
+      .ch3 .chapter-header { border-top: 3px solid var(--ch3); }
+      .ch3 .chapter-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+      .ch3 .card { border-color: var(--ch3); }
+      .ch3 .item-list li::before { color: var(--ch3); }
+      .ch3 .stage-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+
+      /* CH4 — Amber */
+      .ch4 .chapter-header { border-top: 3px solid var(--ch4); }
+      .ch4 .chapter-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+      .ch4 .card { border-color: var(--ch4); }
+      .ch4 .item-list li::before { color: var(--ch4); }
+      .ch4 .stage-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+
+      /* CH5 — Green */
+      .ch5 .chapter-header { border-top: 3px solid var(--ch5); }
+      .ch5 .chapter-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+      .ch5 .card { border-color: var(--ch5); }
+      .ch5 .item-list li::before { color: var(--ch5); }
+      .ch5 .stage-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+
+      /* CH6 — Pink */
+      .ch6 .chapter-header { border-top: 3px solid var(--ch6); }
+      .ch6 .chapter-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+      .ch6 .card { border-color: var(--ch6); }
+      .ch6 .item-list li::before { color: var(--ch6); }
+      .ch6 .stage-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+
+      /* CH7 — Red */
+      .ch7 .chapter-header { border-top: 3px solid var(--ch7); }
+      .ch7 .chapter-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+      .ch7 .card { border-color: var(--ch7); }
+      .ch7 .item-list li::before { color: var(--ch7); }
+      .ch7 .stage-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+
+      /* ═══════════════════════════════════════════
+         FOOTER
+      ═══════════════════════════════════════════ */
+      footer {
+        text-align: center;
+        padding: 35px 20px;
+        color: var(--text-muted);
+        font-size: 0.84rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 30px;
+        background: var(--bg2);
+      }
+
+      footer span {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* ═══════════════════════════════════════════
+         RESPONSIVE
+      ═══════════════════════════════════════════ */
+      @media (max-width: 640px) {
+        .hero {
+          padding: 50px 16px 35px;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          padding: 16px 12px;
+        }
+
+        .chapter-header {
+          padding: 16px 18px;
+        }
+
+        .chapter-body {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .chapter.open .chapter-body {
+          padding-bottom: 20px;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .toc a {
+          font-size: 0.78rem;
+          padding: 8px 12px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         SCROLLBAR
+      ═══════════════════════════════════════════ */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--bg3);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 153, 168, 0.3);
+      }
+         ::selection {
+        background: none;
+        color: none;
+      }
+
+      /* ═══════════════════════════════════════════
+   إعدادات الطباعة (منع انقسام العناصر)
+═══════════════════════════════════════════ */
+@media print {
+  .chapter, 
+  .section, 
+  .card, 
+  .stage, 
+  .highlight, 
+  .item-list li {
+    page-break-inside: avoid; /* للمتصفحات القديمة */
+    break-inside: avoid;      /* للمتصفحات الحديثة */
+  }
+}
+    </style>
+
+      <link rel="stylesheet" href="quiz-style.css" />
+      <link rel="stylesheet" href="../../reviews/reviews.css" />
+  </head>
+
+
+<body data-subject="maharat-etsal">
+
+    <div class="hero">
+      <div class="hero-badge">
+       تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      </div>
+
+      <h1>مراجعة مهارات الأتصال</h1>
+      <p>ملخص شامل لجميع المحاضرات</p>
+      <nav class="toc">
+        <a href="#ch1">الفصل ١ — الأداء، توليد الأفكار، والفعالية التنظيمية</a>
+        <a href="#ch2">الفصل ٢ — ماهية و أنواع وطرق الاتصال</a>
+        <a href="#ch3">الفصل ٣ — العرض الفعال، إدارة المقابلات، وإعداد التقارير</a>
+        <a href="#ch4">الفصل ٤ — التكنولوجيا ودورها في تحسين الاتصال</a>
+      </nav>
+    </div>
+
+    <div class="container">
+
+
+      <!-- CHAPTER 1 -->
+<div class="chapter ch1" id="ch1">
+        <div class="chapter-header">
+          <div class="chapter-num">١</div>
+          <h2>الفصل الأول: الأداء، توليد الأفكار، والفعالية التنظيمية</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="chapter-body">
+
+          <div class="section">
+            <div class="section-title">أولاً: المهارات الحاكمة للأداء الفردي والجماعي</div>
+            <div class="highlight">
+              <strong>الأداء الفردي:</strong> هو مستوى إنجاز الفرد للمهام الموكلة إليه وفق معايير من الكفاءة والجودة في إطار زمني معين. ويتأثر بـ (القدرات، الدافعية، الاتجاهات، بيئة العمل، وضوح الأهداف).<br><br>
+              <strong>الأداء الجماعي:</strong> ناتج العمل المشترك لمجموعة تعمل لتحقيق هدف موحد. ولا يعتمد فقط على كفاءة الأفراد، بل على قدرتهم على <strong>التعاون والتنسيق</strong>.
+            </div>
+            
+            <p class="text-intro">أهم المهارات الحاكمة للأداء:</p>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">على المستوى الفردي</div>
+                <ul class="item-list">
+                  <li><strong>الاتصال الفعال:</strong> نقل الأفكار بوضوح وفهم التعليمات.</li>
+                  <li><strong>إدارة الوقت:</strong> تنظيم الأولويات لاستثمار الوقت بأعلى إنتاجية.</li>
+                  <li><strong>اتخاذ القرار وحل المشكلات:</strong> اختيار البديل الأنسب، وتحليل الأسباب لتقديم حلول عملية.</li>
+                  <li><strong>التفكير النقدي:</strong> تحليل المعلومات بموضوعية بعيداً عن التحيز.</li>
+                  <li><strong>الانضباط الذاتي:</strong> الالتزام وتحمل المسؤولية.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">على المستوى الجماعي</div>
+                <ul class="item-list">
+                  <li><strong>العمل ضمن فريق:</strong> تقبل الآراء والتعاون.</li>
+                  <li><strong>القيادة:</strong> توجيه الفريق وتحفيزه نحو الهدف.</li>
+                  <li><strong>التنسيق:</strong> تنظيم الأدوار وتوزيع المسؤوليات.</li>
+                  <li><strong>إدارة الصراع:</strong> التعامل الإيجابي مع الخلافات الداخلية.</li>
+                  <li><strong>الثقة المتبادلة:</strong> خلق بيئة يسودها الاحترام.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثانياً: كيفية توليد الأفكار الجديدة</div>
+            <div class="highlight">
+              توليد الأفكار هو <strong>عملية عقلية منظمة</strong> تهدف لإنتاج أكبر عدد من البدائل لمعالجة موقف أو تطوير وضع قائم.<br>
+              <span class="note-span">الفرق الجوهري:</span> <strong>الإبداع</strong> هو إنتاج فكرة جديدة، بينما <strong>الابتكار</strong> هو تحويل هذه الفكرة إلى تطبيق عملي. (كل ابتكار يبدأ بفكرة، وليس العكس).
+            </div>
+
+            <p class="text-intro">خصائص الفكرة الجيدة ومعوقاتها:</p>
+            <div class="cards">
+              <div class="card">
+                <div class="card-title">خصائص الفكرة الفعالة</div>
+                <p>
+                  الأصالة (الجدة وعدم التقليد) - القابلية للتطبيق - الملاءمة للهدف - الواقعية (التكلفة والإمكانات) - تحقيق إضافة أو قيمة مميزة.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">أبرز المعوقات</div>
+                <p>
+                  الخوف من النقد - التمسك بالروتين والتفكير النمطي - ضعف الثقة بالنفس - ضيق الوقت - البيئة غير المشجعة.
+                </p>
+              </div>
+            </div>
+
+            <p class="text-intro" style="margin-top: 15px;">أهم أساليب توليد الأفكار:</p>
+            <div class="stages">
+              <div class="stage">
+                <div class="stage-num">١</div>
+                <div class="stage-content">
+                  <h4>العصف الذهني</h4>
+                  <p>طرح أكبر عدد ممكن من الأفكار مع <strong>تأجيل التقييم</strong> والنقد، وتشجيع "الكم قبل الكيف"، والبناء على أفكار الآخرين بحرية مطلقة.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٢</div>
+                <div class="stage-content">
+                  <h4>الأسئلة التحفيزية وخرائط العقل</h4>
+                  <p>استخدام أسئلة مثل (ماذا لو؟ كيف نطور؟)، وتنظيم الأفكار بصرياً للربط بين المفاهيم، بالإضافة إلى <strong>تحليل المشكلة</strong> لأجزاء صغيرة يسهل حلها.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثالثاً: الفعالية التنظيمية</div>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">مفهوم الفعالية التنظيمية</div>
+                <p>
+                  قدرة المنظمة على تحقيق أهدافها المخططة باستخدام مواردها، مع الحفاظ على استمراريتها ورضا الأطراف المعنية. وليست مجرد تحقيق أرباح أو أهداف بإهدار الموارد.
+                </p>
+              </div>
+              <div class="card" style="border-color: var(--ch7);">
+                <div class="card-title" style="color: var(--ch7);">الفعالية مقابل الكفاءة</div>
+                <p>
+                  <strong>الفعالية:</strong> تعني تحقيق الأهداف المحددة (فعل الأشياء الصحيحة).<br>
+                  <strong>الكفاءة:</strong> تحقيق الأهداف بأفضل استخدام للموارد (فعل الأشياء بطريقة صحيحة).<br>
+                  المنظمة المثالية تجمع بينهما.
+                </p>
+              </div>
+            </div>
+
+            <p class="text-intro" style="margin-top: 15px;">مداخل دراسة الفعالية التنظيمية:</p>
+            <div class="cards">
+              <div class="card">
+                <div class="card-title">١. مدخل تحقيق الأهداف</div>
+                <p>يركز فقط على مدى تحقيق المنظمة لأهدافها المحددة مسبقاً.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٢. مدخل الموارد</div>
+                <p>يركز على قدرة المنظمة على استقطاب الموارد النادرة (تمويل، كفاءات، تكنولوجيا).</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٣. مدخل العمليات الداخلية</div>
+                <p>يهتم بالاستقرار التنظيمي، انخفاض الصراع، ووضوح الإجراءات.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٤. مدخل أصحاب المصلحة</div>
+                <p>يركز على رضا جميع الأطراف (عاملين، عملاء، موردين، مجتمع).</p>
+              </div>
+            </div>
+
+            <div class="highlight highlight-mt">
+              <strong>العوامل المؤثرة وسبل التحسين:</strong><br>
+              تتأثر الفعالية بالقيادة، وضوح الأهداف، الثقافة التنظيمية، والاتصال الفعال. وتعوقها البيروقراطية الزائدة، الصراعات، وغموض الأهداف. ويمكن تحسينها بتطوير القيادة، الاستثمار في التدريب، وتبني ثقافة الابتكار المستمر.
+            </div>
+            
+          </div>
+
+          <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+            <button class="btn-open-quiz" onclick="openQuiz(1)">اختبر نفسك</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- CHAPTER 2 -->
+<div class="chapter ch2" id="ch2">
+        <div class="chapter-header">
+          <div class="chapter-num">٢</div>
+          <h2>الفصل الثاني: ماهية وأنواع وطرق الاتصال</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="chapter-body">
+
+          <div class="section">
+            <div class="section-title">أولاً: مفهوم وطرق الاتصال</div>
+            <div class="highlight">
+              <strong>طرق الاتصال:</strong> هي الوسائل والأساليب التي يتم من خلالها نقل الرسائل والمعلومات بين الأفراد أو الجماعات داخل المنظمة أو خارجها. ويختلف اختيار الطريقة وفقاً لطبيعة الرسالة (بسيطة، معقدة، حساسة)، درجة الرسمية، الحاجة للتوثيق، وسرعة الاستجابة.
+            </div>
+            
+            <p class="text-intro">أبرز طرق الاتصال وخصائصها:</p>
+            <div class="cards">
+              <div class="card">
+                <div class="card-title">١. الاتصال الشفوي</div>
+                <p>
+                  يتم عبر التحدث المباشر (وجهاً لوجه أو هاتفياً). يتميز بالسرعة والتغذية الراجعة الفورية. يعيبه أنه لا يترك سجلاً رسمياً، ويتأثر بالحالة النفسية.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">٢. الاتصال الكتابي</div>
+                <p>
+                  كلمات مكتوبة كالتقارير واللوائح. يتميز بتوفير توثيق رسمي وتقليل نسيان التفاصيل. يعيبه البطء وافتقاره لرد الفعل الفوري.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">٣. الاتصال الإلكتروني</div>
+                <p>
+                  استخدام التكنولوجيا (إيميل، اجتماعات رقمية). يجمع بين السرعة وتخطي المسافات والتوثيق. يعيبه المشكلات التقنية، غياب لغة الجسد، والمخاطر الأمنية.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">٤. الاتصال غير اللفظي</div>
+                <p>
+                  يتم عبر الإشارات، تعبيرات الوجه، ونبرة الصوت. يعزز الرسالة الشفوية وينقل المشاعر. لا يُعتمد عليه وحده في الرسائل الرسمية، ويختلف باختلاف الثقافات.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثانياً: اتجاهات وشبكات الاتصال داخل المنظمة</div>
+            <p class="text-intro">اتجاهات الاتصال (مسار تدفق المعلومات):</p>
+            <div class="two-col">
+              <ul class="item-list">
+                <li><strong>الاتصال الهابط:</strong> من المستويات العليا للأدنى، لتوضيح التعليمات وتنظيم العمل.</li>
+                <li><strong>الاتصال الصاعد:</strong> من المستويات الدنيا للعليا، لرفع التقارير، الشكاوى، ولمعرفة المشكلات الحقيقية.</li>
+                <li><strong>الاتصال الأفقي:</strong> بين الأفراد أو الإدارات في نفس المستوى (مثل التسويق والإنتاج) لتحقيق التنسيق السريع.</li>
+              </ul>
+              <div class="highlight" style="margin-bottom: 0;">
+                <span class="note-span">الشبكات الرسمية مقابل غير الرسمية:</span><br>
+                الشبكات الرسمية يحددها الهيكل التنظيمي واللوائح. بينما غير الرسمية تتطور عضوياً نتيجة التفاعلات والصداقات (مثل الأحاديث الجانبية).
+              </div>
+            </div>
+
+            <p class="text-intro" style="margin-top: 15px;">أنماط شبكات الاتصال التنظيمي:</p>
+            <div class="stages">
+              <div class="stage">
+                <div class="stage-num">١</div>
+                <div class="stage-content">
+                  <h4>شبكة السلسلة</h4>
+                  <p>تنتقل المعلومات بتتابع (مدير عام ← مدير إدارة ← مشرف ← موظف). تتميز بوضوح التسلسل الإداري، لكن يعيبها البطء.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٢</div>
+                <div class="stage-content">
+                  <h4>شبكة العجلة</h4>
+                  <p>تتركز الاتصالات حول شخص واحد (المركز). تتميز بسرعة اتخاذ القرار، لكن يعيبها زيادة الضغط الشديد على هذا الشخص المركزي.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٣</div>
+                <div class="stage-content">
+                  <h4>شبكة الدائرة</h4>
+                  <p>يتواصل الأفراد دائرياً بمرونة، مما يعزز المشاركة بين الأفراد، إلا أنها تستغرق وقتاً أطول في اتخاذ القرارات.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٤</div>
+                <div class="stage-content">
+                  <h4>شبكة الاتصال الكلي</h4>
+                  <p>الجميع يتواصل مع الجميع مباشرة. تزيد من تبادل الأفكار، لكنها قد تسبب تشابكاً وفوضى في المعلومات إذا لم تُنظم.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثالثاً: أنواع الاتصال</div>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">من حيث درجة الرسمية</div>
+                <p>
+                  <strong>الرسمي:</strong> وفق القنوات والهيكل التنظيمي، يوفر التوثيق وينظم التدفق، لكنه قد يكون بطيئاً وجامداً.<br>
+                  <strong>غير الرسمي:</strong> خارج القنوات ويعتمد على العلاقات. سريع ويخفف الضغوط، لكنه بيئة خصبة لانتشار الشائعات وصعب السيطرة عليه.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">من حيث عدد الأطراف </div>
+                <ul class="item-list">
+                  <li><strong>الذاتي:</strong> تفكير الفرد مع نفسه لاتخاذ قرار.</li>
+                  <li><strong>الشخصي:</strong> بين شخصين (حوار مباشر).</li>
+                  <li><strong>الجماعي:</strong> بين مجموعة داخل فريق للوصول لحل مشترك.</li>
+                  <li><strong>الجماهيري:</strong> جهة لعدد ضخم (مؤتمر). واسع الانتشار لكنه ضعيف التفاعل المباشر.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+            <button class="btn-open-quiz" onclick="openQuiz(2)">اختبر نفسك</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- CHAPTER 3 -->
+<div class="chapter ch3" id="ch3">
+        <div class="chapter-header">
+          <div class="chapter-num">٣</div>
+          <h2>الفصل الثالث: العرض الفعال، إدارة المقابلات، وإعداد التقارير</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="chapter-body">
+
+          <div class="section">
+            <div class="section-title">أولاً: إعداد وعرض الرسائل الاتصالية</div>
+            <div class="highlight">
+              <strong>عرض الرسالة الاتصالية:</strong> هو عملية تنظيم المعلومات أو الأفكار وتقديمها بأسلوب واضح ومؤثر يحقق الفهم والتفاعل لدى الجمهور. لا يكفي امتلاك المعلومة، بل يجب تقديمها بطريقة تؤثر في الجمهور وتغير اتجاهاته.
+            </div>
+            
+            <p class="text-intro">المراحل الأساسية لإعداد عرض اتصالي ناجح:</p>
+            <div class="stages">
+              <div class="stage">
+                <div class="stage-num">١</div>
+                <div class="stage-content">
+                  <h4>تحديد الهدف وتحليل الجمهور </h4>
+                  <p>تحديد ما إذا كان الهدف (شرح موضوع، إقناع، أو تدريب) ، مع فهم خصائص الجمهور مثل مستواهم العلمي، اهتماماتهم، وثقافتهم.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٢</div>
+                <div class="stage-content">
+                  <h4>جمع المعلومات وتنظيم المحتوى </h4>
+                  <p>التأكد من دقة المعلومات وترتيب الأفكار منطقياً. يجب تقسيم المحتوى إلى (مقدمة لجذب الانتباه، موضوع منظم، وخاتمة تلخص أهم النقاط).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">أساليب العرض </div>
+                <ul class="item-list">
+                  <li><span><strong>الأسلوب التفسيري:</strong> لشرح المعلومات.</span></li>
+                  <li><span><strong>الأسلوب الإقناعي:</strong> للتأثير في الجمهور.</span></li>
+                  <li><span><strong>الأسلوب التفاعلي:</strong> لزيادة المشاركة.</span></li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">أخطاء شائعة أثناء التقديم </div>
+                <ul class="item-list">
+                  <li><span>قراءة المحتوى دون شرح.</span></li>
+                  <li><span>الإطالة الزائدة وعدم التواصل مع الجمهور.</span></li>
+                  <li><span>استخدام لغة صعبة أو معقدة.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثانياً: مهارات الإلقاء والتأثير أمام الجمهور</div>
+            <p class="text-intro">عناصر الإلقاء الفعال:</p>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">استخدام الصوت ولغة الجسد </div>
+                <p>يجب وضوح النطق، تنويع نبرة الصوت، وتجنب التحدث بسرعة أو ببطء شديد. كما يجب دعم الرسالة بالتواصل البصري، حركة اليدين، والوقفة الواثقة.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">إدارة الوقت والتفاعل </div>
+                <p>توزيع الوقت، الالتزام بالمدة، وعدم الإطالة في نقطة واحدة. يجب التفاعل عبر طرح الأسئلة، الاستماع للتعليقات، وإشراك الجمهور في النقاش.</p>
+              </div>
+            </div>
+            <div class="highlight" style="margin-top: 15px;">
+              <span class="note-span">كيفية التعامل مع التوتر:</span><br>
+              يعالج التوتر بالتحضير الجيد، التدريب المسبق، التنفس بعمق، والتركيز على الفكرة ذاتها وليس على الخوف.
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثالثاً: إدارة المقابلات وإعداد التقارير</div>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">١. إدارة المقابلات (الاتصال الشفهي) </div>
+                <p>
+                  المقابلة هي اتصال مباشر لتبادل المعلومات أو اتخاذ قرار. أنواعها: توظيف، تقييم أداء، إرشاد، وحل مشكلات.
+                </p>
+                <ul class="item-list">
+                  <li><strong>قبل المقابلة:</strong> تحديد الهدف، إعداد الأسئلة، وجمع المعلومات.</li>
+                  <li><strong>أثناء المقابلة:</strong> الترحيب، الاستماع الجيد، وطرح أسئلة محددة وملاحظة لغة الجسد.</li>
+                  <li><strong>بعد المقابلة:</strong> تحليل المعلومات، اتخاذ القرار، والتوثيق.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">٢. إعداد التقارير (الاتصال الكتابي) </div>
+                <p>
+                  وثيقة مكتوبة لنقل المعلومات أو تحليل البيانات بصورة رسمية ومنظمة. تتنوع بين دورية، تحليلية، إدارية، وتقارير مشكلات.
+                </p>
+                <ul class="item-list">
+                  <li><strong>عناصر التقرير:</strong> مقدمة، عرض البيانات، تحليل، ثم توصيات وخاتمة.</li>
+                  <li><strong>مواصفات الجودة:</strong> الدقة، الموضوعية، التسلسل المنطقي، والاختصار المفيد.</li>
+                  <li><strong>أخطاء قاتلة:</strong> الحشو الزائد، غياب التوصيات، استخدام لغة غير رسمية.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+            <button class="btn-open-quiz" onclick="openQuiz(3)">اختبر نفسك</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CHAPTER 4 -->
+<div class="chapter ch4" id="ch4">
+        <div class="chapter-header">
+          <div class="chapter-num">٤</div>
+          <h2>الفصل الرابع: التكنولوجيا ودورها في تحسين الاتصال</h2>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="chapter-body">
+
+          <div class="section">
+            <div class="section-title">أولاً: مفهوم الاتصال التكنولوجي وأهميته</div>
+            <div class="highlight">
+              <strong>الاتصال التكنولوجي:</strong> هو استخدام الأدوات والتقنيات الحديثة لنقل وتبادل المعلومات بين الأفراد أو المؤسسات بشكل سريع ودقيق وفعال.
+            </div>
+            <p class="text-intro">أهمية التكنولوجيا في عملية الاتصال:</p>
+            <ul class="item-list">
+              <li>تسريع عملية تبادل المعلومات وتقليل الوقت والجهد في التواصل.</li>
+              <li>تحسين دقة المعلومات وتقليل الأخطاء.</li>
+              <li>دعم اتخاذ القرار بشكل أسرع.</li>
+              <li>تسهيل التواصل بين الأفراد داخل وخارج المؤسسة.</li>
+            </ul>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثانياً: وسائل التكنولوجيا الحديثة في الاتصال</div>
+            <div class="cards">
+              <div class="card">
+                <div class="card-title">١. البريد الإلكتروني (Email)</div>
+                <p>وسيلة رسمية وسريعة، تُستخدم في إرسال التقارير والمراسلات الرسمية.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٢. تطبيقات الاجتماعات الإلكترونية</div>
+                <p>مثل (Zoom, Microsoft Teams)، وتُسهل عقد الاجتماعات عن بُعد.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٣. تطبيقات التواصل الفوري</div>
+                <p>مثل (WhatsApp, Slack)، وتُستخدم في التواصل السريع واللحظي داخل الفرق.</p>
+              </div>
+              <div class="card">
+                <div class="card-title">٤. أنظمة إدارة المعلومات</div>
+                <p>مثل أنظمة (ERP Systems)، وتساعد في تنظيم وتبادل البيانات المؤسسية بكفاءة.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">ثالثاً: المزايا والتحديات</div>
+            <div class="two-col">
+              <div class="card">
+                <div class="card-title">مزايا استخدام التكنولوجيا</div>
+                <ul class="item-list">
+                  <li>سرعة نقل المعلومات وسهولة الوصول للبيانات من أي مكان.</li>
+                  <li>تقليل التكلفة مقارنة بالاتصال التقليدي.</li>
+                  <li>تحسين التعاون بين فرق العمل ودعم العمل عن بُعد (Remote Work).</li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">التحديات والسلبيات المحتملة</div>
+                <ul class="item-list">
+                  <li>الاعتماد الزائد على التكنولوجيا وتشتيت الانتباه بسبب كثرة الوسائل.</li>
+                  <li>احتمالية حدوث اختراقات أمنية.</li>
+                  <li>سوء فهم الرسائل الإلكترونية أحياناً، وفقدان بعض جوانب التواصل الإنساني المباشر.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section">
+            <div class="section-title">رابعاً: الاستخدام الفعال ودور التكنولوجيا في بيئة العمل</div>
+            <div class="stages">
+              <div class="stage">
+                <div class="stage-num">١</div>
+                <div class="stage-content">
+                  <h4>كيفية الاستخدام الفعال</h4>
+                  <p>يجب اختيار الوسيلة المناسبة لكل موقف، والحفاظ على وضوح الرسائل الإلكترونية. كما يُشترط تأمين البيانات، وعدم الاعتماد الكامل على التواصل الرقمي فقط، بل يجب دعمه بالتواصل المباشر عند الحاجة.</p>
+                </div>
+              </div>
+              <div class="stage">
+                <div class="stage-num">٢</div>
+                <div class="stage-content">
+                  <h4>دور التكنولوجيا في تطوير بيئة العمل</h4>
+                  <p>تساهم في تحسين سرعة اتخاذ القرار، زيادة كفاءة الأداء التنظيمي، تعزيز التعاون بين الأقسام، ودعم المرونة في العمل (Work Flexibility).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+            <button class="btn-open-quiz" onclick="openQuiz(4)">اختبر نفسك</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+    
+    تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      
+    </footer>
+
+
+    <!-- Quiz Overlay -->
+    <div id="quiz-overlay">
+      <div class="quiz-container">
+        <div class="quiz-close" onclick="closeQuizWarning()">✖</div>
+        
+        <div class="quiz-header">
+          <h2 id="quiz-title">اختبار الفصل</h2>
+          <div class="quiz-progress-wrap">
+            <div class="quiz-progress-info">
+              <span id="quiz-progress-text">سؤال 1 من 10</span>
+              <span id="quiz-badge-num" class="quiz-q-badge">1</span>
+            </div>
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="quiz-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-body" id="quiz-q-box">
+          <div class="quiz-scoreboard">
+            <div class="quiz-score-card correct">
+              <span class="val" id="quiz-score-c">0</span>
+              <span class="lbl">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-score-card wrong">
+              <span class="val" id="quiz-score-w">0</span>
+              <span class="lbl">إجابة خاطئة</span>
+            </div>
+            <div class="quiz-score-card total">
+              <span class="val" id="quiz-score-t">10</span>
+              <span class="lbl">إجمالي الأسئلة</span>
+            </div>
+          </div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-question-text" id="quiz-q-text">هنا يكتب السؤال؟</div>
+            <div class="quiz-options" id="quiz-options">
+              <!-- Options injected here -->
+            </div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+          </div>
+        </div>
+
+        <div class="quiz-body quiz-result-screen" id="quiz-result-screen">
+          <div class="quiz-result-circle" id="quiz-rs-circle">
+            <div class="quiz-result-pct" id="quiz-rs-pct">0%</div>
+          </div>
+          <div class="quiz-result-title">النتيجة النهائية</div>
+          <div class="quiz-result-eval" id="quiz-rs-eval"></div>
+          
+          <div class="quiz-result-stats">
+            <div class="quiz-rs-card cc">
+              <span class="v" id="quiz-rs-c">0</span>
+              <span class="l">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-rs-card ww">
+              <span class="v" id="quiz-rs-w">0</span>
+              <span class="l">إجابة خاطئة</span>
+            </div>
+          </div>
+
+          <div class="quiz-result-actions">
+            <button class="quiz-btn-restart" onclick="restartQuiz()">إعادة الاختبار</button>
+            <button class="quiz-btn-close" onclick="closeQuizForce()">أكمل المراجعة</button>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextAction()">السؤال التالي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="quiz-confirm-modal">
+      <div class="quiz-modal-box">
+        <h3>هل تود إنهاء الاختبار؟</h3>
+        <p>سيتم فقدان تقدمك الحالي إذا قمت بالخروج.</p>
+        <div class="quiz-modal-btns">
+          <button class="quiz-modal-btn quiz-modal-yes" onclick="closeQuizForce()">نعم</button>
+          <button class="quiz-modal-btn quiz-modal-no" onclick="cancelClose()">لا</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      (() => {
+        "use strict";
+
+        /* ═══════════════════════════════════════════
+           GSAP — Hero entrance
+        ═══════════════════════════════════════════ */
+        const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        heroTL
+          .from(".hero-badge", {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            onComplete() {
+              document.querySelector(".hero-badge").style.opacity = "1";
+            },
+          })
+          .from(
+            ".hero h1",
+            {
+              opacity: 0,
+              y: 40,
+              duration: 0.8,
+              onComplete() {
+                document.querySelector(".hero h1").style.opacity = "1";
+              },
+            },
+            "-=0.4"
+          )
+          .from(
+            ".hero > p",
+            {
+              opacity: 0,
+              y: 25,
+              duration: 0.6,
+              onComplete() {
+                document.querySelector(".hero > p").style.opacity = "1";
+              },
+            },
+            "-=0.3"
+          )
+          .to(
+            ".toc a",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.08,
+              ease: "back.out(1.4)",
+            },
+            "-=0.2"
+          );
+
+        /* ═══════════════════════════════════════════
+           GSAP — Chapters staggered fade-up
+        ═══════════════════════════════════════════ */
+        const chapters = document.querySelectorAll(".chapter");
+
+        gsap.to(chapters, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.8,
+        });
+
+        /* ═══════════════════════════════════════════
+           Accordion toggle via GSAP
+        ═══════════════════════════════════════════ */
+        function openChapter(chapter) {
+          chapter.classList.add("open");
+          const body = chapter.querySelector(".chapter-body");
+          gsap.set(body, { height: "auto" });
+          const fullHeight = body.scrollHeight;
+          gsap.fromTo(
+            body,
+            { height: 0, overflow: "hidden" },
+            {
+              height: fullHeight,
+              duration: 0.5,
+              ease: "power2.out",
+              onComplete() {
+                body.style.height = "auto";
+                body.style.overflow = "visible";
+              },
+            }
+          );
+        }
+
+        function closeChapter(chapter, onComplete) {
+          const body = chapter.querySelector(".chapter-body");
+          body.style.overflow = "hidden";
+          gsap.to(body, {
+            height: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            onComplete() {
+              chapter.classList.remove("open");
+              body.style.height = "";
+              body.style.overflow = "";
+              if (onComplete) onComplete();
+            },
+          });
+        }
+
+        function toggleChapter(targetChapter) {
+          const isOpen = targetChapter.classList.contains("open");
+
+          // Close any currently open chapter
+          const currentlyOpen = document.querySelector(".chapter.open");
+          if (currentlyOpen && currentlyOpen !== targetChapter) {
+            closeChapter(currentlyOpen);
+          }
+
+          if (isOpen) {
+            closeChapter(targetChapter);
+          } else {
+            openChapter(targetChapter);
+          }
+        }
+
+        // Attach click handlers to chapter headers (no inline onclick)
+        chapters.forEach((chapter) => {
+          const header = chapter.querySelector(".chapter-header");
+          header.addEventListener("click", () => {
+            toggleChapter(chapter);
+          });
+        });
+
+        /* ═══════════════════════════════════════════
+           TOC links — open chapter + scroll
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            const targetChapter = document.getElementById(targetId);
+            if (!targetChapter) return;
+
+            // Close any open chapter first
+            const currentlyOpen = document.querySelector(".chapter.open");
+            if (currentlyOpen && currentlyOpen !== targetChapter) {
+              closeChapter(currentlyOpen, () => {
+                openChapter(targetChapter);
+                scrollToChapter(targetChapter);
+              });
+            } else if (!targetChapter.classList.contains("open")) {
+              openChapter(targetChapter);
+              scrollToChapter(targetChapter);
+            } else {
+              scrollToChapter(targetChapter);
+            }
+          });
+        });
+
+        function scrollToChapter(chapter) {
+          setTimeout(() => {
+            chapter.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 80);
+        }
+
+        /* ═══════════════════════════════════════════
+           Hover micro-interactions on TOC
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((btn) => {
+          btn.addEventListener("mouseenter", () => {
+            gsap.to(btn, {
+              scale: 1.05,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+              scale: 1,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+        });
+      })();
+    </script>
+  
+    <script src="quiz-data.js"></script>
+    <script src="quiz-ui.js"></script>
+    <script src="../../reviews/reviews.js"></script>
+
+  </body>
+</html>

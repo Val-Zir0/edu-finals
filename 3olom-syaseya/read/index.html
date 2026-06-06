@@ -1,0 +1,1510 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مراجعة علوم سياسية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #03120e;
+        --bg2: #07221b;
+        --bg3: #0c382b;
+        --primary: #059669;
+        --primary-light: #10b981;
+        --gold: #d97706;
+        --gold-light: #fbbf24;
+        --purple: #b45309;
+        --purple-light: #d97706;
+        --text: #e8ecf1;
+        --text-muted: #8b99a8;
+        --ch1: #059669;
+        --ch2: #8b5cf6;
+        --ch3: #06b6d4;
+        --ch4: #d97706;
+        --ch5: #10b981;
+        --ch6: #ec4899;
+        --ch7: #ef4444;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      /* ═══════════════════════════════════════════
+         HERO
+      ═══════════════════════════════════════════ */
+      .hero {
+        background: var(--bg2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 60px 20px 40px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(217, 119, 6, 0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(217, 119, 6, 0.4);
+        color: var(--gold-light);
+        padding: 8px 24px;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        margin-bottom: 24px;
+        opacity: 0;
+      }
+.hero-badge a span {
+color: var(--gold-light);
+
+}
+      .hero h1 {
+        font-family: "Amiri", serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        color: var(--gold);
+        text-shadow: 0 0 60px rgba(217, 119, 6, 0.35), 0 4px 20px rgba(0, 0, 0, 0.4);
+        margin-bottom: 12px;
+        opacity: 0;
+      }
+
+      .hero > p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 35px;
+        opacity: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TOC
+      ═══════════════════════════════════════════ */
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .toc a {
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      .toc a:hover {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .toc a:nth-child(1) {
+        background: rgba(5, 150, 105, 0.1);
+        border-color: rgba(5, 150, 105, 0.4);
+        color: var(--ch1);
+      }
+      .toc a:nth-child(1):hover {
+        background: rgba(5, 150, 105, 0.2);
+        box-shadow: 0 8px 25px rgba(5, 150, 105, 0.2);
+      }
+
+      .toc a:nth-child(2) {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.4);
+        color: var(--ch2);
+      }
+      .toc a:nth-child(2):hover {
+        background: rgba(139, 92, 246, 0.2);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+      }
+
+      .toc a:nth-child(3) {
+        background: rgba(6, 182, 212, 0.1);
+        border-color: rgba(6, 182, 212, 0.4);
+        color: var(--ch3);
+      }
+      .toc a:nth-child(3):hover {
+        background: rgba(6, 182, 212, 0.2);
+        box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+      }
+
+      .toc a:nth-child(4) {
+        background: rgba(217, 119, 6, 0.1);
+        border-color: rgba(217, 119, 6, 0.4);
+        color: var(--ch4);
+      }
+      .toc a:nth-child(4):hover {
+        background: rgba(217, 119, 6, 0.2);
+        box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+      }
+
+      .toc a:nth-child(5) {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: var(--ch5);
+      }
+      .toc a:nth-child(5):hover {
+        background: rgba(16, 185, 129, 0.2);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+      }
+
+      .toc a:nth-child(6) {
+        background: rgba(236, 72, 153, 0.1);
+        border-color: rgba(236, 72, 153, 0.4);
+        color: var(--ch6);
+      }
+      .toc a:nth-child(6):hover {
+        background: rgba(236, 72, 153, 0.2);
+        box-shadow: 0 8px 25px rgba(236, 72, 153, 0.2);
+      }
+
+      .toc a:nth-child(7) {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: var(--ch7);
+      }
+      .toc a:nth-child(7):hover {
+        background: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+      }
+
+      /* ═══════════════════════════════════════════
+         CONTAINER
+      ═══════════════════════════════════════════ */
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 25px 20px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER
+      ═══════════════════════════════════════════ */
+      .chapter {
+        background: var(--bg2);
+        border-radius: 18px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .chapter:hover {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .chapter-header {
+        padding: 22px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s ease;
+      }
+
+      .chapter-header:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .chapter-num {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        font-weight: 900;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      .chapter-header:hover .chapter-num {
+        transform: scale(1.1);
+      }
+
+      .chapter-header h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex: 1;
+      }
+
+      .toggle-icon {
+        font-size: 1.2rem;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-muted);
+      }
+
+      .chapter.open .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .chapter-body {
+        padding: 0 28px;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .chapter.open .chapter-body {
+        padding-bottom: 28px;
+        max-height: none;
+      }
+
+      /* ═══════════════════════════════════════════
+         SECTIONS
+      ═══════════════════════════════════════════ */
+      .section {
+        margin-bottom: 22px;
+      }
+
+      .section-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(217, 119, 6, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-title::before {
+        content: "◆";
+        font-size: 0.6rem;
+        color: var(--gold-light);
+      }
+
+      /* ═══════════════════════════════════════════
+         CARDS
+      ═══════════════════════════════════════════ */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px 18px;
+        border-right: 3px solid;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(4px);
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         LISTS
+      ═══════════════════════════════════════════ */
+      .item-list {
+        list-style: none;
+      }
+
+      .item-list li {
+        padding: 10px 14px;
+        margin-bottom: 8px;
+        background: var(--bg3);
+        border-radius: 10px;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .item-list li:hover {
+        transform: translateX(-4px);
+        background: rgba(12, 56, 43, 0.9);
+      }
+
+      .item-list li::before {
+        content: "✦";
+        font-size: 0.65rem;
+        margin-top: 5px;
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TWO-COL
+      ═══════════════════════════════════════════ */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      
+      @media (max-width: 640px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         HIGHLIGHT
+      ═══════════════════════════════════════════ */
+      .highlight {
+        background: rgba(217, 119, 6, 0.07);
+        border: 1px solid rgba(217, 119, 6, 0.22);
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: 0.88rem;
+        margin-bottom: 16px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      .highlight strong {
+        color: var(--gold-light);
+      }
+
+      .highlight .item-list {
+        margin-top: 8px;
+      }
+
+      /* ═══════════════════════════════════════════
+         STAGES
+      ═══════════════════════════════════════════ */
+      .stages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stage {
+        display: flex;
+        gap: 14px;
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px;
+        align-items: flex-start;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .stage:hover {
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .stage-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .stage-content h4 {
+        font-size: 0.93rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .stage-content p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         DIVIDER
+      ═══════════════════════════════════════════ */
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        margin: 20px 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TEXT HELPERS
+      ═══════════════════════════════════════════ */
+      .text-intro {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .text-conclusion-ch2 {
+        font-size: 0.85rem;
+        color: var(--ch2);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-conclusion-ch3 {
+        font-size: 0.85rem;
+        color: var(--ch3);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-note {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 8px;
+      }
+
+      .text-critical {
+        font-size: 0.85rem;
+        color: var(--ch7);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .text-critical-ch4 {
+        font-size: 0.85rem;
+        color: var(--ch4);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .note-span {
+        color: var(--ch7);
+        font-weight: bold;
+      }
+
+      .cards-single-col {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        .cards-three-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .highlight-mt {
+        margin-top: 15px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER COLORS
+      ═══════════════════════════════════════════ */
+      /* CH1 — Blue */
+      .ch1 .chapter-header { border-top: 3px solid var(--ch1); }
+      .ch1 .chapter-num { background: rgba(5, 150, 105, 0.15); color: var(--ch1); }
+      .ch1 .card { border-color: var(--ch1); }
+      .ch1 .item-list li::before { color: var(--ch1); }
+      .ch1 .stage-num { background: rgba(5, 150, 105, 0.15); color: var(--ch1); }
+
+      /* CH2 — Purple */
+      .ch2 .chapter-header { border-top: 3px solid var(--ch2); }
+      .ch2 .chapter-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+      .ch2 .card { border-color: var(--ch2); }
+      .ch2 .item-list li::before { color: var(--ch2); }
+      .ch2 .stage-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+
+      /* CH3 — Cyan */
+      .ch3 .chapter-header { border-top: 3px solid var(--ch3); }
+      .ch3 .chapter-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+      .ch3 .card { border-color: var(--ch3); }
+      .ch3 .item-list li::before { color: var(--ch3); }
+      .ch3 .stage-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+
+      /* CH4 — Amber */
+      .ch4 .chapter-header { border-top: 3px solid var(--ch4); }
+      .ch4 .chapter-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+      .ch4 .card { border-color: var(--ch4); }
+      .ch4 .item-list li::before { color: var(--ch4); }
+      .ch4 .stage-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+
+      /* CH5 — Green */
+      .ch5 .chapter-header { border-top: 3px solid var(--ch5); }
+      .ch5 .chapter-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+      .ch5 .card { border-color: var(--ch5); }
+      .ch5 .item-list li::before { color: var(--ch5); }
+      .ch5 .stage-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+
+      /* CH6 — Pink */
+      .ch6 .chapter-header { border-top: 3px solid var(--ch6); }
+      .ch6 .chapter-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+      .ch6 .card { border-color: var(--ch6); }
+      .ch6 .item-list li::before { color: var(--ch6); }
+      .ch6 .stage-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+
+      /* CH7 — Red */
+      .ch7 .chapter-header { border-top: 3px solid var(--ch7); }
+      .ch7 .chapter-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+      .ch7 .card { border-color: var(--ch7); }
+      .ch7 .item-list li::before { color: var(--ch7); }
+      .ch7 .stage-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+
+      /* ═══════════════════════════════════════════
+         FOOTER
+      ═══════════════════════════════════════════ */
+      footer {
+        text-align: center;
+        padding: 35px 20px;
+        color: var(--text-muted);
+        font-size: 0.84rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 30px;
+        background: var(--bg2);
+      }
+
+      footer span {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* ═══════════════════════════════════════════
+         RESPONSIVE
+      ═══════════════════════════════════════════ */
+      @media (max-width: 640px) {
+        .hero {
+          padding: 50px 16px 35px;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          padding: 16px 12px;
+        }
+
+        .chapter-header {
+          padding: 16px 18px;
+        }
+
+        .chapter-body {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .chapter.open .chapter-body {
+          padding-bottom: 20px;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .toc a {
+          font-size: 0.78rem;
+          padding: 8px 12px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         SCROLLBAR
+      ═══════════════════════════════════════════ */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--bg3);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 153, 168, 0.3);
+      }
+         ::selection {
+        background: none;
+        color: none;
+      }
+
+      /* ═══════════════════════════════════════════
+   إعدادات الطباعة (منع انقسام العناصر)
+═══════════════════════════════════════════ */
+@media print {
+  .chapter, 
+  .section, 
+  .card, 
+  .stage, 
+  .highlight, 
+  .item-list li {
+    page-break-inside: avoid; /* للمتصفحات القديمة */
+    break-inside: avoid;      /* للمتصفحات الحديثة */
+  }
+}
+    </style>
+
+      <link rel="stylesheet" href="quiz-style.css" />
+      <link rel="stylesheet" href="../../reviews/reviews.css" />
+  </head>
+  
+<body data-subject="3olom-syaseya">
+  
+  <div class="hero">
+      <div class="hero-badge">
+       تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      </div>
+
+      <h1>مراجعة علوم سياسية</h1>
+      <p>ملخص شامل لجميع المحاضرات</p>
+      <nav class="toc">
+        <a href="#ch1">الفصل ١ — مدخل للعلوم السياسية والنظرية العامة للدولة</a>
+        <a href="#ch2">الفصل ٢ — الدولة المركبة واتحادات الدول</a>
+        <a href="#ch3">الفصل ٣ — نظم الحكم ومبدأ الفصل بين السلطات</a>
+        <a href="#ch4">الفصل ٤ — تنظيم السلطات (السلطة التنفيذية والمحلية)</a>
+        <a href="#ch5">الفصل ٥ — المنظمات الدولية وأجهزة الأمم المتحدة</a>
+      </nav>
+    </div>
+
+    <div class="container">
+
+
+      <!-- CHAPTER 1 -->
+<div class="chapter ch1" id="ch1">
+  <div class="chapter-header">
+    <div class="chapter-num">١</div>
+    <h2>الفصل الأول: مدخل للعلوم السياسية والنظرية العامة للدولة</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: ماهية علم السياسة وتطوره</div>
+      <div class="highlight">
+        <strong>تعريف علم السياسة:</strong> لغةً يفيد الرياسة والقيادة. أما اصطلاحاً، فقد تدرج من "علم الدولة والمؤسسات" (الاتجاه التقليدي) ، مروراً بكونه "علم السلطة" ، وصولاً إلى التعريف الأشمل بأنه العلم الذي يدرس الظواهر السياسية (الدولة، السلطة، والعلاقات المجتمعية). وعرّفه "دافيد إيستون" بأنه الدراسة العلمية لظاهرة السلطة.
+      </div>
+      
+      <p class="text-intro">مراحل تطور علم السياسة:</p>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>المرحلة الفلسفية (التقليدية)</h4>
+            <p>من القرن 5 ق.م حتى القرن 16 م. اتسمت بالدراسة الفلسفية القيمية للعدالة والديمقراطية، وكان الإنسان محورها (كما وصفه أرسطو: كائن سياسي بطبعه).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>المرحلة الواقعية (المؤسسية)</h4>
+            <p>من القرن 18 حتى الـ 20 م. انتقل التركيز من دراسة التغير المجتمعي إلى دراسة الدولة ومؤسساتها السياسية بشكل منهجي وواقعي.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: علاقة علم السياسة بالعلوم الأخرى</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">مع علم التاريخ</div>
+          <p>التاريخ هو الجذور، والسياسة هي الثمرة. التاريخ يهتم بالأحداث الفريدة، بينما السياسة تستخلص "الخصائص العامة" للتحليل.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">مع علم الاقتصاد</div>
+          <p>كانا يُدرسان معاً باسم "الاقتصاد السياسي". السياسة العامة للدولة تتأثر بشدة بالقدرات الاقتصادية وطرق إدارة الموارد التجارية.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">مع علم النفس</div>
+          <p>تطورت العلاقة بعد الحرب العالمية 2 لدراسة الرأي العام، القيادة السياسية، وتأثير العوامل النفسية (الخوف/الطُمأنينة) على السلوك السياسي.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">مع علم القانون</div>
+          <p>القانون الدستوري يُعد محوراً أساسياً يربط العلمين (مبدأ الفصل بين السلطات). السياسة تدرس القوانين التي تنظم العلاقات مجتمعياً ودولياً.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: الدولة البسيطة (الموحدة)</div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">المفهوم والمركزية السياسية</div>
+          <p>
+            دولة تبدو ككتلة واحدة تتسم بـ <strong>"المركزية السياسية"</strong> (سلطة تشريعية، تنفيذية، وقضائية واحدة) بغض النظر عن شكل الحكم (جمهوري/ملكي) أو مساحتها.
+          </p>
+        </div>
+        <div class="card" style="border-color: var(--ch7);">
+          <div class="card-title" style="color: var(--ch7);">الاستثناءات واللامركزية الإدارية</div>
+          <p>
+            لا يتعارض كون الدولة موحدة مع تطبيق <strong>"اللامركزية الإدارية"</strong> لتوزيع المهام التنفيذية. استثناءً لتاريخ أو جغرافيا، قد يُطبق قانون خاص بجزء من الإقليم (مثل السودان 1899) بشكل مؤقت.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: الدولة المركبة (الفيدرالية)</div>
+      <div class="highlight">
+        <span class="note-span">تنبيه هام:</span> <strong>الاتحاد الكونفدرالي</strong> يخضع للقانون الدولي (معاهدة بين دول ذات سيادة)، بينما <strong>الاتحاد الفيدرالي</strong> يخضع للقانون الدستوري وينتج عنه شخص دولي جديد (دولة واحدة خارجية).
+      </div>
+
+      <p class="text-intro">المبادئ الأساسية للاتحاد الفيدرالي:</p>
+      <ul class="item-list">
+        <li><strong>مبدأ الاستقلالية:</strong> الدويلات تحتفظ بسيادتها الداخلية (دساتير وهيئات خاصة) بشرط عدم التعارض مع الدستور الاتحادي (وهو الأعلى).</li>
+        <li><strong>مبدأ المشاركة:</strong> تشارك الولايات في إقرار أو تعديل الدستور الاتحادي، ويمثلها مجلس في البرلمان (مثل مجلس الشيوخ الأمريكي).</li>
+        <li><strong>مبدأ الازدواجية:</strong> وجود سلطات اتحادية (للدفاع والخارجية) وسلطات محلية (للشئون الداخلية) جنباً إلى جنب. استثناء: الإمارات تأخذ بمجلس تشريعي واحد.</li>
+      </ul>
+
+      <p class="text-intro" style="margin-top: 15px;">طرق توزيع الاختصاصات ونشأة الاتحاد:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">١. توزيع الاختصاصات </div>
+          <p>
+            - حصر اختصاصات الاتحاد، وترك الباقي للولايات (الاختصاص العام للولايات - أمريكا/سويسرا).<br>
+            - حصر اختصاصات الولايات، وترك الباقي للاتحاد (الاختصاص العام للاتحاد - كندا/الهند).
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">٢. نشأة الفيدرالية </div>
+          <p>
+            - <strong>انضمامي:</strong> دول مستقلة تتحد لمصالح مشتركة (وهو الأنجح والأكثر بقاءً).<br>
+            - <strong>انفصالي:</strong> تفكك دولة بسيطة لأقاليم ذات استقلال ذاتي لمنع الانهيار التام للحفاظ على الوحدة المركزية (مثل العراق).
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(1)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 2 -->
+<div class="chapter ch2" id="ch2">
+  <div class="chapter-header">
+    <div class="chapter-num">٢</div>
+    <h2>الفصل الثاني: الدولة المركبة واتحادات الدول</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: ماهية الدولة الاتحادية (الفيدرالية) وخصائصها</div>
+      <div class="highlight">
+        <strong>الدولة الفيدرالية:</strong> هي اتحاد ينشأ بموجب <strong>دستور</strong> (وليس معاهدة)، يترتب عليه ميلاد شخص دولي جديد. تفقد فيه الدويلات شخصيتها الخارجية تماماً لصالح الحكومة المركزية، مع احتفاظها بجزء كبير من سيادتها الداخلية (تشريعياً، تنفيذياً، وقضائياً).
+      </div>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">على الصعيد الخارجي</div>
+          <p>
+            تظهر دولة واحدة بجيش واحد وتمثيل دبلوماسي واحد وجنسية واحدة. أي نزاع مسلح بين ولاياتها يُعد <strong>حرباً أهلية</strong>، وتتحمل الحكومة المركزية وحدها المسئولية الدولية.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">على الصعيد الداخلي</div>
+          <p>
+            السيادة "مشتركة". لكل ولاية دستورها وهيئاتها الخاصة (مثال: 50 دستوراً في أمريكا)، بشرط ألا تتعارض مع الدستور الاتحادي الذي يمثل القانون الأعلى للبلاد.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: مبادئ الاتحاد الفيدرالي وتوزيع الاختصاصات</div>
+      <p class="text-intro">يقوم الاتحاد الفيدرالي على ثلاثة مبادئ حاكمة:</p>
+      <ul class="item-list">
+        <li><strong>الاستقلالية:</strong> ممارسة الدويلات لسلطاتها الداخلية بحرية تامة، مع سيادة الدستور الاتحادي عند التعارض (كما في المادة 151 من دستور الإمارات والمادة 6 من الدستور الأمريكي).</li>
+        <li><strong>المشاركة:</strong> حق الولايات في المشاركة في تعديل الدستور الاتحادي، ووجود برلمان من مجلسين (مجلس يمثل الشعب، ومجلس يمثل الولايات بالتساوي كـ "مجلس الشيوخ").</li>
+        <li><strong>الازدواجية:</strong> وجود سلطات اتحادية ومحلية (تشريعية/تنفيذية/قضائية) تعمل معاً. <em>(استثناء: الإمارات تأخذ بنظام المجلس التشريعي الواحد)</em>.</li>
+      </ul>
+
+      <p class="text-intro" style="margin-top: 15px;">طرق توزيع الاختصاصات الدستورية:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">الاختصاص العام للولايات</div>
+          <p>يُحدد الدستور اختصاصات الاتحاد حصراً، ويُترك ما عداها (وما يستجد) للولايات. (تغليب للاستقلال - أمريكا، سويسرا، ألمانيا).</p>
+        </div>
+        <div class="card">
+          <div class="card-title">الاختصاص العام للاتحاد</div>
+          <p>تُحدد اختصاصات الولايات حصراً، ويُترك الاختصاص العام والأصيل للسلطة الاتحادية. (تغليب للوحدة - كندا، الهند).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: نشأة ومصير الفيدرالية</div>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>النشأة (انضمامية مقابل انفصالية)</h4>
+            <p><strong>الانضمامية:</strong> دول مستقلة تتحد لمواجهة تهديد أو خلق كيان اقتصادي قوي (الأكثر نجاحاً).<br><strong>الانفصالية:</strong> تفكك دولة بسيطة لمنح أقاليمها المتباينة حكماً ذاتياً لتجنب الانهيار التام (مثل العراق، وباكستان قديماً).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>المصير (اندماج مقابل تفكك)</h4>
+            <p>إما التحول إلى <strong>دولة بسيطة موحدة</strong> تندمج فيها الولايات كلياً (إندونيسيا 1951)، أو <strong>الانفصال والانهيار</strong> لتكوين دول مستقلة (الاتحاد السوفيتي 1991، والجمهورية العربية المتحدة).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: اتحادات الدول (لا تخلق دولة جديدة)</div>
+      <div class="highlight">
+        هذه الاتحادات يحكمها <strong>القانون الدولي العام</strong>، ولا ينتج عنها شخص دولي جديد، بل تحتفظ كل دولة بسيادتها وشخصيتها.
+      </div>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">١. الاتحاد الشخصي (الأضعف)</div>
+          <p>
+            دولتان أو أكثر تخضعان لرئيس/ملك واحد. تحتفظ كل دولة بسياستها الخارجية والداخلية وجنسيتها وجيشها. يزول الاتحاد بمجرد اختلاف شخص الرئيس (لاختلاف قوانين الوراثة مثلاً). (مثال تاريخي: إنجلترا وهانوفر).
+          </p>
+        </div>
+        <div class="card" style="border-color: var(--ch4);">
+          <div class="card-title" style="color: var(--ch4);">٢. الاتحاد الكونفدرالي (التعاهدي)</div>
+          <p>
+            ينشأ بـ <strong>معاهدة دولية</strong>. تتولى شئونه هيئة (مجلس/مؤتمر) قراراتها غالباً بالإجماع ولا تُلزم الدول إلا بموافقتها. الحرب بين دوله "دولية". قد يتحول لفيدرالية (أمريكا 1787) أو يتفكك (خروج بريطانيا من الاتحاد الأوروبي).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(2)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 3 -->
+<div class="chapter ch3" id="ch3">
+  <div class="chapter-header">
+    <div class="chapter-num">٣</div>
+    <h2>الفصل الثالث: نظم الحكم ومبدأ الفصل بين السلطات</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: تقسيم نظم الحكم من حيث اختيار رئيس الدولة</div>
+      <p class="text-intro">تنقسم النظم السياسية بناءً على آلية وصول الحاكم للسلطة إلى نظامين رئيسيين:</p>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">١. النظام الملكي</div>
+          <p>
+            يتولى فيه الملك الحكم <strong>مدى الحياة</strong> بناءً على "الحق الذاتي" وقواعد الوراثة. يتسم بعدم المسئولية السياسية أو الجنائية للملك (الملك لا يخطئ). 
+          </p>
+          <ul class="item-list">
+            <li><strong>الملكية المطلقة:</strong> الملك يجمع كافة السلطات، ولا توجد رقابة عليه (فكرة الحق الإلهي).</li>
+            <li><strong>الملكية الدستورية (المقيدة):</strong> الملك "يملك ولا يحكم"، والسلطة الفعلية بيد الحكومة والبرلمان (مثل: إنجلترا، اليابان).</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color: var(--ch3);">
+          <div class="card-title" style="color: var(--ch3);">٢. النظام الجمهوري</div>
+          <p>
+            يتولى فيه الرئيس الحكم <strong>لمدة مؤقتة ومحددة</strong> مما يضمن التداول السلمي للسلطة. يصل الرئيس للحكم عبر الانتخاب، ويكون مسؤولاً جنائياً (وأحياناً سياسياً).
+          </p>
+          <ul class="item-list">
+            <li><strong>انتخاب شعبي:</strong> مباشر، أو غير مباشر عبر مندوبين (مثل "المجمع الانتخابي" بأمريكا).</li>
+            <li><strong>انتخاب برلماني:</strong> البرلمان يختار الرئيس (مثل لبنان والعراق)، وقد يجعل الرئيس خاضعاً للائتلافات.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: مبدأ الفصل بين السلطات (الأساس النظري)</div>
+      <div class="highlight">
+        أسس الفيلسوف <strong>مونتسكيو</strong> (1748) هذا المبدأ في كتابه "روح القوانين"، لمنع الاستبداد. حيث أكد أنه لضمان الحرية يجب ألا تجتمع السلطات (التشريعية، التنفيذية، القضائية) في يد واحدة، وأن <strong>"السلطة توقف السلطة"</strong> لتحقيق التوازن.
+      </div>
+      
+      <p class="text-intro">بناءً على تطبيق هذا المبدأ (جامد أم مرن)، تنقسم نظم الحكم إلى:</p>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>النظام المجلسي (حكومة الجمعية)</h4>
+            <p>لا يأخذ بفصل السلطات، بل يرتكز على أفكار <strong>"روسو"</strong> بأن السيادة لا تتجزأ. تتركز كل السلطات في يد "البرلمان/الجمعية"، وتكون السلطة التنفيذية مجرد "وكيل" تابع للبرلمان يعزله متى شاء. (مُطبق حالياً في سويسرا بخصائص معدلة).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>النظام البرلماني</h4>
+            <p>نشأ في إنجلترا ويأخذ بـ <strong>الفصل المرن</strong>. يتسم بـ <strong>ثنائية السلطة التنفيذية</strong> (رئيس دولة شرفي، وحكومة فعلية تسأل سياسياً). تقوم العلاقة على "الرقابة المتبادلة": البرلمان يمنح ويسحب الثقة من الحكومة، والحكومة تملك حل البرلمان.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>النظام الرئاسي أو المختلط</h4>
+            <p>يجمع بين فصل السلطات وبين وجود رئيس منتخب يتمتع بسلطات تنفيذية واضحة، مع برلمان مستقل يراقب العمل الحكومي ويساهم في التوازن السياسي.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(3)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 4 -->
+<div class="chapter ch4" id="ch4">
+  <div class="chapter-header">
+    <div class="chapter-num">٤</div>
+    <h2>الفصل الرابع: تنظيم السلطات (السلطة التنفيذية والمحلية)</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: رئيس الجمهورية (شروط الترشح والمدة)</div>
+      <p class="text-intro">رئيس الجمهورية هو رئيس الدولة ورئيس السلطة التنفيذية. يُنتخب لمدة <strong>ست سنوات</strong>، ولا يجوز أن يتولى الرئاسة لأكثر من <strong>مدتين رئاسيتين متتاليتين</strong>.</p>
+      
+      <div class="highlight">
+        <span class="note-span">تنبيه دستوري هام:</span> <strong>التمييز في شرط الجنسية:</strong> يُشترط فيمن يترشح لرئاسة الجمهورية أو لرئاسة مجلس الوزراء أن يكون مصرياً من أبوين مصريين، <strong>وألا يحمل هو أو والداه أو زوجه جنسية دولة أخرى</strong>. بينما قضت المحكمة الدستورية العليا <strong>بعدم دستورية</strong> اشتراط عدم حمل جنسية أخرى لمرشح (مجلس النواب)، مكتفية بتمتعه بالجنسية المصرية.
+      </div>
+      
+      <p class="text-intro" style="margin-top: 15px;">من أهم الشروط الأخرى للترشح للرئاسة:</p>
+      <ul class="item-list">
+        <li>أن يكون متمتعاً بحقوقه المدنية والسياسية.</li>
+        <li>ألا يكون قد حُكم عليه في جناية أو جريمة مخلة بالشرف أو الأمانة (حتى لو رُد إليه اعتباره).</li>
+        <li>أن يكون قد أدى الخدمة العسكرية أو أُعفي منها قانوناً.</li>
+        <li>ألا تقل سنه يوم فتح باب الترشح عن <strong>أربعين سنة ميلادية</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: اختصاصات السلطة التنفيذية (الرئيس والحكومة)</div>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">صلاحيات رئيس الجمهورية</div>
+          <ul class="item-list">
+            <li><strong>تسمية رئيس الوزراء:</strong> وتكليفه بتشكيل الحكومة وعرض برنامجها على مجلس النواب (يجب الحصول على ثقة الأغلبية).</li>
+            <li><strong>الإعفاء والتعديل الوزاري:</strong> يجوز له إعفاء الحكومة بعد موافقة (أغلبية) مجلس النواب، وإجراء تعديل وزاري بعد موافقة (ثلث) المجلس.</li>
+            <li><strong>إعلان حالة الطوارئ:</strong> بعد أخذ رأي الحكومة. تُعرض على البرلمان خلال 7 أيام للموافقة (بأغلبية المجلس)، والمدة القصوى 3 أشهر تُمد لمرة واحدة بموافقة (الثلثين).</li> 
+            <li> <strong> <span class="note-span">محلوظة : </span></strong>   لا يجوز حل البرلمان أثناء الطوارئ.</li>
+            <li><strong>التشريع الاستثنائي:</strong> إصدار "قرارات بقوانين" (لوائح الضرورة) في حال غياب البرلمان، ويجب عرضها عليه خلال 15 يوماً من انعقاده.</li>
+          </ul>
+        </div>
+        
+        <div class="card" style="border-color: var(--ch3);">
+          <div class="card-title" style="color: var(--ch3);">صلاحيات الحكومة (رئيس الوزراء والوزراء)</div>
+          <p>
+            الوزير هو المسئول الأول عن رسم سياسة وزارته (في إطار السياسة العامة)، ولا يجوز لأعضاء الحكومة الجمع بين مناصبهم وعضوية (مجلس النواب).
+          </p>
+          <ul class="item-list">
+            <li>إصدار <strong>اللوائح التنفيذية</strong> للقوانين (اختصاص رئيس الوزراء).</li>
+            <li>إصدار <strong>لوائح الضبط</strong> (بناءً على تفويض).</li>
+            <li>عقد القروض، ولكن <strong>لا توافق عليها السلطة التنفيذية</strong> إلا بعد موافقة مجلس النواب.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: الإدارة المحلية والمجالس المحلية</div>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>التقسيم واللامركزية</h4>
+            <p>تُقسم الدولة إدارياً إلى (محافظات، مراكز، مدن، أحياء، وقرى). وتكفل الدولة دعم <strong>اللامركزية الإدارية والمالية والاقتصادية</strong>، ولكل وحدة موازنة مستقلة.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>تشكيل المجالس المحلية (انتخابات)</h4>
+            <p>تُنتخب بالاقتراع العام السري المباشر لمدة 4 سنوات (سن الترشح 21 سنة). <strong>نِسَب دستورية حتمية:</strong> (25% شباب، 25% نساء، وألا تقل نسبة العمال والفلاحين عن 50% مع تمثيل مسيحيين وذوي إعاقة).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>استقلالية وصلاحيات المجالس</h4>
+            <p>قراراتها نهائية في حدود اختصاصها ولا تتدخل السلطة التنفيذية إلا لمنع التجاوز. تملك أدوات رقابية (أسئلة، إحاطة، استجواب) <strong>وتملك سحب الثقة</strong> من رؤساء الوحدات المحلية. <em>لا يجوز حلها بإجراء إداري شامل.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(4)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 5 -->
+
+<div class="chapter ch5" id="ch5">
+  <div class="chapter-header">
+    <div class="chapter-num">٥</div>
+    <h2>الفصل الخامس: المنظمات الدولية وأجهزة الأمم المتحدة</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: ماهية المنظمات الدولية والمصطلحات المتداخلة</div>
+      <p class="text-intro">ظهرت المنظمات الدولية كظاهرة حديثة نسبياً في أواخر القرن الـ 19 وبدايات الـ 20. ويُفرق الفقه القانوني بدقة بين ثلاثة مصطلحات مترابطة:</p>
+      
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">١. النظم الدولية</div>
+          <p>تمثل الإطار العام والقواعد الكلية التي تحكم التفاعلات بين الفاعلين الدوليين في حقبة زمنية معينة.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٢. التنظيم الدولي</div>
+          <p>يشير إلى "العملية" (Process) أو الحركة المستمرة لخلق وتطوير قواعد وهياكل التعاون بين الدول.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٣. المنظمة الدولية</div>
+          <p>الكيان المؤسسي (Entity) المستقل الذي يمتلك إرادة ذاتية وشخصية قانونية منفصلة عن الدول الأعضاء المكونة له.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: وضع "الدول غير الأعضاء" في الأمم المتحدة</div>
+      <div class="highlight">
+        <span class="note-span">قاعدة قانونية:</span> رغم أن ميثاق الأمم المتحدة معاهدة تلزم أطرافها، إلا أن <strong>الفقرة 6 من المادة 2</strong> تُلزم "الدول غير الأعضاء" بمبادئ الأمم المتحدة <strong>بالقدر الضروري لحفظ السلم والأمن الدوليين فقط</strong>، ولا تُلزمهم بغير ذلك (كدفع النفقات).
+      </div>
+      
+      <p class="text-intro">المزايا والحقوق الممنوحة للدول غير الأعضاء:</p>
+      <ul class="item-list">
+        <li><strong>المشاركة في النقاش:</strong> يحق لها الاشتراك في مناقشات مجلس الأمن حول نزاع تكون طرفاً فيه (دون حق التصويت).</li>
+        <li><strong>اللجوء للمنظمة:</strong> يحق لها تنبيه مجلس الأمن أو الجمعية العامة لأي نزاع هي طرف فيه، بشرط </li>
+        <li><strong>قَبول التزامات الحل السلمي : </strong> المذكورة في الميثاق مُقدماً.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: أجهزة الأمم المتحدة (الرئيسية والثانوية)</div>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">الفروع الرئيسية (المادة 7)</div>
+          <p>
+            حدد الميثاق 6 أجهزة رئيسية هي: (الجمعية العامة، مجلس الأمن، المجلس الاقتصادي والاجتماعي، مجلس الوصاية، محكمة العدل الدولية، والأمانة العامة).
+          </p>
+        </div>
+        <div class="card" style="border-color: var(--ch5);">
+          <div class="card-title" style="color: var(--ch5);">الفروع الثانوية</div>
+          <p>
+            أجاز الميثاق إنشاء فروع ثانوية لمساعدة الأجهزة الرئيسية. يملك حق إنشائها كل من: <strong>الجمعية العامة</strong> (المادة 22)، <strong>مجلس الأمن</strong> (المادة 29)، و<strong>المجلس الاقتصادي والاجتماعي</strong> (المادة 68 - لجان اقتصادية/اجتماعية ولحقوق الإنسان).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: محكمة العدل الدولية (القواعد والأحكام)</div>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>مصادر الحكم (المادة 38 من النظام الأساسي)</h4>
+            <p>تفصل المحكمة بناءً على: (المعاهدات، العرف الدولي، مبادئ القانون العامة، أحكام المحاكم وكبار الفقهاء). ويجوز لها الاستثناء والفصل وفقاً لمبادئ <strong>"العدل والإنصاف" (Ex aequo et bono)</strong> فقط <strong>إذا وافق أطراف الدعوى</strong> على ذلك.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>إصدار الأحكام وشروطها</h4>
+            <p>تصدر الأحكام بأغلبية القضاة، وفي حال <strong>تساوي الأصوات</strong> يُرجح الجانب الذي منه الرئيس. يجب أن يكون الحكم مُسبباً، ومُوقعاً، ويُتلى علناً، ويجوز لأي قاضٍ إصدار بيان مستقل برأيه (مخالف أو موافق).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>القوة الإلزامية والتنفيذ (المادة 94)</h4>
+            <p>الحكم مُلزم <strong>فقط لأطراف النزاع</strong> وفي حدود القضية. إذا امتنع طرف عن التنفيذ، جاز للطرف الآخر اللجوء إلى <strong>مجلس الأمن</strong> الذي يملك تقديم توصيات أو إصدار قرارات بتدابير لتنفيذ الحكم.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(5)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+
+    <footer>
+    
+    تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      
+    </footer>
+
+
+    <!-- Quiz Overlay -->
+    <div id="quiz-overlay">
+      <div class="quiz-container">
+        <div class="quiz-close" onclick="closeQuizWarning()">✖</div>
+        
+        <div class="quiz-header">
+          <h2 id="quiz-title">اختبار الفصل</h2>
+          <div class="quiz-progress-wrap">
+            <div class="quiz-progress-info">
+              <span id="quiz-progress-text">سؤال 1 من 10</span>
+              <span id="quiz-badge-num" class="quiz-q-badge">1</span>
+            </div>
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="quiz-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-body" id="quiz-q-box">
+          <div class="quiz-scoreboard">
+            <div class="quiz-score-card correct">
+              <span class="val" id="quiz-score-c">0</span>
+              <span class="lbl">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-score-card wrong">
+              <span class="val" id="quiz-score-w">0</span>
+              <span class="lbl">إجابة خاطئة</span>
+            </div>
+            <div class="quiz-score-card total">
+              <span class="val" id="quiz-score-t">10</span>
+              <span class="lbl">إجمالي الأسئلة</span>
+            </div>
+          </div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-question-text" id="quiz-q-text">هنا يكتب السؤال؟</div>
+            <div class="quiz-options" id="quiz-options">
+              <!-- Options injected here -->
+            </div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+          </div>
+        </div>
+
+        <div class="quiz-body quiz-result-screen" id="quiz-result-screen">
+          <div class="quiz-result-circle" id="quiz-rs-circle">
+            <div class="quiz-result-pct" id="quiz-rs-pct">0%</div>
+          </div>
+          <div class="quiz-result-title">النتيجة النهائية</div>
+          <div class="quiz-result-eval" id="quiz-rs-eval"></div>
+          
+          <div class="quiz-result-stats">
+            <div class="quiz-rs-card cc">
+              <span class="v" id="quiz-rs-c">0</span>
+              <span class="l">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-rs-card ww">
+              <span class="v" id="quiz-rs-w">0</span>
+              <span class="l">إجابة خاطئة</span>
+            </div>
+          </div>
+
+          <div class="quiz-result-actions">
+            <button class="quiz-btn-restart" onclick="restartQuiz()">إعادة الاختبار</button>
+            <button class="quiz-btn-close" onclick="closeQuizForce()">أكمل المراجعة</button>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextAction()">السؤال التالي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="quiz-confirm-modal">
+      <div class="quiz-modal-box">
+        <h3>هل تود إنهاء الاختبار؟</h3>
+        <p>سيتم فقدان تقدمك الحالي إذا قمت بالخروج.</p>
+        <div class="quiz-modal-btns">
+          <button class="quiz-modal-btn quiz-modal-yes" onclick="closeQuizForce()">نعم</button>
+          <button class="quiz-modal-btn quiz-modal-no" onclick="cancelClose()">لا</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      (() => {
+        "use strict";
+
+        /* ═══════════════════════════════════════════
+           GSAP — Hero entrance
+        ═══════════════════════════════════════════ */
+        const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        heroTL
+          .from(".hero-badge", {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            onComplete() {
+              document.querySelector(".hero-badge").style.opacity = "1";
+            },
+          })
+          .from(
+            ".hero h1",
+            {
+              opacity: 0,
+              y: 40,
+              duration: 0.8,
+              onComplete() {
+                document.querySelector(".hero h1").style.opacity = "1";
+              },
+            },
+            "-=0.4"
+          )
+          .from(
+            ".hero > p",
+            {
+              opacity: 0,
+              y: 25,
+              duration: 0.6,
+              onComplete() {
+                document.querySelector(".hero > p").style.opacity = "1";
+              },
+            },
+            "-=0.3"
+          )
+          .to(
+            ".toc a",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.08,
+              ease: "back.out(1.4)",
+            },
+            "-=0.2"
+          );
+
+        /* ═══════════════════════════════════════════
+           GSAP — Chapters staggered fade-up
+        ═══════════════════════════════════════════ */
+        const chapters = document.querySelectorAll(".chapter");
+
+        gsap.to(chapters, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.8,
+        });
+
+        /* ═══════════════════════════════════════════
+           Accordion toggle via GSAP
+        ═══════════════════════════════════════════ */
+        function openChapter(chapter) {
+          chapter.classList.add("open");
+          const body = chapter.querySelector(".chapter-body");
+          gsap.set(body, { height: "auto" });
+          const fullHeight = body.scrollHeight;
+          gsap.fromTo(
+            body,
+            { height: 0, overflow: "hidden" },
+            {
+              height: fullHeight,
+              duration: 0.5,
+              ease: "power2.out",
+              onComplete() {
+                body.style.height = "auto";
+                body.style.overflow = "visible";
+              },
+            }
+          );
+        }
+
+        function closeChapter(chapter, onComplete) {
+          const body = chapter.querySelector(".chapter-body");
+          body.style.overflow = "hidden";
+          gsap.to(body, {
+            height: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            onComplete() {
+              chapter.classList.remove("open");
+              body.style.height = "";
+              body.style.overflow = "";
+              if (onComplete) onComplete();
+            },
+          });
+        }
+
+        function toggleChapter(targetChapter) {
+          const isOpen = targetChapter.classList.contains("open");
+
+          // Close any currently open chapter
+          const currentlyOpen = document.querySelector(".chapter.open");
+          if (currentlyOpen && currentlyOpen !== targetChapter) {
+            closeChapter(currentlyOpen);
+          }
+
+          if (isOpen) {
+            closeChapter(targetChapter);
+          } else {
+            openChapter(targetChapter);
+          }
+        }
+
+        // Attach click handlers to chapter headers (no inline onclick)
+        chapters.forEach((chapter) => {
+          const header = chapter.querySelector(".chapter-header");
+          header.addEventListener("click", () => {
+            toggleChapter(chapter);
+          });
+        });
+
+        /* ═══════════════════════════════════════════
+           TOC links — open chapter + scroll
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            const targetChapter = document.getElementById(targetId);
+            if (!targetChapter) return;
+
+            // Close any open chapter first
+            const currentlyOpen = document.querySelector(".chapter.open");
+            if (currentlyOpen && currentlyOpen !== targetChapter) {
+              closeChapter(currentlyOpen, () => {
+                openChapter(targetChapter);
+                scrollToChapter(targetChapter);
+              });
+            } else if (!targetChapter.classList.contains("open")) {
+              openChapter(targetChapter);
+              scrollToChapter(targetChapter);
+            } else {
+              scrollToChapter(targetChapter);
+            }
+          });
+        });
+
+        function scrollToChapter(chapter) {
+          setTimeout(() => {
+            chapter.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 80);
+        }
+
+        /* ═══════════════════════════════════════════
+           Hover micro-interactions on TOC
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((btn) => {
+          btn.addEventListener("mouseenter", () => {
+            gsap.to(btn, {
+              scale: 1.05,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+              scale: 1,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+        });
+      })();
+    </script>
+  
+    <script src="quiz-data.js?v=2"></script>
+    <script src="quiz-ui.js?v=2"></script>
+    <script src="../../reviews/reviews.js"></script>
+
+  </body>
+</html>

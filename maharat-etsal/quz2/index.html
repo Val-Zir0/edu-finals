@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار مهارات الأتصال - بنك الأسئلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../reviews/reviews.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      :root {
+        --bg: #0b111a;
+        --bg2: #15202b;
+        --bg3: #223447;
+        --gold: #06b6d4;
+        --gold2: #22d3ee;
+        --primary: #0284c7;
+        --primary-light: #38bdf8;
+        --teal: #10b981;
+        --red: #ef4444;
+        --blue: #38bdf8;
+        --text: #e8ecf1;
+        --muted: #8b99a8;
+        --correct: #10b981;
+        --wrong: #ef4444;
+        --radius: 14px;
+        --purple: #8b5cf6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* ====== Ambient Background Orbs ====== */
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+      }
+      body::before {
+        width: 500px;
+        height: 500px;
+        background: var(--gold);
+        top: -150px;
+        right: -100px;
+      }
+      body::after {
+        width: 450px;
+        height: 450px;
+        background: var(--purple);
+        bottom: -100px;
+        left: -100px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* ====== Header ====== */
+      .header {
+        width: 100%;
+        max-width: 720px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .header h1 {
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        color: var(--gold);
+        font-weight: 900;
+        text-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+        letter-spacing: -0.02em;
+      }
+      .header p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 8px;
+        font-weight: 400;
+      }
+            .header a {
+        color: var(--gold2);
+      }
+
+      /* ====== Screens ====== */
+      #intro-screen, #quiz-screen, #result-screen {
+        width: 100%;
+        max-width: 720px;
+        position: relative;
+        z-index: 1;
+      }
+
+      #intro-screen {
+        text-align: center;
+      }
+
+      /* ====== Glass Card Base ====== */
+      .glass {
+        background: rgba(21, 32, 43, 0.65);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      /* ====== Intro Card ====== */
+      .intro-card {
+        border-radius: 22px;
+        padding: 40px 32px;
+        margin-bottom: 20px;
+      }
+      .intro-icon {
+        font-size: 3.5rem;
+        margin-bottom: 18px;
+        display: block;
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .intro-card h2 {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-weight: 900;
+      }
+      .intro-card p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+      .intro-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .feat {
+        background: rgba(34, 52, 71, 0.6);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 16px 14px;
+        font-size: 0.84rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .feat:hover {
+        transform: translateY(-3px);
+        border-color: rgba(6, 182, 212, 0.25);
+      }
+      .feat span {
+        color: var(--gold);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+      }
+
+      /* ====== Progress Bar ====== */
+      .progress-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .progress-bar {
+        height: 7px;
+        background: var(--bg3);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        border-radius: 20px;
+        transition: width 0.4s ease;
+        box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+      }
+
+      /* ====== Scoreboard ====== */
+      .scoreboard {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      .score-card {
+        flex: 1;
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(21, 32, 43, 0.6);
+        backdrop-filter: blur(12px);
+        transition: transform 0.3s ease;
+      }
+      .score-card:hover {
+        transform: translateY(-2px);
+      }
+      .score-card .val {
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+      .score-card .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .score-card.correct .val { color: var(--correct); }
+      .score-card.wrong .val { color: var(--wrong); }
+      .score-card.total .val { color: var(--gold); }
+      .score-card.correct { border-bottom: 2px solid var(--correct); }
+      .score-card.wrong { border-bottom: 2px solid var(--wrong); }
+      .score-card.total { border-bottom: 2px solid var(--gold); }
+
+      /* ====== Question Card ====== */
+      .card {
+        width: 100%;
+        border-radius: 22px;
+        padding: 30px;
+      }
+      .q-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .q-badge {
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.15));
+        color: var(--gold);
+        border: 1px solid rgba(6, 182, 212, 0.35);
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      .q-chapter {
+        font-size: 0.8rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px 12px;
+        border-radius: 12px;
+      }
+      .question {
+        font-size: 1.08rem;
+        font-weight: 700;
+        line-height: 1.9;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      /* ====== Options ====== */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .opt {
+        background: rgba(34, 52, 71, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.07);
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        border-radius: 14px;
+        padding: 15px 18px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: right;
+        width: 100%;
+        backdrop-filter: blur(6px);
+      }
+      .opt:not(.disabled):hover {
+        border-color: var(--gold);
+        background: rgba(6, 182, 212, 0.08);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+      }
+      .opt-letter {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.88rem;
+        transition: all 0.25s ease;
+      }
+      .opt.correct {
+        border-color: var(--correct);
+        background: rgba(16, 185, 129, 0.12);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+      }
+      .opt.correct .opt-letter {
+        background: var(--correct);
+        color: #000;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      }
+      .opt.wrong {
+        border-color: var(--wrong);
+        background: rgba(239, 68, 68, 0.12);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+      }
+      .opt.wrong .opt-letter {
+        background: var(--wrong);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+      }
+      .opt.disabled {
+        cursor: default;
+      }
+
+      /* ====== Feedback ====== */
+      .feedback {
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        opacity: 0;
+        display: none;
+      }
+      .feedback.correct-fb {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--correct);
+      }
+      .feedback.wrong-fb {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: var(--wrong);
+      }
+      .feedback strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      /* ====== Buttons ====== */
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        transition: left 0.5s ease;
+      }
+      .btn:hover::before {
+        left: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #f3f3f3;
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.45);
+      }
+      .btn-primary:active {
+        transform: translateY(0) scale(0.98);
+      }
+      .btn-next {
+        opacity: 0;
+        display: none;
+      }
+      .btn-start, .btn-restart {
+        padding: 15px 52px;
+        font-size: 1.05rem;
+        border-radius: 14px;
+      }
+
+      /* ====== Result Screen ====== */
+      #result-screen {
+        text-align: center;
+      }
+      .result-circle-wrap {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 24px;
+      }
+      .result-circle {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: conic-gradient(var(--bg3) 100%, var(--bg3) 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
+      }
+      .result-circle::after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--bg2);
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      .result-circle-glow {
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        background: conic-gradient(var(--gold), var(--purple), var(--gold)) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.5;
+        animation: glowSpin 4s linear infinite;
+      }
+      @keyframes glowSpin {
+        to { transform: rotate(360deg); }
+      }
+      .result-pct {
+        position: relative;
+        z-index: 1;
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--gold);
+        text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+      }
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 8px;
+        text-shadow: 0 0 25px rgba(6, 182, 212, 0.2);
+      }
+      .result-sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 28px;
+        line-height: 1.8;
+      }
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .rs-card {
+        background: rgba(34, 52, 71, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: var(--radius);
+        padding: 18px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s ease;
+      }
+      .rs-card:hover {
+        transform: translateY(-3px);
+      }
+      .rs-card .v {
+        font-size: 2.2rem;
+        font-weight: 900;
+      }
+      .rs-card .l {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .rs-correct-val { color: var(--correct); }
+      .rs-wrong-val { color: var(--wrong); }
+      .rs-pct-val { color: var(--gold); }
+
+      /* ====== Modal ====== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        background: rgba(21, 32, 43, 0.92);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 42px 36px;
+        max-width: 440px;
+        width: 90%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+      .modal-icon {
+        font-size: 3.2rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .modal-box p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+      .modal-sub-text {
+        font-size: 0.85rem;
+      }
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 7px;
+        background: var(--bg3);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .modal-progress .mp-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        border-radius: 20px;
+      }
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 14px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .modal-btn-yes {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #f7f7f7;
+        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+      }
+      .modal-btn-yes:hover {
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.45);
+      }
+      .modal-btn-no {
+        background: rgba(34, 52, 71, 0.8);
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        transform: translateY(-2px);
+      }
+
+      /* ====== Responsive ====== */
+      @media (max-width: 600px) {
+        body {
+          padding: 14px;
+        }
+        .modal-box {
+          padding: 30px 22px;
+        }
+        .card {
+          padding: 22px 16px;
+          border-radius: 18px;
+        }
+        .intro-card {
+          padding: 28px 20px;
+          border-radius: 18px;
+        }
+        .header h1 {
+          font-size: 1.35rem;
+        }
+        .intro-features {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .result-stats {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .scoreboard {
+          gap: 8px;
+        }
+        .score-card {
+          padding: 10px 8px;
+        }
+        .score-card .val {
+          font-size: 1.4rem;
+        }
+        .btn-start, .btn-restart {
+          padding: 14px 36px;
+          font-size: 0.98rem;
+        }
+        .result-circle-wrap {
+          width: 130px;
+          height: 130px;
+        }
+        .result-circle {
+          width: 130px;
+          height: 130px;
+        }
+        .result-circle::after {
+          width: 100px;
+          height: 100px;
+        }
+        .result-pct {
+          font-size: 1.5rem;
+        }
+        .modal-btns {
+          flex-direction: column;
+        }
+      }
+       @font-face {
+        font-family: "Emoji";
+        src: url(../fonts/Emojis.ttf) format("truetype");
+      }
+    .emoji, .intro-icon, .modal-icon {
+        font-family: "Emoji";
+      }
+         ::selection {
+        background: none;
+        color: none;
+      }
+
+    </style>
+  </head>
+
+
+<body data-subject="maharat-etsal">
+
+  
+    <div class="header">
+      <h1><span class="emoji">📢</span> اختبار مهارات الأتصال</h1>
+      <p>بنك الأسئلة الشامل - مادة مهارات الأتصال</p>
+      <p>نم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a></p>
+
+    </div>
+
+    <!-- شاشة البداية -->
+    <div id="intro-screen">
+      <div class="intro-card glass">
+        <div class="intro-icon">📧</div>
+        <h2>مرحباً بك في بنك الأسئلة</h2>
+        <p>
+          اختبار متكامل يحتوي على أسئلة بنك مادة مهارات الأتصال.<br>
+          اختر الإجابة الصحيحة واحصل على تغذية راجعة فورية لكل سؤال.
+        </p>
+        <div class="intro-features">
+          <div class="feat"><span class="emoji">📖</span> أسئلة شاملة<br>مستخرجة من بنك الأسئلة</div>
+          <div class="feat"><span class="emoji">⚡</span> تغذية فورية<br>شرح لكل إجابة</div>
+          <div class="feat"><span class="emoji">🎯</span> متعدد الخيارات<br>اختيار واحد صحيح</div>
+          <div class="feat"><span class="emoji">📊</span> نتيجة نهائية<br>مع تقييم مستواك</div>
+        </div>
+        <button class="btn btn-primary btn-start" id="btn-start">ابدأ الاختبار ←</button>
+      </div>
+    </div>
+
+    <!-- شاشة الأسئلة -->
+    <div id="quiz-screen" class="hidden">
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="val" id="sc-correct">0</div>
+          <div class="lbl"><span class="emoji">✔</span> صحيح</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="val" id="sc-wrong">0</div>
+          <div class="lbl"><span class="emoji">✘</span> خطأ</div>
+        </div>
+        <div class="score-card total">
+          <div class="val" id="sc-remain">0</div>
+          <div class="lbl">متبقي</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="q-counter">سؤال 1 من 0</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card glass" id="q-card">
+        <div class="q-meta">
+          <span class="q-badge" id="q-num-badge">سؤال ١</span>
+          <span class="q-chapter">مهارات الأتصال</span>
+        </div>
+        <div class="question" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+        <div class="feedback" id="q-feedback"></div>
+        <div class="actions">
+          <button class="btn btn-primary btn-next" id="btn-next">السؤال التالي ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- شاشة النتيجة -->
+    <div id="result-screen" class="hidden">
+      <div class="intro-card glass">
+        <div class="result-circle-wrap">
+          <div class="result-circle" id="result-circle">
+            <div class="result-pct" id="res-pct">0%</div>
+          </div>
+          <div class="result-circle-glow"></div>
+        </div>
+        <div class="result-title" id="res-title">نتيجتك</div>
+        <div class="result-sub" id="res-sub"></div>
+        <div class="result-stats">
+          <div class="rs-card">
+            <div class="v rs-correct-val" id="rs-correct">0</div>
+            <div class="l">إجابات صحيحة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v rs-wrong-val" id="rs-wrong">0</div>
+            <div class="l">إجابات خاطئة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v rs-pct-val" id="rs-pct2">0%</div>
+            <div class="l">النسبة المئوية</div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-restart" id="btn-restart"><span class="emoji">🔄</span> إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <!-- مودال استكمال الاختبار -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📋</span>
+        <h3>لديك اختبار لم يكتمل!</h3>
+        <p>يبدو أنك بدأت هذا الاختبار ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-sub-text">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ==================== بنك الأسئلة - مادة مهارات الأتصال ====================
+      const questionsData = [
+  {
+    "q": "إذا حددت شركة هدفًا يتمثل في زيادة مبيعاتها بنسبة 20% خلال عام وقد تحقق الهدف بأقل تكلفة ممكنة :",
+    "opts": [
+      "تحقيق هذا الهدف يعد مؤشراً على الفعالية",
+      "تحقيق هذا الهدف مؤشراً على تحقيق الكفاءة",
+      "ليس شئ مما سبق",
+      "تحقيق هذا الهدف يعد مؤشراً على تحقيق الكفاءة والفعالية معاً"
+    ],
+    "correct": 3,
+    "explain": "تحقيق الهدف يعني الفعالية، وتحقيقه بأقل تكلفة ممكنة يعني الكفاءة."
+  },
+  {
+    "q": "من عيوب الاتصال الكتابي",
+    "opts": [
+      "التوثيق",
+      "البطء في بعض الحالات وعدم الرد الفوري",
+      "الوضوح",
+      "التنظيم"
+    ],
+    "correct": 1,
+    "explain": "يفتقر الاتصال الكتابي في بعض الأحيان إلى التفاعل الفوري المتاح في الاتصال الشفوي."
+  },
+  {
+    "q": "أي مما يلي لا يعد مثالاً على الاتصال الشفوي :",
+    "opts": [
+      "الاجتماعات الدورية",
+      "المناقشات داخل الفريق",
+      "اللوائح والتعليمات",
+      "المقابلات الشخصية"
+    ],
+    "correct": 2,
+    "explain": "اللوائح والتعليمات تُعتبر من وسائل الاتصال المكتوب (الرسمي) وليس الشفوي."
+  },
+  {
+    "q": "إذا احتوى تقرير على جمل إنشائية مكررة لا تخدم هدف التقرير، فما هو الخطأ الشائع؟",
+    "opts": [
+      "غياب التوصيات",
+      "استخدام لغة غير رسمية",
+      "الحشو الزائد",
+      "ضعف التنظيم"
+    ],
+    "correct": 2,
+    "explain": "استخدام جمل مكررة بلا فائدة فعلية يسمى بالحشو الزائد ويضعف من دقة وقيمة التقرير."
+  },
+
+  {
+    "q": "من أنواع التقارير:",
+    "opts": [
+      "تقارير دورية فقط",
+      "تقارير خاصة بالمشكلات فقط",
+      "ليس شئ مما سبق",
+      "الاختيارين السابقين صحيحين معاً"
+    ],
+    "correct": 3,
+    "explain": "التقارير الإدارية تتنوع لتشمل تقارير دورية روتينية وتقارير استثنائية خاصة بالمشكلات."
+  },
+  {
+    "q": "الاتصال الصاعد هو :",
+    "opts": [
+      "من أعلى لأسفل",
+      "من أسفل إلى أعلى",
+      "داخلي فقط",
+      "خارجي"
+    ],
+    "correct": 1,
+    "explain": "ينقل الاتصال الصاعد تقارير الأداء والمقترحات والشكاوى من العاملين في المستويات الدنيا للإدارة العليا."
+  },
+  {
+    "q": "كل ذلك يُعد ضمن دور التكنولوجيا في تطوير بيئة العمل، ماعدا :",
+    "opts": [
+      "زيادة كفاءة الأداء",
+      "تعزيز التعاون بين الأقسام",
+      "الاعتماد الزائد على التكنولوجيا",
+      "دعم المرونة في العمل"
+    ],
+    "correct": 2,
+    "explain": "الاعتماد الزائد يُعتبر من التحديات أو السلبيات التي قد تعيق العمل عند انقطاع الخدمة، وليس من أدوار التطوير الإيجابية."
+  },
+  {
+    "q": "الفعالية التنظيمية هي:",
+    "opts": [
+      "زيادة الأرباح فقط",
+      "تقليل الجهد",
+      "إلغاء الأهداف",
+      "تحقيق الأهداف باستخدام الموارد المتاحة"
+    ],
+    "correct": 3,
+    "explain": "الفعالية تتعلق بمدى قدرة ونجاح المنظمة في تحقيق أهدافها المحددة."
+  },
+  {
+    "q": "الاتصال غير اللفظي هو:",
+    "opts": [
+      "كتابة",
+      "كلام",
+      "الإشارات ونبرة الصوت والحركات",
+      "تقارير"
+    ],
+    "correct": 2,
+    "explain": "لغة الجسد والحركات وتعبيرات الوجه توصل رسائل قوية لا تحتاج إلى استخدام الكلمات."
+  },
+  {
+    "q": "الاتصال هو :",
+    "opts": [
+      "حفظ بيانات",
+      "نقل المعلومات بين الأفراد",
+      "تجاهل",
+      "كتابة فقط"
+    ],
+    "correct": 1,
+    "explain": "مفهوم الاتصال يعبر عن عملية نقل وتبادل المعلومات والمعاني والأفكار بين طرفين أو أكثر."
+  },
+  {
+    "q": "الاتصال الكتابي يتم عبر:",
+    "opts": [
+      "الكلام",
+      "التقارير والبريد الإلكتروني",
+      "الإشارات",
+      "الصوت"
+    ],
+    "correct": 1,
+    "explain": "التقارير والمذكرات والبريد الإلكتروني من أشهر وسائل الاتصال المكتوب في بيئة العمل."
+  },
+  {
+    "q": "من أهداف الاتصال داخل المنظمة:",
+    "opts": [
+      "التعقيد",
+      "تحقيق التنسيق بين الأفراد",
+      "إلغاء التواصل",
+      "تقليل المعلومات"
+    ],
+    "correct": 1,
+    "explain": "يسعى الاتصال الفعال إلى توجيه وتنسيق الجهود الفردية لخدمة أهداف المنظمة ككل وتجنب التضارب."
+  },
+  {
+    "q": "من معوقات الفعالية التنظيمية",
+    "opts": [
+      "وضوح الأهداف",
+      "ضعف الاتصال الداخلي",
+      "التدريب",
+      "التطوير"
+    ],
+    "correct": 1,
+    "explain": "الاتصال الضعيف يؤدي إلى سوء الفهم وغياب التنسيق بين الأفراد مما يعيق تحقيق أهداف المنظمة."
+  },
+  {
+    "q": "تأتي خطوة جمع المعلومات المتعلقة بالموضوع ضمن خطوات عملية لتوليد الأفكار :",
+    "opts": [
+      "قبل تحديد المشكلة",
+      "بعد تحديد المشكلة",
+      "في الخطوة النهائية",
+      "ليس شئ مما سبق"
+    ],
+    "correct": 1,
+    "explain": "تبدأ العملية بتحديد المشكلة أولاً بوضوح ثم يتبعها جمع المعلومات اللازمة لفهم أبعادها."
+  },
+  {
+    "q": "من مزايا الاتصال الشفوي",
+    "opts": [
+      "البطء",
+      "سرعة نقل المعلومات والتغذية الراجعة",
+      "الغموض",
+      "عدم الفهم"
+    ],
+    "correct": 1,
+    "explain": "يسمح الاتصال الشفوي بالرد الفوري والتأكد من الفهم من خلال استقبال التغذية الراجعة فوراً."
+  },
+  {
+    "q": "الاتصال الذي قد يقلل من التواصل الإنساني المباشر، هو :",
+    "opts": [
+      "الاتصال الشفوي",
+      "الاتصال الإلكتروني",
+      "الاتصال الكتابي",
+      "الاتصال غير اللفظي"
+    ],
+    "correct": 1,
+    "explain": "الاتصال الإلكتروني يتم غالباً عبر الشاشات والأجهزة مما قد يقلل من التفاعل الإنساني المباشر وجهاً لوجه."
+  },
+  {
+    "q": "الاتصال الذي ينقل المشاعر بشكل أسرع من الكلمات، هو الاتصال :",
+    "opts": [
+      "الكتابي",
+      "الشفوي",
+      "الإلكتروني",
+      "غير اللفظي"
+    ],
+    "correct": 3,
+    "explain": "لغة الجسد وتعبيرات الوجه والاتصال البصري (الاتصال غير اللفظي) تنقل المشاعر والانفعالات بصدق وسرعة أكبر."
+  },
+  {
+    "q": "تحسين الفعالية يتم عبر:",
+    "opts": [
+      "إهمال التدريب",
+      "تطوير المهارات والاتصال الداخلي",
+      "تقليل الاتصال",
+      "إلغاء التخطيط"
+    ],
+    "correct": 1,
+    "explain": "التدريب المستمر وتطوير المهارات يعززان قدرات الموظفين على تحقيق الأهداف بفعالية أكبر."
+  },
+  {
+    "q": "الأداء الفردي القوي :",
+    "opts": [
+      "يعزز الأداء الجماعي",
+      "ليس له تأثير",
+      "يضعف الأداء الجماعي",
+      "ليس شئ مما سبق"
+    ],
+    "correct": 0,
+    "explain": "الفرق القوية تتكون من أفراد ذوي أداء قوي يساهمون بشكل مباشر في تحقيق أهداف الجماعة."
+  },
+  {
+    "q": "يتأثر الأداء الفردي بعدة عوامل منها:",
+    "opts": [
+      "القدرات والمهارات",
+      "الدافعية",
+      "الاتجاهات",
+      "كل ما سبق"
+    ],
+    "correct": 3,
+    "explain": "الأداء الفردي محصلة لتفاعل القدرات والدافعية والاتجاهات التي يمتلكها الفرد."
+  },
+  {
+    "q": "أي من العبارات التالية هي عبارة غير صحيحة طبقاً لما درسته :",
+    "opts": [
+      "الابتكار تحويل الفكرة إلى تطبيق",
+      "الإبداع إنتاج فكرة جديدة",
+      "ليس كل فكرة تتحول إلى ابتكار",
+      "الابتكار يسبق الإبداع"
+    ],
+    "correct": 3,
+    "explain": "العبارة غير الصحيحة هي أن الابتكار يسبق الإبداع، والصحيح أن الإبداع (إنتاج الفكرة) يسبق الابتكار (تطبيق الفكرة)."
+  },
+  {
+    "q": "من أهم قواعد العصف الذهني :",
+    "opts": [
+      "تقييد التفكير",
+      "التقييم أثناء الحوار",
+      "تشجيع الكيف قبل الكم",
+      "ليس شئ مما سبق"
+    ],
+    "correct": 3,
+    "explain": "من قواعد العصف الذهني تشجيع 'الكم' قبل 'الكيف' وإرجاء التقييم وإطلاق حرية التفكير، لذا الخيارات المذكورة خاطئة."
+  },
+  {
+    "q": "الكفاءة تعني:",
+    "opts": [
+      "تحقيق الهدف بأقل استخدام ممكن للموارد",
+      "تحقيق الهدف فقط",
+      "زيادة العمل",
+      "الفوضى"
+    ],
+    "correct": 0,
+    "explain": "الكفاءة ترتبط بالاستخدام الأمثل للموارد لتحقيق الهدف، أي تقليل الفاقد."
+  },
+  {
+    "q": "من خصائص الفكرة الجيدة",
+    "opts": [
+      "التقليد",
+      "القابلية للتطبيق والملاءمة",
+      "الغموض",
+      "العشوائية"
+    ],
+    "correct": 1,
+    "explain": "الفكرة الجيدة والمبتكرة يجب أن تتسم بالواقعية وأن تكون قابلة للتنفيذ الفعلي في بيئة العمل."
+  },
+  {
+    "q": "أي من الحالات التالية يعتبر تطبيقاً صحيحاً لمبدأ الموضوعية في كتابة التقارير الإدارية؟",
+    "opts": [
+      "عرض النتائج بناءاً على الأدلة والبيانات بغض النظر عن الآراء الشخصية",
+      "صياغة التقرير بأسلوب أدبي بليغ لإقناع القارئ",
+      "تجاهل البيانات التي قد تظهر تقصير الإدارة",
+      "الإكتفاء بذكر التوصيات السهلة"
+    ],
+    "correct": 0,
+    "explain": "الموضوعية تعني التجرد والاعتماد التام على الحقائق والأدلة بعيداً عن التحيز أو الآراء الشخصية."
+  },
+  {
+    "q": "كل ذلك يعتبر من الأخطاء الشائعة في إدارة المقابلات ، ماعدا:",
+    "opts": [
+      "المقاطعة",
+      "التحيز",
+      "طرح أسئلة ذكية",
+      "الأسئلة غير الواضحة"
+    ],
+    "correct": 2,
+    "explain": "طرح الأسئلة الذكية يُعد من مهارات الإدارة الناجحة للمقابلات وليس من الأخطاء."
+  },
+  {
+    "q": "شبكة الدائرة",
+    "opts": [
+      "مغلقة",
+      "يتواصل الأفراد بشكل دائري",
+      "بدون اتصال",
+      "فردي"
+    ],
+    "correct": 1,
+    "explain": "يتواصل كل فرد مع شخصين فقط يمثلان اليمين واليسار له، مما يشكل حلقة دائرية."
+  },
+  {
+    "q": "كل ذلك يعتبر ضمن دور التكنولوجيا في تطوير المقابلات، ما عدا:",
+    "opts": [
+      "مقابلات عبر Zoom",
+      "تسجيل المقابلات",
+      "أنظمة إدارة المؤسسات (ERP)",
+      "نماذج تقييم الكترونية"
+    ],
+    "correct": 2,
+    "explain": "أنظمة تخطيط موارد المؤسسة (ERP) مخصصة لإدارة موارد وبيانات المنظمة ككل وليست أداة مباشرة لتطوير المقابلات."
+  },
+  {
+    "q": "الإنتاجية تعني:",
+    "opts": [
+      "العلاقة بين المدخلات والمخرجات",
+      "الشكل فقط",
+      "عدد الموظفين",
+      "الوقت فقط"
+    ],
+    "correct": 0,
+    "explain": "الإنتاجية هي مقياس لكفاءة تحويل المدخلات (موارد) إلى مخرجات (سلع وخدمات)."
+  },
+  {
+    "q": "الاتصال الشفوي يتميز بـ:",
+    "opts": [
+      "التوثيق فقط",
+      "السرعة والتفاعل المباشر",
+      "البطء",
+      "الجمود"
+    ],
+    "correct": 1,
+    "explain": "من أهم خصائص الاتصال الشفوي أنه يتيح النقاش الفوري وتوضيح المعاني والتفاعل المباشر."
+  },
+  {
+    "q": "الاتصال الهابط يكون من:",
+    "opts": [
+      "الموظف للمدير",
+      "الإدارة العليا إلى العاملين",
+      "بين الموظفين",
+      "خارج المنظمة"
+    ],
+    "correct": 1,
+    "explain": "يتم توجيه الأوامر والتعليمات والسياسات من المستويات الإدارية العليا للأدنى من خلال الاتصال الهابط."
+  },
+  {
+    "q": "رضا العاملين يعني",
+    "opts": [
+      "ضغط العمل",
+      "الشعور بالراحة والاستقرار الوظيفي",
+      "زيادة المشاكل",
+      "ترك العمل"
+    ],
+    "correct": 1,
+    "explain": "الرضا الوظيفي يعكس حالة نفسية إيجابية تجاه بيئة العمل والاستقرار فيها."
+  },
+  {
+    "q": "كل ذلك يعد مثالاً على الاتصال غير الرسمي ما عدا :",
+    "opts": [
+      "الأحاديث الجانبية بين العاملين",
+      "تبادل المعلومات أثناء فترات الاستراحة",
+      "النقاشات غير الرسمية داخل بيئة العمل",
+      "المذكرات الداخلية"
+    ],
+    "correct": 3,
+    "explain": "المذكرات الداخلية تُعد إحدى قنوات الاتصال الرسمي المكتوب المعتمدة داخل المنظمة."
+  },
+  {
+    "q": "الفرق بين الكفاءة والفعالية",
+    "opts": [
+      "لا يوجد فرق",
+      "الفعالية تحقيق الهدف والكفاءة استخدام الموارد",
+      "نفس المعنى",
+      "ليس شيء مما سبق"
+    ],
+    "correct": 1,
+    "explain": "الفعالية تعنى بتحقيق الغايات والأهداف، بينما الكفاءة تعنى بضبط الوسائل وحسن استخدام الموارد."
+  },
+  {
+    "q": "الاتصال الكلي:",
+    "opts": [
+      "محدود",
+      "يسمح للجميع بالتواصل المباشر",
+      "مغلق",
+      "رسمي فقط"
+    ],
+    "correct": 1,
+    "explain": "تُسمى أيضاً بشبكة الاتصال المفتوح، حيث تتاح الفرصة لكل فرد للتواصل المباشر والحر مع جميع الأفراد."
+  },
+  {
+    "q": "أولى خطوات إعداد التقرير بشكل صحيح هي:",
+    "opts": [
+      "جمع البيانات",
+      "تحديد الهدف",
+      "كتابة التقرير",
+      "تنظيم المعلومات"
+    ],
+    "correct": 1,
+    "explain": "تحديد الهدف من التقرير هو الأساس الذي يُبنى عليه مسار جمع البيانات وكيفية كتابة وعرض التقرير."
+  },
+  {
+    "q": "إن نجاح الاتصال يعتمد على :",
+    "opts": [
+      "وسيلة الاتصال المناسبة فقط",
+      "طريقة انتقال المعلومة بين المستويات الإدارية فقط.",
+      "الاختيارين السابقين صحيحين",
+      "كل ما سبق خاطئ"
+    ],
+    "correct": 2,
+    "explain": "نجاح الاتصال منظومة متكاملة تعتمد على اختيار الوسيلة المناسبة والمسار والطريقة الصحيحة معاً."
+  },
+  {
+    "q": "رضا العملاء يعني:",
+    "opts": [
+      "عدم الشراء",
+      "استمرار التعامل مع المؤسسة",
+      "الشكوى",
+      "الانسحاب"
+    ],
+    "correct": 1,
+    "explain": "رضا العميل يترجم بشكل مباشر إلى ولاء واستمرارية في التعامل مع المؤسسة وشراء منتجاتها."
+  },
+  {
+    "q": "عيب شبكة العجلة",
+    "opts": [
+      "البطء",
+      "زيادة الضغط على الشخص المركزي",
+      "عدم وضوح",
+      "ضعف الاتصال"
+    ],
+    "correct": 1,
+    "explain": "اعتماد جميع أفراد الشبكة على شخص واحد في التواصل يسبب له ضغطاً كبيراً (عبء معلوماتي)."
+  },
+  {
+    "q": "من أهم المهارات الحاكمة للأداء الجماعي :",
+    "opts": [
+      "مهارة الاتصال الفعال",
+      "مهارة إدارة الوقت",
+      "مهارة اتخاذ القرار",
+      "ليس شئ مما سبق"
+    ],
+    "correct": 0,
+    "explain": "الاتصال الفعال هو شريان العمل الجماعي الذي يربط بين أعضاء الفريق وينسق جهودهم."
+  },
+  {
+    "q": "من خطوات توليد الأفكار",
+    "opts": [
+      "التنفيذ أولاً",
+      "تحديد المشكلة وجمع المعلومات وتوليد البدائل",
+      "تجاهل المشكلة",
+      "حذف البيانات"
+    ],
+    "correct": 1,
+    "explain": "توليد الأفكار هو عملية منهجية تبدأ بفهم المشكلة ثم جمع المعلومات وطرح البدائل والأفكار."
+  },
+  {
+    "q": "من معوقات الفعالية",
+    "opts": [
+      "القيادة القوية",
+      "البيروقراطية",
+      "التدريب",
+      "التطوير"
+    ],
+    "correct": 1,
+    "explain": "البيروقراطية الزائدة تسبب بطء الإجراءات وتعقيدها مما يعيق تحقيق الأهداف بفعالية."
+  },
+  {
+    "q": "الشبكة التي يعيبها زيادة الضغط على الشخص المركزي، وتتميز بسرعة اتخاذ القرار، هي شبكة:",
+    "opts": [
+      "العجلة",
+      "السلسلة",
+      "الاتصال الكلي",
+      "الدائرة"
+    ],
+    "correct": 0,
+    "explain": "شبكة العجلة تعتمد على وجود شخص مركزي واحد يتواصل مع الجميع ويحتكر المعلومات، مما يسهل القرار ويزيد الضغط عليه."
+  },
+  {
+    "q": "الاتصال الشفوي هو:",
+    "opts": [
+      "كتابة",
+      "كلام مباشر بين الأفراد",
+      "تقارير",
+      "إشارات"
+    ],
+    "correct": 1,
+    "explain": "الاتصال الشفوي يعتمد بشكل أساسي على التحدث والاستماع المباشر بين الأطراف."
+  },
+  {
+    "q": "الاتصال الإلكتروني يعتمد على:",
+    "opts": [
+      "الورق",
+      "التكنولوجيا الحديثة",
+      "الكلام فقط",
+      "اليد"
+    ],
+    "correct": 1,
+    "explain": "يستخدم الاتصال الإلكتروني الوسائط والتقنيات الرقمية الحديثة وشبكات الإنترنت."
+  },
+  {
+    "q": "شبكة العجلة مركزها",
+    "opts": [
+      "كل الأفراد",
+      "شخص واحد",
+      "دائرة",
+      "بدون مركز"
+    ],
+    "correct": 1,
+    "explain": "في شبكة العجلة، يتمحور الاتصال بشكل كامل حول فرد واحد يكون هو همزة الوصل للجميع."
+  },
+  {
+    "q": "الاتصال الأفقي يحدث بين",
+    "opts": [
+      "مستويات مختلفة",
+      "نفس المستوى الإداري",
+      "خارج المنظمة",
+      "الجمهور"
+    ],
+    "correct": 1,
+    "explain": "يحدث الاتصال الأفقي بين الزملاء والأقسام في نفس المستوى الإداري لتنسيق العمليات والمهام."
+  },
+  {
+    "q": "التكيف هو :",
+    "opts": [
+      "رفض التغيير",
+      "الاستجابة للتغيرات البيئية",
+      "الجمود",
+      "الفوضى"
+    ],
+    "correct": 1,
+    "explain": "التكيف هو قدرة المنظمة على التجاوب والتواؤم مع متغيرات البيئة المحيطة لضمان البقاء والاستمرار."
+  },
+  {
+    "q": "شبكة السلسلة تعني:",
+    "opts": [
+      "اتصال عشوائي",
+      "انتقال المعلومات بشكل متتابع",
+      "مركزي",
+      "مفتوح"
+    ],
+    "correct": 1,
+    "explain": "في هذه الشبكة تنتقل المعلومة من شخص لآخر بشكل تسلسلي وخطي (مستوى تلو الآخر)."
+  },
+  {
+    "q": "من معايير الفعالية",
+    "opts": [
+      "الشكل",
+      "رضا العملاء",
+      "عدد الموظفين",
+      "ليس شيء مما سبق"
+    ],
+    "correct": 1,
+    "explain": "رضا العملاء يعتبر مؤشراً رئيسياً على نجاح المنظمة في تحقيق أهدافها وتقديم القيمة الفعالة."
+  }
+];
+
+
+
+
+    
+      // ==================== المنطق ====================
+      let currentIdx = 0;
+      let correctAnswers = 0;
+      let wrongAnswers = 0;
+      let isAnswered = false;
+      let shuffledQuestions = [];
+
+      const screens = {
+        intro: document.getElementById('intro-screen'),
+        quiz: document.getElementById('quiz-screen'),
+        result: document.getElementById('result-screen')
+      };
+      const qCard = document.getElementById('q-card');
+      const nextBtn = document.getElementById('btn-next');
+      const feedbackEl = document.getElementById('q-feedback');
+      const optionsContainer = document.getElementById('q-options');
+
+      document.getElementById('btn-start').addEventListener('click', initQuiz);
+      document.getElementById('btn-next').addEventListener('click', handleNext);
+      document.getElementById('btn-restart').addEventListener('click', resetQuiz);
+
+      
+      // ===== RESUME QUIZ MODAL =====
+      function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("resume") === "true") {
+                if (typeof resumeQuiz === 'function' && window.location.pathname.includes(data.quizFilename)) {
+                    resumeQuiz(data);
+                }
+                return;
+            }
+
+            const modal = document.getElementById('resume-modal');
+            if(!modal) return;
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 500);
+
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? data.quizFilename : 'index2.html';
+              if (window.location.pathname.includes(target)) {
+                 modal.classList.remove('active');
+                 if (typeof resumeQuiz === 'function') resumeQuiz(data);
+              } else {
+                 window.location.href = target + '?resume=true';
+              }
+            });
+
+            document.getElementById('modal-no').addEventListener('click', () => {
+              if (typeof clearProgress === 'function') clearProgress();
+              else localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkQuizProgress);
+
+      // ==================== Page Load Animation ====================
+      (function animateOnLoad() {
+        gsap.set('.header', { opacity: 0, y: -25 });
+        gsap.set('.intro-card', { opacity: 0, y: 40, scale: 0.97 });
+        gsap.set('.feat', { opacity: 0, y: 20 });
+        gsap.set('.btn-start', { opacity: 0, scale: 0.9 });
+
+        const tl = gsap.timeline({ delay: 0.2 });
+        tl.to('.header', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+          .to('.intro-card', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, '-=0.3')
+          .to('.feat', { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, '-=0.3')
+          .to('.btn-start', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, '-=0.2');
+      })();
+
+      function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function saveProgress() {
+        try {
+          const data = {
+            inProgress: true,
+            currentIdx: currentIdx,
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers,
+            totalQuestions: shuffledQuestions.length,
+            quizFilename: "index2.html",
+            questionOrder: shuffledQuestions.map(q => questionsData.indexOf(q)),
+            timestamp: Date.now()
+          };
+          localStorage.setItem('hr_quiz_progress', JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      function clearProgress() {
+        try { localStorage.removeItem('hr_quiz_progress'); } catch (e) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return null;
+          const data = JSON.parse(saved);
+          return (data && data.inProgress) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function initQuiz() {
+        shuffledQuestions = shuffleArray(questionsData);
+        currentIdx = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        saveProgress();
+
+        gsap.to(screens.intro, {
+          opacity: 0, y: -30, scale: 0.96, duration: 0.5, ease: "power2.in",
+          onComplete: () => {
+            screens.intro.classList.add('hidden');
+            screens.quiz.classList.remove('hidden');
+            gsap.fromTo(screens.quiz, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.3)"});
+            renderQuestion();
+          }
+        });
+      }
+
+      function resumeQuiz(data) {
+        shuffledQuestions = data.questionOrder.map(idx => questionsData[idx]);
+        currentIdx = data.currentIdx;
+        correctAnswers = data.correctAnswers || 0;
+        wrongAnswers = data.wrongAnswers || 0;
+        screens.intro.classList.add('hidden');
+        screens.quiz.classList.remove('hidden');
+        gsap.fromTo(screens.quiz, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.3)"});
+        renderQuestion();
+      }
+
+      (function checkResumeOnLoad() {
+        const data = loadProgress();
+        if (!data) return;
+        const modal = document.getElementById('resume-modal');
+        const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+        const fillEl = document.getElementById('modal-progress-fill');
+        fillEl.style.width = pct + '%';
+        document.getElementById('modal-progress-text').textContent =
+          `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+        setTimeout(() => modal.classList.add('active'), 500);
+        document.getElementById('modal-yes').addEventListener('click', () => {
+          modal.classList.remove('active');
+          setTimeout(() => resumeQuiz(data), 300);
+        });
+        document.getElementById('modal-no').addEventListener('click', () => {
+          clearProgress();
+          modal.classList.remove('active');
+        });
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.classList.remove('active');
+        });
+      })();
+
+      function renderQuestion() {
+        isAnswered = false;
+        const total = shuffledQuestions.length;
+        const qData = shuffledQuestions[currentIdx];
+
+        document.getElementById('q-num-badge').textContent = `سؤال ${currentIdx + 1}`;
+        document.getElementById('q-text').textContent = qData.q;
+        document.getElementById('q-counter').textContent = `سؤال ${currentIdx + 1} من ${total}`;
+        document.getElementById('sc-correct').textContent = correctAnswers;
+        document.getElementById('sc-wrong').textContent = wrongAnswers;
+        document.getElementById('sc-remain').textContent = total - currentIdx;
+
+        const pct = Math.round((currentIdx / total) * 100);
+        document.getElementById('q-pct').textContent = pct + '%';
+        gsap.to('#progress-fill', { width: pct + '%', duration: 0.6, ease: "power2.out" });
+
+        feedbackEl.style.display = 'none';
+        feedbackEl.style.opacity = '0';
+        nextBtn.style.display = 'none';
+        nextBtn.style.opacity = '0';
+
+        const letters = ['أ', 'ب', 'ج', 'د'];
+        optionsContainer.innerHTML = '';
+
+        qData.opts.forEach((optText, index) => {
+          const btn = document.createElement('button');
+          btn.className = 'opt';
+          btn.addEventListener('mouseenter', () => {
+            if (!isAnswered) gsap.to(btn, {x: -5, duration: 0.2, ease: "power2.out"});
+          });
+          btn.addEventListener('mouseleave', () => {
+            if (!isAnswered) gsap.to(btn, {x: 0, duration: 0.2, ease: "power2.out"});
+          });
+          btn.addEventListener('click', () => selectAnswer(index, btn));
+          btn.innerHTML = `<span class="opt-letter">${letters[index]}</span>${optText}`;
+          optionsContainer.appendChild(btn);
+        });
+
+        // Card entrance animation
+        gsap.fromTo(qCard,
+          {opacity: 0, x: -40, scale: 0.97},
+          {opacity: 1, x: 0, scale: 1, duration: 0.55, ease: "back.out(1.3)"}
+        );
+        // Stagger options
+        gsap.fromTo('.opt',
+          {opacity: 0, x: -20},
+          {opacity: 1, x: 0, duration: 0.35, stagger: 0.08, ease: "power2.out", delay: 0.15}
+        );
+      }
+
+      function selectAnswer(selectedIndex, clickedBtn) {
+        if (isAnswered) return;
+        isAnswered = true;
+
+        const qData = shuffledQuestions[currentIdx];
+        const allOpts = document.querySelectorAll('.opt');
+
+        allOpts.forEach(opt => {
+          opt.classList.add('disabled');
+          gsap.to(opt, {x: 0, duration: 0.1});
+        });
+
+        if (selectedIndex === qData.correct) {
+          correctAnswers++;
+          clickedBtn.classList.add('correct');
+          feedbackEl.className = 'feedback correct-fb';
+          feedbackEl.innerHTML = `<strong><span class="emoji">✔</span> إجابة صحيحة!</strong><br><span class="emoji">📖</span> ${qData.explain}`;
+          gsap.fromTo(clickedBtn, {scale: 1}, {scale: 1.03, yoyo: true, repeat: 1, duration: 0.18, ease: "power2.inOut"});
+        } else {
+          wrongAnswers++;
+          clickedBtn.classList.add('wrong');
+          allOpts[qData.correct].classList.add('correct');
+          feedbackEl.className = 'feedback wrong-fb';
+          feedbackEl.innerHTML = `<strong><span class="emoji">✘</span> إجابة خاطئة</strong><br><span class="emoji">📖</span> الإجابة الصحيحة: ${qData.opts[qData.correct]}<br><br><span class="emoji">📝</span> ${qData.explain}`;
+          gsap.fromTo(clickedBtn, {x: -6}, {x: 6, yoyo: true, repeat: 3, duration: 0.08});
+        }
+
+        document.getElementById('sc-correct').textContent = correctAnswers;
+        document.getElementById('sc-wrong').textContent = wrongAnswers;
+
+        feedbackEl.style.display = 'block';
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = (currentIdx < shuffledQuestions.length - 1) ? 'السؤال التالي ←' : 'عرض النتيجة ←';
+
+        gsap.to(feedbackEl, {opacity: 1, y: 0, duration: 0.45, delay: 0.2, ease: "power2.out"});
+        gsap.fromTo(nextBtn, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.45, delay: 0.45, ease: "back.out(1.5)"});
+        saveProgress();
+      }
+
+      function handleNext() {
+        currentIdx++;
+        saveProgress();
+        if (currentIdx >= shuffledQuestions.length) {
+          showResult();
+        } else {
+          gsap.to(qCard, {
+            opacity: 0, x: 40, scale: 0.97, duration: 0.35, ease: "power2.in",
+            onComplete: renderQuestion
+          });
+        }
+      }
+
+      function showResult() {
+        const total = shuffledQuestions.length;
+        const finalPct = Math.round((correctAnswers / total) * 100);
+
+        gsap.to(screens.quiz, {
+          opacity: 0, scale: 0.93, duration: 0.45, ease: "power2.in",
+          onComplete: () => {
+            screens.quiz.classList.add('hidden');
+            screens.result.classList.remove('hidden');
+
+            // Staggered result entrance
+            gsap.set(screens.result, {opacity: 1});
+            gsap.fromTo('.result-circle-wrap', {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.5)", delay: 0.1});
+            gsap.fromTo('.result-title', {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5, delay: 0.3});
+            gsap.fromTo('.result-sub', {opacity: 0}, {opacity: 1, duration: 0.5, delay: 0.45});
+            gsap.fromTo('.rs-card', {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.12, duration: 0.5, delay: 0.55, ease: "power2.out"});
+            gsap.fromTo('.btn-restart', {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.5, delay: 0.9, ease: "back.out(2)"});
+
+            document.getElementById('rs-correct').textContent = correctAnswers;
+            document.getElementById('rs-wrong').textContent = wrongAnswers;
+            document.getElementById('rs-pct2').textContent = finalPct + '%';
+
+            let title, sub;
+            if (finalPct >= 90) {
+              title = "🏆 ممتاز - جاهز للامتحان!";
+              sub = `أداء رائع! أجبت على ${correctAnswers} من ${total} إجابة بشكل صحيح.`;
+            } else if (finalPct >= 70) {
+              title = "🌟 جيد جداً";
+              sub = `أداؤك مميز. حصلت على ${correctAnswers} من ${total} إجابة صحيحة. راجع النقاط التي أخطأت فيها.`;
+            } else if (finalPct >= 50) {
+              title = "👍 مقبول";
+              sub = `حصلت على ${correctAnswers} من ${total} إجابة صحيحة. تحتاج لمراجعة المادة مرة أخرى.`;
+            } else {
+              title = "📚 تحتاج إلى مذاكرة";
+              sub = `حصلت على ${correctAnswers} من ${total} إجابة صحيحة. لا تقلق، راجع المادة وحاول الاختبار مرة أخرى.`;
+            }
+
+            document.getElementById('res-title').textContent = title;
+            document.getElementById('res-sub').textContent = sub;
+
+            // Update review system conditions
+            localStorage.setItem('quizFinished', 'true');
+            if (typeof window.triggerReviewAfterQuiz === 'function') {
+                window.triggerReviewAfterQuiz();
+            }
+
+            let proxy = { val: 0 };
+            const circleEl = document.getElementById('result-circle');
+            const pctTextEl = document.getElementById('res-pct');
+
+            gsap.to(proxy, {
+              val: finalPct,
+              duration: 1.8,
+              delay: 0.4,
+              ease: "power3.out",
+              onUpdate: function () {
+                let currentVal = Math.round(proxy.val);
+                pctTextEl.textContent = currentVal + "%";
+                let deg = (currentVal / 100) * 360;
+                circleEl.style.background = `conic-gradient(var(--gold) 0deg, var(--purple) ${deg}deg, var(--bg3) ${deg}deg)`;
+              }
+            });
+          }
+        });
+
+        clearProgress();
+      }
+
+      function resetQuiz() {
+        currentIdx = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        clearProgress();
+
+        gsap.to(screens.result, {
+          opacity: 0, y: 30, scale: 0.96, duration: 0.45, ease: "power2.in",
+          onComplete: () => {
+            screens.result.classList.add('hidden');
+            screens.quiz.classList.remove('hidden');
+            gsap.set(screens.quiz, {opacity: 1, scale: 1});
+            shuffledQuestions = shuffleArray(questionsData);
+            renderQuestion();
+          }
+        });
+      }
+    </script>
+    <script src="../../reviews/reviews.js"></script>
+  </body>
+</html>

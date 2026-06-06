@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مهارات الاتصال</title>
+    <meta
+      name="description"
+      content="موقع تعليمي غير ربحي لمراجعةالمادة يقدم ملخصات منظمة وبنك أسئلة تفاعلي لاختبار معلوماتك بأسلوب حديث وممتع."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <style>
+      :root {
+        --bg: #0b111a;
+        --bg2: #15202b;
+        --bg3: #223447;
+        --primary: #0284c7;
+        --primary-light: #38bdf8;
+        --gold: #06b6d4;
+        --gold-light: #22d3ee;
+        --gold-glow: rgba(6, 182, 212, 0.25);
+        --purple: #8b5cf6;
+        --purple-light: #a78bfa;
+        --purple-glow: rgba(139, 92, 246, 0.2);
+        --blue: #38bdf8;
+        --blue-glow: rgba(56, 189, 248, 0.2);
+        --text: #e8ecf1;
+        --text-muted: #8b99a8;
+        --radius: 18px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        position: relative;
+        text-align: center;
+        padding: 80px 20px 60px;
+        overflow: hidden;
+      }
+      .hero > *:not(.particles) {
+        position: relative;
+        z-index: 1;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(6, 182, 212, 0.08) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 20% 80%,
+            rgba(56, 189, 248, 0.07) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 80%,
+            rgba(139, 92, 246, 0.07) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(2, 132, 199, 0.1) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.3), transparent);
+      }
+
+      /* Floating particles */
+      .particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0;
+      }
+
+      /* Hero scales icon */
+      .hero-scales {
+        font-size: clamp(3rem, 8vw, 4.5rem);
+        display: block;
+        margin-bottom: 18px;
+        opacity: 0;
+        filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.35));
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(6, 182, 212, 0.1);
+        border: 1px solid rgba(6, 182, 212, 0.35);
+        color: var(--gold);
+        padding: 8px 24px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 24px;
+        opacity: 0;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+.hero-badge a span {
+color: var(--gold-light);
+
+}
+      .hero h1 {
+        font-family: "Amiri", serif;
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 40px rgba(6, 182, 212, 0.25));
+        margin-bottom: 14px;
+        opacity: 0;
+      }
+
+      .hero-sub {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        max-width: 580px;
+        margin: 0 auto 16px;
+        line-height: 1.9;
+        opacity: 0;
+      }
+
+      .hero-line {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--blue), var(--gold), var(--purple));
+        border-radius: 10px;
+        margin: 0 auto;
+        opacity: 0;
+      }
+
+      /* ===== STATS BAR ===== */
+      .stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 30px 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-val {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--gold);
+      }
+      .stat-lbl {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+
+      /* ===== CARDS SECTION ===== */
+      .cards-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 20px 60px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+        max-width: 1100px;
+        width: 100%;
+      }
+
+      .nav-card {
+        position: relative;
+        background: rgba(21, 32, 43, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 36px 30px 32px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.3s;
+      }
+
+      .nav-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--radius);
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+      }
+
+      .nav-card:hover::before {
+        opacity: 1;
+      }
+      .nav-card:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+        transform: translateY(-4px);
+      }
+
+      /* Card 1 - Quiz - Blue (العدالة) */
+      .nav-card.card-quiz::before {
+        background: radial-gradient(
+          ellipse at 50% 100%,
+          var(--blue-glow) 0%,
+          transparent 70%
+        );
+      }
+      .nav-card.card-quiz:hover {
+        box-shadow:
+          0 8px 40px rgba(56, 189, 248, 0.15),
+          0 0 0 1px rgba(56, 189, 248, 0.2);
+      }
+
+      /* Card 2 - Bank - Gold (الكرامة) */
+      .nav-card.card-bank::before {
+        background: radial-gradient(
+          ellipse at 50% 100%,
+          var(--gold-glow) 0%,
+          transparent 70%
+        );
+      }
+      .nav-card.card-bank:hover {
+        box-shadow:
+          0 8px 40px rgba(6, 182, 212, 0.15),
+          0 0 0 1px rgba(6, 182, 212, 0.2);
+      }
+
+      /* Card 3 - Read - Purple (الحرية) */
+      .nav-card.card-read::before {
+        background: radial-gradient(
+          ellipse at 50% 100%,
+          var(--purple-glow) 0%,
+          transparent 70%
+        );
+      }
+      .nav-card.card-read:hover {
+        box-shadow:
+          0 8px 40px rgba(139, 92, 246, 0.15),
+          0 0 0 1px rgba(139, 92, 246, 0.2);
+      }
+
+      .card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.4rem;
+        margin-bottom: 22px;
+        position: relative;
+      }
+
+      .card-quiz .card-icon {
+        background: linear-gradient(
+          135deg,
+          rgba(56, 189, 248, 0.2),
+          rgba(56, 189, 248, 0.05)
+        );
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
+      }
+      .card-bank .card-icon {
+        background: linear-gradient(
+          135deg,
+          rgba(6, 182, 212, 0.2),
+          rgba(6, 182, 212, 0.05)
+        );
+        box-shadow: 0 0 30px rgba(6, 182, 212, 0.1);
+      }
+      .card-read .card-icon {
+        background: linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.2),
+          rgba(139, 92, 246, 0.05)
+        );
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+      }
+
+      .card-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        display: inline-block;
+      }
+      .card-quiz .card-label {
+        color: var(--blue);
+        background: rgba(56, 189, 248, 0.12);
+      }
+      .card-bank .card-label {
+        color: var(--gold);
+        background: rgba(6, 182, 212, 0.12);
+      }
+      .card-read .card-label {
+        color: var(--purple-light);
+        background: rgba(139, 92, 246, 0.12);
+      }
+
+      .nav-card h2 {
+        font-size: 1.35rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        color: var(--text);
+      }
+
+      .nav-card p {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 24px;
+      }
+
+      .card-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        margin-bottom: 24px;
+      }
+      .feat-item {
+        background: var(--bg3);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .feat-item span {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 2px;
+        font-size: 0.82rem;
+      }
+      .card-quiz .feat-item span {
+        color: var(--blue);
+      }
+      .card-bank .feat-item span {
+        color: var(--gold);
+      }
+      .card-read .feat-item span {
+        color: var(--purple-light);
+      }
+
+      .card-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 32px;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+      }
+      .card-quiz .card-btn {
+        background: var(--blue);
+        color: #fff;
+      }
+      .card-quiz .card-btn:hover {
+        background: var(--primary-light);
+        transform: scale(1.04);
+      }
+      .card-bank .card-btn {
+        background: var(--gold);
+        color: #ffffff;
+      }
+      .card-bank .card-btn:hover {
+        background: var(--gold-light);
+        transform: scale(1.04);
+      }
+      .card-read .card-btn {
+        background: var(--purple);
+        color: #fff;
+      }
+      .card-read .card-btn:hover {
+        background: var(--purple-light);
+        transform: scale(1.04);
+      }
+
+      .card-btn .arrow {
+        transition: transform 0.25s;
+        font-size: 1.1rem;
+      }
+      .nav-card:hover .card-btn .arrow {
+        transform: translateX(-4px);
+      }
+
+      /* Shimmer effect on cards */
+      .nav-card .shimmer {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.03),
+          transparent
+        );
+        transform: skewX(-15deg);
+        pointer-events: none;
+      }
+      .nav-card:hover .shimmer {
+        animation: shimmer 0.8s ease;
+      }
+      @keyframes shimmer {
+        to {
+          right: 150%;
+        }
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        line-height: 2;
+      }
+      footer span {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .footer-notice {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 107, 107, 0.08);
+        border: 1px solid rgba(255, 107, 107, 0.2);
+        color: #ff8a8a;
+        padding: 6px 18px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+      }
+      .footer-notice .emoji {
+        font-size: 1.5rem;
+
+      }
+
+      /* ===== RESUME MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        background: rgba(21, 32, 43, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        padding: 40px 36px;
+        max-width: 440px;
+        width: 90%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+      .modal-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .modal-box p {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+      .modal-box .modal-sub {
+        font-size: 0.85rem;
+      }
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .modal-progress .mp-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        border-radius: 10px;
+        width: 0%;
+      }
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .modal-btn-yes {
+        background: var(--gold);
+        color: var(--bg);
+      }
+      .modal-btn-yes:hover {
+        background: var(--gold-light);
+        transform: scale(1.04);
+      }
+      .modal-btn-no {
+        background: var(--bg3);
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 700px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+          max-width: 420px;
+        }
+        .hero {
+          padding: 60px 20px 40px;
+        }
+        .stats-bar {
+          gap: 24px;
+        }
+        .modal-box {
+          padding: 30px 24px;
+        }
+      }
+
+      @font-face {
+        font-family: "Emoji";
+        src: url(fonts/Emojis.ttf) format("truetype");
+      }
+      .card-icon, .hero-scales, .modal-icon, .emoji {
+        font-family: "Emoji";
+      }
+
+      ::selection {
+        background: none;
+        color: none;
+      }
+    </style>
+    <link rel="stylesheet" href="../reviews/reviews.css" />
+  </head>
+
+
+<body data-subject="maharat-etsal">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="particles" id="particles"></div>
+      <div class="hero-scales" id="hero-scales">🗣️</div>
+      <div class="hero-badge" id="hero-badge">
+        تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      </div>
+      <h1 id="hero-title">مراجعة مهارات الاتصال</h1>
+      <p class="hero-sub" id="hero-sub">
+        منصة تعليمية تفاعلية تساعدك على مراجعة واختبار معلوماتك في مادة مهارات
+        الاتصال بأسلوب حديث وممتع.
+      </p>
+      <div class="hero-line" id="hero-line"></div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-item">
+        <div class="stat-val">4</div>
+        <div class="stat-lbl">فصول دراسية</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">+75</div>
+        <div class="stat-lbl">سؤال تدريبي</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">∞</div>
+        <div class="stat-lbl">محاولات غير محدودة</div>
+      </div>
+
+    </div>
+
+    <!-- CARDS -->
+    <main class="cards-section">
+      <div class="cards-grid">     
+           <!-- READ CARD -->
+        <a
+          href="read/"
+          class="nav-card card-read"
+          id="card-read"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">🎯</div>
+          <div class="card-label">مهارة</div>
+          <h2>مراجعة مهارات الأتصال</h2>
+          <p>
+            ملخص شامل ومنظم لجميع الفصول  مع تصنيف المفاهيم والمبادئ
+            الأساسية في بطاقات واضحة.
+          </p>
+          <div class="card-features">
+            <div class="feat-item"><span class="emoji">📑</span> 4 فصول</div>
+            <div class="feat-item"><span class="emoji">🗂️</span> بطاقات منظمة</div>
+            <div class="feat-item"><span class="emoji">🔍</span> تفاصيل دقيقة تغطية شاملة</div>
+            <div class="feat-item"><span class="emoji">📱</span> متجاوب يعمل على كل الأجهزة</div>
+          </div>
+          <div class="card-btn">ابدأ المراجعة <span class="arrow">←</span></div>
+        </a>
+
+        <!-- QUIZ CARD -->
+        <a
+          href="quz1"
+          class="nav-card card-quiz"
+          id="card-quiz"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">⚙</div>
+          <div class="card-label">كفائة</div>
+          <h2>اختبار مهارات الأتصال</h2>
+          <p>
+            اختبر معلوماتك من خلال مجموعة أسئلة متنوعة متعددة الخيارات تغطي جميع فصول
+            مادة مهارات الأتصال مع تغذية راجعة فورية.
+          </p>
+          <div class="card-features">
+            <div class="feat-item"><span class="emoji">📚</span> أسئلة متقدمة أسئلة صعبة</div>
+            <div class="feat-item"><span class="emoji">⚡</span> تغذية فورية شرح لكل إجابة</div>
+            <div class="feat-item"><span class="emoji">🎯</span> متعدد الخيارات 4 خيارات لكل سؤال</div>
+            <div class="feat-item"><span class="emoji">📊</span> نتيجة نهائية مع تقييم مستواك</div>
+          </div>
+          <div class="card-btn">ابدأ الاختبار <span class="arrow">←</span></div>
+        </a>
+
+        <!-- QUIZ BANK CARD -->
+        <a
+          href="quz2"
+          class="nav-card card-bank"
+          id="card-bank"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">⚡</div>
+          <div class="card-label">سرعة</div>
+          <h2>بنك أسئلة مهارات الأتصال</h2>
+          <p>
+            اختبار شامل يحتوي على مجموعة أسئلة من بنك مادة مهارات الأتصال
+            مع شرح مفصل لكل إجابة.
+          </p>
+          <div class="card-features">
+            <div class="feat-item"><span class="emoji">📖</span> أسئلة شاملة بنك أسئلة كامل</div>
+            <div class="feat-item"><span class="emoji">💾</span> حفظ التقدم أكمل من حيث توقفت</div>
+            <div class="feat-item"><span class="emoji">⚡</span> تغذية فورية شرح لكل إجابة</div>
+            <div class="feat-item"><span class="emoji">📊</span> نتيجة تفصيلية تقييم شامل</div>
+          </div>
+          <div class="card-btn">ابدأ بنك الأسئلة <span class="arrow">←</span></div>
+        </a>
+
+
+      </div>
+    </main>
+
+
+
+    <!-- RESUME MODAL -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📨</span>
+        <h3>لديك اختبار لم يكتمل!</h3>
+        <p>يبدو أنك بدأت اختبار بنك أسئلة مهارات الأتصال ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-sub">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-notice">
+  <span class="emoji">⚠️</span>
+  تنبيه: هذا الموقع مشروع تعليمي مستقل وغير ربحي، تم إنشاؤه لأغراض المساعدة الدراسية فقط.
+  <br />
+  الموقع غير تابع رسميًا للجامعة أو المعهد أو أعضاء هيئة التدريس، ولا يمثل أي جهة أكاديمية.
+  <br />
+  لا يتم جمع أي بيانات شخصية من الزوار، وجميع المحتوى المعروض مستند إلى مراجعات وملاحظات تعليمية شخصية.
+</div>
+      <br />
+
+    تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+    </footer>
+
+    <script>
+      // ===== GSAP ANIMATIONS =====
+      document.addEventListener("DOMContentLoaded", () => {
+      // Create floating particles
+      const particlesContainer = document.getElementById("particles");
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.width = Math.random() * 4 + 2 + "px";
+        p.style.height = p.style.width;
+        particlesContainer.appendChild(p);
+      }
+
+      // Animate particles infinitely
+      document.querySelectorAll(".particle").forEach((p, i) => {
+        gsap.to(p, {
+          opacity: Math.random() * 0.5 + 0.1,
+          y: -80 - Math.random() * 120,
+          x: (Math.random() - 0.5) * 100,
+          duration: 4 + Math.random() * 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2,
+        });
+      });
+
+      // Hero entrance timeline
+      const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      heroTL
+        .fromTo(
+          "#hero-scales",
+          { opacity: 0, scale: 0.5, rotation: -15 },
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.9 }
+        )
+        .to("#hero-badge", { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+        .fromTo(
+          "#hero-title",
+          { opacity: 0, y: 30, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.9 },
+          "-=0.3",
+        )
+        .to("#hero-sub", { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+        .fromTo(
+          "#hero-line",
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.5 },
+          "-=0.3",
+        )
+        .to("#stats-bar", { opacity: 1, y: 0, duration: 0.6 }, "-=0.2");
+
+      // Animate stat numbers
+      heroTL.add(() => {
+        document.querySelectorAll(".stat-val").forEach((el) => {
+          gsap.from(el, {
+            scale: 0.5,
+            opacity: 0,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          });
+        });
+      }, "-=0.4");
+
+      // Cards stagger entrance
+      gsap.to(".nav-card", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 1.2,
+      });
+
+      // Card icon floating animation
+      gsap.to(".card-icon", {
+        y: -6,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.3,
+      });
+
+      // Subtle scales rotation for hero icon
+      gsap.to("#hero-scales", {
+        rotation: 3,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 1,
+      });
+
+      // Footer fade in
+      gsap.from("footer", {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 2,
+        ease: "power2.out",
+      });
+      });
+
+      // ===== RESUME QUIZ MODAL =====
+      (function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          // Check if quiz is in progress (not completed)
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            const modal = document.getElementById('resume-modal');
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            // Show modal with delay
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 1500);
+
+            // Yes button - go to quiz with resume flag
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? ('quz/' + data.quizFilename) : 'quz/index2.html';
+              window.location.href = target + '?resume=true';
+            });
+
+            // No button - clear progress and close
+            document.getElementById('modal-no').addEventListener('click', () => {
+              localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+
+            // Close on overlay click
+            modal.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                modal.classList.remove('active');
+              }
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      })();
+
+
+
+    </script>
+
+
+    <script src="../reviews/reviews.js" defer></script>
+    
+  </body>
+</html>

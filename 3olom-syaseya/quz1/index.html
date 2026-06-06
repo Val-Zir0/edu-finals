@@ -1,0 +1,2423 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار علوم سياسية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../reviews/reviews.css" />
+    <style>
+      :root {
+        --bg: #03120e;
+        --bg2: #07221b;
+        --bg3: #0c382b;
+        --gold: #d97706;
+        --gold2: #fbbf24;
+        --primary: #059669;
+        --primary-light: #10b981;
+        --teal: #10b981;
+        --red: #ef4444;
+        --blue: #059669;
+        --text: #e8ecf1;
+        --muted: #8b99a8;
+        --correct: #10b981;
+        --wrong: #ef4444;
+        --radius: 14px;
+        --purple: #b45309;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* ===== BACKGROUND EFFECTS ===== */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        right: -30%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(5, 150, 105, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: -40%;
+        left: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(180, 83, 9, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ===== HEADER ===== */
+      .header {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header h1 {
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        color: var(--gold);
+        font-weight: 900;
+        text-shadow: 0 2px 20px rgba(217, 119, 6, 0.2);
+        letter-spacing: -0.5px;
+      }
+
+      .header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 8px;
+        opacity: 0.85;
+      }
+      .header a {
+        color: var(--gold2);
+      }
+
+      .header-line {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        margin: 14px auto 0;
+        border-radius: 10px;
+      }
+
+      /* ===== PROGRESS ===== */
+      .progress-wrap {
+        width: 100%;
+        max-width: 760px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .progress-bar {
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--teal));
+        border-radius: 10px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== SCOREBOARD ===== */
+      .scoreboard {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .score-card {
+        flex: 1;
+        background: rgba(7, 34, 27, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .score-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .score-card .val {
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+
+      .score-card .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .score-card.correct .val {
+        color: var(--correct);
+      }
+
+      .score-card.wrong .val {
+        color: var(--wrong);
+      }
+
+      .score-card.total .val {
+        color: var(--gold);
+      }
+
+      /* ===== CARD (GLASSMORPHISM) ===== */
+      .card {
+        width: 100%;
+        max-width: 760px;
+        background: rgba(7, 34, 27, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.3), transparent);
+      }
+
+      .q-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .q-badge {
+        background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(180, 83, 9, 0.15));
+        color: var(--gold);
+        border: 1px solid rgba(217, 119, 6, 0.25);
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .q-chapter {
+        font-size: 0.76rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+
+      .question {
+        font-size: 1.08rem;
+        font-weight: 700;
+        line-height: 1.9;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      /* ===== OPTIONS ===== */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .opt {
+        background: rgba(12, 56, 43, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: right;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .opt::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(217, 119, 6, 0.06), transparent);
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+
+      .opt:hover:not(.disabled)::before {
+        opacity: 1;
+      }
+
+      .opt:hover:not(.disabled) {
+        border-color: var(--gold);
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(217, 119, 6, 0.1);
+      }
+
+      .opt-letter {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.25s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .opt.selected {
+        border-color: var(--blue);
+        background: rgba(5, 150, 105, 0.1);
+      }
+
+      .opt.selected .opt-letter {
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3);
+      }
+
+      .opt.correct {
+        border-color: var(--correct);
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .opt.correct .opt-letter {
+        background: var(--correct);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+      }
+
+      .opt.wrong {
+        border-color: var(--wrong);
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .opt.wrong .opt-letter {
+        background: var(--wrong);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+      }
+
+      .opt.disabled {
+        cursor: default;
+      }
+
+      /* ===== FEEDBACK ===== */
+      .feedback {
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-fb {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        color: var(--correct);
+      }
+
+      .feedback.wrong-fb {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: var(--wrong);
+      }
+
+      .feedback strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      /* ===== BUTTONS ===== */
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-next {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        display: none;
+        box-shadow: 0 4px 16px rgba(217, 119, 6, 0.2);
+      }
+
+      .btn-next:hover {
+        transform: scale(1.04) translateY(-1px);
+        box-shadow: 0 6px 24px rgba(217, 119, 6, 0.3);
+      }
+
+      .btn-next.show {
+        display: inline-block;
+      }
+
+      /* ===== INTRO SCREEN ===== */
+      #intro-screen {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-card {
+        background: rgba(7, 34, 27, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 22px;
+        padding: 40px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .intro-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .intro-icon {
+        font-size: 3.5rem;
+        margin-bottom: 18px;
+        display: block;
+      }
+
+      .intro-card h2 {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 12px;
+        font-weight: 900;
+      }
+
+      .intro-card p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+
+      .intro-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .feat {
+        background: rgba(12, 56, 43, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, border-color 0.3s;
+      }
+
+      .feat:hover {
+        transform: translateY(-2px);
+        border-color: rgba(217, 119, 6, 0.2);
+      }
+
+      .feat span {
+        color: var(--gold);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+
+      .btn-start {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 54px;
+        font-size: 1.08rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 6px 24px rgba(217, 119, 6, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-start::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn-start:hover::before {
+        left: 100%;
+      }
+
+      .btn-start:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(217, 119, 6, 0.35);
+      }
+
+      /* ===== QUIZ SCREEN ===== */
+      #quiz-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ===== RESULT SCREEN ===== */
+      #result-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      #result-screen.show {
+        display: block;
+      }
+
+      .result-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: conic-gradient(var(--gold) 0%, var(--teal) 50%, var(--bg3) 50%);
+        margin: 0 auto 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(217, 119, 6, 0.15);
+      }
+
+      .result-circle::after {
+        content: "";
+        position: absolute;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        background: var(--bg2);
+      }
+
+      .result-pct {
+        position: relative;
+        z-index: 1;
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+      }
+
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+
+      .result-sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 26px;
+      }
+
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .rs-card {
+        background: rgba(7, 34, 27, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .rs-card .v {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      .rs-card .l {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .btn-restart {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 44px;
+        font-size: 1rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s;
+        box-shadow: 0 6px 24px rgba(217, 119, 6, 0.2);
+      }
+
+      .btn-restart:hover {
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(217, 119, 6, 0.3);
+      }
+
+      /* ===== RESUME MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-box {
+        background: rgba(7, 34, 27, 0.92);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 42px 38px;
+        max-width: 460px;
+        width: 92%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .modal-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .modal-box p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+
+      .modal-box .modal-small-text {
+        font-size: 0.85rem;
+      }
+
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .modal-progress .mp-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold));
+        border-radius: 10px;
+      }
+
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+
+      .modal-btn-yes {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
+      }
+
+      .modal-btn-yes:hover {
+        transform: scale(1.04);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      .modal-btn-no {
+        background: var(--bg3);
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 600px) {
+        body {
+          padding: 12px;
+        }
+
+        .card {
+          padding: 22px 18px;
+          border-radius: 16px;
+        }
+
+        .intro-card {
+          padding: 28px 20px;
+        }
+
+        .intro-features {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .result-stats {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .scoreboard {
+          gap: 8px;
+        }
+
+        .score-card {
+          padding: 10px 6px;
+        }
+
+        .score-card .val {
+          font-size: 1.3rem;
+        }
+
+        .q-meta {
+          flex-direction: column;
+          gap: 8px;
+          align-items: flex-start;
+        }
+
+        .modal-box {
+          padding: 30px 22px;
+        }
+
+        .modal-btns {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.3rem;
+        }
+        
+
+        .question {
+          font-size: 0.98rem;
+        }
+
+        .opt {
+          padding: 12px 14px;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ===== INITIAL HIDDEN STATES FOR GSAP ===== */
+      .gsap-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      @font-face {
+        font-family: "Emoji";
+        src: url(../fonts/Emojis.ttf) format("truetype");
+      }
+
+            .emoji,
+      .intro-icon {
+        font-family: "Emoji";
+      }
+   ::selection {
+        background: none;
+        color: none;
+      }
+
+    </style>
+  </head>
+
+
+<body data-subject="3olom-syaseya">
+
+    <div class="header">
+      <h1><span class="emoji">📣</span> اختبار علوم سياسية</h1>
+      <p>نم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a></p>
+      <div class="header-line"></div>
+    </div>
+
+    <!-- INTRO -->
+    <div id="intro-screen">
+      <div class="intro-card">
+        <div class="intro-icon">🖨️</div>
+        <h2>مرحباً بك في الاختبار التدريبي</h2>
+        <p>
+          اختبار شامل وصعب يغطي جميع فصول مادة علوم سياسية . اختر الإجابة
+          الصحيحة واحصل على تغذية راجعة فورية مع شرح مفصّل لكل سؤال.
+        </p>
+        <div class="intro-features">
+          <div class="feat"><span class="emoji">📚</span> أسئلة متقدمة</div>
+          <div class="feat"><span class="emoji">⚡</span> تغذية فورية</div>
+          <div class="feat"><span class="emoji">🎯</span> متعدد الخيارات</div>
+          <div class="feat"><span class="emoji">📊</span> نتيجة نهائية</div>
+        </div>
+        <button class="btn-start" id="btn-start">ابدأ الاختبار ←</button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz-screen">
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="val" id="sc-correct">0</div>
+          <div class="lbl">✔ صحيح</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="val" id="sc-wrong">0</div>
+          <div class="lbl"><span class="emoji">✘</span> خطأ</div>
+        </div>
+        <div class="score-card total">
+          <div class="val" id="sc-remain">--</div>
+          <div class="lbl">متبقي</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="q-counter">--</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+      <div class="card" id="q-card">
+        <div class="q-meta">
+          <span class="q-badge" id="q-num-badge">سؤال ١</span>
+          <span class="q-chapter" id="q-chapter-lbl"></span>
+        </div>
+        <div class="question" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+        <div class="feedback" id="q-feedback"></div>
+        <div class="actions">
+          <button class="btn btn-next" id="btn-next">السؤال التالي ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result-screen">
+      <div class="intro-card">
+        <div class="result-circle">
+          <div class="result-pct" id="res-pct">0%</div>
+        </div>
+        <div class="result-title" id="res-title">نتيجتك</div>
+        <div class="result-sub" id="res-sub"></div>
+        <div class="result-stats">
+          <div class="rs-card">
+            <div class="v" id="rs-correct">0</div>
+            <div class="l">إجابات صحيحة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-wrong">0</div>
+            <div class="l">إجابات خاطئة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-pct2">0%</div>
+            <div class="l">النسبة المئوية</div>
+          </div>
+        </div>
+        <button class="btn-restart" id="btn-restart">🔄 إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <!-- RESUME MODAL -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📋</span>
+        <h3>لديك اختبار آخر لم يكتمل!</h3>
+        <p>يبدو أنك بدأت اختبار بنك الأسئلة الشامل ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-small-text">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+      /* ===== QUESTIONS DATA ===== */
+      const questions = [
+  {
+    chapter: "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    q: "إذا قامت دولة بسيطة موحدة بتفويض إدارات منتخبة في المحافظات لإدارة المرافق والخدمات العامة، مع بقاء التشريع حكراً على برلمان العاصمة، فإن هذه الدولة تطبق قانونياً:",
+    opts: [
+      "مبدأ اللامركزية السياسية",
+      "نظام الاتحاد الكونفدرالي",
+      "مبدأ اللامركزية الإدارية",
+      "نظام الاتحاد الفيدرالي"
+    ],
+    correct: 2,
+    explain: "اللامركزية الإدارية تعني توزيع الوظيفة التنفيذية على مجالس محلية مع بقاء المركزية السياسية (وحدة التشريع)، وهو ما لا يتعارض مع كون الدولة بسيطة."
+  },
+  {
+    chapter: "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    q: "اندلع نزاع تجاري بين 'ولاية' تابعة لدولة فيدرالية ودولة أخرى ذات سيادة. أمام المحاكم الدولية، من يملك حق التمثيل القانوني كطرف في النزاع؟",
+    opts: [
+      "حاكم الولاية الفيدرالية المتضررة",
+      "الحكومة المركزية للدولة الفيدرالية",
+      "برلمان الولاية الفيدرالية",
+      "مجلس الشيوخ الاتحادي"
+    ],
+    correct: 1,
+    explain: "في الاتحاد الفيدرالي تفقد الولايات شخصيتها الدولية تماماً وتندمج في دولة واحدة تتحمل وحدها المسئولية الخارجية وتمثيل الاتحاد دولياً."
+  },
+  {
+    chapter: "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    q: "أي من الحالات التالية يُعتبر خرقاً جوهرياً لـ 'مبدأ الازدواجية' المؤسس للاتحادات الفيدرالية؟",
+    opts: [
+      "تبني الدولة الاتحادية لبرلمان من غرفة تشريعية واحدة فقط",
+      "خضوع الدساتير المحلية للدستور الاتحادي",
+      "احتفاظ كل ولاية بحكومة محلية خاصة بها",
+      "مشاركة الولايات في تعديل الدستور المركزي"
+    ],
+    correct: 0,
+    explain: "مبدأ الازدواجية يقتضي وجود غرفتين للبرلمان (واحدة للشعب وأخرى للولايات)، ووجود غرفة واحدة (كما في الإمارات كاستثناء) يُعد خروجاً عن القاعدة الكلاسيكية."
+  },
+  {
+    chapter: "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    q: "رغم أن الاتحاد الكونفدرالي ينشأ بموجب معاهدة دولية، إلا أنه يخلق شخصية قانونية دولية جديدة ومستقلة تندمج فيها سيادة الدول الأعضاء.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 1,
+    explain: "الاتحاد الكونفدرالي لا يخلق شخصاً دولياً جديداً، بل تحتفظ كل دولة بسيادتها وشخصيتها الدولية المستقلة."
+  },
+  {
+    chapter: "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    q: "في دولة تأخذ بنظام 'الاختصاص العام للاتحاد'، إذا ظهرت تقنية جديدة لم ينص الدستور على من ينظمها، فإن حق التشريع بشأنها يذهب تلقائياً إلى:",
+    opts: [
+      "البرلمانات المحلية للولايات",
+      "السلطة التشريعية المركزية",
+      "المحكمة الدستورية العليا",
+      "الشعب عبر استفتاء مباشر"
+    ],
+    correct: 1,
+    explain: "في نظام الاختصاص العام للاتحاد (مثل كندا والهند)، تُحصر اختصاصات الولايات، ويُترك ما عداها (وما يستجد) للسلطة الاتحادية المركزية."
+  },
+  {
+    chapter: "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    q: "إذا تحللت دولة بسيطة تعاني من تنوع عرقي لمنح أقاليمها حكماً ذاتياً للحفاظ على الوحدة، فهذا يُعرف بـ:",
+    opts: [
+      "الاتحاد الفيدرالي ذو النشأة الانفصالية",
+      "الاتحاد الكونفدرالي التعاهدي",
+      "الاتحاد الفيدرالي ذو النشأة الانضمامية",
+      "الاتحاد الشخصي المؤقت"
+    ],
+    correct: 0,
+    explain: "الفيدرالية ذات النشأة الانفصالية تحدث عندما تتفكك دولة بسيطة لأقاليم مستقلة ذاتياً لتجنب الانهيار والتمزق الكامل للدولة."
+  },
+  {
+    chapter: "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    q: "يزول 'الاتحاد الشخصي' بين دولتين تلقائياً بمجرد اختلاف قوانين وراثة العرش التي تمنع تولي نفس الشخص لحكم الدولتين.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 0,
+    explain: "الاتحاد الشخصي هو أضعف الاتحادات، ويقوم حصرياً على شخص الحاكم المشترك، ويزول فور انتهاء هذه الرابطة الشخصية."
+  },
+  {
+    chapter: "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    q: "في دولة (س)، واجهت الحكومة أزمة ثقة فقام البرلمان بعزلها، فرد رئيس الدولة بحل البرلمان للاحتكام للشعب. هذا المشهد هو تطبيق كلاسيكي لـ:",
+    opts: [
+      "نظام حكومة الجمعية التابع لروسو",
+      "النظام الرئاسي ذو الفصل الجامد",
+      "النظام البرلماني ذو الفصل المرن",
+      "نظام الملكية المطلقة المركزية"
+    ],
+    correct: 2,
+    explain: "أدوات 'سحب الثقة من الحكومة' و'حل البرلمان' هي جوهر العلاقة والرقابة المتبادلة في النظام البرلماني (الفصل المرن)."
+  },
+  {
+    chapter: "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    q: "في النظام الرئاسي، لا يحق للبرلمان سحب الثقة من وزراء الحكومة لسبب دستوري جوهري وهو:",
+    opts: [
+      "أنهم يتمتعون بحصانة تشريعية مطلقة",
+      "أنهم مجرد مساعدين للرئيس ولا يسألون سياسياً أمامه",
+      "أن سحب الثقة يتطلب موافقة المحكمة الدستورية",
+      "لأنهم منتخبون مباشرة من الشعب كالرئيس"
+    ],
+    correct: 1,
+    explain: "النظام الرئاسي يعتمد على وحدة السلطة التنفيذية بيد الرئيس، فالوزراء سكرتارية له يخضعون لمحاسبته هو فقط، وليس للبرلمان سلطة عزلهم سياسياً."
+  },
+  {
+    chapter: "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    q: "التطبيق السويسري خالف النظرية الأصلية لـ 'نظام المجلس' (حكومة الجمعية) عندما منع البرلمان من عزل السلطة التنفيذية قبل انتهاء مدتها المقررة.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 0,
+    explain: "في النظرية المجلسية البحتة، البرلمان يملك عزل وكلائه التنفيذيين في أي وقت، لكن سويسرا حصنت المجلس الاتحادي (التنفيذي) من العزل طوال فترته."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "قرر البرلمان المصري إدخال تعديل على الموازنة العامة بزيادة مخصصات التعليم. لكي يصبح هذا التعديل دستورياً يجب:",
+    opts: [
+      "عرضه على استفتاء شعبي بنعم أو لا",
+      "تصديق المحكمة الدستورية العليا عليه",
+      "الاتفاق مع الحكومة على تدبير إيرادات لتعويض الزيادة",
+      "موافقة ثلثي أعضاء مجلس النواب بشكل نهائي"
+    ],
+    correct: 2,
+    explain: "ينص الدستور على أنه إذا أدى التعديل لزيادة النفقات، وجب اتفاق المجلس مع الحكومة على تدبير مصادر جديدة للإيرادات لتحقيق التوازن."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "إذا أراد رئيس الجمهورية إقالة أحد الوزراء (تعديل وزاري) وليس الحكومة بأكملها، فإن الأغلبية البرلمانية المطلوبة لتمرير هذا القرار هي:",
+    opts: [
+      "موافقة الأغلبية المطلقة للحاضرين وبما لا يقل عن الثلث",
+      "موافقة ثلثي إجمالي أعضاء مجلس النواب",
+      "موافقة الأغلبية المطلقة لجميع أعضاء المجلس",
+      "لا يشترط موافقة البرلمان في التعديلات الفردية"
+    ],
+    correct: 0,
+    explain: "التعديل الوزاري وفقاً للدستور يتطلب موافقة الأغلبية المطلقة للحاضرين، على ألا يقل عدد الموافقين عن ثلث عدد أعضاء المجلس."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "يجوز لرئيس السلطة التنفيذية حل المجالس المحلية المنتخبة في عموم الجمهورية بقرار إداري شامل ومسبب في أوقات الأزمات الوطنية.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 1,
+    explain: "حظر الدستور المصري صراحة (المادة 183) حل المجالس المحلية بإجراء إداري شامل لضمان استقلاليتها."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "قدم عضو بمجلس النواب طلباً لوزير الصحة عن نقص الأدوية بعد أن علم بالأزمة من الصحف ويريد التحقق. الأداة الرقابية الصحيحة هنا هي:",
+    opts: [
+      "الاستجواب",
+      "البيان العاجل",
+      "السؤال",
+      "طلب الإحاطة"
+    ],
+    correct: 2,
+    explain: "السؤال يُستخدم للاستفهام عن أمر يجهله العضو أو يطلب التحقق منه، بينما طلب الإحاطة يُستخدم للفت نظر الوزير لأمر يعلمه العضو بالفعل."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "شاب مصري يبلغ 23 عاماً رُفضت أوراقه لانتخابات المجالس المحلية بحجة عدم بلوغه سن 25 المخصصة للبرلمان. هذا الرفض يُعد:",
+    opts: [
+      "باطلاً، لأن سن الترشح للمحليات هو 21 عاماً",
+      "صحيحاً، لتوحيد سن الترشح في كافة الانتخابات",
+      "باطلاً، لأن سن الترشح للمحليات هو 18 عاماً",
+      "صحيحاً، إلا إذا كان مرشحاً على كوتة الفلاحين"
+    ],
+    correct: 0,
+    explain: "حدد الدستور سن الترشح لمجلس النواب بـ 25 عاماً، بينما خفّض سن الترشح للمجالس المحلية إلى 21 عاماً لدعم مشاركة الشباب."
+  },
+  {
+    chapter: "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    q: "دولة ليست عضواً بالأمم المتحدة رفضت الالتزام بقرار حظر تصدير السلاح لدولة معتدية بحجة عدم توقيعها على الميثاق. وفقاً للقانون الدولي، هذا الرفض:",
+    opts: [
+      "مشروع، لأن المعاهدات لا تلزم غير أطرافها مطلقاً",
+      "غير مشروع، لأن الجمعية العامة تصدر قوانين ملزمة للكافة",
+      "مشروع، بشرط إعلان حيادها الدائم في النزاع",
+      "غير مشروع، لأن الميثاق يلزمها بمبادئ حفظ السلم والأمن"
+    ],
+    correct: 3,
+    explain: "الفقرة 6 من المادة 2 من الميثاق تُلزم الدول غير الأعضاء بالعمل وفق مبادئ الأمم المتحدة بالقدر الضروري لحفظ السلم والأمن الدوليين كاستثناء قانوني."
+  },
+  {
+    chapter: "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    q: "أي من الأجهزة التالية لا يملك سلطة إبرام أو إنشاء لجان فرعية لتعزيز حقوق الإنسان وفقاً لميثاق الأمم المتحدة؟",
+    opts: [
+      "الجمعية العامة",
+      "مجلس الأمن",
+      "محكمة العدل الدولية",
+      "المجلس الاقتصادي والاجتماعي"
+    ],
+    correct: 2,
+    explain: "محكمة العدل الدولية هي جهاز قضائي بحت، بينما منحت المواد 22 و 29 و 68 الأجهزة السياسية والتنفيذية (الجمعية، مجلس الأمن، الاقتصادي) حق إنشاء فروع ثانوية."
+  },
+  {
+    chapter: "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    q: "في قضية أمام محكمة العدل الدولية، انقسم القضاة 7 مقابل 7. يتم ترجيح الجانب الذي صوّت معه رئيس المحكمة لكسر التعادل وإصدار الحكم.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 0,
+    explain: "ينص النظام الأساسي للمحكمة بوضوح على أنه في حالة تساوي الأصوات، يكون صوت رئيس المحكمة أو من ينوب عنه هو الصوت المُرجح."
+  },
+  {
+    chapter: "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    q: "طلبت دولتان متنازعتان من محكمة العدل الدولية تجاهل المعاهدات الصارمة وتطبيق مبادئ 'العدل والإنصاف'. المحكمة سترفض ذلك لعدم اختصاصها.",
+    opts: [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    correct: 1,
+    explain: "المادة 38 تجيز للمحكمة استثناءً الفصل في المنازعات استناداً إلى مبادئ 'العدل والإنصاف' (Ex aequo et bono) شريطة موافقة أطراف النزاع صراحةً على ذلك."
+  },
+  {
+    chapter: "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    q: "أصدر رئيس الجمهورية قراراً بإعلان حالة الطوارئ لظروف أمنية حادة أثناء إجازة البرلمان. الإجراء الدستوري السليم لتمرير الإعلان هو:",
+    opts: [
+      "الانتظار لحين الانعقاد العادي وعرض القرار في أول جلسة",
+      "دعوة البرلمان لانعقاد طارئ وعرض الإعلان فوراً",
+      "عرض القرار على المحكمة الدستورية لإجازته مؤقتاً",
+      "اكتساب القرار قوة نهائية دون عرضه استناداً لقوة الضرورة"
+    ],
+    correct: 1,
+    explain: "الدستور أوجب في حال إعلان الطوارئ في غياب البرلمان أن يتم دعوته لانعقاد طارئ وعرض إعلان الطوارئ عليه فوراً لاتخاذ قرار بشأنه."
+  },
+{
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "وفقاً للتحليل الدقيق لتعريفات علم السياسة، أي المفكرين أو الاتجاهات وسّع النطاق ليشمل دراسة 'النقابات العمالية' كفاعل سياسي؟",
+    "opts": [
+      "الاتجاه التقليدي (علم الدولة).",
+      "هارولد لاسويل.",
+      "الاتجاه الوسط (علم السلطة في المجموعات البشرية).",
+      "دافيد إيستون."
+    ],
+    "correct": 2,
+    "explain": "الاتجاه الوسط تجاوز مؤسسات الدولة الرسمية واعتبر السياسة علم السلطة في المجموعات البشرية، بما فيها الأحزاب والنقابات."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "إذا كان التاريخ هو 'الجذور' والسياسة هي 'الثمرة'، فإن الفارق المنهجي في دراسة ظاهرة 'الثورة' بينهما يكمن في أن المحلل السياسي:",
+    "opts": [
+      "يدرس الدوافع النفسية الفردية للقادة.",
+      "يستخلص الخصائص العامة لتكرار الثورات لبناء نظرية.",
+      "يركز على سرد الأحداث الفريدة بتسلسلها الزمني.",
+      "يحلل التكلفة المالية المباشرة للثورة."
+    ],
+    "correct": 1,
+    "explain": "المؤرخ يدرس الحدث كحالة فريدة، بينما عالم السياسة يبحث في 'الخصائص والأنماط العامة' لخدمة التنظير وصنع القرار."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "دولة موحدة قررت منح إقليم معين حق تشريع قوانين عقابية خاصة به لأسباب تاريخية (مثل إنجلترا والسودان 1899). هذا الإجراء يجعلها:",
+    "opts": [
+      "دولة فيدرالية ذات نشأة انفصالية.",
+      "دولة بسيطة تطبق استثناءً جغرافياً على المركزية السياسية.",
+      "اتحاداً كونفدرالياً مع الإقليم.",
+      "دولة بسيطة تأخذ باللامركزية الإدارية فقط."
+    ],
+    "correct": 1,
+    "explain": "الدولة البسيطة قد تطبق استثناءات مكانية مؤقتة في التشريع لظروف خاصة دون أن تفقد صفتها كدولة موحدة."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "نشأ نزاع مسلح بين ولايتين داخل دولة فيدرالية. التوصيف القانوني الدولي الدقيق لهذا النزاع هو أنه:",
+    "opts": [
+      "حرب دولية تخضع للقانون الدولي العام.",
+      "نزاع إداري يختص به مجلس الأمن.",
+      "حرب أهلية وتمرد داخلي تتحمل الحكومة المركزية مسؤوليته.",
+      "نزاع بين شخصين دوليين يخضع لمحكمة العدل الدولية."
+    ],
+    "correct": 2,
+    "explain": "في الفيدرالية، تفقد الولايات شخصيتها الدولية، وتُعد أي حرب بينها شأناً داخلياً (حرباً أهلية) تواجهه السلطة الاتحادية."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "في الدول التي تأخذ بـ 'الاختصاص العام للولايات' (كأمريكا وسويسرا)، إذا ظهرت تكنولوجيا جديدة تتطلب تنظيماً، من يملك حق التشريع الأصيل؟",
+    "opts": [
+      "البرلمان الاتحادي حصراً.",
+      "برلمانات الولايات حصراً.",
+      "المحكمة الدستورية العليا.",
+      "لجنة مشتركة من البرلمانين."
+    ],
+    "correct": 1,
+    "explain": "نظام 'الاختصاص العام للولايات' يحصر سلطات الاتحاد، ويترك كل ما عداه وما يستجد مستقبلاً لاختصاص الولايات."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "أي من المواقف التالية يُعتبر خرقاً لتطبيق 'مبدأ المشاركة' في الدولة الفيدرالية؟",
+    "opts": [
+      "انفراد البرلمان المركزي بتعديل الدستور الاتحادي دون تصديق الولايات.",
+      "احتفاظ كل ولاية بدستورها الخاص.",
+      "إنشاء محكمة عليا لفض النزاعات بين الولايات.",
+      "وجود مجلس تشريعي واحد يمثل الشعب بأكمله."
+    ],
+    "correct": 0,
+    "explain": "مبدأ المشاركة يُحتم مشاركة الولايات في تعديل الدستور (باعتباره عقد التأسيس) لضمان عدم سلب استقلاليتها."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "دولة الإمارات العربية المتحدة تُعد تطبيقاً استثنائياً في النظم الفيدرالية لأنها خروقاً لمبدأ 'الازدواجية' من خلال:",
+    "opts": [
+      "توحيد القوات المسلحة.",
+      "تبني مجلس تشريعي اتحادي واحد بدلاً من غرفتين.",
+      "تمثيل الدولة خارجياً بشخصية واحدة.",
+      "احتفاظ الإمارات بالسيادة الداخلية."
+    ],
+    "correct": 1,
+    "explain": "مبدأ الازدواجية يقتضي برلماناً من مجلسين، لكن الإمارات استثنت ذلك وأخذت بنظام 'المجلس الواحد' في التشريع الاتحادي."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "الاتحاد الذي يزول تلقائياً لاختلاف قوانين توارث العرش بين الدولتين المكونتين له هو:",
+    "opts": [
+      "الاتحاد الفيدرالي الانضمامي.",
+      "الاتحاد الشخصي.",
+      "الاتحاد الكونفدرالي.",
+      "الاتحاد الحقيقي (الفعلي)."
+    ],
+    "correct": 1,
+    "explain": "الاتحاد الشخصي هو أضعف الاتحادات ويقوم على 'شخص' الحاكم المشترك، ويزول باختلاف قوانين الوراثة (مثل إنجلترا وهانوفر)."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "انهيار 'الجمهورية العربية المتحدة' (مصر وسوريا 1961) يُعد في الفقه الدستوري تطبيقاً لـ:",
+    "opts": [
+      "تحول اتحاد كونفدرالي لدولتين بسيطتين.",
+      "انتهاء اتحاد شخصي بوفاة الرئيس.",
+      "تفكك دولة اتحادية اندماجية بالانفصال لاستعادة الاستقلال.",
+      "نشأة فيدرالية انفصالية لمنع الانهيار."
+    ],
+    "correct": 2,
+    "explain": "الجمهورية كانت 'دولة اتحادية' خلقت شخصاً دولياً واحداً، وانتهت بالتحلل والانفصال لتعود كل دولة لسيادتها الكاملة."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "في 'نظام حكومة الجمعية' (النظام المجلسي)، السلطة التنفيذية هي سلطة أصلية ومستقلة توازن السلطة التشريعية.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "في النظام المجلسي، تتركز السلطات بيد البرلمان، وتكون السلطة التنفيذية مجرد 'وكيل' تابع للبرلمان يُعزل في أي وقت."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "في النظام البرلماني، إذا سحب البرلمان الثقة من الحكومة، فما هو السلاح المضاد الذي تملكه السلطة التنفيذية لتحقيق التوازن؟",
+    "opts": [
+      "حق النقض (الفيتو) على قوانين البرلمان.",
+      "إحالة أعضاء البرلمان للمحكمة الدستورية.",
+      "دعوة الشعب لاستفتاء لتعديل الدستور.",
+      "حق رئيس الدولة في حل البرلمان والدعوة لانتخابات."
+    ],
+    "correct": 3,
+    "explain": "في الفصل المرن (النظام البرلماني)، يقابل 'سحب الثقة' حق السلطة التنفيذية في 'حل البرلمان' والاحتكام للناخبين."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "الولايات المتحدة تأخذ بـ 'الفصل الجامد'، ورغم ذلك فالرئيس يملك حق 'الاعتراض' على القوانين، وهذا يُعد:",
+    "opts": [
+      "خرقاً دستورياً لمبدأ الفصل تم تداركه لاحقاً.",
+      "مظهراً للرقابة المتبادلة وتخفيفاً لجمود الفصل (السلطة توقف السلطة).",
+      "تطبيقاً لسيطرة السلطة التنفيذية على التشريع كالنظام المجلسي.",
+      "استثناءً يطبق في حالات الطوارئ فقط."
+    ],
+    "correct": 1,
+    "explain": "الفصل المطلق مستحيل عملياً، والفيتو الرئاسي هو أداة للرقابة المتبادلة لضمان عدم استبداد السلطة التشريعية."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "من عيوب انتخاب رئيس الجمهورية بواسطة البرلمان (كما في لبنان والعراق):",
+    "opts": [
+      "فقدان الرئيس لاستقلاليته وخضوعه لابتزاز الكتل الحزبية.",
+      "إلغاء منصب رئيس الوزراء تلقائياً.",
+      "عدم إمكانية إعادة انتخابه لفترة ثانية إطلاقاً.",
+      "تحول النظام مباشرة إلى نظام رئاسي مركزي."
+    ],
+    "correct": 0,
+    "explain": "الانتخاب البرلماني للرئيس يجعله مديناً للبرلمان بمنصبه، مما يضعف استقلاليته ويزيد من خضوعه للمساومات الحزبية."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "في الملكية الدستورية، تقع المسؤولية السياسية عن أخطاء الحكومة على عاتق الملك باعتباره رأس الدولة.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "الملك في الملكية الدستورية 'يملك ولا يحكم' ولا يُسأل (الملك لا يخطئ)، وتقع المسؤولية السياسية كاملة على الحكومة الفعلية."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "شخص يحمل الجنسية المصرية والأمريكية، تم ترشيحه لرئاسة مجلس الوزراء المصري. قراره بالقبول يُعد:",
+    "opts": [
+      "قانونياً بشرط تنازله عن الجنسية الأجنبية خلال 6 أشهر.",
+      "غير دستوري لأن الدستور يحظر ازدواج الجنسية لرئيس الوزراء.",
+      "قانونياً تماماً بناءً على حكم المحكمة الدستورية العليا.",
+      "غير دستوري إلا إذا وافق مجلس النواب بأغلبية الثلثين."
+    ],
+    "correct": 1,
+    "explain": "الدستور حظر صراحة على (رئيس الجمهورية) و(رئيس الوزراء) حمل جنسية أخرى، بينما سمحت المحكمة الدستورية بذلك لأعضاء (مجلس النواب)."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "أجرى رئيس الجمهورية تعديلاً وزارياً شمل وزيرين. لكي يكون التعديل نافذاً، يتطلب تصويت مجلس النواب بـ:",
+    "opts": [
+      "أغلبية الأعضاء الحاضرين وبما لا يقل عن ثلث إجمالي أعضاء المجلس.",
+      "أغلبية ثلثي أعضاء المجلس إجمالاً.",
+      "الأغلبية المطلقة لجميع أعضاء المجلس (النصف + 1).",
+      "لا يشترط العرض على المجلس في التعديلات الفردية."
+    ],
+    "correct": 0,
+    "explain": "التعديل الوزاري (وليس الإعفاء الكامل للحكومة) يتطلب أغلبية الحاضرين بشرط ألا يقل الموافقون عن ثلث عدد أعضاء البرلمان."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "في حالة إعلان 'حالة الطوارئ'، الحد الأقصى للمدة التي يجوز إعلانها (قبل طلب التمديد) هي:",
+    "opts": [
+      "شهر واحد.",
+      "ثلاثة أشهر.",
+      "ستة أشهر.",
+      "سنة كاملة."
+    ],
+    "correct": 1,
+    "explain": "تُعلن حالة الطوارئ لمدة محددة لا تتجاوز (ثلاثة أشهر)، ولا تمد إلا لمدة مماثلة واحدة بعد موافقة ثلثي أعضاء المجلس."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "أصدر رئيس الجمهورية قراراً بقانون (لائحة ضرورة) في غياب البرلمان، وعند انعقاد البرلمان تم عرضه ورفضه. الأثر القانوني لذلك هو:",
+    "opts": [
+      "يُبطل القرار بأثر فوري (من تاريخ الرفض) وتبقى آثاره السابقة صحيحة.",
+      "تُجمد آثاره لحين عرضه على المحكمة الدستورية.",
+      "يزول ما كان له من قوة القانون بأثر رجعي (كأنه لم يكن) ما لم يعتمد المجلس نفاذها.",
+      "يُطرح القرار لاستفتاء شعبي لحسم النزاع."
+    ],
+    "correct": 2,
+    "explain": "رفض قرارات الضرورة يؤدي إلى زوالها بـ (أثر رجعي)، إلا إذا رأى المجلس صراحة اعتماد نفاذها وتسوية آثارها في الفترة السابقة."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "أي من الإجراءات الآتية تعتبر باطلة دستورياً فيما يخص المجالس المحلية؟",
+    "opts": [
+      "قيام المجلس المحلي بسحب الثقة من رئيس الوحدة المحلية.",
+      "قيام السلطة التنفيذية بحل المجالس المحلية بإجراء إداري شامل.",
+      "تخصيص 25% من مقاعد المجلس للشباب دون 35 سنة.",
+      "احتكام المجالس لـ 'مجلس الدولة' عند التنازع على الاختصاص."
+    ],
+    "correct": 1,
+    "explain": "المادة 183 حظرت صراحة حل المجالس المحلية بـ 'إجراء إداري شامل' لضمان استقلاليتها وعدم خضوعها لتعسف السلطة المركزية."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "للحكومة سلطة الموافقة النهائية والمطلقة على إبرام المعاهدات الدولية التي تحمل خزانة الدولة أعباء مالية دون الرجوع للبرلمان.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "المعاهدات التي تحمل الخزانة العامة أعباء مالية غير مدرجة بالموازنة لا تصبح نافذة إطلاقاً إلا بعد موافقة مجلس النواب (المنع المسبق)."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "بدأت جلسة مجلس النواب بحضور الأغلبية المطلقة للأعضاء. أثناء الجلسة، غادر بعضهم القاعة فاختل النصاب، وبدأ التصويت على قانون. النتيجة القانونية:",
+    "opts": [
+      "الجلسة تستمر صحيحة وكذلك التصويت على القانون.",
+      "تُرفع الجلسة فوراً لعدم صحة انعقادها.",
+      "المناقشات صحيحة، لكن التصويت على القانون باطل لغياب نصاب 'اتخاذ القرار'.",
+      "التصويت صحيح إذا وافق رئيس المجلس على الاستمرار."
+    ],
+    "correct": 2,
+    "explain": "انعقاد الجلسة يبقى صحيحاً لمجرد (المناقشة) حتى لو غادر الأعضاء، لكن (اتخاذ القرار والتصويت) يستوجب حتمياً توافر أغلبية الأعضاء وقت التصويت."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "تم توجيه (سؤال) برلماني لوزير حول أزمة معينة، وبعد استماع العضو لإجابة الوزير لم يقتنع بها. الأداة الرقابية التصعيدية المتاحة للعضو في (ذات الجلسة) هي:",
+    "opts": [
+      "الاستجواب.",
+      "طلب الإحاطة.",
+      "طلب المناقشة العامة.",
+      "لا شيء، لا يجوز تحويل السؤال لاستجواب في نفس الجلسة."
+    ],
+    "correct": 3,
+    "explain": "الدستور (المادة 129) نص صراحة على أنه لا يجوز تحويل (السؤال) إلى (استجواب) في 'الجلسة ذاتها' كضمانة لعدم مباغتة الوزير."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "قدم 20 عضواً طلب مناقشة عامة لاستيضاح سياسة الحكومة. هل يحق لأعضاء 'مجلس الشيوخ' استخدام هذه الأداة الرقابية؟",
+    "opts": [
+      "نعم، فهي إحدى أداتين رقابيتين يملكهما مجلس الشيوخ.",
+      "لا، الرقابة البرلمانية حكر على مجلس النواب فقط.",
+      "نعم، ولكن تتطلب موافقة مجلس الوزراء مسبقاً.",
+      "لا، مجلس الشيوخ يملك الاقتراح برغبة فقط."
+    ],
+    "correct": 0,
+    "explain": "مجلس الشيوخ لا يملك سحب الثقة أو الاستجواب، واقتصرت أدواته الرقابية على (طلب المناقشة العامة) و(الاقتراح برغبة) فقط."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "الحصانة البرلمانية 'الإجرائية' تمنع رفع الدعوى الجنائية أو اتخاذ أي إجراء ضد العضو إطلاقاً طوال فترة عضويته حتى في حالة التلبس.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "الحصانة الإجرائية تُسقط في حالة 'التلبس' بالجريمة، حيث يجوز اتخاذ الإجراءات فوراً مع إخطار المجلس لاحقاً، ولا تتطلب إذناً مسبقاً في هذه الحالة."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "قرار 'إسقاط العضوية' عن نائب بسبب فقدانه شروط الترشح يتطلب صدوره أغلبية:",
+    "opts": [
+      "الأغلبية المطلقة للحاضرين.",
+      "أغلبية أعضاء المجلس إجمالاً.",
+      "أغلبية ثلثي أعضاء المجلس.",
+      "حكم قضائي من المحكمة الدستورية حصراً."
+    ],
+    "correct": 2,
+    "explain": "إسقاط العضوية لخطورته كونه يلغي إرادة الناخبين، استوجب الدستور لصدوره أغلبية خاصة مشددة وهي (ثلثي عدد أعضاء المجلس)."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "وفقاً للتفرقة الفقهية، العملية المستمرة لخلق قواعد وتطوير هياكل التعاون بين الدول تُسمى:",
+    "opts": [
+      "المنظمة الدولية.",
+      "التنظيم الدولي.",
+      "النظام الدولي.",
+      "القانون الدولي الدبلوماسي."
+    ],
+    "correct": 1,
+    "explain": "التنظيم (Organizing/Process) هو 'الحركة والعملية' المستمرة، بينما المنظمة (Organization/Entity) هي 'الكيان المؤسسي' الناتج عن هذه العملية."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "دولة غير عضو في الأمم المتحدة أرادت عرض نزاع يهدد أمنها على مجلس الأمن. إجرائياً، هذا التصرف:",
+    "opts": [
+      "باطل ومرفوض لعدم عضويتها.",
+      "مقبول بشرط قبولها المسبق لالتزامات الحل السلمي في الميثاق.",
+      "مقبول بشرط سدادها لرسوم التقاضي للمنظمة.",
+      "مقبول وتحصل فوراً على حق التصويت في هذا النزاع فقط."
+    ],
+    "correct": 1,
+    "explain": "الميثاق سمح للدول غير الأعضاء باللجوء لمجلس الأمن والجمعية لحل النزاعات، شريطة التعهد المسبق بالالتزام بقواعد الحل السلمي احتراما للميثاق."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "أي من الأجهزة الرئيسية للأمم المتحدة يملك سلطة إنشاء لجان فرعية تُعنى بحقوق الإنسان أو الشئون الاقتصادية (فروع ثانوية)؟",
+    "opts": [
+      "الجمعية العامة حصراً.",
+      "مجلس الأمن حصراً.",
+      "محكمة العدل الدولية.",
+      "المجلس الاقتصادي والاجتماعي."
+    ],
+    "correct": 3,
+    "explain": "المادة 68 أعطت صراحة لـ 'المجلس الاقتصادي والاجتماعي' سلطة إنشاء لجان ثانوية متخصصة كحقوق الإنسان لتأدية وظائفه."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "في محكمة العدل الدولية، القاضي الذي يصوت ضد رأي الأغلبية يُمنع من نشر تسبيبه الخاص حفاظاً على وحدة الحكم وهيبة المحكمة.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "النظام الأساسي يجيز بوضوح لأي قاضٍ (سواء كان مخالفاً أو موافقاً للأغلبية) إصدار بيان مستقل يُرفق بالحكم يوضح فيه رأيه (الرأي المخالف/المنفصل)."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "صدر حكم من محكمة العدل لصالح دولة (أ)، وامتنعت الدولة (ب) عن التنفيذ. الجهة الدولية التي تملك إصدار قرارات بتدابير جبرية لتنفيذ الحكم هي:",
+    "opts": [
+      "قوات القبعات الزرقاء مباشرة.",
+      "الجمعية العامة للأمم المتحدة.",
+      "مجلس الأمن الدولي بناءً على طلب الدولة المتضررة.",
+      "الإنتربول الدولي."
+    ],
+    "correct": 2,
+    "explain": "المادة 94 أعطت الدولة المضرورة حق اللجوء لـ 'مجلس الأمن'، والذي يملك سلطة تقديرية لتقديم توصيات أو إصدار قرارات جبرية لتنفيذ الحكم."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "الفرق بين الاتحاد הפيدرالي والاتحاد الكونفدرالي من حيث التمثيل الدبلوماسي (الخارجي) هو أن:",
+    "opts": [
+      "كلاهما يمتلك تمثيلاً دبلوماسياً واحداً باسم الاتحاد.",
+      "في الكونفدرالي تحتفظ الدول بتمثيلها، وفي الفيدرالي ينفرد الاتحاد بالتمثيل.",
+      "في الفيدرالي تحتفظ الولايات بسفاراتها، وفي الكونفدرالي تُلغى.",
+      "التمثيل الخارجي متروك للولايات في كلا النظامين."
+    ],
+    "correct": 1,
+    "explain": "الاتحاد الكونفدرالي لا يلغي شخصية الدول فيبقى لكل دولة سفاراتها، بينما الفيدرالية تخلق دولة واحدة تنفرد حصرياً بالتمثيل الدبلوماسي."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "في النظام الرئاسي، العلاقة بين رئيس الدولة والوزراء مبنية على أساس:",
+    "opts": [
+      "المسؤولية التضامنية للوزراء أمام البرلمان.",
+      "التبعية التامة للرئيس كـ 'سكرتارية' ومساعدين له.",
+      "الاستقلالية التامة للوزير في وزارته دون تدخل الرئيس.",
+      "الانتخاب المباشر للوزراء من الشعب."
+    ],
+    "correct": 1,
+    "explain": "النظام الرئاسي يعتمد على وحدة السلطة التنفيذية، حيث الرئيس هو الحاكم الفعلي والوحيد، والوزراء مجرد مساعدين خاضعين لتوجيهاته المطلقة."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "أي من الإجراءات الرقابية التالية يُعد الأعنف ويؤدي إلى طرح مسألة 'سحب الثقة' من الحكومة في البرلمان المصري؟",
+    "opts": [
+      "طلب المناقشة العامة.",
+      "البيان العاجل.",
+      "الاستجواب.",
+      "لجنة تقصي الحقائق."
+    ],
+    "correct": 2,
+    "explain": "الاستجواب يحمل طابع 'الاتهام' للحكومة بخطأ جسيم، وهو الإجراء الإلزامي الذي يجب أن يسبق أي طلب لـ 'سحب الثقة'."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "يُحظر على عضو مجلس النواب الجمع بين عضويته وأي وظيفة حكومية إلا إذا كان التعيين ناتجاً عن ترقية أو حكم قضائي.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 0,
+    "explain": "لحماية استقلالية النائب، حظر القانون تعيينه في وظائف حكومية (كتعيين مبتدأ) لتجنب الإغراءات، واستثنى من ذلك الترقية الطبيعية أو تنفيذ حكم قضائي."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "محكمة العدل الدولية ملزمة بتطبيق 'مبادئ العدل والإنصاف' في جميع القضايا المعروضة عليها لتكملة النقص في المعاهدات.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "العدل والإنصاف ليس مصدراً تلقائياً، بل يُطبق كاستثناء نادر (فقط) إذا طلب وتوافق أطراف النزاع صراحةً على ذلك."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "إذا استقالت الحكومة تضامناً مع وزير قرر البرلمان سحب الثقة منه، فهذا يُعد تطبيقاً لـ:",
+    "opts": [
+      "المسؤولية السياسية التضامنية للحكومة.",
+      "حصانة الوزراء ضد قرارات البرلمان.",
+      "سلطة رئيس الجمهورية في إقالة الحكومة.",
+      "حل البرلمان بقوة القانون."
+    ],
+    "correct": 0,
+    "explain": "عندما يسحب البرلمان الثقة من وزير واحد، وتعلن الحكومة تضامنها معه، تصبح المسألة متعلقة بالحكومة ككل وتلتزم بتقديم استقالتها."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "وفقاً للاتجاه التقليدي التاريخي، علم السياسة كان يُعتبر مرادفاً لـ:",
+    "opts": [
+      "علم النفس الاجتماعي.",
+      "علم الدولة والمؤسسات الرسمية فقط.",
+      "علم السلطة في كل المجتمعات البشرية.",
+      "الاقتصاد السياسي حصراً."
+    ],
+    "correct": 1,
+    "explain": "الاتجاه التقليدي في بداية القرن الـ 20 كان يضيق تعريف السياسة ليحصرها فقط في 'علم الدولة ومؤسساتها الدستورية الرسمية'."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "حصر اختصاصات الولايات في الدستور وترك الصلاحيات غير المذكورة للسلطة الاتحادية (كما في الهند) يهدف إلى:",
+    "opts": [
+      "تغليب مظهر 'الاستقلال' للولايات.",
+      "تغليب مظهر 'الوحدة والمركزية' للدولة الفيدرالية.",
+      "إضعاف الحكومة المركزية عسكرياً.",
+      "التمهيد للتحول إلى اتحاد كونفدرالي."
+    ],
+    "correct": 1,
+    "explain": "ترك (الاختصاص العام) للاتحاد يقوي من قبضة السلطة المركزية على حساب الولايات، مما يغلب نزعة الوحدة على نزعة الاستقلال."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "تتميز 'الملكية المطلقة' بتركيز كافة السلطات بيد الملك استناداً تاريخياً لـ:",
+    "opts": [
+      "نظرية السيادة الشعبية لروسو.",
+      "الانتخاب المباشر مدى الحياة.",
+      "نظرية العقد الاجتماعي.",
+      "نظرية الحق الإلهي المباشر أو التفويض الإلهي."
+    ],
+    "correct": 3,
+    "explain": "الملكيات المطلقة تاريخياً كانت تبرر استبدادها وعدم مسؤوليتها السياسية بأن الحاكم يستمد سلطته مباشرة من الله (الحق الإلهي)."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "يشترط لصحة تشكيل مجلس النواب المصري أن يتضمن كوتة مضمونة ومحددة سلفاً لـ:",
+    "opts": [
+      "ألا تقل نسبة العمال والفلاحين عن 50% مع تخصيص 25% للمرأة.",
+      "تخصيص 50% للشباب والمرأة بالتساوي.",
+      "ألا يقل تمثيل الأحزاب المعارضة عن 30%.",
+      "لا توجد أي نسب دستورية، المقاعد جميعها فردية حرة."
+    ],
+    "correct": 0,
+    "explain": "الدستور أقر نسباً ملزمة للتمييز الإيجابي، كألا تقل نسبة العمال والفلاحين عن 50% (نظرياً في القوائم)، مع كوتة 25% للمرأة في إجمالي المجلس."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "اقتراح القوانين حق حصري لأعضاء مجلس النواب، ولا يجوز لرئيس الجمهورية أو الحكومة تقديم مشاريع قوانين.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "المادة 122 أعطت حق اقتراح القوانين لكل من: رئيس الجمهورية، ومجلس الوزراء، وكل عضو من أعضاء مجلس النواب."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "أي من الدول الآتية لا يحق لها التصويت في محكمة العدل الدولية حتى وإن اشتركت في النقاش؟",
+    "opts": [
+      "الدول الدائمة العضوية في مجلس الأمن.",
+      "لا توجد دولة تصوت؛ التصويت للقضاة فقط وليس للدول المتنازعة.",
+      "الدول غير الأعضاء في الأمم المتحدة.",
+      "الدول التي تمتنع عن سداد اشتراكاتها المالية."
+    ],
+    "correct": 1,
+    "explain": "سؤال خادع: محكمة العدل هي جهاز قضائي، والدول أطراف دعوى تُرافع ولا (تصوت). التصويت على الأحكام يكون (للقضاة) الـ 15 المكونين للمحكمة."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "تأثير جغرافية الدولة (سواحل، جبال، مساحة) على سياستها الخارجية وقوتها العسكرية يُعرف بعلم:",
+    "opts": [
+      "الاقتصاد السياسي.",
+      "الجغرافيا السياسية (الجيوبوليتيك).",
+      "القانون الدستوري.",
+      "الاجتماع السياسي."
+    ],
+    "correct": 1,
+    "explain": "الجغرافيا السياسية تدرس مدى تأثير البيئة الطبيعية والموارد والموقع الجغرافي على قوة الدولة وسلوكها السياسي الخارجي."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "الفرق بين 'مبدأ الاستقلالية' و 'مبدأ المشاركة' في الفيدرالية هو أن:",
+    "opts": [
+      "الأول يعني الانفصال، والثاني يعني الاندماج.",
+      "الأول ينظم السيادة الداخلية للولاية، والثاني ينظم دورها في السلطة المركزية.",
+      "الأول يخص الاقتصاد، والثاني يخص الجيش.",
+      "الأول يطبق في أمريكا، والثاني في كندا فقط."
+    ],
+    "correct": 1,
+    "explain": "الاستقلالية تسمح للولاية ببرلمان وحكومة محلية خاصة، بينما المشاركة تضمن حق الولاية في المشاركة في قرار الاتحاد المركزي ككل."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "المرجعية الفكرية للنظام البرلماني تستند بشكل رئيسي إلى أفكار:",
+    "opts": [
+      "جان جاك روسو في وحدة السيادة.",
+      "كارل ماركس في الصراع الطبقي.",
+      "مونتسكيو في الفصل بين السلطات لتجنب الاستبداد.",
+      "مكيافيلي في الغاية تبرر الوسيلة."
+    ],
+    "correct": 2,
+    "explain": "مونتسكيو هو صاحب نظرية (الفصل بين السلطات - السلطة توقف السلطة)، والتي تُعد حجر الأساس للنظام البرلماني والرئاسي لمنع تركز السلطة."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "رئيس الجمهورية يُعتبر فاقداً لشرط من شروط الترشح إذا:",
+    "opts": [
+      "لم يحصل على مؤهل جامعي عالٍ.",
+      "كان متزوجاً من أجنبية حتى لو تنازلت عن جنسيتها.",
+      "تزوجت إحدى بناته من رجل يحمل جنسية أجنبية.",
+      "كان يحمل هو أو زوجه أو والداه جنسية دولة أخرى."
+    ],
+    "correct": 3,
+    "explain": "الشرط الدستوري الصارم يمتد ليشمل (المرشح نفسه، والديه، وزوجه) بعدم حمل جنسية أخرى، لكنه لا يمتد للأبناء."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "يجوز لمجلس النواب تعديل بنود الموازنة العامة المقدمة من الحكومة، ولكن لا يجوز له زيادة النفقات دون تدبير إيرادات بديلة.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 0,
+    "explain": "لضمان الاستقرار المالي، ألزم الدستور البرلمان بالاتفاق مع الحكومة على توفير إيرادات لأي تعديل يرفع من نفقات الدولة لمنع تفاقم العجز."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "القرارات التي تصدرها الجمعية العامة للأمم المتحدة بشأن المسائل الداخلية للدول الأعضاء تمتلك قوة تنفيذية جبرية فورية.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "قرارات الجمعية العامة هي غالباً (توصيات) سياسية وأدبية غير ملزمة جبرياً (عدا القرارات التنظيمية الداخلية)، وقوة الإلزام الجبري يملكها مجلس الأمن."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "وفقاً لدافيد إيستون، تعريف السياسة يتمحور حول التخصيص السلطوي لـ:",
+    "opts": [
+      "الحدود الجغرافية.",
+      "الموارد المالية فقط.",
+      "القيم (المادية والمعنوية) في المجتمع.",
+      "القوة العسكرية."
+    ],
+    "correct": 2,
+    "explain": "إيستون عرّف السياسة بأنها (التخصيص السلطوي للقيم في المجتمع)، مما يعني اتخاذ قرارات ملزمة لتوزيع الموارد والمكاسب."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "الحرب بين الدول الأعضاء في الاتحاد الكونفدرالي تُعد حرباً:",
+    "opts": [
+      "أهلية لأنهم دولة واحدة.",
+      "دولية لأن كل دولة محتفظة بسيادتها المستقلة.",
+      "إدارية تخضع للمحكمة الدستورية.",
+      "غير شرعية وتُسقط الاتحاد فوراً."
+    ],
+    "correct": 1,
+    "explain": "لأن الكونفدرالية لا تُفقد الدول شخصيتها الدولية، فإن أي نزاع مسلح بينها يوصف كنزاع دولي يخضع لقوانين الحرب بين الدول المستقلة."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "في النظام المجلسي (سويسرا)، إذا تعارضت إرادة السلطة التنفيذية مع البرلمان، فإن الكلمة العليا تكون لـ:",
+    "opts": [
+      "الشعب عبر الاستفتاء الإلزامي حصراً.",
+      "رئيس الدولة بصفته الحكم.",
+      "البرلمان (الجمعية) لأنها صاحبة السيادة الأصلية.",
+      "المحكمة الدستورية العليا."
+    ],
+    "correct": 2,
+    "explain": "في النظام المجلسي، البرلمان يمثل الأمة وتتركز بيده السلطات، والتنفيذيون هم مجرد وكلاء ملزمون بتنفيذ أوامر البرلمان."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "الجهة المنوط بها إعلان 'حالة الحرب' رسمياً في مصر وفقاً للدستور تتطلب تظافر إرادة:",
+    "opts": [
+      "رئيس الجمهورية ومجلس الوزراء فقط.",
+      "رئيس الجمهورية والبرلمان (أغلبية الثلثين) ومجلس الدفاع الوطني.",
+      "البرلمان بأغلبية مطلقة ومجلس الدولة.",
+      "وزير الدفاع ورئيس الجمهورية."
+    ],
+    "correct": 1,
+    "explain": "لخطورة القرار، لا يُعلن الرئيس الحرب إلا بعد أخذ رأي مجلس الدفاع الوطني وموافقة (ثلثي) أعضاء مجلس النواب."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "إذا استقال عضو البرلمان من حزبه الذي اُنتخب على أساسه أثناء الفصل التشريعي، ما هو الأثر الدستوري المتوقع؟",
+    "opts": [
+      "لا أثر لذلك ويستمر كعضو مستقل.",
+      "تسقط عضويته حتمياً بقوة القانون دون تصويت.",
+      "يُحال للمحكمة الدستورية العليا للفصل في عضويته.",
+      "يجوز إسقاط عضويته لتغييره 'الصفة' التي اُنتخب على أساسها بأغلبية الثلثين."
+    ],
+    "correct": 3,
+    "explain": "تغيير الصفة الحزبية أو المستقلة التي اُنتخب النائب على أساسها يُعد إخلالاً بالثقة، ويجيز للمجلس إسقاط العضوية بتصويت الثلثين."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "مجلس الوصاية التابع للأمم المتحدة هو أحد الأجهزة الرئيسية التي لا تزال تعمل بكامل طاقتها لإنهاء استعمار الأقاليم المتبقية.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "مجلس الوصاية أوقف عملياته فعلياً في 1994 بعد استقلال 'بالاو' (آخر إقليم مشمول بالوصاية)، ولكنه لا يزال موجوداً شكلياً في الميثاق."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "الارتباط بين علم السياسة وعلم القانون يتجلى بأوضح صوره في دراسة:",
+    "opts": [
+      "القانون التجاري للشركات.",
+      "القانون المدني للأحوال الشخصية.",
+      "القانون الدستوري وتنظيم السلطات.",
+      "القانون الجنائي للجرائم الاقتصادية."
+    ],
+    "correct": 2,
+    "explain": "القانون الدستوري هو نقطة التماس الكبرى، لأنه ينظم هيكل الدولة وسلطاتها وحقوق الأفراد، وهي جوهر علم السياسة."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "في الاتحاد الكونفدرالي، قرارات مجلس (أو مؤتمر) الاتحاد تُلزم الدول الأعضاء فور صدورها بالأغلبية البسيطة.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "قرارات الاتحاد الكونفدرالي تُتخذ غالباً بالإجماع، ولا تُلزم أياً من الدول الأعضاء إلا بعد تصديقها وموافقتها الخاصة كدولة ذات سيادة."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "أي الأنظمة الديمقراطية التالية يعاني تاريخياً من ظاهرة 'عدم الاستقرار الحكومي السريع' بسبب هشاشة الائتلافات الحزبية؟",
+    "opts": [
+      "النظام الرئاسي الأمريكي.",
+      "النظام المجلسي السويسري.",
+      "النظام البرلماني التعددي (كالجمهورية الرابعة بفرنسا).",
+      "النظام الملكي المطلق."
+    ],
+    "correct": 2,
+    "explain": "في النظام البرلماني، غياب حزب يحوز الأغلبية المطلقة يؤدي لـ 'حكومات ائتلافية' تسقط بسهولة مع أي خلاف بسحب الثقة منها."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "إعفاء (الحكومة كاملة) من منصبها بواسطة رئيس الجمهورية يتطلب موافقة مجلس النواب بأغلبية:",
+    "opts": [
+      "الأغلبية المطلقة (للحاضرين).",
+      "أغلبية (أعضاء المجلس) إجمالاً.",
+      "أغلبية الثلثين.",
+      "لا يتطلب موافقة البرلمان، فهو حق مطلق للرئيس."
+    ],
+    "correct": 1,
+    "explain": "نظراً لخطورة إقالة الحكومة ككل، اشترط الدستور موافقة أغلبية (إجمالي أعضاء المجلس) وليس فقط الحاضرين، على عكس التعديل الوزاري المحدود."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "دور 'مجلس الشيوخ' المصري في النظام التشريعي يتسم بأنه:",
+    "opts": [
+      "رقابي قاهر يملك سحب الثقة من الحكومة.",
+      "تشريعي إلزامي، لا يمر قانون بدونه.",
+      "استشاري ملزم في التعديلات الدستورية والمعاهدات السيادية.",
+      "قضائي يفصل في صحة عضوية النواب."
+    ],
+    "correct": 2,
+    "explain": "مجلس الشيوخ وظيفته الأساسية تعميق الدراسة وتقديم المشورة، ويجب (إلزاماً) أخذ رأيه في التعديلات الدستورية والخطط العامة، لكنه لا يملك سحب الثقة."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "الأمين العام للأمم المتحدة يملك سلطة 'سياسية' لافتة بموجب المادة 99، وهي:",
+    "opts": [
+      "استخدام الفيتو ضد قرارات الجمعية العامة.",
+      "تنبيه مجلس الأمن لأي مسألة يرى أنها تهدد السلم والأمن الدوليين.",
+      "عزل القضاة في محكمة العدل الدولية.",
+      "فرض عقوبات اقتصادية بشكل منفرد."
+    ],
+    "correct": 1,
+    "explain": "المادة 99 منحت الأمين العام بُعداً سياسياً يتجاوز الإدارة، بحقه في المبادرة ولفت انتباه مجلس الأمن للأزمات الخطيرة."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "ظهرت الحاجة لدراسة 'علم النفس السياسي' بشكل مكثف خصوصاً لفهم ظواهر مثل:",
+    "opts": [
+      "معدلات التضخم والبطالة.",
+      "أثر المناخ على الموارد المائية.",
+      "صناعة الرأي العام، الدعاية، وجاذبية القيادة السياسية.",
+      "نصوص المعاهدات التجارية."
+    ],
+    "correct": 2,
+    "explain": "علم النفس يُحلل السلوك الإنساني والدافعية، وهو ضروري في السياسة لفهم سلوك الجماهير والدعاية والتأثير الكاريزمي للقادة (تطور بعد الحرب ع 2)."
+  },
+  {
+    "chapter": "الفصل الثاني — الدولة المركبة واتحادات الدول",
+    "q": "الولايات المتحدة الأمريكية تأسست كاتحاد كونفدرالي (1776) ثم تطورت لتصبح أول اتحاد فيدرالي (1787).",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 0,
+    "explain": "هذا تطور تاريخي كلاسيكي للمركزية؛ بدأت كـ (تعاهد) كونفدرالي هش، ثم تحولت لدولة (فيدرالية) قوية بموجب الدستور."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "النظام الذي يكون فيه رئيس الدولة منتخباً، ولكنه لا يملك سلطات تنفيذية فعلية، بل يمارسها رئيس الوزراء الخاضع للبرلمان، هو:",
+    "opts": [
+      "نظام جمهوري رئاسي.",
+      "نظام ملكي مطلق.",
+      "نظام جمهوري برلماني.",
+      "نظام مجلسي."
+    ],
+    "correct": 2,
+    "explain": "في الجمهورية البرلمانية (مثل ألمانيا والهند)، الرئيس منصب شرفي (يملك ولا يحكم)، ورئيس الوزراء هو الحاكم الفعلي المسئول."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "إذا رفض رئيس الجمهورية التصديق على قانون أقره البرلمان ورده إليه، يستطيع البرلمان تجاوز هذا الفيتو وتمرير القانون بـ:",
+    "opts": [
+      "الأغلبية البسيطة للحاضرين مجدداً.",
+      "أغلبية ثلثي أعضاء المجلس.",
+      "اللجوء للمحكمة الدستورية للفصل.",
+      "طرح القانون لاستفتاء شعبي."
+    ],
+    "correct": 1,
+    "explain": "كسر 'الفيتو التوقيفي' لرئيس الجمهورية يستلزم أغلبية مشددة جداً لإقراره ثانيةً، وهي موافقة (ثلثي) أعضاء البرلمان إجمالاً."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "يحق لرئيس الجمهورية حل مجلس النواب لـ 'ذات السبب' الذي حُل من أجله المجلس السابق لضمان استقرار السياسات.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 1,
+    "explain": "الدستور حظر صراحة حل مجلس النواب لـ 'ذات السبب' الذي حُل من أجله المجلس السابق، لمنع التعسف والصدام المستمر مع الإرادة الشعبية."
+  },
+  {
+    "chapter": "الفصل الخامس — المنظمات الدولية وأجهزة الأمم المتحدة",
+    "q": "القرارات الموضوعية (السياسية) في مجلس الأمن تحتاج لإصدارها إلى:",
+    "opts": [
+      "9 أصوات دون اشتراط موافقة الدول الخمس الكبرى.",
+      "9 أصوات من ضمنها أصوات الدول الخمس دائمة العضوية متفقة.",
+      "إجماع جميع أعضاء المجلس الـ 15.",
+      "الأغلبية المطلقة (8 أصوات)."
+    ],
+    "correct": 1,
+    "explain": "القرارات الإجرائية تكفي 9 أصوات عشوائية، بينما القرارات الموضوعية تتطلب 9 أصوات 'بما فيها' أصوات الدول الخمس الكبرى (حق الفيتو)."
+  },
+  {
+    "chapter": "الفصل الأول — مدخل للعلوم السياسية والنظرية العامة للدولة",
+    "q": "فكرة 'الحق العام المتبقي' (Residual Powers) في الدساتير الفيدرالية تُستخدم لتحديد:",
+    "opts": [
+      "توزيع الثروات بين الولايات.",
+      "لمن تؤول الاختصاصات التي لم تُذكر صراحة في الدستور (المركز أم الولايات).",
+      "حق المواطنين في الثورة.",
+      "حق الولايات في الانفصال السلمي."
+    ],
+    "correct": 1,
+    "explain": "الحق المتبقي هو آلية دستورية تحدد من يملك سلطة التشريع في الأمور المستحدثة غير المذكورة، إما للاتحاد (كندا) أو للولايات (أمريكا)."
+  },
+  {
+    "chapter": "الفصل الثالث — نظم الحكم ومبدأ الفصل بين السلطات",
+    "q": "أي المفكرين يعتبر الأب الروحي لمبدأ 'الفصل بين السلطات' لضمان الحريات ومنع الطغيان؟",
+    "opts": [
+      "ابن خلدون.",
+      "جان جاك روسو.",
+      "مونتسكيو.",
+      "جون لوك."
+    ],
+    "correct": 2,
+    "explain": "مونتسكيو في كتابه 'روح القوانين' (1748) أسس المبدأ معتمداً على فكرة أن 'السلطة توقف السلطة' لمنع استبداد الحاكم."
+  },
+  {
+    "chapter": "الفصل الرابع — تنظيم السلطات (السلطة التنفيذية والمحلية)",
+    "q": "إذا استقال رئيس الجمهورية، لمن يوجه كتاب استقالته وفقاً للدستور؟",
+    "opts": [
+      "لمجلس الوزراء.",
+      "للمحكمة الدستورية العليا.",
+      "لمجلس النواب.",
+      "للشعب عبر خطاب متلفز."
+    ],
+    "correct": 2,
+    "explain": "رئيس الجمهورية يوجه كتاب استقالته إلى (مجلس النواب) ممثل الإرادة الشعبية، وفي حال حل المجلس، يوجهها للجمعية العامة للمحكمة الدستورية."
+  },
+  {
+    "chapter": "الفصل الخامس — السلطة التشريعية",
+    "q": "تشكيل 'لجنة تقصي حقائق' برلمانية يحق له جمع الأدلة وسماع الشهود وفحص السجلات الإدارية لأي مؤسسة عامة.",
+    "opts": [
+      "عبارة صحيحة",
+      "عبارة خاطئة"
+    ],
+    "correct": 0,
+    "explain": "لجان تقصي الحقائق تملك صلاحيات شبه قضائية واسعة للتحقق من فساد أو خلل إداري ومالي في أي هيئة حكومية، وتلزم الجهات بالتعاون معها."
+  }
+]
+
+
+
+      /* ===== STATE ===== */
+      let current = 0;
+      let correctCount = 0;
+      let wrongCount = 0;
+      let answered = false;
+      let shuffled = [];
+
+      
+      function saveProgress() {
+        try {
+          const data = {
+            inProgress: true,
+            currentIdx: current,
+            correctAnswers: correctCount,
+            wrongAnswers: wrongCount,
+            totalQuestions: shuffled.length,
+            questionOrder: shuffled.map(q => questions.indexOf(q)),
+            quizFilename: "index.html",
+            timestamp: Date.now()
+          };
+          localStorage.setItem('hr_quiz_progress', JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      function clearProgress() {
+        try { localStorage.removeItem('hr_quiz_progress'); } catch (e) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return null;
+          const data = JSON.parse(saved);
+          return (data && data.inProgress) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function resumeQuiz(data) {
+        shuffled = data.questionOrder.map(idx => questions[idx]);
+        current = data.currentIdx;
+        correctCount = data.correctAnswers || 0;
+        wrongCount = data.wrongAnswers || 0;
+        
+        const intro = document.getElementById("intro-screen");
+        const quiz = document.getElementById("quiz-screen");
+        intro.style.display = "none";
+        quiz.style.display = "block";
+        gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+        renderQuestion();
+      }
+
+      /* ===== DOM REFS ===== */
+      const $ = (id) => document.getElementById(id);
+
+      /* ===== SHUFFLE ===== */
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      /* ===== START QUIZ ===== */
+      function startQuiz() {
+        shuffled = shuffle(questions);
+        const intro = $("intro-screen");
+        const quiz = $("quiz-screen");
+
+        gsap.to(intro, {
+          opacity: 0,
+          y: -30,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            intro.style.display = "none";
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            saveProgress();
+            renderQuestion();
+          }
+        });
+      }
+
+      /* ===== RENDER QUESTION ===== */
+      function renderQuestion() {
+        answered = false;
+        const q = shuffled[current];
+        const total = shuffled.length;
+
+        $("q-num-badge").textContent = `سؤال ${current + 1}`;
+        $("q-chapter-lbl").textContent = q.chapter;
+        $("q-text").textContent = q.q;
+        $("q-counter").textContent = `سؤال ${current + 1} من ${total}`;
+        const pct = Math.round((current / total) * 100);
+        $("q-pct").textContent = pct + "%";
+        $("progress-fill").style.width = pct + "%";
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+        $("sc-remain").textContent = total - current;
+
+        const fb = $("q-feedback");
+        fb.className = "feedback";
+        fb.innerHTML = "";
+
+        $("btn-next").className = "btn btn-next";
+
+        const letters = ["أ", "ب", "ج", "د"];
+        const optsDiv = $("q-options");
+        optsDiv.innerHTML = "";
+
+        q.opts.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.className = "opt";
+          btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+          btn.addEventListener("click", () => selectAnswer(i));
+          optsDiv.appendChild(btn);
+        });
+
+        /* Animate options in with GSAP */
+        gsap.fromTo(
+          ".opt",
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.35, stagger: 0.07, ease: "power2.out" }
+        );
+      }
+
+      /* ===== SELECT ANSWER ===== */
+      function selectAnswer(idx) {
+        if (answered) return;
+        answered = true;
+
+        const q = shuffled[current];
+        const opts = document.querySelectorAll(".opt");
+        opts.forEach((o) => o.classList.add("disabled"));
+
+        const fb = $("q-feedback");
+
+        if (idx === q.correct) {
+          correctCount++;
+          opts[idx].classList.add("correct");
+          fb.className = "feedback correct-fb show";
+          fb.innerHTML = `<strong>✔ إجابة صحيحة!</strong>${q.explain}`;
+        } else {
+          wrongCount++;
+          opts[idx].classList.add("wrong");
+          opts[q.correct].classList.add("correct");
+          fb.className = "feedback wrong-fb show";
+          fb.innerHTML = `<strong>✘ إجابة خاطئة</strong>${q.explain}`;
+        }
+
+        saveProgress();
+
+        /* Animate feedback in */
+        gsap.fromTo(fb, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+
+        const nextBtn = $("btn-next");
+        nextBtn.className = "btn btn-next show";
+        nextBtn.textContent = current < shuffled.length - 1 ? "السؤال التالي ←" : "عرض النتيجة ←";
+
+        gsap.fromTo(nextBtn, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+      }
+
+      /* ===== NEXT QUESTION ===== */
+      function nextQuestion() {
+        current++;
+        if (current >= shuffled.length) {
+          showResult();
+        } else {
+          const card = $("q-card");
+          gsap.to(card, {
+            opacity: 0,
+            x: -40,
+            duration: 0.25,
+            ease: "power2.in",
+            onComplete: () => {
+              renderQuestion();
+              gsap.fromTo(card, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" });
+            }
+          });
+        }
+      }
+
+      /* ===== SHOW RESULT ===== */
+      function showResult() {
+        const quizScreen = $("quiz-screen");
+        const rs = $("result-screen");
+
+        gsap.to(quizScreen, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            quizScreen.style.display = "none";
+            clearProgress();
+            rs.classList.add("show");
+
+            const total = shuffled.length;
+            const pct = Math.round((correctCount / total) * 100);
+            const circle = document.querySelector(".result-circle");
+            const deg = (pct / 100) * 360;
+            circle.style.background = `conic-gradient(var(--gold) 0deg, var(--teal) ${deg}deg, var(--bg3) ${deg}deg)`;
+
+            $("res-pct").textContent = pct + "%";
+            $("rs-correct").textContent = correctCount;
+            $("rs-wrong").textContent = total - correctCount;
+            $("rs-pct2").textContent = pct + "%";
+
+            let title, sub;
+            if (pct >= 90) {
+              title = "🏆 ممتاز!";
+              sub = "أداء رائع! أنت مستعد تماماً للاختبار.";
+            } else if (pct >= 75) {
+              title = "🌟 جيد جداً!";
+              sub = "أداء قوي — راجع الأسئلة التي أخطأت فيها.";
+            } else if (pct >= 60) {
+              title = "👍 جيد";
+              sub = "مستوى جيد — حاول مراجعة المحاضرات مجدداً.";
+            } else {
+              title = "📚 تحتاج مزيداً من المذاكرة";
+              sub = "راجع المراجعة الشاملة وحاول الاختبار مجدداً.";
+            }
+
+            $("res-title").textContent = title;
+            $("res-sub").textContent = sub;
+
+            // Update review system conditions
+            localStorage.setItem('quizFinished', 'true');
+            if (typeof window.triggerReviewAfterQuiz === 'function') {
+                window.triggerReviewAfterQuiz();
+            }
+
+            /* Animate result in */
+            gsap.fromTo(rs, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            gsap.fromTo(".result-circle", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
+            gsap.fromTo(".rs-card", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.4, ease: "power2.out" });
+          }
+        });
+      }
+
+      /* ===== RESTART QUIZ ===== */
+      function restartQuiz() {
+        current = 0;
+        correctCount = 0;
+        wrongCount = 0;
+
+        const rs = $("result-screen");
+        gsap.to(rs, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            rs.classList.remove("show");
+            shuffled = shuffle(questions);
+            const quiz = $("quiz-screen");
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            renderQuestion();
+          }
+        });
+      }
+
+      
+      // ===== RESUME QUIZ MODAL =====
+      function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("resume") === "true") {
+                if (typeof resumeQuiz === 'function' && window.location.pathname.includes(data.quizFilename)) {
+                    resumeQuiz(data);
+                }
+                return;
+            }
+
+            const modal = document.getElementById('resume-modal');
+            if(!modal) return;
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 500);
+
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? data.quizFilename : 'index2.html';
+              if (window.location.pathname.includes(target)) {
+                 modal.classList.remove('active');
+                 if (typeof resumeQuiz === 'function') resumeQuiz(data);
+              } else {
+                 window.location.href = target + '?resume=true';
+              }
+            });
+
+            document.getElementById('modal-no').addEventListener('click', () => {
+              if (typeof clearProgress === 'function') clearProgress();
+              else localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkQuizProgress);
+
+      /* ===== EVENT LISTENERS (NO INLINE) ===== */
+      document.addEventListener("DOMContentLoaded", () => {
+        $("btn-start").addEventListener("click", startQuiz);
+        $("btn-next").addEventListener("click", nextQuestion);
+        $("btn-restart").addEventListener("click", () => { clearProgress(); restartQuiz(); });
+
+        /* ===== PAGE LOAD ANIMATIONS ===== */
+        gsap.fromTo(
+          ".header",
+          { opacity: 0, y: -30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".intro-card",
+          { opacity: 0, y: 40, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power2.out", delay: 0.15 }
+        );
+
+        gsap.fromTo(
+          ".intro-icon",
+          { opacity: 0, scale: 0.3, rotation: -20 },
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)", delay: 0.3 }
+        );
+
+        gsap.fromTo(
+          ".feat",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, delay: 0.45, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".btn-start",
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.4, delay: 0.7, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+          ".header-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.6, delay: 0.4, ease: "power2.out" }
+        );
+      });
+
+
+    </script>
+
+
+    <script src="../../reviews/reviews.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2259 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار مهارات الأتصال</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../reviews/reviews.css" />
+    <style>
+      :root {
+        --bg: #0b111a;
+        --bg2: #15202b;
+        --bg3: #223447;
+        --gold: #06b6d4;
+        --gold2: #22d3ee;
+        --primary: #0284c7;
+        --primary-light: #38bdf8;
+        --teal: #10b981;
+        --red: #ef4444;
+        --blue: #38bdf8;
+        --text: #e8ecf1;
+        --muted: #8b99a8;
+        --correct: #10b981;
+        --wrong: #ef4444;
+        --radius: 14px;
+        --purple: #8b5cf6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* ===== BACKGROUND EFFECTS ===== */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        right: -30%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(2, 132, 199, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: -40%;
+        left: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ===== HEADER ===== */
+      .header {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header h1 {
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        color: var(--gold);
+        font-weight: 900;
+        text-shadow: 0 2px 20px rgba(6, 182, 212, 0.2);
+        letter-spacing: -0.5px;
+      }
+
+      .header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 8px;
+        opacity: 0.85;
+      }
+      .header a {
+        color: var(--gold2);
+      }
+
+      .header-line {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        margin: 14px auto 0;
+        border-radius: 10px;
+      }
+
+      /* ===== PROGRESS ===== */
+      .progress-wrap {
+        width: 100%;
+        max-width: 760px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .progress-bar {
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--teal));
+        border-radius: 10px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== SCOREBOARD ===== */
+      .scoreboard {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .score-card {
+        flex: 1;
+        background: rgba(21, 32, 43, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .score-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .score-card .val {
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+
+      .score-card .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .score-card.correct .val {
+        color: var(--correct);
+      }
+
+      .score-card.wrong .val {
+        color: var(--wrong);
+      }
+
+      .score-card.total .val {
+        color: var(--gold);
+      }
+
+      /* ===== CARD (GLASSMORPHISM) ===== */
+      .card {
+        width: 100%;
+        max-width: 760px;
+        background: rgba(21, 32, 43, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+      }
+
+      .q-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .q-badge {
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
+        color: var(--gold);
+        border: 1px solid rgba(6, 182, 212, 0.25);
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .q-chapter {
+        font-size: 0.76rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+
+      .question {
+        font-size: 1.08rem;
+        font-weight: 700;
+        line-height: 1.9;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      /* ===== OPTIONS ===== */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .opt {
+        background: rgba(34, 52, 71, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: right;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .opt::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.06), transparent);
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+
+      .opt:hover:not(.disabled)::before {
+        opacity: 1;
+      }
+
+      .opt:hover:not(.disabled) {
+        border-color: var(--gold);
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(6, 182, 212, 0.1);
+      }
+
+      .opt-letter {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.25s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .opt.selected {
+        border-color: var(--blue);
+        background: rgba(56, 189, 248, 0.1);
+      }
+
+      .opt.selected .opt-letter {
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+      }
+
+      .opt.correct {
+        border-color: var(--correct);
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .opt.correct .opt-letter {
+        background: var(--correct);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+      }
+
+      .opt.wrong {
+        border-color: var(--wrong);
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .opt.wrong .opt-letter {
+        background: var(--wrong);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+      }
+
+      .opt.disabled {
+        cursor: default;
+      }
+
+      /* ===== FEEDBACK ===== */
+      .feedback {
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-fb {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        color: var(--correct);
+      }
+
+      .feedback.wrong-fb {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: var(--wrong);
+      }
+
+      .feedback strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      /* ===== BUTTONS ===== */
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-next {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        display: none;
+        box-shadow: 0 4px 16px rgba(6, 182, 212, 0.2);
+      }
+
+      .btn-next:hover {
+        transform: scale(1.04) translateY(-1px);
+        box-shadow: 0 6px 24px rgba(6, 182, 212, 0.3);
+      }
+
+      .btn-next.show {
+        display: inline-block;
+      }
+
+      /* ===== INTRO SCREEN ===== */
+      #intro-screen {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-card {
+        background: rgba(21, 32, 43, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 22px;
+        padding: 40px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .intro-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .intro-icon {
+        font-size: 3.5rem;
+        margin-bottom: 18px;
+        display: block;
+      }
+
+      .intro-card h2 {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 12px;
+        font-weight: 900;
+      }
+
+      .intro-card p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+
+      .intro-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .feat {
+        background: rgba(34, 52, 71, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, border-color 0.3s;
+      }
+
+      .feat:hover {
+        transform: translateY(-2px);
+        border-color: rgba(6, 182, 212, 0.2);
+      }
+
+      .feat span {
+        color: var(--gold);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+
+      .btn-start {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 54px;
+        font-size: 1.08rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 6px 24px rgba(6, 182, 212, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-start::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn-start:hover::before {
+        left: 100%;
+      }
+
+      .btn-start:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.35);
+      }
+
+      /* ===== QUIZ SCREEN ===== */
+      #quiz-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ===== RESULT SCREEN ===== */
+      #result-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      #result-screen.show {
+        display: block;
+      }
+
+      .result-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: conic-gradient(var(--gold) 0%, var(--teal) 50%, var(--bg3) 50%);
+        margin: 0 auto 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
+      }
+
+      .result-circle::after {
+        content: "";
+        position: absolute;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        background: var(--bg2);
+      }
+
+      .result-pct {
+        position: relative;
+        z-index: 1;
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+      }
+
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+
+      .result-sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 26px;
+      }
+
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .rs-card {
+        background: rgba(21, 32, 43, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .rs-card .v {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      .rs-card .l {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .btn-restart {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 44px;
+        font-size: 1rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s;
+        box-shadow: 0 6px 24px rgba(6, 182, 212, 0.2);
+      }
+
+      .btn-restart:hover {
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.3);
+      }
+
+      /* ===== RESUME MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-box {
+        background: rgba(21, 32, 43, 0.92);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 42px 38px;
+        max-width: 460px;
+        width: 92%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .modal-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .modal-box p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+
+      .modal-box .modal-small-text {
+        font-size: 0.85rem;
+      }
+
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .modal-progress .mp-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold));
+        border-radius: 10px;
+      }
+
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+
+      .modal-btn-yes {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(2, 132, 199, 0.3);
+      }
+
+      .modal-btn-yes:hover {
+        transform: scale(1.04);
+        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+      }
+
+      .modal-btn-no {
+        background: var(--bg3);
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 600px) {
+        body {
+          padding: 12px;
+        }
+
+        .card {
+          padding: 22px 18px;
+          border-radius: 16px;
+        }
+
+        .intro-card {
+          padding: 28px 20px;
+        }
+
+        .intro-features {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .result-stats {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .scoreboard {
+          gap: 8px;
+        }
+
+        .score-card {
+          padding: 10px 6px;
+        }
+
+        .score-card .val {
+          font-size: 1.3rem;
+        }
+
+        .q-meta {
+          flex-direction: column;
+          gap: 8px;
+          align-items: flex-start;
+        }
+
+        .modal-box {
+          padding: 30px 22px;
+        }
+
+        .modal-btns {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.3rem;
+        }
+        
+
+        .question {
+          font-size: 0.98rem;
+        }
+
+        .opt {
+          padding: 12px 14px;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ===== INITIAL HIDDEN STATES FOR GSAP ===== */
+      .gsap-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      @font-face {
+        font-family: "Emoji";
+        src: url(../fonts/Emojis.ttf) format("truetype");
+      }
+
+            .emoji,
+      .intro-icon {
+        font-family: "Emoji";
+      }
+   ::selection {
+        background: none;
+        color: none;
+      }
+
+    </style>
+  </head>
+
+
+
+<body data-subject="maharat-etsal">
+
+    <div class="header">
+      <h1><span class="emoji">📣</span> اختبار مهارات الأتصال</h1>
+      <p>نم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a></p>
+      <div class="header-line"></div>
+    </div>
+
+    <!-- INTRO -->
+    <div id="intro-screen">
+      <div class="intro-card">
+        <div class="intro-icon">🖨️</div>
+        <h2>مرحباً بك في الاختبار التدريبي</h2>
+        <p>
+          اختبار شامل وصعب يغطي جميع فصول مادة مهارات الأتصال . اختر الإجابة
+          الصحيحة واحصل على تغذية راجعة فورية مع شرح مفصّل لكل سؤال.
+        </p>
+        <div class="intro-features">
+          <div class="feat"><span class="emoji">📚</span> أسئلة متقدمة</div>
+          <div class="feat"><span class="emoji">⚡</span> تغذية فورية</div>
+          <div class="feat"><span class="emoji">🎯</span> متعدد الخيارات</div>
+          <div class="feat"><span class="emoji">📊</span> نتيجة نهائية</div>
+        </div>
+        <button class="btn-start" id="btn-start">ابدأ الاختبار ←</button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz-screen">
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="val" id="sc-correct">0</div>
+          <div class="lbl">✔ صحيح</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="val" id="sc-wrong">0</div>
+          <div class="lbl"><span class="emoji">✘</span> خطأ</div>
+        </div>
+        <div class="score-card total">
+          <div class="val" id="sc-remain">--</div>
+          <div class="lbl">متبقي</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="q-counter">--</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+      <div class="card" id="q-card">
+        <div class="q-meta">
+          <span class="q-badge" id="q-num-badge">سؤال ١</span>
+          <span class="q-chapter" id="q-chapter-lbl"></span>
+        </div>
+        <div class="question" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+        <div class="feedback" id="q-feedback"></div>
+        <div class="actions">
+          <button class="btn btn-next" id="btn-next">السؤال التالي ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result-screen">
+      <div class="intro-card">
+        <div class="result-circle">
+          <div class="result-pct" id="res-pct">0%</div>
+        </div>
+        <div class="result-title" id="res-title">نتيجتك</div>
+        <div class="result-sub" id="res-sub"></div>
+        <div class="result-stats">
+          <div class="rs-card">
+            <div class="v" id="rs-correct">0</div>
+            <div class="l">إجابات صحيحة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-wrong">0</div>
+            <div class="l">إجابات خاطئة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-pct2">0%</div>
+            <div class="l">النسبة المئوية</div>
+          </div>
+        </div>
+        <button class="btn-restart" id="btn-restart">🔄 إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <!-- RESUME MODAL -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📋</span>
+        <h3>لديك اختبار آخر لم يكتمل!</h3>
+        <p>يبدو أنك بدأت اختبار بنك الأسئلة الشامل ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-small-text">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+      /* ===== QUESTIONS DATA ===== */
+      const questions = [
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "إذا تمكنت إدارة التسويق من زيادة مبيعاتها بنسبة 30% كما خططت، ولكنها استهلكت ميزانية إعلانية تعادل أرباح المبيعات الجديدة، فإن هذه الإدارة تُوصف بأنها:",
+    opts: [
+      "تتمتع بالكفاءة والفعالية معاً",
+      "تتمتع بالكفاءة وتفتقر إلى الفعالية",
+      "تتمتع بالفعالية وتفتقر إلى الكفاءة",
+      "تفتقر إلى كل من الكفاءة والفعالية"
+    ],
+    correct: 2,
+    explain: "الفعالية هي تحقيق الهدف (زيادة المبيعات)، والكفاءة هي حسن استخدام الموارد (الميزانية). استنزاف الميزانية يعني غياب الكفاءة رغم تحقيق الهدف."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "طرح موظف فكرة غير مسبوقة لتقليل وقت التصنيع، وقامت الإدارة بتوثيقها والإشادة بها دون تطبيقها الفعلي لتكلفتها الأولية. يُصنف هذا الموقف إدارياً بأنه:",
+    opts: [
+      "ابتكار فاشل بسبب سوء التخطيط المالي",
+      "إبداع لم يرتقِ ليصبح ابتكاراً",
+      "عصف ذهني غير موجه للأهداف",
+      "ابتكار نظري يفتقر إلى الأصالة"
+    ],
+    correct: 1,
+    explain: "الإبداع هو إنتاج الفكرة الجديدة، بينما الابتكار يشترط تحويل هذه الفكرة إلى تطبيق عملي وملموس، وبما أنها لم تُطبق فهي إبداع فقط."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "تعتمد الفعالية التنظيمية وفق 'مدخل أصحاب المصلحة' على إرضاء أطراف متعددة، أي من المؤشرات التالية يعكس نجاح هذا المدخل بشكل مباشر؟",
+    opts: [
+      "انخفاض معدل دوران العمالة وزيادة ولاء العملاء في نفس الوقت",
+      "استقطاب كفاءات تكنولوجية عالية التكلفة",
+      "تخفيض التكاليف التشغيلية الداخلية بنسبة 15%",
+      "وضوح الهيكل التنظيمي وانعدام الصراعات بين الإدارات"
+    ],
+    correct: 0,
+    explain: "مدخل أصحاب المصلحة يركز على تلبية توقعات ورضا الأطراف المرتبطة بالمنظمة كالعاملين (انخفاض الدوران) والعملاء (الولاء)."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "أثناء جلسة توليد أفكار، قاطع المدير موظفاً قائلاً: 'فكرتك ممتازة ولكنها قد تواجه عقبات قانونية'، ما هو الخطأ الإداري الذي ارتكبه المدير؟",
+    opts: [
+      "التركيز على الكمية وإهمال الكيفية",
+      "تشجيع التفكير النمطي على حساب الأصالة",
+      "مخالفة قاعدة 'تأجيل التقييم والنقد' في العصف الذهني",
+      "الفشل في ربط الفكرة بخرائط العقل التنظيمية"
+    ],
+    correct: 2,
+    explain: "أهم قواعد العصف الذهني هي تأجيل أي تقييم أو نقد (حتى لو كان بناءً أو إيجابياً مبدئياً) حتى انتهاء مرحلة طرح جميع الأفكار."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "يعتبر الأداء الجماعي نتاجاً للأداء الفردي، ولكن اجتماع أفراد ذوي كفاءة عالية لا يضمن نجاح الفريق إلا بتوافر مهارة حاكمة هي:",
+    opts: [
+      "الانضباط الذاتي",
+      "إدارة الوقت بشكل مستقل",
+      "التفكير النقدي الفردي",
+      "التنسيق وتوزيع الأدوار"
+    ],
+    correct: 3,
+    explain: "نجاح الأداء الجماعي لا يعتمد فقط على كفاءة الأفراد الفنية، بل يعتمد جوهرياً على قدرتهم على التعاون والتنسيق وتكامل الأدوار."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "المنظمة الفعالة هي بالضرورة منظمة كفؤة، فكلاهما وجهان لعملة واحدة ولا يمكن فصلهما في الواقع العملي.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. قد تكون المنظمة فعالة (تحقق الهدف) دون أن تكون كفؤة (تهدر الموارد)، والعكس صحيح. المنظمة المثالية فقط هي من تجمع بينهما."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "أي من المعوقات التالية يُعد عائقاً 'تنظيمياً بيئياً' وليس 'نفسياً داخلياً' لتوليد الأفكار؟",
+    opts: [
+      "الخوف من النقد والسخرية",
+      "البيئة غير المشجعة والتمسك بالروتين",
+      "ضعف الثقة بالنفس",
+      "التفكير النمطي المحدود"
+    ],
+    correct: 1,
+    explain: "البيئة غير المشجعة والروتين الإداري هما عوائق تنظيمية تفرضها الإدارة، بينما البقية هي عوائق نفسية أو ذهنية تنبع من داخل الفرد نفسه."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "تعتمد مهارة 'اتخاذ القرار' على اختيار البديل الأنسب، بينما مهارة 'حل المشكلات' تركز بشكل أعمق على:",
+    opts: [
+      "تحديد الأهداف الاستراتيجية بعيدة المدى",
+      "تحديد أسباب الفجوة واقتراح حلول عملية لمعالجتها",
+      "تنظيم الوقت لتفادي الأزمات المستقبلية",
+      "تحليل المعلومات بموضوعية وتجريد"
+    ],
+    correct: 1,
+    explain: "حل المشكلات يركز على تشخيص الأسباب الجذرية للمشكلة وتوليد واقتراح الحلول، بينما اتخاذ القرار هو الخطوة التي تتوج باختيار بديل من بينها."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "إذا قامت الشركة بتفكيك أزمة المبيعات الكلية إلى (مشكلة تسعير، مشكلة توزيع، مشكلة جودة)، فهي تستخدم أسلوب:",
+    opts: [
+      "خرائط العقل للربط المفاهيمي",
+      "العصف الذهني الكمي",
+      "تحليل المشكلة إلى أجزاء لتسهيل الحل",
+      "الأسئلة التحفيزية التوجيهية"
+    ],
+    correct: 2,
+    explain: "هذا هو أسلوب تقسيم المشكلة الكبيرة إلى عناصر أصغر لتبسيطها ويسهل التفكير في حلول متخصصة لكل جزء على حدة."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "تقييم أداء منظمة بناءً على قدرتها على تأمين خطوط تمويل جديدة وجذب كفاءات تقنية نادرة، يندرج تحت:",
+    opts: [
+      "مدخل العمليات الداخلية",
+      "مدخل الموارد",
+      "مدخل أصحاب المصلحة",
+      "مدخل تحقيق الأهداف"
+    ],
+    correct: 1,
+    explain: "مدخل الموارد يركز على قدرة المنظمة على استقطاب وتأمين الموارد النادرة (التمويل، الكفاءات، التكنولوجيا) كمعيار لفعاليتها."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "أرسل مدير التسويق خطاباً رسمياً لمدير الإنتاج يطلب فيه تعديل مواصفات التغليف بناءً على شكاوى العملاء. هذا الاتصال يُصنف فنياً بأنه:",
+    opts: [
+      "رسمي، هابط، كتابي",
+      "رسمي، أفقي، شفوي",
+      "رسمي، أفقي، كتابي",
+      "غير رسمي، صاعد، كتابي"
+    ],
+    correct: 2,
+    explain: "رسمي (لأنه خطاب مهني)، أفقي (بين مديرين في نفس المستوى الإداري)، وكتابي (لأنه خطاب موثق)."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "في شبكة 'العجلة'، تتسم عملية اتخاذ القرار بالسرعة الفائقة، لكنها تدفع ضريبة خطيرة تتمثل في:",
+    opts: [
+      "انعدام التوثيق للمعلومات المتداولة",
+      "تشابك المعلومات وفوضى التوجيهات",
+      "بطء التسلسل الإداري وتعدد المستويات",
+      "زيادة الضغط والاختناق الإداري لدى الشخص المركزي"
+    ],
+    correct: 3,
+    explain: "شبكة العجلة تعتمد على شخص واحد كمركز يتلقى ويوزع المعلومات، مما يسرع القرار لكنه يسبب عبئاً وضغطاً شديداً عليه."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "أي من المواقف الآتية يُعد تطبيقاً نموذجياً لضرورة استخدام 'الاتصال الشفوي' لتفادي أزمات تنظيمية؟",
+    opts: [
+      "تعديل اللوائح المالية والمحاسبية الخاصة بالرواتب",
+      "حل نزاع مفاجئ بين موظفين أدى لتوقف خط الإنتاج",
+      "إصدار قرار بترقية مجموعة من العاملين بالإدارة",
+      "التواصل مع فروع الشركة بدول مختلفة لنقل بيانات دقيقة"
+    ],
+    correct: 1,
+    explain: "في حالات الطوارئ والنزاعات التي تتطلب تدخلاً فورياً وتغذية راجعة حية ومراعاة للمشاعر، يُعد الاتصال الشفوي (المباشر) هو الوسيلة الأنسب."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "الاتصال غير الرسمي داخل المنظمات هو ظاهرة سلبية يجب القضاء عليها كلياً لتفادي الشائعات وضمان تدفق المعلومات عبر الهيكل التنظيمي فقط.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. الاتصال غير الرسمي له مزايا كبرى مثل سرعة انتقال المعلومات وتخفيف الضغوط النفسية وتعزيز الروابط، ولا يمكن ولا ينبغي القضاء عليه كلياً."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "التفاوت بين 'الرسالة الشفوية' و'لغة الجسد' للمتحدث (كأن يوافق لفظياً ويهز رأسه بالرفض)، يؤدي إلى:",
+    opts: [
+      "اعتماد المستقبل على الرسالة اللفظية لكونها أكثر وضوحاً",
+      "تكذيب الرسالة اللفظية لأن الاتصال غير اللفظي يكشف الدوافع الحقيقية",
+      "تحول الاتصال من شخصي إلى اتصال ذاتي",
+      "تعزيز قوة الرسالة وتوثيقها رسمياً"
+    ],
+    correct: 1,
+    explain: "الاتصال غير اللفظي أصدق في نقل المشاعر، وعند التناقض يميل المستقبل لتصديق لغة الجسد لأنها تكشف المواقف الحقيقية وتصعب السيطرة عليها."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "أثناء عمل فريق بحثي متطور، سُمح لجميع الأعضاء بالتواصل مع بعضهم دون قيود لتشجيع الابتكار، مما أدى لضياع بعض المهام نتيجة غياب التنظيم. هذه الشبكة هي:",
+    opts: [
+      "الشبكة العنقودية غير الرسمية",
+      "شبكة الدائرة",
+      "شبكة الاتصال الكلي",
+      "شبكة السلسلة المفتوحة"
+    ],
+    correct: 2,
+    explain: "شبكة الاتصال الكلي تزيد من تبادل الأفكار وتناسب فرق الابتكار، لكن غياب المركزية فيها قد يسبب فوضى وتشابكاً إذا لم تُدار جيداً."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "أي أنواع الاتصال التالية يعتمد عليه الموظف كخطوة أولى وأساسية قبل عرض مقترح مشروع معقد على مديره؟",
+    opts: [
+      "الاتصال الشخصي",
+      "الاتصال الأفقي",
+      "الاتصال الذاتي",
+      "الاتصال غير الرسمي"
+    ],
+    correct: 2,
+    explain: "الاتصال الذاتي (تفكير الفرد مع نفسه) هو الخطوة التمهيدية الأولى لتنظيم الأفكار وتحليل المعلومات وتقييم الموقف قبل نقلها للغير."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "مؤتمر صحفي أقامته الشركة للإعلان عن طرح أسهمها، لكن الإدارة لم تتمكن من قياس رد فعل المستثمرين لحظياً. يعود ذلك لعيوب:",
+    opts: [
+      "الاتصال الجماهيري حيث يضعف التفاعل والتغذية الراجعة الفورية",
+      "الاتصال الجماعي لزيادة عدد الأطراف بشكل يعوق التنظيم",
+      "الاتصال الشفوي لاعتماده على الكلمات غير الموثقة",
+      "الاتصال الرسمي لجموده وبطئه الشديد"
+    ],
+    correct: 0,
+    explain: "الاتصال الجماهيري (كالمؤتمرات) يصل لعدد ضخم، لكن من أبرز عيوبه صعوبة الحصول على رد فعل أو تغذية راجعة فورية لغياب التفاعل المباشر."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "تعتبر 'السرعة' ميزة مشتركة بين الاتصال الإلكتروني والاتصال الشفوي، ولكن الاتصال الإلكتروني يتفوق جوهرياً في:",
+    opts: [
+      "القدرة على نقل لغة الجسد والانفعالات الدقيقة",
+      "تخطي حاجز المسافات الجغرافية وتوفير التوثيق الفوري",
+      "القضاء التام على مشكلات سوء الفهم باختلاف الثقافات",
+      "عدم تأثره بأي أعطال أو مخاطر بيئية"
+    ],
+    correct: 1,
+    explain: "الاتصال الإلكتروني يجمع بين السرعة (كالشفوي) والتوثيق وتخطي الحدود الجغرافية بتكلفة منخفضة، رغم افتقاره للغة الجسد وتعرضه لأعطال تقنية."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "الاتصال الصاعد هو القناة الوحيدة التي تستخدمها الإدارة العليا لنقل التعليمات وضمان سير العمل وفق اللوائح المعتمدة.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. الاتصال الهابط (وليس الصاعد) هو الذي ينتقل من الإدارة العليا للأدنى لنقل التعليمات، بينما الصاعد يُستخدم لرفع التقارير والشكاوى."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "في عرض تقديمي لإقناع الإدارة بزيادة الرواتب، قضى الموظف 90% من الوقت في سرد تاريخ الشركة الاقتصادي دون ربطه بالمطلب. الفشل هنا سببه خطأ في:",
+    opts: [
+      "تحليل الجمهور المستهدف والتواصل البصري",
+      "تنظيم محتوى العرض وغياب التسلسل المنطقي للأسلوب الإقناعي",
+      "استخدام الأسلوب التفاعلي بدلاً من التفسيري",
+      "الاعتماد على لغة الجسد أكثر من نبرة الصوت"
+    ],
+    correct: 1,
+    explain: "الخطأ يكمن في خلل تنظيم المحتوى (غياب الخاتمة والهدف) واستخدام سرد تاريخي بدلاً من الأسلوب الإقناعي المبني على الأدلة والربط المنطقي."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "المدير الناجح في إدارة 'مقابلات التوظيف' يجب أن يركز بشكل أساسي في مرحلة 'أثناء المقابلة' على:",
+    opts: [
+      "تحديد موعد ومكان المقابلة لضمان الراحة",
+      "تحليل المعلومات واتخاذ قرار التعيين النهائي",
+      "الاستماع الجيد، طرح أسئلة ذكية، وملاحظة لغة الجسد",
+      "إعداد قائمة بالأسئلة النمطية وتوثيق النتائج للإدارة"
+    ],
+    correct: 2,
+    explain: "إعداد الأسئلة وتحديد المكان من مرحلة (قبل)، والتحليل والقرار والتوثيق من مرحلة (بعد). أما (أثناء) فتتطلب الاستماع والملاحظة التفاعلية."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "تقرير إداري ممتاز لغوياً ويحتوي على بيانات دقيقة جداً، لكن الإدارة قررت تجاهله لعدم قدرتها على اتخاذ قرار بناءً عليه. ما هو العنصر المفقود على الأرجح؟",
+    opts: [
+      "المقدمة التمهيدية الطويلة",
+      "التسلسل الزمني للبيانات المجمعة",
+      "استخدام اللغة غير الرسمية لتبسيط الفهم",
+      "التحليل المنطقي والتوصيات العملية الختامية"
+    ],
+    correct: 3,
+    explain: "غياب التوصيات والتحليل (الذي يربط البيانات بالحلول) هو خطأ قاتل يجعل التقرير مجرد سرد أرقام بلا قيمة إدارية لاتخاذ القرار."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "أفضل استراتيجية ذهنية للمحاضر للتعامل مع التوتر الشديد قبل وأثناء تقديم العرض أمام جمهور كبير هي:",
+    opts: [
+      "التركيز على قراءة الشرائح حرفياً لتجنب نسيان أي نقطة",
+      "تحويل التركيز من الخوف الذاتي إلى الفكرة وأهمية توصيلها للجمهور",
+      "الاعتذار المسبق للجمهور عن التوتر لكسب تعاطفهم",
+      "تجاهل النظر للجمهور تماماً والنظر إلى نقطة فراغ في القاعة"
+    ],
+    correct: 1,
+    explain: "التركيز على 'الفكرة' وقيمتها بدلاً من التركيز على 'المخاوف الداخلية' هو أسلوب احترافي يحرر العقل من ضغط الأداء ويستعيد الثقة."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "أي من أنواع المقابلات التالية يُعد إجراءً 'تصحيحياً واستباقياً' لمنع تفاقم انخفاض إنتاجية الموظف؟",
+    opts: [
+      "مقابلات تقييم الأداء السنوية",
+      "مقابلات التوظيف والاستقطاب",
+      "مقابلات الإرشاد والتوجيه",
+      "مقابلات إنهاء الخدمة"
+    ],
+    correct: 2,
+    explain: "مقابلات الإرشاد والتوجيه تهدف للجلوس مع الموظف لفهم أسباب التراجع وتوجيهه لتصحيح مساره قبل تدهور الأداء بشكل لا يمكن تداركه."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "من الأخطاء القاتلة في إعداد التقارير 'الحشو الزائد'، وهو ما يتناقض مباشرة مع عنصر 'الاختصار المفيد' والموضوعية المطلوبة في الاتصال الكتابي.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 0,
+    explain: "صح. الحشو الزائد يضعف هيكل التقرير ويشتت القارئ ويتناقض مع سمة التقرير الجيد المتمثلة في الوضوح والاختصار المفيد."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "التحدث بنبرة صوت واحدة (Monotone) أثناء العرض التقديمي يعتبر ميزة إيجابية لأنها توحي بالرسمية والجدية وتبعد الانفعالات.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. التحدث بنبرة واحدة من أسوأ أخطاء الإلقاء، فهو يسبب الملل ويفقد الجمهور الانتباه، يجب تنويع نبرة الصوت لشد الانتباه والتأثير."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "أثناء تحليل الجمهور المستهدف قبل عرض رسالة اتصالية تخص 'نظام محاسبي معقد'، اكتشفت أن الحضور من خلفيات إدارية غير تقنية. التصرف الأنسب هو:",
+    opts: [
+      "استخدام المصطلحات التقنية لرفع مستواهم العلمي بالقوة",
+      "إلغاء العرض لأنه لا يتناسب مع اهتماماتهم الحالية",
+      "مواءمة لغة العرض واستخدام أمثلة مبسطة تناسب خلفيتهم وتلبي اهتمامهم",
+      "استخدام الأسلوب الإقناعي العاطفي دون التطرق لأي معلومات"
+    ],
+    correct: 2,
+    explain: "تحليل الجمهور يهدف لضبط 'الرسالة' لتلائم مستوى وثقافة واهتمامات الجمهور، لضمان الفهم الجيد وعدم استخدام لغة معقدة تعيق الاتصال."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "التحيز، والمقاطعة المستمرة للمتحدث، وتجاهل الإشارات غير اللفظية تعتبر من أبرز عيوب:",
+    opts: [
+      "إعداد التقارير الدورية",
+      "الأسلوب التفسيري في العرض",
+      "إدارة المقابلات الشفهية",
+      "استخدام العصف الذهني"
+    ],
+    correct: 2,
+    explain: "هذه السلوكيات تمثل أخطاء شائعة وقاتلة من قِبل المديرين أثناء إدارة المقابلات، مما يؤدي لفشل استنباط المعلومات الصحيحة من الطرف الآخر."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "تتضمن مرحلة 'تنظيم محتوى العرض' تقسيمه منطقياً إلى مقدمة وموضوع وخاتمة، وتكون الوظيفة الرئيسية لـ 'المقدمة' هي:",
+    opts: [
+      "تلخيص التوصيات لتوفير وقت الجمهور",
+      "سرد كافة الأدلة والإحصائيات التفصيلية",
+      "جذب انتباه الجمهور وتهيئة أذهانهم لتقبل الفكرة",
+      "فتح باب النقاش والأسئلة مباشرة لتطبيق الأسلوب التفاعلي"
+    ],
+    correct: 2,
+    explain: "المقدمة هدفها الأساسي هو كسر الجليد، لفت الانتباه، التمهيد للفكرة، وإثارة اهتمام الجمهور لاستكمال متابعة العرض."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "استخدام تطبيق WhatsApp لإرسال قرار فصل موظف من الشركة يمثل خطأ إدارياً فادحاً لأنه يعارض قاعدة:",
+    opts: [
+      "سرعة نقل المعلومات وتقليل الجهد",
+      "دعم العمل عن بعد",
+      "اختيار الوسيلة التكنولوجية المناسبة لطبيعة وحساسية الموقف",
+      "عدم الاعتماد الكامل على الاتصال الرقمي وتأمين البيانات"
+    ],
+    correct: 2,
+    explain: "تطبيقات المراسلة الفورية تناسب التواصل السريع غير الرسمي، أما القرارات المصيرية والحساسة كالفصل فتتطلب وسيلة أكثر رسمية أو مواجهة مباشرة."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "لتفادي ظاهرة 'تشتت الانتباه' وفوضى المعلومات بين الأقسام، تعتمد المؤسسات الكبرى بشكل متزايد على تقنية متكاملة هي:",
+    opts: [
+      "إنشاء مجموعات ضخمة على Slack تضم جميع الأفراد",
+      "أنظمة إدارة المعلومات المتكاملة (ERP Systems)",
+      "تطبيق سياسة العمل عن بعد (Remote Work)",
+      "إيقاف التواصل الإلكتروني والعودة للاجتماعات الورقية"
+    ],
+    correct: 1,
+    explain: "أنظمة (ERP) تساعد في تنظيم، توحيد، وتبادل البيانات بين جميع الأقسام في منصة واحدة، مما يمنع التشتت وتكرار المعلومات."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "رغم أن التكنولوجيا زادت من سرعة الاتصال، إلا أنها خلقت تحدياً نفسياً للموظفين يتمثل في إساءة تفسير النوايا، والسبب الرئيسي هو:",
+    opts: [
+      "انخفاض تكلفة الاتصال مما قلل من قيمته",
+      "زيادة سرعة اتخاذ القرارات الإدارية بشكل مفرط",
+      "غياب العناصر الإنسانية المباشرة كلغة الجسد ونبرة الصوت الدقيقة",
+      "تعرض الأنظمة للاختراقات الأمنية المستمرة"
+    ],
+    correct: 2,
+    explain: "التواصل الرقمي (خاصة النصي كالبريد) يفتقر للإشارات غير اللفظية التي توضح المشاعر الحقيقية، مما يفتح الباب واسعاً لسوء الظن والتفسير الخاطئ."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "الاعتماد الزائد على التكنولوجيا في الاتصال قد يؤدي إلى العزلة وضعف الروابط الاجتماعية داخل بيئة العمل، لذلك يجب:",
+    opts: [
+      "الاستغناء عن البريد الإلكتروني في المراسلات الداخلية",
+      "دعم الاتصال التكنولوجي بالتواصل الإنساني المباشر عند الحاجة",
+      "منع الموظفين من التحدث في أمور العمل خارج الأنظمة الرقمية",
+      "تشفير كافة البيانات لزيادة ثقة الموظفين"
+    ],
+    correct: 1,
+    explain: "من قواعد الاستخدام الفعال عدم الاعتماد 'الكامل المطلق' على الرقميات، بل تعزيزه بالاتصال المباشر لتقوية الروابط الإنسانية وحل النزاعات."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "التكنولوجيا تضمن 'فعالية' الرسالة بنسبة 100% بمجرد وصولها للمستقبل بسرعة ودون أخطاء تقنية.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. التكنولوجيا تحسن 'الكفاءة' (السرعة والدقة)، لكن 'الفعالية' (فهم المستقبل للرسالة كما قصدها المرسل وتأثره بها) تعتمد على الصياغة والوضوح وليس فقط الوسيلة."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "وفقاً لمفهوم 'المرونة في العمل' (Work Flexibility)، كيف أسهمت التكنولوجيا في تغيير الهيكل التقليدي للوظائف؟",
+    opts: [
+      "بإجبار جميع الموظفين على التواجد المادي تحت رقابة إلكترونية دقيقة",
+      "بتقسيم المنظمة إلى إدارات أصغر منفصلة تماماً لا تتواصل مع بعضها",
+      "عبر دعم العمل عن بعد وإمكانية إنجاز المهام والتواصل بكفاءة من أي مكان وزمان",
+      "بزيادة المركزية وجعل القرارات حكراً على مدير واحد يملك النظام"
+    ],
+    correct: 2,
+    explain: "أدوات كالاجتماعات الإلكترونية وأنظمة السحابة ألغت قيود الزمان والمكان، مما مكن من تطبيق المرونة العالية ونماذج العمل عن بعد (Remote Work) بكفاءة."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "إذا تعرضت إحدى الشركات لاختراق أدى لتسريب تقارير استراتيجية تم إرسالها عبر تطبيق تراسل فوري عادي، فإن التحدي التكنولوجي الذي أُغفل هنا هو:",
+    opts: [
+      "اختيار الوسيلة المناسبة التي تضمن 'تأمين البيانات والمعلومات'",
+      "تجنب تشتيت الانتباه",
+      "وضوح الرسالة وصياغتها اللغوية",
+      "تجاهل التغذية الراجعة من المستقبلين"
+    ],
+    correct: 0,
+    explain: "استخدام تطبيقات غير مشفرة أو غير مخصصة للأعمال للملفات الحساسة يعرضها للاختراق، وهو من أبرز التحديات التي تتطلب تأميناً وبروتوكولات صارمة."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة (الفصل 1 + 2)",
+    q: "لتحسين 'الفعالية التنظيمية' من خلال 'مدخل العمليات الداخلية'، أي شبكات الاتصال الآتية هي الأكثر خطورة ويجب إدارتها بحذر لتجنب الصراعات؟",
+    opts: [
+      "شبكة السلسلة لأنها شديدة السرعة وتتجاوز المديرين",
+      "الشبكات غير الرسمية (الأحاديث الجانبية) لأنها بيئة خصبة لانتشار الشائعات وتدمير الاستقرار",
+      "الاتصال الهابط لأنه يسمح للموظفين بانتقاد سياسات الإدارة العليا",
+      "شبكة العجلة لأنها تعطي سلطة اتخاذ القرار للجميع دون استثناء"
+    ],
+    correct: 1,
+    explain: "العمليات الداخلية تركز على تقليل الصراع والاستقرار، والشبكات غير الرسمية إذا تُركت بلا إدارة تنشر الشائعات التي تضرب هذا الاستقرار مباشرة."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة (الفصل 3 + 4)",
+    q: "مدير استخدم 'Zoom' لتقديم عرض 'إقناعي' عن رؤية الشركة المستقبلية للموظفين. لمنع تحدي 'فقدان التفاعل المباشر' التكنولوجي، يجب عليه التركيز استثنائياً على أداة من مهارات الإلقاء وهي:",
+    opts: [
+      "حركة المشي والتنقل الواسع على منصة العرض الوهمية",
+      "القراءة المباشرة من الشاشة لضمان دقة الكلمات 100%",
+      "تنويع نبرة الصوت بشكل دقيق وإشراك الجمهور بأسئلة تفاعلية مستمرة",
+      "الاعتماد التام على المؤثرات البصرية وإلغاء ظهوره بالكاميرا لتقليل تشتت الانتباه"
+    ],
+    correct: 2,
+    explain: "في البيئة الافتراضية تضعف لغة الجسد ويغيب التواصل البصري الحقيقي، لذا يصبح 'الصوت' والتفاعل المستمر هما الأدوات الأقوى للحفاظ على انتباه المشاهدين وإقناعهم."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة (الفصل 1 + 3)",
+    q: "موظف يعاني من 'التفكير النمطي' كعائق لتوليد الأفكار. لتقييمه ومساعدته، يجب على مديره إجراء مقابلة من نوع:",
+    opts: [
+      "مقابلة توظيف لتبديله",
+      "مقابلة حل مشكلات لفرض عقوبة صارمة",
+      "مقابلة إرشاد وتوجيه لمناقشة العائق وتدريبه على 'العصف الذهني'",
+      "مقابلة إنهاء الخدمة فوراً لكفاءته المتدنية"
+    ],
+    correct: 2,
+    explain: "الإرشاد والتوجيه يهدف لمساعدة الموظف على التغلب على نقاط ضعفه (كالتفكير النمطي) وتدريبه للارتقاء بأدائه، وهو أسلوب تطويري وليس عقابياً."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "مفهوم 'الأصالة' كأحد خصائص الفكرة الجيدة يتناقض بشكل مباشر مع عائق نفسي يتمثل في:",
+    opts: [
+      "ضيق الوقت المتاح",
+      "التمسك بالروتين والتفكير النمطي المقلد",
+      "البيئة غير المشجعة مادياً",
+      "صعوبة التنفيذ والتطبيق العملي"
+    ],
+    correct: 1,
+    explain: "الأصالة تعني الجدة وعدم التقليد، بينما التفكير النمطي والروتين هما الاستمرار في الأنماط القديمة والمقلدة دون تجديد."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "تطبيق قواعد صارمة لمعاقبة الموظفين المخطئين أثناء محاولتهم تطوير العمل، يضرب إحدى خصائص البيئة الداعمة للإبداع ويؤدي لظهور معوق:",
+    opts: [
+      "الخوف من النقد والفشل",
+      "نقص الموارد المالية",
+      "غموض الأهداف الاستراتيجية",
+      "ضعف شبكات الاتصال الرسمية"
+    ],
+    correct: 0,
+    explain: "بيئة العمل التي تعاقب على الأخطاء الناتجة عن محاولات التطوير تزرع 'الخوف من النقد والفشل'، مما يقتل أي دافع للمجازفة أو طرح أفكار إبداعية جديدة."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "عندما تطلب الإدارة العليا من الإدارات الوسطى رفع مقترحاتهم حول الميزانية الجديدة، فهذا تفعيل مباشر للاتصال:",
+    opts: [
+      "الأفقي",
+      "الهابط",
+      "الصاعد",
+      "غير الرسمي"
+    ],
+    correct: 2,
+    explain: "انتقال المعلومات (المقترحات) من المستوى الأدنى (الإدارة الوسطى) إلى المستوى الأعلى (الإدارة العليا) يُعد اتصالاً صاعداً."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "في التفاوض أو حل النزاعات الحساسة، لا يُنصح أبداً بالاعتماد كلياً على 'الاتصال الكتابي' لأنه يفتقر إلى:",
+    opts: [
+      "الرسمية والتوثيق القانوني",
+      "القدرة على نقل لغة الجسد ونبرة الصوت التي تساهم في امتصاص الغضب",
+      "الدقة في صياغة الشروط والبنود المتفق عليها",
+      "القدرة على الوصول لعدد كبير من الأشخاص"
+    ],
+    correct: 1,
+    explain: "الاتصال الكتابي جامد ويفتقر للإشارات غير اللفظية والتغذية الراجعة اللحظية اللازمة لفهم مشاعر الطرف الآخر والتفاوض بمرونة لاحتواء الأزمة."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "الأسلوب 'التفسيري' في العروض التقديمية يكون الخيار الأمثل عندما يكون هدف المتحدث الأساسي هو:",
+    opts: [
+      "تغيير القناعات والمواقف العاطفية للجمهور",
+      "شرح إجراءات نظام عمل جديد أو تفصيل بيانات معقدة لتسهيل فهمها",
+      "تحفيز الجمهور على اتخاذ قرارات شرائية فورية",
+      "تحويل العرض إلى ورشة عمل تعتمد على التفاعل العشوائي المطلق"
+    ],
+    correct: 1,
+    explain: "الأسلوب التفسيري هدفه الشرح والتوضيح ونقل المعرفة (كيف يعمل النظام، أو ما هي تفاصيل المعلومات)، بينما الإقناعي لتغيير القناعات."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "أي أجزاء التقرير الإداري تُعد بمثابة 'خلاصة التحليل' التي تُقدم لصانع القرار وتجيب على سؤال 'ماذا يجب أن نفعل الآن؟'",
+    opts: [
+      "المقدمة التمهيدية",
+      "عرض البيانات الخام",
+      "التوصيات والخاتمة",
+      "الملاحق الإضافية"
+    ],
+    correct: 2,
+    explain: "التوصيات هي الثمرة النهائية للتقرير، فهي تقدم الحلول والإجراءات المقترحة بناءً على التحليل المذكور لتمكين الإدارة من اتخاذ القرار."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "تطبيقات مثل Microsoft Teams تقتصر فائدتها على تقليل تكلفة السفر، ولكنها لا تساهم في أي مرونة أو سرعة في اتخاذ القرار التنظيمي.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. تطبيقات الاجتماعات تساهم جذرياً في تسريع اتخاذ القرار بجمع الأطراف المعنية فوراً من أي مكان، وتدعم مرونة العمل بشكل كبير وليس فقط تقليل التكلفة."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "استخدام البريد الإلكتروني (Email) في إرسال العقود والسياسات الداخلية يُفضل لأنه يجمع بين صفتين حيويتين للإدارة هما:",
+    opts: [
+      "التفاعلية اللحظية والنقل العاطفي",
+      "الرسمية والتوثيق الكتابي مع سرعة الوصول",
+      "السرية التامة المستحيلة الاختراق وسهولة الاستخدام",
+      "تقليل الاعتماد على النص وزيادة الاعتماد على الرموز التعبيرية"
+    ],
+    correct: 1,
+    explain: "البريد الإلكتروني هو أداة اتصال 'كتابي إلكتروني' يوفر التوثيق الرسمي، ويعد إثباتاً معتمداً في بيئة العمل، مع سرعة تزيد عن الورق."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة",
+    q: "لضمان كفاءة تطبيق 'الاتصال الأفقي' بين الأقسام المتباعدة جغرافياً وتخفيف 'البيروقراطية الزائدة'، الأداة الأفضل للربط بينها هي:",
+    opts: [
+      "التقارير الورقية السنوية",
+      "الاجتماعات الجماهيرية المفتوحة",
+      "أنظمة إدارة المعلومات (ERP Systems) وتطبيقات التعاون السحابية",
+      "الاعتماد على الشبكات غير الرسمية (الأحاديث الجانبية)"
+    ],
+    correct: 2,
+    explain: "الاتصال الأفقي (بين الأقسام) لتنسيق العمل وتخفيف البيروقراطية (الورقيات) ينجح بقوة عند استخدام التكنولوجيا وأنظمة ERP التي توحد البيانات وتتيحها لحظياً للجميع."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة",
+    q: "إذا كانت المشكلة هي 'ضعف الانضباط الذاتي' لدى الموظفين بسبب عدم وضوح المهام، فإن أداة الاتصال الاستراتيجية الأولى لمعالجة هذا الخلل هي:",
+    opts: [
+      "تفعيل الاتصال غير الرسمي بكثافة",
+      "تحسين جودة ووضوح رسائل 'الاتصال الهابط' الموجهة من الإدارة لهم",
+      "استخدام الأسلوب التفاعلي في العروض دون توجيهات",
+      "تقليص الاعتماد على التكنولوجيا للحد من المشتتات"
+    ],
+    correct: 1,
+    explain: "عدم وضوح المهام يعالج بتحسين 'الاتصال الهابط' (من الإدارة للموظفين) لإيضاح التعليمات والأهداف، مما ينعكس إيجاباً على الانضباط والأداء الفردي."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "قدرة المنظمة على الاستجابة للتغيرات التكنولوجية والاقتصادية المفاجئة تُعد معياراً أساسياً لقياس فعاليتها التنظيمية ضمن بُعد:",
+    opts: [
+      "الإنتاجية",
+      "الربحية القصيرة المدى",
+      "القدرة على التكيف",
+      "رضا العاملين"
+    ],
+    correct: 2,
+    explain: "القدرة على التكيف مع البيئة المتغيرة (اقتصادياً وتكنولوجياً واجتماعياً) هي من أهم أبعاد ومؤشرات الفعالية التنظيمية لضمان الاستمرارية."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "شبكة الاتصال التي تمثل التسلسل الهرمي العسكري التقليدي حيث تمر الأوامر بمحطات محددة وتتسم بالبطء هي:",
+    opts: [
+      "شبكة الدائرة",
+      "شبكة السلسلة",
+      "شبكة العجلة",
+      "الشبكة الكلية"
+    ],
+    correct: 1,
+    explain: "شبكة السلسلة تنتقل فيها المعلومات بتتابع صارم (أ ثم ب ثم ج)، مما يوفر وضوحاً في التسلسل ولكنه يسبب بطئاً في انتقال المعلومة."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "في المقابلات، 'الاستماع الفعال' لا يعني فقط السكوت أثناء حديث الطرف الآخر، بل يتطلب أيضاً الإيماء وملاحظة لغة الجسد وتحليل المعاني غير المكتوبة.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 0,
+    explain: "صح. الاستماع الفعال هو عملية إيجابية تتضمن الفهم، التفاعل غير اللفظي لبيان الاهتمام، وقراءة ما بين السطور وليس مجرد الصمت."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "ظاهرة 'فقدان التوثيق' هي التحدي الأكبر لبرامج الاتصال التكنولوجي (كالبريد الإلكتروني) داخل المنظمات الحديثة.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. العكس تماماً، من أكبر مزايا الاتصال التكنولوجي (كالبريد) هو توفيره لـ 'التوثيق المستدام' وسهولة استرجاع المعلومات، بينما التحديات تكمن في الأمن وسوء الفهم."
+  },
+  {
+    chapter: "أسئلة مراجعة سريعة وخادعة",
+    q: "أي المهارات التالية لا تُصنف كمهارة 'أداء جماعي'، بل هي أساس حاكم للـ 'أداء الفردي'؟",
+    opts: [
+      "إدارة الصراع الداخلي",
+      "التنسيق وتوزيع الأدوار",
+      "القيادة وتوجيه الآخرين",
+      "الانضباط الذاتي والتفكير النقدي"
+    ],
+    correct: 3,
+    explain: "الانضباط الذاتي، إدارة الوقت، التفكير النقدي، هي مهارات فردية تبني كفاءة الشخص نفسه. أما الصراع والتنسيق والقيادة فهي مهارات تفاعلية جماعية."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "المنظمة التي تعاني من بيروقراطية زائدة ومقاومة شديدة للتغيير تفتقر بشكل رئيسي إلى:",
+    opts: [
+      "الفعالية في استقطاب الموارد المالية",
+      "تبني ثقافة الابتكار والتطوير والقدرة على التكيف",
+      "أدوات الاتصال الأفقي السريعة فقط",
+      "الاستقرار الوظيفي للموظفين القدامى"
+    ],
+    correct: 1,
+    explain: "البيروقراطية الزائدة ومقاومة التغيير هما من أبرز 'معوقات' الفعالية التنظيمية، وعلاجهما يتطلب تبني ثقافة الابتكار والقدرة الدائمة على التكيف مع المستجدات."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "عندما تنجح مؤسسة في تخفيض معدلات الصراع بين موظفيها وتأسيس بيئة عمل مستقرة وإجراءات واضحة، فإنها تحقق الفعالية التنظيمية من منظور:",
+    opts: [
+      "مدخل أصحاب المصلحة",
+      "مدخل العمليات الداخلية",
+      "مدخل الموارد",
+      "مدخل تحقيق الأهداف"
+    ],
+    correct: 1,
+    explain: "مدخل العمليات الداخلية هو الذي يركز على كفاءة واستقرار البيئة التنظيمية من الداخل، ووضوح الإجراءات، وانخفاض معدلات الصراع التنظيمي."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "أي من العبارات التالية تصف بشكل دقيق الفرق الجوهري بين 'مهارة التفكير النقدي' و'مهارة اتخاذ القرار' في بيئة العمل؟",
+    opts: [
+      "التفكير النقدي يركز على اختيار البديل الأنسب، بينما اتخاذ القرار يركز على تنفيذ الحل",
+      "التفكير النقدي يعتمد على التجربة والخطأ، بينما اتخاذ القرار يعتمد على البيانات الرقمية فقط",
+      "التفكير النقدي هو تحليل المعلومات بموضوعية وتجرد، وهو خطوة تمهيدية تسبق اختيار البديل الأنسب في اتخاذ القرار",
+      "لا يوجد فرق جوهري، فكلاهما مصطلحان مترادفان لعملية عقلية واحدة"
+    ],
+    correct: 2,
+    explain: "التفكير النقدي هو القدرة على تحليل المعطيات دون تحيز لتقييم الموقف، وبناءً على هذا التحليل السليم تأتي مهارة اتخاذ القرار لاختيار البديل الأفضل."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "مهارة 'إدارة الصراع' داخل فريق العمل تعني القضاء التام على أي اختلافات في الرأي لضمان انسجام الفريق وتحقيق الهدف بسرعة.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. إدارة الصراع لا تعني القضاء على الاختلافات (فالاختلاف قد يولد أفكاراً مبتكرة)، بل تعني التعامل الإيجابي مع الخلافات وتوجيهها لخدمة مصلحة العمل."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "أي من معايير قياس الفعالية التنظيمية التالية يعبر عن 'العلاقة الرياضية بين المدخلات والمخرجات'؟",
+    opts: [
+      "الإنتاجية",
+      "الربحية",
+      "القدرة على التكيف",
+      "تحقيق الأهداف"
+    ],
+    correct: 0,
+    explain: "الإنتاجية هي المعيار الذي يقيس كفاءة تحويل المدخلات (الموارد) إلى مخرجات (نتائج ومنتجات)، وكلما زادت المخرجات بنفس الموارد ارتفعت الإنتاجية."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "إذا كانت طبيعة الرسالة 'معقدة جداً وتحتوي على تفاصيل مالية دقيقة' وتحتاج إلى سرعة في النقل بين فروع دولية، فإن المزيج الاتصالي الأفضل هو:",
+    opts: [
+      "الاتصال الشفوي عبر الهاتف لضمان الفهم",
+      "الاتصال الإلكتروني الكتابي عبر البريد الإلكتروني مع إرفاق المستندات",
+      "الاتصال غير الرسمي لتخفيف حدة التعقيد",
+      "الاتصال غير اللفظي لتعزيز الثقة المتبادلة"
+    ],
+    correct: 1,
+    explain: "الرسائل المعقدة والمالية تتطلب 'التوثيق' و'الدقة' (اتصال كتابي)، وبما أنها تحتاج السرعة بين مسافات بعيدة، يكون البريد الإلكتروني هو الحل الأمثل."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "شبكة 'الدائرة' في الاتصال التنظيمي تعتبر مثالية في الأزمات العاجلة لأنها تسمح باتخاذ قرارات سريعة وحاسمة دون الرجوع للإدارة العليا.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. شبكة الدائرة تعزز المشاركة والمرونة لكن من أهم عيوبها أنها تستغرق وقتاً أطول في اتخاذ القرار، لذا لا تناسب الأزمات العاجلة التي تتطلب شبكة كالـ 'العجلة'."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "أي من أنواع الاتصال التالية يمثل بيئة خصبة لانتشار الشائعات ويصعب على الإدارة تنظيمه أو السيطرة على مساراته؟",
+    opts: [
+      "الاتصال الأفقي",
+      "الاتصال الجماهيري",
+      "الاتصال غير الرسمي",
+      "الاتصال الذاتي"
+    ],
+    correct: 2,
+    explain: "الاتصال غير الرسمي (الأحاديث الجانبية خارج الهيكل التنظيمي) يتسم بالسرعة والعفوية، ولكنه يحمل عيباً خطيراً وهو احتمالية تحريفه للمعلومات ونشر الشائعات."
+  },
+  {
+    chapter: "الفصل الثاني — ماهية وطرق وأنواع الاتصال",
+    q: "يتميز 'الاتصال الشفوي' بميزة قوية تفتقر إليها التقارير المكتوبة، وهي:",
+    opts: [
+      "توفير مرجعية قانونية قوية قابلة للتقاضي",
+      "الحصول على تغذية راجعة فورية تتيح تعديل الرسالة لحظياً",
+      "القدرة المطلقة على إخفاء الانفعالات والمشاعر",
+      "الوصول لعدد هائل من الجماهير في نفس اللحظة بكفاءة"
+    ],
+    correct: 1,
+    explain: "التغذية الراجعة الفورية (Instant Feedback) هي أقوى مزايا الاتصال الشفوي، حيث تتيح للمتحدث التأكد من فهم المستقبل للرسالة وتوضيح أي غموض فوراً."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "مرحلة 'ما بعد المقابلة' لا تقل أهمية عن المقابلة ذاتها، وأي خلل فيها يؤدي لضياع مجهود المقابلة. الخطوة الأهم في هذه المرحلة هي:",
+    opts: [
+      "طرح الأسئلة الذكية وتصحيحها بناءً على لغة الجسد",
+      "الترحيب بالمرشح وتخفيف التوتر لضمان بيئة إيجابية",
+      "توثيق النتائج وتحليل المعلومات لاتخاذ قرار موضوعي",
+      "مراجعة السيرة الذاتية وجمع معلومات أولية عن الطرف الآخر"
+    ],
+    correct: 2,
+    explain: "الترحيب وطرح الأسئلة يكون 'أثناء' المقابلة، وجمع المعلومات يكون 'قبلها'. توثيق النتائج والتحليل واتخاذ القرار هي جوهر مرحلة 'ما بعد المقابلة'."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "الاعتماد الكامل على قراءة المحتوى من شرائح الـ PowerPoint أثناء العرض التقديمي يعتبر من الممارسات الاحترافية لأنه يضمن عدم نسيان أي معلومة دقيقة.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. الاعتماد الكامل على قراءة الشرائح دون شرح وتواصل بصري هو من أسوأ الأخطاء، لأنه يفقد العرض روحه ويصيب الجمهور بالملل والتشتت."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "في إعداد التقارير الإدارية، ما هو العنصر الذي يمثل حلقة الوصل بين 'البيانات الخام' و'التوصيات الختامية'؟",
+    opts: [
+      "مقدمة التقرير",
+      "التحليل المنطقي",
+      "الملاحق الخارجية",
+      "الحشو الزائد للتوضيح"
+    ],
+    correct: 1,
+    explain: "التحليل هو الذي يفسر البيانات والأرقام المعروضة، وبناءً على هذا التفسير المنطقي (التحليل) يتم استنباط وصياغة التوصيات العملية."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "إذا أراد مدير إقناع فريق عمله بتغيير سياسة الإجازات، فإن الأسلوب الاتصالي الذي يجب أن يتبناه يرتكز بالدرجة الأولى على:",
+    opts: [
+      "الأسلوب التفسيري لتوضيح اللوائح خطوة بخطوة",
+      "استخدام الأدلة القطعية، عرض أمثلة واقعية، وفهم احتياجاتهم",
+      "الأسلوب التفاعلي الذي يترك القرار النهائي بالكامل لتصويت الفريق",
+      "تجنب التواصل البصري للظهور بمظهر الحزم والجدية"
+    ],
+    correct: 1,
+    explain: "الهدف هنا هو 'الإقناع وتغيير الاتجاهات'، وهذا يتطلب استخدام الأسلوب الإقناعي الذي يعتمد على طرح الأدلة وعرض الأمثلة الواقعية لفهم وتلبية احتياجات الجمهور."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "من المخاطر التنظيمية للاعتماد 'المطلق' على الاتصال التكنولوجي داخل الشركة دون دعمه بالتواصل الإنساني المباشر:",
+    opts: [
+      "انخفاض التكلفة التشغيلية بشكل يضر بميزانية الشركة",
+      "سوء فهم الرسائل الإلكترونية وفقدان الروابط الإنسانية والمشاعر",
+      "صعوبة الرجوع للبيانات لعدم وجود توثيق إلكتروني",
+      "تسريع عملية اتخاذ القرار بشكل يعوق الرقابة"
+    ],
+    correct: 1,
+    explain: "الرسائل النصية والتقنية تفتقر للنبرة الصوتية ولغة الجسد، مما يرفع من احتمالية سوء الفهم ويفقد بيئة العمل الجانب الإنساني والتعاطف."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "أنظمة إدارة المعلومات (مثل ERP) تعتبر أداة للاتصال الخارجي فقط، وتهدف بشكل أساسي للتواصل مع الموردين والعملاء بعيداً عن الموظفين.",
+    opts: [
+      "صح",
+      "خطأ"
+    ],
+    correct: 1,
+    explain: "خطأ. أنظمة ERP تُستخدم بشكل أساسي وجوهري لتنظيم وتبادل البيانات 'داخل' المؤسسة بين الأقسام المختلفة لتحقيق التكامل وتقليل الأخطاء الداخلية."
+  },
+  {
+    chapter: "الفصل الرابع — التكنولوجيا ودورها في تحسين الاتصال",
+    q: "أرادت شركة تقليل الوقت والجهد في عقد اجتماعات دورية لفرق تعمل في دول مختلفة. التطبيق التكنولوجي الأنسب لتحقيق ذلك بجودة عالية هو:",
+    opts: [
+      "تطبيقات التواصل الفوري النصية مثل WhatsApp",
+      "تطبيقات الاجتماعات الإلكترونية مثل Zoom و Microsoft Teams",
+      "البريد الإلكتروني الجماعي (Mailing Lists)",
+      "نظام إرسال الفاكس الرقمي"
+    ],
+    correct: 1,
+    explain: "هذه التطبيقات صُممت خصيصاً لتسهيل الاجتماعات عن بُعد (بالصوت والصورة)، مما يلغي حاجز المسافات ويدعم التعاون الحي بين الفرق الموزعة جغرافياً."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة",
+    q: "التنسيق بين إدارة 'الإنتاج' وإدارة 'المبيعات' باستخدام نظام إلكتروني موحد لمعرفة المخزون اللحظي، يمثل اندماجاً بين التكنولوجيا و:",
+    opts: [
+      "الاتصال الصاعد",
+      "شبكة الاتصال السلسلة",
+      "الاتصال الأفقي",
+      "الاتصال الجماهيري"
+    ],
+    correct: 2,
+    explain: "التواصل بين إدارتين في نفس المستوى الوظيفي (إنتاج ومبيعات) هو اتصال 'أفقي'، واستخدام النظام الموحد يسهل هذا التنسيق بعيداً عن المركزية المعرقلة."
+  },
+  {
+    chapter: "أسئلة ربط تحليلية متقدمة",
+    q: "عندما يقوم الفرد بتحليل نقاط ضعفه بعد تقديم عرض تقديمي غير ناجح ليتلافى الأخطاء مستقبلاً، فإنه يمارس مهارة 'التقييم' من خلال:",
+    opts: [
+      "الاتصال الجماعي",
+      "الاتصال غير اللفظي",
+      "الاتصال الذاتي",
+      "الاتصال غير الرسمي"
+    ],
+    correct: 2,
+    explain: "تفكير الفرد مع نفسه وتحليله لأدائه وتقييمه للموقف هو جوهر عملية 'الاتصال الذاتي' التي تسبق أي تطوير شخصي أو اتخاذ قرار."
+  },
+  {
+    chapter: "الفصل الأول — الأداء وتوليد الأفكار والفعالية",
+    q: "القابلية للتطبيق، والواقعية من حيث التكلفة، والملاءمة للهدف، جميعها شروط ضرورية لتحويل 'الإبداع' النظري إلى:",
+    opts: [
+      "عصف ذهني كمي",
+      "ابتكار فعلي ذو قيمة",
+      "أداء جماعي تنافسي",
+      "خريطة عقل مرئية"
+    ],
+    correct: 1,
+    explain: "الابتكار يتطلب أن تكون الفكرة الإبداعية قابلة للتطبيق واقعياً وتلائم الهدف وتناسب الميزانية لتتحول لمنتج أو عملية ملموسة."
+  },
+  {
+    chapter: "الفصل الثالث — العرض والإلقاء والمقابلات والتقارير",
+    q: "استخدام لغة معقدة أو مصطلحات فنية دقيقة جداً مع جمهور من العوام يُعد إخلالاً جوهرياً بإحدى خطوات إعداد العرض، وهي:",
+    opts: [
+      "مرحلة تنظيم المحتوى وترتيب الأفكار",
+      "مرحلة إدارة الوقت والالتزام بالمدة",
+      "مرحلة تحليل الجمهور المستهدف وفهم خصائصه ومستواه الثقافي",
+      "مرحلة جمع المعلومات من مصادر موثوقة"
+    ],
+    correct: 2,
+    explain: "استخدام لغة لا تناسب الحضور يعني فشل المتحدث في 'تحليل الجمهور' لمعرفة مستواهم العلمي وثقافتهم واختيار المفردات التي تلائمهم وتضمن فهمهم للرسالة."
+  }
+
+]
+
+      /* ===== STATE ===== */
+      let current = 0;
+      let correctCount = 0;
+      let wrongCount = 0;
+      let answered = false;
+      let shuffled = [];
+
+      
+      function saveProgress() {
+        try {
+          const data = {
+            inProgress: true,
+            currentIdx: current,
+            correctAnswers: correctCount,
+            wrongAnswers: wrongCount,
+            totalQuestions: shuffled.length,
+            questionOrder: shuffled.map(q => questions.indexOf(q)),
+            quizFilename: "index.html",
+            timestamp: Date.now()
+          };
+          localStorage.setItem('hr_quiz_progress', JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      function clearProgress() {
+        try { localStorage.removeItem('hr_quiz_progress'); } catch (e) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return null;
+          const data = JSON.parse(saved);
+          return (data && data.inProgress) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function resumeQuiz(data) {
+        shuffled = data.questionOrder.map(idx => questions[idx]);
+        current = data.currentIdx;
+        correctCount = data.correctAnswers || 0;
+        wrongCount = data.wrongAnswers || 0;
+        
+        const intro = document.getElementById("intro-screen");
+        const quiz = document.getElementById("quiz-screen");
+        intro.style.display = "none";
+        quiz.style.display = "block";
+        gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+        renderQuestion();
+      }
+
+      /* ===== DOM REFS ===== */
+      const $ = (id) => document.getElementById(id);
+
+      /* ===== SHUFFLE ===== */
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      /* ===== START QUIZ ===== */
+      function startQuiz() {
+        shuffled = shuffle(questions);
+        const intro = $("intro-screen");
+        const quiz = $("quiz-screen");
+
+        gsap.to(intro, {
+          opacity: 0,
+          y: -30,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            intro.style.display = "none";
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            saveProgress();
+            renderQuestion();
+          }
+        });
+      }
+
+      /* ===== RENDER QUESTION ===== */
+      function renderQuestion() {
+        answered = false;
+        const q = shuffled[current];
+        const total = shuffled.length;
+
+        $("q-num-badge").textContent = `سؤال ${current + 1}`;
+        $("q-chapter-lbl").textContent = q.chapter;
+        $("q-text").textContent = q.q;
+        $("q-counter").textContent = `سؤال ${current + 1} من ${total}`;
+        const pct = Math.round((current / total) * 100);
+        $("q-pct").textContent = pct + "%";
+        $("progress-fill").style.width = pct + "%";
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+        $("sc-remain").textContent = total - current;
+
+        const fb = $("q-feedback");
+        fb.className = "feedback";
+        fb.innerHTML = "";
+
+        $("btn-next").className = "btn btn-next";
+
+        const letters = ["أ", "ب", "ج", "د"];
+        const optsDiv = $("q-options");
+        optsDiv.innerHTML = "";
+
+        q.opts.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.className = "opt";
+          btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+          btn.addEventListener("click", () => selectAnswer(i));
+          optsDiv.appendChild(btn);
+        });
+
+        /* Animate options in with GSAP */
+        gsap.fromTo(
+          ".opt",
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.35, stagger: 0.07, ease: "power2.out" }
+        );
+      }
+
+      /* ===== SELECT ANSWER ===== */
+      function selectAnswer(idx) {
+        if (answered) return;
+        answered = true;
+
+        const q = shuffled[current];
+        const opts = document.querySelectorAll(".opt");
+        opts.forEach((o) => o.classList.add("disabled"));
+
+        const fb = $("q-feedback");
+
+        if (idx === q.correct) {
+          correctCount++;
+          opts[idx].classList.add("correct");
+          fb.className = "feedback correct-fb show";
+          fb.innerHTML = `<strong>✔ إجابة صحيحة!</strong>${q.explain}`;
+        } else {
+          wrongCount++;
+          opts[idx].classList.add("wrong");
+          opts[q.correct].classList.add("correct");
+          fb.className = "feedback wrong-fb show";
+          fb.innerHTML = `<strong>✘ إجابة خاطئة</strong>${q.explain}`;
+        }
+
+        saveProgress();
+
+        /* Animate feedback in */
+        gsap.fromTo(fb, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+
+        const nextBtn = $("btn-next");
+        nextBtn.className = "btn btn-next show";
+        nextBtn.textContent = current < shuffled.length - 1 ? "السؤال التالي ←" : "عرض النتيجة ←";
+
+        gsap.fromTo(nextBtn, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+      }
+
+      /* ===== NEXT QUESTION ===== */
+      function nextQuestion() {
+        current++;
+        if (current >= shuffled.length) {
+          showResult();
+        } else {
+          const card = $("q-card");
+          gsap.to(card, {
+            opacity: 0,
+            x: -40,
+            duration: 0.25,
+            ease: "power2.in",
+            onComplete: () => {
+              renderQuestion();
+              gsap.fromTo(card, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" });
+            }
+          });
+        }
+      }
+
+      /* ===== SHOW RESULT ===== */
+      function showResult() {
+        const quizScreen = $("quiz-screen");
+        const rs = $("result-screen");
+
+        gsap.to(quizScreen, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            quizScreen.style.display = "none";
+            clearProgress();
+            rs.classList.add("show");
+
+            const total = shuffled.length;
+            const pct = Math.round((correctCount / total) * 100);
+            const circle = document.querySelector(".result-circle");
+            const deg = (pct / 100) * 360;
+            circle.style.background = `conic-gradient(var(--gold) 0deg, var(--teal) ${deg}deg, var(--bg3) ${deg}deg)`;
+
+            $("res-pct").textContent = pct + "%";
+            $("rs-correct").textContent = correctCount;
+            $("rs-wrong").textContent = total - correctCount;
+            $("rs-pct2").textContent = pct + "%";
+
+            let title, sub;
+            if (pct >= 90) {
+              title = "🏆 ممتاز!";
+              sub = "أداء رائع! أنت مستعد تماماً للاختبار.";
+            } else if (pct >= 75) {
+              title = "🌟 جيد جداً!";
+              sub = "أداء قوي — راجع الأسئلة التي أخطأت فيها.";
+            } else if (pct >= 60) {
+              title = "👍 جيد";
+              sub = "مستوى جيد — حاول مراجعة المحاضرات مجدداً.";
+            } else {
+              title = "📚 تحتاج مزيداً من المذاكرة";
+              sub = "راجع المراجعة الشاملة وحاول الاختبار مجدداً.";
+            }
+
+            $("res-title").textContent = title;
+            $("res-sub").textContent = sub;
+
+            // Update review system conditions
+            localStorage.setItem('quizFinished', 'true');
+            if (typeof window.triggerReviewAfterQuiz === 'function') {
+                window.triggerReviewAfterQuiz();
+            }
+
+            /* Animate result in */
+            gsap.fromTo(rs, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            gsap.fromTo(".result-circle", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
+            gsap.fromTo(".rs-card", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.4, ease: "power2.out" });
+          }
+        });
+      }
+
+      /* ===== RESTART QUIZ ===== */
+      function restartQuiz() {
+        current = 0;
+        correctCount = 0;
+        wrongCount = 0;
+
+        const rs = $("result-screen");
+        gsap.to(rs, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            rs.classList.remove("show");
+            shuffled = shuffle(questions);
+            const quiz = $("quiz-screen");
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            renderQuestion();
+          }
+        });
+      }
+
+      
+      // ===== RESUME QUIZ MODAL =====
+      function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("resume") === "true") {
+                if (typeof resumeQuiz === 'function' && window.location.pathname.includes(data.quizFilename)) {
+                    resumeQuiz(data);
+                }
+                return;
+            }
+
+            const modal = document.getElementById('resume-modal');
+            if(!modal) return;
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 500);
+
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? data.quizFilename : 'index2.html';
+              if (window.location.pathname.includes(target)) {
+                 modal.classList.remove('active');
+                 if (typeof resumeQuiz === 'function') resumeQuiz(data);
+              } else {
+                 window.location.href = target + '?resume=true';
+              }
+            });
+
+            document.getElementById('modal-no').addEventListener('click', () => {
+              if (typeof clearProgress === 'function') clearProgress();
+              else localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkQuizProgress);
+
+      /* ===== EVENT LISTENERS (NO INLINE) ===== */
+      document.addEventListener("DOMContentLoaded", () => {
+        $("btn-start").addEventListener("click", startQuiz);
+        $("btn-next").addEventListener("click", nextQuestion);
+        $("btn-restart").addEventListener("click", () => { clearProgress(); restartQuiz(); });
+
+        /* ===== PAGE LOAD ANIMATIONS ===== */
+        gsap.fromTo(
+          ".header",
+          { opacity: 0, y: -30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".intro-card",
+          { opacity: 0, y: 40, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power2.out", delay: 0.15 }
+        );
+
+        gsap.fromTo(
+          ".intro-icon",
+          { opacity: 0, scale: 0.3, rotation: -20 },
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)", delay: 0.3 }
+        );
+
+        gsap.fromTo(
+          ".feat",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, delay: 0.45, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".btn-start",
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.4, delay: 0.7, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+          ".header-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.6, delay: 0.4, ease: "power2.out" }
+        );
+      });
+
+
+    </script>
+
+
+    <script src="../../reviews/reviews.js"></script>
+  </body>
+</html>

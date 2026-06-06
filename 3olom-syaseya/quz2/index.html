@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار علوم سياسية - بنك الأسئلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../reviews/reviews.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      :root {
+        --bg: #03120e;
+        --bg2: #07221b;
+        --bg3: #0c382b;
+        --gold: #d97706;
+        --gold2: #fbbf24;
+        --primary: #059669;
+        --primary-light: #10b981;
+        --teal: #10b981;
+        --red: #ef4444;
+        --blue: #059669;
+        --text: #e8ecf1;
+        --muted: #8b99a8;
+        --correct: #10b981;
+        --wrong: #ef4444;
+        --radius: 14px;
+        --purple: #b45309;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* ====== Ambient Background Orbs ====== */
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+      }
+      body::before {
+        width: 500px;
+        height: 500px;
+        background: var(--gold);
+        top: -150px;
+        right: -100px;
+      }
+      body::after {
+        width: 450px;
+        height: 450px;
+        background: var(--purple);
+        bottom: -100px;
+        left: -100px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* ====== Header ====== */
+      .header {
+        width: 100%;
+        max-width: 720px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .header h1 {
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        color: var(--gold);
+        font-weight: 900;
+        text-shadow: 0 0 30px rgba(217, 119, 6, 0.25);
+        letter-spacing: -0.02em;
+      }
+      .header p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 8px;
+        font-weight: 400;
+      }
+            .header a {
+        color: var(--gold2);
+      }
+
+      /* ====== Screens ====== */
+      #intro-screen, #quiz-screen, #result-screen {
+        width: 100%;
+        max-width: 720px;
+        position: relative;
+        z-index: 1;
+      }
+
+      #intro-screen {
+        text-align: center;
+      }
+
+      /* ====== Glass Card Base ====== */
+      .glass {
+        background: rgba(7, 34, 27, 0.65);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      /* ====== Intro Card ====== */
+      .intro-card {
+        border-radius: 22px;
+        padding: 40px 32px;
+        margin-bottom: 20px;
+      }
+      .intro-icon {
+        font-size: 3.5rem;
+        margin-bottom: 18px;
+        display: block;
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .intro-card h2 {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 10px;
+        font-weight: 900;
+      }
+      .intro-card p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+      .intro-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .feat {
+        background: rgba(12, 56, 43, 0.6);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 16px 14px;
+        font-size: 0.84rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .feat:hover {
+        transform: translateY(-3px);
+        border-color: rgba(217, 119, 6, 0.25);
+      }
+      .feat span {
+        color: var(--gold);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+      }
+
+      /* ====== Progress Bar ====== */
+      .progress-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .progress-bar {
+        height: 7px;
+        background: var(--bg3);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        border-radius: 20px;
+        transition: width 0.4s ease;
+        box-shadow: 0 0 12px rgba(217, 119, 6, 0.4);
+      }
+
+      /* ====== Scoreboard ====== */
+      .scoreboard {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      .score-card {
+        flex: 1;
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(7, 34, 27, 0.6);
+        backdrop-filter: blur(12px);
+        transition: transform 0.3s ease;
+      }
+      .score-card:hover {
+        transform: translateY(-2px);
+      }
+      .score-card .val {
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+      .score-card .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .score-card.correct .val { color: var(--correct); }
+      .score-card.wrong .val { color: var(--wrong); }
+      .score-card.total .val { color: var(--gold); }
+      .score-card.correct { border-bottom: 2px solid var(--correct); }
+      .score-card.wrong { border-bottom: 2px solid var(--wrong); }
+      .score-card.total { border-bottom: 2px solid var(--gold); }
+
+      /* ====== Question Card ====== */
+      .card {
+        width: 100%;
+        border-radius: 22px;
+        padding: 30px;
+      }
+      .q-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .q-badge {
+        background: linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(180, 83, 9, 0.15));
+        color: var(--gold);
+        border: 1px solid rgba(217, 119, 6, 0.35);
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      .q-chapter {
+        font-size: 0.8rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px 12px;
+        border-radius: 12px;
+      }
+      .question {
+        font-size: 1.08rem;
+        font-weight: 700;
+        line-height: 1.9;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      /* ====== Options ====== */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .opt {
+        background: rgba(12, 56, 43, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.07);
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        border-radius: 14px;
+        padding: 15px 18px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: right;
+        width: 100%;
+        backdrop-filter: blur(6px);
+      }
+      .opt:not(.disabled):hover {
+        border-color: var(--gold);
+        background: rgba(217, 119, 6, 0.08);
+        box-shadow: 0 0 20px rgba(217, 119, 6, 0.1);
+      }
+      .opt-letter {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.88rem;
+        transition: all 0.25s ease;
+      }
+      .opt.correct {
+        border-color: var(--correct);
+        background: rgba(16, 185, 129, 0.12);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+      }
+      .opt.correct .opt-letter {
+        background: var(--correct);
+        color: #000;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      }
+      .opt.wrong {
+        border-color: var(--wrong);
+        background: rgba(239, 68, 68, 0.12);
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+      }
+      .opt.wrong .opt-letter {
+        background: var(--wrong);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+      }
+      .opt.disabled {
+        cursor: default;
+      }
+
+      /* ====== Feedback ====== */
+      .feedback {
+        margin-top: 20px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        opacity: 0;
+        display: none;
+      }
+      .feedback.correct-fb {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--correct);
+      }
+      .feedback.wrong-fb {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: var(--wrong);
+      }
+      .feedback strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      /* ====== Buttons ====== */
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        transition: left 0.5s ease;
+      }
+      .btn:hover::before {
+        left: 100%;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #03120e;
+        box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 30px rgba(217, 119, 6, 0.45);
+      }
+      .btn-primary:active {
+        transform: translateY(0) scale(0.98);
+      }
+      .btn-next {
+        opacity: 0;
+        display: none;
+      }
+      .btn-start, .btn-restart {
+        padding: 15px 52px;
+        font-size: 1.05rem;
+        border-radius: 14px;
+      }
+
+      /* ====== Result Screen ====== */
+      #result-screen {
+        text-align: center;
+      }
+      .result-circle-wrap {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 24px;
+      }
+      .result-circle {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: conic-gradient(var(--bg3) 100%, var(--bg3) 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(217, 119, 6, 0.15);
+      }
+      .result-circle::after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--bg2);
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      .result-circle-glow {
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        background: conic-gradient(var(--gold), var(--purple), var(--gold)) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.5;
+        animation: glowSpin 4s linear infinite;
+      }
+      @keyframes glowSpin {
+        to { transform: rotate(360deg); }
+      }
+      .result-pct {
+        position: relative;
+        z-index: 1;
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--gold);
+        text-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+      }
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 8px;
+        text-shadow: 0 0 25px rgba(217, 119, 6, 0.2);
+      }
+      .result-sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 28px;
+        line-height: 1.8;
+      }
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .rs-card {
+        background: rgba(12, 56, 43, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: var(--radius);
+        padding: 18px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s ease;
+      }
+      .rs-card:hover {
+        transform: translateY(-3px);
+      }
+      .rs-card .v {
+        font-size: 2.2rem;
+        font-weight: 900;
+      }
+      .rs-card .l {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .rs-correct-val { color: var(--correct); }
+      .rs-wrong-val { color: var(--wrong); }
+      .rs-pct-val { color: var(--gold); }
+
+      /* ====== Modal ====== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        background: rgba(7, 34, 27, 0.92);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 42px 36px;
+        max-width: 440px;
+        width: 90%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+      .modal-icon {
+        font-size: 3.2rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .modal-box p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+      .modal-sub-text {
+        font-size: 0.85rem;
+      }
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 7px;
+        background: var(--bg3);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .modal-progress .mp-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        border-radius: 20px;
+      }
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 14px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .modal-btn-yes {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #03120e;
+        box-shadow: 0 4px 20px rgba(217, 119, 6, 0.3);
+      }
+      .modal-btn-yes:hover {
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 8px 30px rgba(217, 119, 6, 0.45);
+      }
+      .modal-btn-no {
+        background: rgba(12, 56, 43, 0.8);
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        transform: translateY(-2px);
+      }
+
+      /* ====== Responsive ====== */
+      @media (max-width: 600px) {
+        body {
+          padding: 14px;
+        }
+        .modal-box {
+          padding: 30px 22px;
+        }
+        .card {
+          padding: 22px 16px;
+          border-radius: 18px;
+        }
+        .intro-card {
+          padding: 28px 20px;
+          border-radius: 18px;
+        }
+        .header h1 {
+          font-size: 1.35rem;
+        }
+        .intro-features {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .result-stats {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .scoreboard {
+          gap: 8px;
+        }
+        .score-card {
+          padding: 10px 8px;
+        }
+        .score-card .val {
+          font-size: 1.4rem;
+        }
+        .btn-start, .btn-restart {
+          padding: 14px 36px;
+          font-size: 0.98rem;
+        }
+        .result-circle-wrap {
+          width: 130px;
+          height: 130px;
+        }
+        .result-circle {
+          width: 130px;
+          height: 130px;
+        }
+        .result-circle::after {
+          width: 100px;
+          height: 100px;
+        }
+        .result-pct {
+          font-size: 1.5rem;
+        }
+        .modal-btns {
+          flex-direction: column;
+        }
+      }
+       @font-face {
+        font-family: "Emoji";
+        src: url(../fonts/Emojis.ttf) format("truetype");
+      }
+    .emoji, .intro-icon, .modal-icon {
+        font-family: "Emoji";
+      }
+         ::selection {
+        background: none;
+        color: none;
+      }
+
+    </style>
+  </head>
+
+
+<body data-subject="3olom-syaseya">
+
+
+    <div class="header">
+      <h1><span class="emoji">📢</span> اختبار علوم سياسية</h1>
+      <p>بنك الأسئلة الشامل - مادة علوم سياسية</p>
+      <p>نم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a></p>
+
+    </div>
+
+    <!-- شاشة البداية -->
+    <div id="intro-screen">
+      <div class="intro-card glass">
+        <div class="intro-icon">📧</div>
+        <h2>مرحباً بك في الاختبار التدريبي</h2>
+        <p>
+          اختبار متكامل يحتوي على أسئلة بنك مادة علوم سياسية.<br>
+          اختر الإجابة الصحيحة واحصل على تغذية راجعة فورية لكل سؤال.
+        </p>
+        <div class="intro-features">
+          <div class="feat"><span class="emoji">📖</span> أسئلة شاملة<br>مستخرجة من بنك الأسئلة</div>
+          <div class="feat"><span class="emoji">⚡</span> تغذية فورية<br>شرح لكل إجابة</div>
+          <div class="feat"><span class="emoji">🎯</span> متعدد الخيارات<br>اختيار واحد صحيح</div>
+          <div class="feat"><span class="emoji">📊</span> نتيجة نهائية<br>مع تقييم مستواك</div>
+        </div>
+        <button class="btn btn-primary btn-start" id="btn-start">ابدأ الاختبار ←</button>
+      </div>
+    </div>
+
+    <!-- شاشة الأسئلة -->
+    <div id="quiz-screen" class="hidden">
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="val" id="sc-correct">0</div>
+          <div class="lbl"><span class="emoji">✔</span> صحيح</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="val" id="sc-wrong">0</div>
+          <div class="lbl"><span class="emoji">✘</span> خطأ</div>
+        </div>
+        <div class="score-card total">
+          <div class="val" id="sc-remain">0</div>
+          <div class="lbl">متبقي</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="q-counter">سؤال 1 من 0</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card glass" id="q-card">
+        <div class="q-meta">
+          <span class="q-badge" id="q-num-badge">سؤال ١</span>
+          <span class="q-chapter">علوم سياسية</span>
+        </div>
+        <div class="question" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+        <div class="feedback" id="q-feedback"></div>
+        <div class="actions">
+          <button class="btn btn-primary btn-next" id="btn-next">السؤال التالي ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- شاشة النتيجة -->
+    <div id="result-screen" class="hidden">
+      <div class="intro-card glass">
+        <div class="result-circle-wrap">
+          <div class="result-circle" id="result-circle">
+            <div class="result-pct" id="res-pct">0%</div>
+          </div>
+          <div class="result-circle-glow"></div>
+        </div>
+        <div class="result-title" id="res-title">نتيجتك</div>
+        <div class="result-sub" id="res-sub"></div>
+        <div class="result-stats">
+          <div class="rs-card">
+            <div class="v rs-correct-val" id="rs-correct">0</div>
+            <div class="l">إجابات صحيحة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v rs-wrong-val" id="rs-wrong">0</div>
+            <div class="l">إجابات خاطئة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v rs-pct-val" id="rs-pct2">0%</div>
+            <div class="l">النسبة المئوية</div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-restart" id="btn-restart"><span class="emoji">🔄</span> إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <!-- مودال استكمال الاختبار -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📋</span>
+        <h3>لديك اختبار لم يكتمل!</h3>
+        <p>يبدو أنك بدأت هذا الاختبار ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-sub-text">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ==================== بنك الأسئلة - مادة علوم سياسية ====================
+      const questionsData = [
+        {
+          q: "النص على علوم سياسية في الدستور يعطيها...........",
+          opts: ["قدرة على التغيير", "ثبات واستقرار", "مسايرة الواقع", "قدرة السلطة على التعديل"],
+          correct: 1,
+          explain: "النص على علوم سياسية في الدستور يمنحها طابع الثبات والاستقرار لأن الدستور هو القانون الأعلى في الدولة ويصعب تعديله."
+        },
+        {
+          q: "يحدد .................. شكل الدولة والسلطات العامة وحقوق وحريات الأفراد في الدولة.",
+          opts: ["القانون المدني", "القانون الجنائي", "الدستور", "اللائحة"],
+          correct: 2,
+          explain: "الدستور هو الوثيقة القانونية العليا التي تحدد شكل الدولة وأجهزتها وحقوق المواطنين وحرياتهم."
+        },
+        {
+          q: "من الأسباب التي تؤدي إلى التدخل الدولي لحماية علوم سياسية على مستوى العالم:",
+          opts: ["توحيد مفاهيم علوم سياسية", "كل ما سبق", "قصور التشريعات الوطنية", "قدرة الدول على وقف حريات الإنسان"],
+          correct: 1,
+          explain: "يتدخل المجتمع الدولي لحماية علوم سياسية لأسباب عدة تشمل: توحيد المفاهيم، وقصور التشريعات الوطنية، وضعف الدول عن صون الحريات."
+        },
+        {
+          q: "تقوم علوم سياسية وحرياته على قاعدة هي.........",
+          opts: ["الحرية والمساواة", "العدالة", "المنطق", "القضاء"],
+          correct: 0,
+          explain: "الحرية والمساواة هما الركيزتان الأساسيتان اللتان تقوم عليهما علوم سياسية وحرياته."
+        },
+        {
+          q: "تُعرف ........... بأنها مجموعة القواعد القانونية المكتوبة وغير المكتوبة والتي تكفل احترام الإنسان وتقدمه وازدهاره.",
+          opts: ["علوم سياسية", "قانون دولي", "ميثاق الأمم المتحدة", "حقوق الشعوب"],
+          correct: 0,
+          explain: "علوم سياسية هي تلك المنظومة من القواعد القانونية المكتوبة وغير المكتوبة التي تصون كرامة الإنسان وتكفل له التقدم والازدهار."
+        },
+        {
+          q: "يعد حق ثابت لكل شخص بكونه إنساناً على ظهر الأرض يسمى.........",
+          opts: ["حق ذهني", "حق عيني", "حق مالي", "حق شخصي"],
+          correct: 3,
+          explain: "الحق الشخصي هو الحق المرتبط بالشخص ذاته بسبب إنسانيته، وهو ثابت لكل إنسان بصرف النظر عن جنسيته أو انتمائه."
+        },
+        {
+          q: "اتفق العهدين الدوليين في تحرير الإنسان من:",
+          opts: ["قهر الحكومات", "الرق", "حماية الفئات الضعيفة", "كل ما سبق"],
+          correct: 3,
+          explain: "اتفق العهد الدولي للحقوق المدنية والسياسية والعهد الدولي للحقوق الاقتصادية والاجتماعية والثقافية في الحماية من قهر الحكومات والرق وحماية الفئات الضعيفة."
+        },
+        {
+          q: "يعد الارتباط بـ ........... علوم سياسية بالتخلف والضعف، وانكسار للتحضر والتمدين الإنساني.",
+          opts: ["القانون", "إهدار", "كل ما سبق", "الاهتمام"],
+          correct: 1,
+          explain: "إهدار علوم سياسية يرتبط ارتباطاً مباشراً بالتخلف والضعف ويعد انتكاسة للحضارة الإنسانية."
+        },
+        {
+          q: "اهتمت مصر بعلوم سياسية بالانضمام للمعاهدات الدولية وترجمت ذلك بالنص على هذه الحقوق في............",
+          opts: ["القانون الطبيعي", "العرف", "الدستور", "العهدين الدوليين"],
+          correct: 2,
+          explain: "جسّدت مصر التزامها بعلوم سياسية بالنص عليها في الدستور المصري، إضافة إلى انضمامها للمعاهدات الدولية ذات الصلة."
+        },
+        {
+          q: "تعد .....................لها دور هام في تبني أغلب المواثيق الدولية الخاصة بعلوم سياسية",
+          opts: ["كل ما سبق", "الولايات المتحدة الأمريكية", "المحكمة الدولية", "الجمعية العامة"],
+          correct: 3,
+          explain: "الجمعية العامة للأمم المتحدة هي الجهة الرئيسية التي تتبنى وتعتمد المواثيق والإعلانات الدولية المتعلقة بعلوم سياسية."
+        },
+        {
+          q: "تتكون الأمم المتحدة من ................والتي تهتم ويصدر عنها العديد من الإعلانات والاتفاقيات الخاصة بعلوم سياسية",
+          opts: ["المحكمة الجنائية الدولية", "مجلس الأمن", "محكمة العدل الدولية", "الجمعية العامة"],
+          correct: 3,
+          explain: "الجمعية العامة للأمم المتحدة هي الجهاز الأساسي الذي يصدر عنه الإعلانات والاتفاقيات الخاصة بعلوم سياسية."
+        },
+        {
+          q: "نص الميثاق الإفريقي على الحق في تقرير المصير ويسمى هذا حق ...................خاصة بعد التخلص من الاستعمار.",
+          opts: ["سياسي", "الشعوب", "اقتصادي", "اجتماعي"],
+          correct: 1,
+          explain: "الميثاق الإفريقي لعلوم سياسية والشعوب نص على حق الشعوب في تقرير مصيرها، وهو حق مكتسب خاصة في مرحلة ما بعد الاستعمار."
+        },
+        {
+          q: "حق الانتخاب يثبت للفرد باعتباره عضواً في جماعة.............",
+          opts: ["سياسية", "اقتصادية", "اجتماعية", "كل ما سبق"],
+          correct: 0,
+          explain: "حق الانتخاب حق سياسي يمارسه الفرد باعتباره عضواً في الجماعة السياسية (المواطنون)."
+        },
+        {
+          q: "ميثاق دولي اهتم بتحرير الشعوب من قهر الاستعمار وذلك بالنص على حق الشعوب في تقرير مصيرها",
+          opts: ["كل ما سبق", "العهد الدولي للحقوق المدنية", "الميثاق العربي", "الإعلان العالمي لعلوم سياسية"],
+          correct: 0,
+          explain: "أكثر من وثيقة دولية نصّت على حق الشعوب في تقرير مصيرها، منها العهد الدولي للحقوق المدنية والإعلان العالمي وغيرهما."
+        },
+        {
+          q: "يعتبر الحق في الضمان الاجتماعي من الحقوق..............",
+          opts: ["الاجتماعية", "السياسية", "الثقافية", "الذهنية"],
+          correct: 0,
+          explain: "الحق في الضمان الاجتماعي ينتمي إلى فئة الحقوق الاقتصادية والاجتماعية التي تهدف لتأمين مستوى معيشي لائق."
+        },
+        {
+          q: "ألزمت الاتفاقية الأوروبية لعلوم سياسية الدول الأوروبية بتعديل ....................ليتفق مع ما جاء فيها من نصوص متعلقة بعلوم سياسية.",
+          opts: ["اللوائح", "الدستور", "كل ما سبق", "القانون"],
+          correct: 2,
+          explain: "الاتفاقية الأوروبية لعلوم سياسية ألزمت الدول الموقّعة بتعديل دساتيرها وقوانينها ولوائحها لتنسجم مع أحكامها."
+        },
+        {
+          q: "اقتصر دورها في بداية نشأتها على تعزيز علوم سياسية دون حمايتها هي................",
+          opts: ["الجمعية العامة", "كل ما سبق", "لجنة علوم سياسية", "المجلس الاقتصادي والاجتماعي"],
+          correct: 2,
+          explain: "لجنة علوم سياسية الأممية اقتصر دورها في البداية على تعزيز ونشر ثقافة علوم سياسية دون صلاحية الحماية الفعلية."
+        },
+        {
+          q: "يعد ............... أحدث جهاز دولي للمحافظة على علوم سياسية، حيث اعتمدت الجمعية العامة للأمم المتحدة القرار في 15 مارس 2006",
+          opts: ["لجنة حقوق الأقليات", "المجلس الدولي لعلوم سياسية", "لجنة علوم سياسية", "مجلس الأمن"],
+          correct: 1,
+          explain: "المجلس الدولي لعلوم سياسية (مجلس علوم سياسية) تأسس بقرار الجمعية العامة في 15 مارس 2006 ليحل محل لجنة علوم سياسية."
+        },
+        {
+          q: "اهتمت مصر بعلوم سياسية بالانضمام للمعاهدات الدولية وترجمت ذلك بالنص على هذه الحقوق في................",
+          opts: ["العرف", "الدستور", "العهدين الدوليين", "القانون الطبيعي"],
+          correct: 1,
+          explain: "مصر ترجمت اهتمامها بعلوم سياسية بإدراجها صراحةً في الدستور المصري."
+        },
+        {
+          q: "اتفق العهدان الدوليان في تحرير الإنسان من",
+          opts: ["كل ما سبق", "حماية الفئات الضعيفة", "الرق", "قهر الحكومات"],
+          correct: 0,
+          explain: "اتفق العهدان الدوليان (المدني والسياسي - الاقتصادي والاجتماعي والثقافي) في تحرير الإنسان من الرق وقهر الحكومات وحماية الفئات الضعيفة."
+        },
+  // ---------------- الفصل الأول ----------------
+  {
+    chapter: "الفصل ١ — النظام القانوني لعلوم سياسية",
+    q: "رغم أن الثورة الفرنسية كانت سباقة في تحرير المواطن، إلا أن الفقه القانوني يرى أن المجتمع الدولي لم يعرف علوم سياسية بمفهومها العصري الشامل إلا بعد:",
+    opts: [
+      "تأسيس عصبة الأمم بعد الحرب العالمية الأولى",
+      "صدور الإعلان العالمي لعلوم سياسية في منتصف القرن الماضي",
+      "إصدار الدساتير الوطنية في أوروبا وأمريكا اللاتينية",
+      "إلغاء نظام الرق رسمياً في المعاهدات الثنائية"
+    ],
+    correct: 1,
+    explain: "يؤكد المنهج أن المجتمع الدولي لم يعرف علوم سياسية بمفهومها العصري والشامل إلا عند صدور 'الإعلان العالمي لعلوم سياسية'."
+  },
+  {
+    chapter: "الفصل ١ — النظام القانوني لعلوم سياسية",
+    q: "كيف تختلف الديانة المسيحية عن اليهودية (المحرفة) في تناولها لفكرة علوم سياسية وفقاً للتطور التاريخي؟",
+    opts: [
+      "اليهودية ركزت على العدل المطلق، بينما المسيحية ركزت على القصاص المادي",
+      "المسيحية دعت لتحقيق العدل عبر الصفاء الروحي والتسامح المطلق، بينما استندت اليهودية المحرفة للغطرسة واحتقار الشعوب",
+      "كلاهما اعتبر أتباعه 'شعب الله المختار' ولكن المسيحية رفضت العنف",
+      "المسيحية قننت علوم سياسية في نصوص قانونية وضعية لأول مرة، عكس اليهودية"
+    ],
+    correct: 1,
+    explain: "المسيحية دعت للصفاء الروحي والتسامح وترك الملذات لتحقيق مجتمع مثالي قائم على المحبة، بينما اتسمت اليهودية المحرفة بالفاشية واحتقار الشعوب الأخرى."
+  },
+  {
+    chapter: "الفصل ١ — النظام القانوني لعلوم سياسية",
+    q: "ما هي المكانة القانونية والتاريخية لـ 'الأديان السماوية' في هرم تشريعات علوم سياسية؟",
+    opts: [
+      "مصدر ثانوي يُستأنس به في الدول الدينية فقط",
+      "مصدر تاريخي تم الاستغناء عنه بظهور المواثيق المدنية الحديثة",
+      "المصدر الرئيسي والأساسي لكافة القواعد والتشريعات والإعلانات العالمية لعلوم سياسية",
+      "قواعد عرفية تقتصر على تنظيم الحريات الشخصية دون السياسية"
+    ],
+    correct: 2,
+    explain: "جاءت الأديان جميعها بميثاق ديني يكرم البشر، وتُعد الأديان السماوية المصدر الرئيسي لكافة القواعد والتشريعات والإعلانات العالمية."
+  },
+
+  // ---------------- الفصل الثاني ----------------
+  {
+    chapter: "الفصل ٢ — ماهية وخصائص علوم سياسية",
+    q: "ينص مبدأ 'المساواة' كأحد قواعد علوم سياسية على معاملة الأفراد بقدر متساوٍ في الحقوق والحريات. أي العبارات الآتية تحدد النطاق الدقيق لهذا المبدأ؟",
+    opts: [
+      "يقتصر على الحقوق المادية كالراتب والملكية فقط",
+      "يقتصر على الحقوق المعنوية كحرية الرأي والتعبير فقط",
+      "يشمل الحقوق المعنوية والمادية معاً دون أي تمييز أو استثناء",
+      "يُطبق فقط بين المواطنين الأصليين ويستثني المقيمين"
+    ],
+    correct: 2,
+    explain: "المساواة هي معاملة أفراد الشعب على قدر متساوٍ من الحقوق والحريات العامة (سواء كانت معنوية أو مادية) دون أي تمييز."
+  },
+  {
+    chapter: "الفصل ٢ — ماهية وخصائص علوم سياسية",
+    q: "ما هو الأثر المترتب على 'الاتجاه الدولي' كأحد خصائص علوم سياسية؟",
+    opts: [
+      "إلغاء السيادة الوطنية للدول بشكل كامل",
+      "الارتقاء بعلوم سياسية فوق النزعات القومية والانتقال بها من النطاق المحلي إلى آفاق عالمية أرحب",
+      "تحويل علوم سياسية من حقوق ملزمة إلى مجرد توصيات سياسية",
+      "تطبيق القوانين الدولية فقط على فئة الدبلوماسيين"
+    ],
+    correct: 1,
+    explain: "الاتجاه الدولي يعلو بعلوم سياسية فوق القومية؛ وينتقل بها من النطاق المحلي المغلق إلى آفاق عالمية أكثر اتساعاً."
+  },
+  {
+    chapter: "الفصل ٢ — ماهية وخصائص علوم سياسية",
+    q: "أي من الفئات التالية يندرج ضمن الجيل الثالث من علوم سياسية (حقوق الشعوب)؟",
+    opts: [
+      "الحق في الانتخاب والترشح المجالس النيابية",
+      "الحق في التأمين الاجتماعي والمعاشات",
+      "الحق في السيطرة على الموارد الداخلية والتمتع ببيئة نظيفة",
+      "الحق في عدم التعرض للتعذيب أو الاعتقال التعسفي"
+    ],
+    correct: 2,
+    explain: "الجيل الثالث (حقوق الشعوب) يشمل الحقوق الجماعية مثل: الحق في بيئة نظيفة، السيطرة على الموارد الداخلية، وحق الحكم الذاتي."
+  },
+
+  // ---------------- الفصل الثالث ----------------
+  {
+    chapter: "الفصل ٣ — التدخل الدولي ومصادر علوم سياسية",
+    q: "رغم أن ميثاق الأمم المتحدة يُعد أهم معاهدة دولية، إلا أنه ينفرد بخاصية قانونية تجعله بمنزلة 'الدستور العالمي'. ما هي؟",
+    opts: [
+      "أنه يسمح بالتحفظ على بنوده التي تخالف العادات المحلية",
+      "أنه معاهدة دولية جماعية شارعة لا يجوز التحفظ على أي حكم من أحكامها إطلاقاً",
+      "أنه صادر عن محكمة العدل الدولية كحكم قضائي نهائي",
+      "أنه يُلزم الدول غير الأعضاء في الأمم المتحدة بشكل مباشر"
+    ],
+    correct: 1,
+    explain: "يتميز ميثاق الأمم المتحدة بأنه معاهدة جماعية ملزمة وشارعة، ولا يجوز التحفظ على أي حكم من أحكامها."
+  },
+  {
+    chapter: "الفصل ٣ — التدخل الدولي ومصادر علوم سياسية",
+    q: "إذا تعارضت معاهدة ثنائية أبرمتها دولة عضو مع التزاماتها بحماية علوم سياسية المنصوص عليها في ميثاق الأمم المتحدة، فأي المبادئ القانونية الآتية يحكم هذا التعارض وفقاً لطبيعة الميثاق؟",
+    opts: [
+      "تسود المعاهدة الثنائية إعمالاً لمبدأ السيادة المطلقة للدولة وإقليمية القوانين",
+      "يُسمح للدولة بالتحفظ المؤقت على البند المتعارض في الميثاق لحين انتهاء المعاهدة الثنائية",
+      "يسري ميثاق الأمم المتحدة وتُهدر المعاهدة الثنائية المخالفة، لكون الميثاق معاهدة 'شارعة ودستورية' ملزمة لا يجوز التحفظ عليها",
+      "تُحال المسألة وجوباً للمجلس الاقتصادي والاجتماعي لتعديل ميثاق الأمم المتحدة بما يتوافق مع مصلحة الدولتين"
+    ],
+    correct: 2,
+    explain: "ميثاق الأمم المتحدة يُعد بمثابة معاهدة دولية 'شارعة' (كالدستور الداخلي الذي لا يجوز مخالفته)، وهي جماعية رضائية ملزمة لا يجوز 'التحفظ' على أي حكم من أحكامها، مما يجعلها تسمو على أي معاهدات ثنائية متعارضة."
+  },
+  {
+    chapter: "الفصل ٣ — التدخل الدولي ومصادر علوم سياسية",
+    q: "وفقاً لأهداف الأمم المتحدة، العلاقة بين 'حفظ السلم والأمن الدوليين' و'علوم سياسية' هي علاقة:",
+    opts: [
+      "تضاد؛ حيث يتطلب حفظ الأمن التضحية ببعض علوم سياسية",
+      "انفصال؛ فلكل منهما لجان ومهام مستقلة لا تتقاطع",
+      "تلازم وثيق؛ فلا يمكن تحقيق السلم الدولي دون توفير واحترام علوم سياسية",
+      "تبعية إدارية مؤقتة تنتهي بانتهاء النزاعات المسلحة"
+    ],
+    correct: 2,
+    explain: "المنهج يؤكد أن هناك تلازماً وثيقاً بين حفظ السلم والأمن وتوفير علوم سياسية، وهما وجهان لعملة واحدة."
+  },
+  {
+    chapter: "الفصل ٣ — التدخل الدولي ومصادر علوم سياسية",
+    q: "من الأسباب الجوهرية للتدخل الدولي لحماية علوم سياسية 'توحيد المفاهيم'. كيف تطور هذا المفهوم ليفرض تدخلاً أممياً؟",
+    opts: [
+      "تحول التركيز من إدانة الأفراد إلى إدانة الحكومات",
+      "تطور الحقوق من مجرد حقوق فردية (جيل أول) إلى حقوق جماعية تفرض على الدول توفير الرعاية (كالتعليم والصحة) مما استوجب التوحيد العالمي",
+      "ظهور الإنترنت الذي ألغى الحدود الجغرافية للدول",
+      "رغبة مجلس الأمن في فرض سيطرته الاقتصادية على الدول النامية"
+    ],
+    correct: 1,
+    explain: "تطورت الحقوق من فردية إلى حقوق جماعية تفرض على الدول توفير الرعاية والتعليم، وهذا التطور تطلب آليات تعاون دولية لتوحيد مفاهيمها."
+  },
+
+  // ---------------- الفصل الرابع ----------------
+  {
+    chapter: "الفصل ٤ — دور أجهزة الأمم المتحدة في علوم سياسية",
+    q: "عندما تكتشف إحدى اللجان التابعة للجمعية العامة انتهاكاً جسيماً لعلوم سياسية في منطقة ما، ما هو الإجراء التصعيدي الأقصى الذي تملكه الجمعية العامة؟",
+    opts: [
+      "توقيع عقوبات اقتصادية فورية على الدولة المعتدية",
+      "حل برلمان الدولة المنتهكة لعلوم سياسية",
+      "إصدار توصيات، والطلب من 'مجلس الأمن' التدخل المباشر لحماية علوم سياسية في تلك المنطقة",
+      "إصدار مذكرات توقيف دولية بحق رؤساء تلك الدول"
+    ],
+    correct: 2,
+    explain: "الجمعية العامة تُصدر توصيات، ومن الممكن أن تطلب من 'مجلس الأمن' التدخل لحماية علوم سياسية في منطقة معينة."
+  },
+  {
+    chapter: "الفصل ٤ — دور أجهزة الأمم المتحدة في علوم سياسية",
+    q: "بموجب القرار رقم (1102/40) لعام 1966، تحول دور لجنة علوم سياسية (القديمة) تغييراً جذرياً ليصبح:",
+    opts: [
+      "الاقتصار على الدعوة والتنظير لاحترام علوم سياسية في جنيف فقط",
+      "تشكيل محاكم جنائية مؤقتة داخل الدول المنتهكة",
+      "البدء في حماية علوم سياسية فعلياً والتدخل والقيام بزيارات ميدانية للدول للتأكد من التطبيق",
+      "نقل تبعيتها من المجلس الاقتصادي إلى مجلس الأمن مباشرة"
+    ],
+    correct: 2,
+    explain: "اقتصر دورها في البداية على الدعوة، ولكن بصدور القرار 1966 بدأت في الحماية والتدخل وزيارة الدول للتأكد من التطبيق."
+  },
+  {
+    chapter: "الفصل ٤ — دور أجهزة الأمم المتحدة في علوم سياسية",
+    q: "أي الأجهزة الدولية يعتبر 'الأحدث' في منظومة المحافظة على علوم سياسية، وتم إنشاؤه ليحل محل لجنة سابقة فقدت مصداقيتها؟",
+    opts: [
+      "المحكمة الجنائية الدولية",
+      "المجلس الدولي لعلوم سياسية (2006)",
+      "اللجنة المعنية بالتحقيق في الممارسات العنصرية",
+      "المجلس الاقتصادي والاجتماعي"
+    ],
+    correct: 1,
+    explain: "المجلس الدولي لعلوم سياسية (2006) هو أحدث جهاز دولي، أنشئ ليحل محل لجنة علوم سياسية بعد قرابة 60 عاماً من عملها."
+  },
+
+  // ---------------- الفصل الخامس ----------------
+  {
+    chapter: "الفصل ٥ — الإعلان العالمي والعهدين",
+    q: "خلا العهد الدولي الخاص بالحقوق المدنية والسياسية (1966) من التنصيص على حق أساسي كان مذكوراً في الإعلان العالمي لعام 1948، وهو:",
+    opts: [
+      "الحق في حرية الاعتقاد",
+      "الحق في الملكية",
+      "الحق في عدم التعرض للتعذيب",
+      "الحق في المساواة أمام المحاكم"
+    ],
+    correct: 1,
+    explain: "الحقوق المذكورة في هذا العهد مستوحاة من الإعلان العالمي، لكنها جاءت خلواً من النص على 'حق الملكية'."
+  },
+  {
+    chapter: "الفصل ٥ — الإعلان العالمي والعهدين",
+    q: "في الشريعة الإسلامية، يمتد مفهوم 'حماية وتكريم الإنسان' ليغطي مراحل زمنية تتجاوز القوانين الوضعية، وتتمثل في:",
+    opts: [
+      "حمايته من سن الرشد وحتى الشيخوخة فقط",
+      "حمايته منذ ميلاده حياً وحتى وفاته",
+      "حمايته قبل أن يولد (جنيناً)، وبعد الولادة، وكذلك تكريمه بعد الوفاة",
+      "حماية المسلمين فقط في أوقات السلم والحرب"
+    ],
+    correct: 2,
+    explain: "شرع الإسلام الأحكام ليحمي الإنسان قبل أن يولد (تحريم إسقاط الجنين)، وبعد الولادة، وكذلك بعد الوفاة (كحرمة الميت)."
+  },
+  {
+    chapter: "الفصل ٥ — الإعلان العالمي والعهدين",
+    q: "رغم تحريم الإسلام لقتل النفس واعتباره من أكبر الكبائر، إلا أنه وضع استثناءً شرعياً وحيداً لاستخدام القوة المميتة للحماية الفردية، وهو:",
+    opts: [
+      "الدفاع عن الممتلكات الشخصية البسيطة",
+      "الدفاع الشرعي في حالة الاعتداء المباشر على النفس",
+      "تطبيق العقوبات التعزيرية باليد من قبل الأفراد",
+      "لا يوجد أي استثناء إطلاقاً فالقتل محرم مطلقاً"
+    ],
+    correct: 1,
+    explain: "حرم الإسلام القتل بغير حق، ولكنه أباح للإنسان أن يدافع عن نفسه في حالة الاعتداء عليها (وهو ما يُعرف بالدفاع الشرعي)."
+  },
+  {
+    chapter: "الفصل ٥ — الإعلان العالمي والعهدين",
+    q: "إلى أي مجموعة من الحقوق ينتمي 'الحق في الالتحاق بالنقابات العمالية والتمتع بمستوى معيشي كافٍ للرفاهية'؟",
+    opts: [
+      "الحقوق المدنية",
+      "الحقوق السياسية",
+      "الحقوق الاقتصادية والاجتماعية والثقافية",
+      "حقوق الشعوب والجماعات غير المنظمة"
+    ],
+    correct: 2,
+    explain: "وفقاً لتصنيف الإعلان العالمي والعهدين، الضمان الاجتماعي والنقابات ومستوى المعيشة تندرج تحت الحقوق الاقتصادية والاجتماعية والثقافية."
+  },
+  {
+    chapter: "الفصل ٥ — الإعلان العالمي والعهدين",
+    q: "من الأسس الجوهرية التي بُني عليها 'العهدين الدوليين' توفير حماية خاصة ونوعية لبعض الفئات المجتمعية، من هم؟",
+    opts: [
+      "اللاجئون السياسيون والأسرى فقط",
+      "العمالة المهاجرة وأرباب العمل",
+      "الفئات الضعيفة كالطفل والمرأة وكبار السن",
+      "الأقليات اللغوية فقط"
+    ],
+    correct: 2,
+    explain: "رابع الأسس التي بُني عليها العهدين هو 'تقرير حماية خاصة للفئات الضعيفة كالطفل والمرأة وكبار السن'."
+  },
+
+  // ---------------- الفصل السادس ----------------
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "ما هو الشرط الأساسي الذي يُعتبر جوهر 'الحق في التنمية' بالنسبة للدول وفقاً للمواثيق الدولية؟",
+    opts: [
+      "الحصول على قروض دولية بدون فوائد ميسرة",
+      "استقلال الدولة من التبعية الاقتصادية وإقرار حقها في السيادة المطلقة على مواردها الطبيعية",
+      "تحول الدولة من النظام الزراعي إلى النظام الصناعي الكامل",
+      "الانضمام إلى التكتلات الاقتصادية الكبرى والتنازل عن العملة المحلية"
+    ],
+    correct: 1,
+    explain: "يُعرّف الحق في التنمية بأنه استقلال الدولة من التبعية الاقتصادية وإقرار حقها في السيادة على الموارد الطبيعية ليكون محركاً لنظام دولي جديد."
+  },
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "ينقسم 'الحق في السلام' إلى ثلاثة مستويات. ما هو المستوى الذي يستهدف تحقيق الأمن والاستقرار داخل (المدينة) أو المجتمع الداخلي المباشر؟",
+    opts: [
+      "السلام الدولي",
+      "السلام الوطني",
+      "السلام الذاتي",
+      "السلام الكوني"
+    ],
+    correct: 2,
+    explain: "النص يفرق بين السلام الدولي، والسلام الوطني (سلامة أرض الوطن)، والسلام الذاتي (والذي يُقصد به السلام الذي يستهدف المدينة/المجتمع المحلي)."
+  },
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "يُعد 'الحق في بيئة صحية ونظيفة' حقاً استثنائياً في تصنيفه القانوني لأنه:",
+    opts: [
+      "يُمنح للدول الساحلية فقط لوجود حماية للبيئة البحرية",
+      "يعتبر حقاً فردياً خالصاً يمكن للفرد التنازل عنه",
+      "ليس حقاً فردياً فحسب، بل هو حق جماعي أيضاً يشمل الأجيال الحالية والقادمة",
+      "يتطلب تدخلاً عسكرياً أممياً لفرضه"
+    ],
+    correct: 2,
+    explain: "الحق في بيئة صحية ليس حقاً فردياً فحسب، وإنما هو حق جماعي أيضاً، ويتضمن حماية البيئة بعناصرها المتوازنة والتمتع بثروات البحار."
+  },
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "ينزع الإنسان بفطرته إلى الانطلاق ويكره التقييد أو الحد من رغبته في الانتقال. هذه الفطرة تُرجمت قانونياً في الدستور المصري تحت مُسمى:",
+    opts: [
+      "الحق في المعاملة الإنسانية",
+      "الحق في تكوين الأحزاب",
+      "الحق في الحرية والأمن الشخصي",
+      "الحق في الشخصية القانونية"
+    ],
+    correct: 2,
+    explain: "الحق في الحرية والأمن الشخصي يعكس نزعة الإنسان للفطرة والانطلاق، ويكره التقييد عليه أو الحد من رغبته في الانتقال من مكان لآخر."
+  },
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "ما هو الفارق الدقيق بين 'الحق في الحياة' و'الحق في الشخصية القانونية' من حيث التوقيت الزمني لبدايتهما؟",
+    opts: [
+      "الحق في الحياة يثبت عند الولادة، والشخصية القانونية عند بلوغ سن الـ 18",
+      "الحق في الحياة يحمي الوجود الإنساني عموماً، بينما الشخصية القانونية (صلاحية التمتع بالحقوق والالتزامات) تثبت بتمام ولادته حياً",
+      "كلاهما مصطلحان مترادفان يثبتان في نفس الثانية من الحمل",
+      "الشخصية القانونية تسبق الحق في الحياة"
+    ],
+    correct: 1,
+    explain: "الحق في الحياة يعني عدم إنهاء الوجود، أما الحق في الشخصية القانونية فهو 'صلاحية الإنسان للتمتع بالحقوق والالتزامات' وتثبت 'بتمام ولادته حياً'."
+  },
+  {
+    chapter: "الفصل ٦ — الحقوق الجماعية (حقوق الشعوب)",
+    q: "ما هي الوسيلة المشروطة والمحددة التي يجب أن يستخدمها 'الحزب السياسي' لتحقيق برامجه والمشاركة في مسؤوليات الحكم؟",
+    opts: [
+      "الضغط الاقتصادي على الحكومة المركزية",
+      "الوسائل السياسية الديمقراطية وفقاً لأحكام القانون",
+      "الاحتجاجات الفئوية المسلحة",
+      "التدخل لدى المنظمات الدولية الأجنبية"
+    ],
+    correct: 1,
+    explain: "يُعرّف الحزب السياسي بأنه جماعة منظمة تعمل 'بالوسائل السياسية الديمقراطية' لتحقيق برامج محددة تتعلق بشؤون الدولة للمشاركة في مسؤوليات الحكم."
+  },
+
+  // ---------------- الفصل السابع ----------------
+  {
+    chapter: "الفصل ٧ — واجبات الأفراد والتزاماتهم",
+    q: "إن مسئولية الفرد تجاه (الوطن) تتطلب منه سلوكاً محدداً يختلف عن مسؤوليته تجاه (الدولة). أي من الآتي يمثل مسؤوليته تجاه الوطن (والنفس)؟",
+    opts: [
+      "المشاركة في دفع الضرائب بانتظام",
+      "العمل على ضبط غرائزه وتحسين أخلاقه في التعامل مع الغير",
+      "احترام نظام الدولة وقوانينها الوضعية",
+      "تأسيس الجمعيات الأهلية لتنمية المجتمع"
+    ],
+    correct: 1,
+    explain: "تجاه الوطن/النفس: يجب أن يعمل على ضبط غرائزه وتحسين أخلاقه. أما تجاه الدولة فهو احترام قوانينها، وتجاه المجتمع فهو الإسهام في التنمية."
+  },
+  {
+    chapter: "الفصل ٧ — واجبات الأفراد والتزاماتهم",
+    q: "لضمان تحويل 'التسامح' من مجرد شعار إلى واقع ممارس فعلياً في المجتمع، ما هو الالتزام الذي يجب أن يُصاحبه حتمياً؟",
+    opts: [
+      "الالتزام بترسيخ دعائم السلطة التنفيذية المركزية",
+      "الالتزام بمبدأ الحوار البنّاء والتواصل والمشاركة الحقيقية لقبول الآخر",
+      "الالتزام بالعزلة المجتمعية تجنباً للصدام",
+      "الالتزام بتجاهل أي اختلافات ثقافية واعتبارها غير موجودة"
+    ],
+    correct: 1,
+    explain: "المنهج ينص بوضوح: 'لا يتحقق التسامح إلا بالحوار والتواصل والمشاركة الحقيقية...'؛ فالحوار البناء هو الطريق لحل القضايا."
+  },
+  {
+    chapter: "الفصل ٧ — واجبات الأفراد والتزاماتهم",
+    q: "ما هي الطبيعة الفقهية لالتزام المواطن بـ 'الدفاع عن الأوطان وحمايتها'؟",
+    opts: [
+      "هو التزام مدني تطوعي يسقط وقت السلم",
+      "هو فرض كفاية يقوم به الجيش ولا يُلزم به المواطن العادي",
+      "هو أمر ديني وشرعي، ودفع العدو يُعد 'فرض عين' على أهل البلد",
+      "هو التزام سياسي يُقرره البرلمان فقط"
+    ],
+    correct: 2,
+    explain: "النص صريح في أن الدفاع عن الأوطان أمر ديني وشرعي في المقام الأول، ودفع العدو هو 'فرض عين' على أهل هذا البلد."
+  },
+  {
+    chapter: "الفصل ٧ — واجبات الأفراد والتزاماتهم",
+    q: "أي من التصرفات التالية يُعد انتهاكاً لالتزام المواطن بـ 'مواجهة الإرهاب الإلكتروني'؟",
+    opts: [
+      "نشر صور شخصية دون إذن أصحابها",
+      "الامتناع عن التصويت في الانتخابات الإلكترونية",
+      "المساهمة في نشر الشائعات والترويج للأفكار المتطرفة والحروب النفسية عبر الإنترنت",
+      "قرصنة القنوات التلفزيونية الترفيهية"
+    ],
+    correct: 2,
+    explain: "مواجهة الإرهاب الإلكتروني تعني التصدي للشائعات والحروب النفسية والأفكار المتطرفة التي تُبث عبر الإنترنت لحماية الأمن الفكري."
+  },
+  {
+    chapter: "الفصل ٧ — واجبات الأفراد والتزاماتهم",
+    q: "العمل على تقوية النسيج المجتمعي وتوحيد الصفوف ونبذ التفرقة بين أبناء الوطن الواحد. هذا الوصف يعبر عن الالتزام بـ:",
+    opts: [
+      "المسؤولية الإدارية تجاه الدولة",
+      "ترسيخ دعائم الوحدة الوطنية",
+      "المحاكمة العادلة والمنصفة",
+      "بناء جمعيات المجتمع المدني"
+    ],
+    correct: 1,
+    explain: "الالتزام بترسيخ دعائم الوحدة الوطنية يعني العمل على تقوية النسيج المجتمعي وتوحيد الصفوف ونبذ التفرقة."
+  },
+
+  // ---------------- أسئلة تجميعية للربط الدقيق ----------------
+  {
+    chapter: "مراجعة شاملة — النظام القانوني والإسلام",
+    q: "كيف توافقت الشريعة الإسلامية مع الإعلان العالمي لعلوم سياسية في نظرتها لقيمة 'المساواة' كقاعدة أساسية؟",
+    opts: [
+      "قررت المساواة المطلقة بين الحاكم والمحكوم في جميع السلطات السيادية",
+      "أقرت بأن الناس سواسية في الحقوق اللصيقة بالشخصية (كالحق في الحياة) ولم تفرق في ذلك بين مسلم وغير مسلم",
+      "اشترطت المساواة فقط بعد بلوغ سن الرشد",
+      "وافقت الإعلان العالمي في المساواة المادية التامة في توزيع الثروات"
+    ],
+    correct: 1,
+    explain: "الشريعة لم تفرق في حماية الحقوق اللصيقة كالحق في الحياة بين المسلم وغير المسلم، مما يتوافق مع قاعدة المساواة وعدم التمييز في علوم سياسية."
+  },
+  {
+    chapter: "مراجعة شاملة — الأجهزة الدولية",
+    q: "أي الجهازين الأمميين ارتبطا بشكل مباشر ومؤسسي بتأسيس وعمل 'لجنة علوم سياسية' التاريخية؟",
+    opts: [
+      "محكمة العدل الدولية والأمانة العامة",
+      "مجلس الأمن والمحكمة الجنائية الدولية",
+      "الجمعية العامة والمجلس الاقتصادي والاجتماعي",
+      "المجلس الدولي لعلوم سياسية ومجلس الوصاية"
+    ],
+    correct: 2,
+    explain: "قام المجلس الاقتصادي والاجتماعي (تحت إشراف الجمعية العامة) بإنشاء 'لجنة علوم سياسية' للقيام بالمهام التي تحددها الجمعية والمجلس."
+  },
+  {
+    chapter: "مراجعة شاملة — أنواع الحقوق",
+    q: "إذا تعرض شخص للقبض وتم إيداعه في مكان غير مخصص للاحتجاز ويفتقر للشروط الصحية، فإن ذلك يمثل انتهاكاً مباشراً لـ:",
+    opts: [
+      "الحق في المعاملة الإنسانية في السجون (الذي يحظر الاحتجاز خارج الأماكن المخصصة واللائقة صحياً)",
+      "الحق في حرية التنقل والإقامة",
+      "الحق في الشخصية القانونية",
+      "الحق في العمل وتكوين النقابات"
+    ],
+    correct: 0,
+    explain: "الحق في المعاملة الإنسانية في السجون ينص على ألا يكون الحجز أو الحبس إلا في أماكن مخصصة لذلك، لائقة إنسانياً وصحياً."
+  },
+  {
+    chapter: "مراجعة شاملة — أجيال الحقوق",
+    q: "ما هو الرابط الخفي بين 'الجيل الثالث من علوم سياسية' ومبدأ 'التدخل الدولي'؟",
+    opts: [
+      "الجيل الثالث يرفض تماماً أي تدخل دولي في شؤون الدول",
+      "الجيل الثالث (حقوق الشعوب كالتنمية وتقرير المصير) يفرض قيوداً على التشريعات الدولية",
+      "إقرار حقوق الجيل الثالث يحتاج تدخلاً دولياً لعدم كفاية مبدأ إقليمية القوانين الوطنية في تحقيقها بمفردها",
+      "التدخل الدولي نشأ خصيصاً لإلغاء الجيل الثالث من الحقوق"
+    ],
+    correct: 2,
+    explain: "إقرار الحقوق الجماعية (كتقرير المصير والتنمية) يتطلب تدخلاً دولياً لأن القوانين الداخلية تسري داخل إقليمها فقط (إقليمية القوانين) ولا تكفي لإقرار حقوق تتطلب مواثيق أممية."
+  },
+  {
+    chapter: "مراجعة شاملة — الحقوق المدنية والسياسية",
+    q: "الحق في 'عدم التعرض للاعتقال التعسفي' والحق في 'تقلد الوظائف العامة' هما على التوالي:",
+    opts: [
+      "حقوق سياسية - حقوق مدنية",
+      "حقوق اقتصادية - حقوق ثقافية",
+      "حقوق مدنية (لصيقة بالشخصية) - حقوق سياسية (مشاركة في الدولة)",
+      "حقوق جماعية - حقوق فردية"
+    ],
+    correct: 2,
+    explain: "عدم التعرض للتعذيب والاعتقال التعسفي هي حقوق (مدنية) لصيقة بالشخصية، بينما تقلد الوظائف والمشاركة في إدارة الشؤون هي حقوق (سياسية)."
+  },
+  {
+    chapter: "مراجعة شاملة — المواثيق والدساتير",
+    q: "لماذا يُعتبر ميثاق الأمم المتحدة (معاهدة شارعة) في سياق علوم سياسية؟",
+    opts: [
+      "لأنه يستمد أحكامه من الأعراف القبلية القديمة",
+      "لأنه يضع المبادئ والأسس العامة التي يجب أن تبني عليها جميع الدول دساتيرها وقوانينها الداخلية دون الخروج عنها",
+      "لأنه يحل محل الشريعة الإسلامية في الدول العربية",
+      "لأنه يُشرع قوانين اقتصادية تحدد العملات الدولية"
+    ],
+    correct: 1,
+    explain: "معاهدة شارعة ودستورية تعني أنه بمثابة دستور يضع المبادئ والأسس للدول لتضع تشريعاتها وتفاصيلها دون أن تتعارض مع هذا الميثاق."
+  }
+      ];
+
+      // ==================== المنطق ====================
+      let currentIdx = 0;
+      let correctAnswers = 0;
+      let wrongAnswers = 0;
+      let isAnswered = false;
+      let shuffledQuestions = [];
+
+      const screens = {
+        intro: document.getElementById('intro-screen'),
+        quiz: document.getElementById('quiz-screen'),
+        result: document.getElementById('result-screen')
+      };
+      const qCard = document.getElementById('q-card');
+      const nextBtn = document.getElementById('btn-next');
+      const feedbackEl = document.getElementById('q-feedback');
+      const optionsContainer = document.getElementById('q-options');
+
+      document.getElementById('btn-start').addEventListener('click', initQuiz);
+      document.getElementById('btn-next').addEventListener('click', handleNext);
+      document.getElementById('btn-restart').addEventListener('click', resetQuiz);
+
+      
+      // ===== RESUME QUIZ MODAL =====
+      function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("resume") === "true") {
+                if (typeof resumeQuiz === 'function' && window.location.pathname.includes(data.quizFilename)) {
+                    resumeQuiz(data);
+                }
+                return;
+            }
+
+            const modal = document.getElementById('resume-modal');
+            if(!modal) return;
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 500);
+
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? data.quizFilename : 'index2.html';
+              if (window.location.pathname.includes(target)) {
+                 modal.classList.remove('active');
+                 if (typeof resumeQuiz === 'function') resumeQuiz(data);
+              } else {
+                 window.location.href = target + '?resume=true';
+              }
+            });
+
+            document.getElementById('modal-no').addEventListener('click', () => {
+              if (typeof clearProgress === 'function') clearProgress();
+              else localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkQuizProgress);
+
+      // ==================== Page Load Animation ====================
+      (function animateOnLoad() {
+        gsap.set('.header', { opacity: 0, y: -25 });
+        gsap.set('.intro-card', { opacity: 0, y: 40, scale: 0.97 });
+        gsap.set('.feat', { opacity: 0, y: 20 });
+        gsap.set('.btn-start', { opacity: 0, scale: 0.9 });
+
+        const tl = gsap.timeline({ delay: 0.2 });
+        tl.to('.header', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+          .to('.intro-card', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, '-=0.3')
+          .to('.feat', { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, '-=0.3')
+          .to('.btn-start', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, '-=0.2');
+      })();
+
+      function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function saveProgress() {
+        try {
+          const data = {
+            inProgress: true,
+            currentIdx: currentIdx,
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers,
+            totalQuestions: shuffledQuestions.length,
+            quizFilename: "index2.html",
+            questionOrder: shuffledQuestions.map(q => questionsData.indexOf(q)),
+            timestamp: Date.now()
+          };
+          localStorage.setItem('hr_quiz_progress', JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      function clearProgress() {
+        try { localStorage.removeItem('hr_quiz_progress'); } catch (e) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return null;
+          const data = JSON.parse(saved);
+          return (data && data.inProgress) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function initQuiz() {
+        shuffledQuestions = shuffleArray(questionsData);
+        currentIdx = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        saveProgress();
+
+        gsap.to(screens.intro, {
+          opacity: 0, y: -30, scale: 0.96, duration: 0.5, ease: "power2.in",
+          onComplete: () => {
+            screens.intro.classList.add('hidden');
+            screens.quiz.classList.remove('hidden');
+            gsap.fromTo(screens.quiz, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.3)"});
+            renderQuestion();
+          }
+        });
+      }
+
+      function resumeQuiz(data) {
+        shuffledQuestions = data.questionOrder.map(idx => questionsData[idx]);
+        currentIdx = data.currentIdx;
+        correctAnswers = data.correctAnswers || 0;
+        wrongAnswers = data.wrongAnswers || 0;
+        screens.intro.classList.add('hidden');
+        screens.quiz.classList.remove('hidden');
+        gsap.fromTo(screens.quiz, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.3)"});
+        renderQuestion();
+      }
+
+      (function checkResumeOnLoad() {
+        const data = loadProgress();
+        if (!data) return;
+        const modal = document.getElementById('resume-modal');
+        const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+        const fillEl = document.getElementById('modal-progress-fill');
+        fillEl.style.width = pct + '%';
+        document.getElementById('modal-progress-text').textContent =
+          `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+        setTimeout(() => modal.classList.add('active'), 500);
+        document.getElementById('modal-yes').addEventListener('click', () => {
+          modal.classList.remove('active');
+          setTimeout(() => resumeQuiz(data), 300);
+        });
+        document.getElementById('modal-no').addEventListener('click', () => {
+          clearProgress();
+          modal.classList.remove('active');
+        });
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.classList.remove('active');
+        });
+      })();
+
+      function renderQuestion() {
+        isAnswered = false;
+        const total = shuffledQuestions.length;
+        const qData = shuffledQuestions[currentIdx];
+
+        document.getElementById('q-num-badge').textContent = `سؤال ${currentIdx + 1}`;
+        document.getElementById('q-text').textContent = qData.q;
+        document.getElementById('q-counter').textContent = `سؤال ${currentIdx + 1} من ${total}`;
+        document.getElementById('sc-correct').textContent = correctAnswers;
+        document.getElementById('sc-wrong').textContent = wrongAnswers;
+        document.getElementById('sc-remain').textContent = total - currentIdx;
+
+        const pct = Math.round((currentIdx / total) * 100);
+        document.getElementById('q-pct').textContent = pct + '%';
+        gsap.to('#progress-fill', { width: pct + '%', duration: 0.6, ease: "power2.out" });
+
+        feedbackEl.style.display = 'none';
+        feedbackEl.style.opacity = '0';
+        nextBtn.style.display = 'none';
+        nextBtn.style.opacity = '0';
+
+        const letters = ['أ', 'ب', 'ج', 'د'];
+        optionsContainer.innerHTML = '';
+
+        qData.opts.forEach((optText, index) => {
+          const btn = document.createElement('button');
+          btn.className = 'opt';
+          btn.addEventListener('mouseenter', () => {
+            if (!isAnswered) gsap.to(btn, {x: -5, duration: 0.2, ease: "power2.out"});
+          });
+          btn.addEventListener('mouseleave', () => {
+            if (!isAnswered) gsap.to(btn, {x: 0, duration: 0.2, ease: "power2.out"});
+          });
+          btn.addEventListener('click', () => selectAnswer(index, btn));
+          btn.innerHTML = `<span class="opt-letter">${letters[index]}</span>${optText}`;
+          optionsContainer.appendChild(btn);
+        });
+
+        // Card entrance animation
+        gsap.fromTo(qCard,
+          {opacity: 0, x: -40, scale: 0.97},
+          {opacity: 1, x: 0, scale: 1, duration: 0.55, ease: "back.out(1.3)"}
+        );
+        // Stagger options
+        gsap.fromTo('.opt',
+          {opacity: 0, x: -20},
+          {opacity: 1, x: 0, duration: 0.35, stagger: 0.08, ease: "power2.out", delay: 0.15}
+        );
+      }
+
+      function selectAnswer(selectedIndex, clickedBtn) {
+        if (isAnswered) return;
+        isAnswered = true;
+
+        const qData = shuffledQuestions[currentIdx];
+        const allOpts = document.querySelectorAll('.opt');
+
+        allOpts.forEach(opt => {
+          opt.classList.add('disabled');
+          gsap.to(opt, {x: 0, duration: 0.1});
+        });
+
+        if (selectedIndex === qData.correct) {
+          correctAnswers++;
+          clickedBtn.classList.add('correct');
+          feedbackEl.className = 'feedback correct-fb';
+          feedbackEl.innerHTML = `<strong><span class="emoji">✔</span> إجابة صحيحة!</strong><br><span class="emoji">📖</span> ${qData.explain}`;
+          gsap.fromTo(clickedBtn, {scale: 1}, {scale: 1.03, yoyo: true, repeat: 1, duration: 0.18, ease: "power2.inOut"});
+        } else {
+          wrongAnswers++;
+          clickedBtn.classList.add('wrong');
+          allOpts[qData.correct].classList.add('correct');
+          feedbackEl.className = 'feedback wrong-fb';
+          feedbackEl.innerHTML = `<strong><span class="emoji">✘</span> إجابة خاطئة</strong><br><span class="emoji">📖</span> الإجابة الصحيحة: ${qData.opts[qData.correct]}<br><br><span class="emoji">📝</span> ${qData.explain}`;
+          gsap.fromTo(clickedBtn, {x: -6}, {x: 6, yoyo: true, repeat: 3, duration: 0.08});
+        }
+
+        document.getElementById('sc-correct').textContent = correctAnswers;
+        document.getElementById('sc-wrong').textContent = wrongAnswers;
+
+        feedbackEl.style.display = 'block';
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = (currentIdx < shuffledQuestions.length - 1) ? 'السؤال التالي ←' : 'عرض النتيجة ←';
+
+        gsap.to(feedbackEl, {opacity: 1, y: 0, duration: 0.45, delay: 0.2, ease: "power2.out"});
+        gsap.fromTo(nextBtn, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.45, delay: 0.45, ease: "back.out(1.5)"});
+        saveProgress();
+      }
+
+      function handleNext() {
+        currentIdx++;
+        saveProgress();
+        if (currentIdx >= shuffledQuestions.length) {
+          showResult();
+        } else {
+          gsap.to(qCard, {
+            opacity: 0, x: 40, scale: 0.97, duration: 0.35, ease: "power2.in",
+            onComplete: renderQuestion
+          });
+        }
+      }
+
+      function showResult() {
+        const total = shuffledQuestions.length;
+        const finalPct = Math.round((correctAnswers / total) * 100);
+
+        gsap.to(screens.quiz, {
+          opacity: 0, scale: 0.93, duration: 0.45, ease: "power2.in",
+          onComplete: () => {
+            screens.quiz.classList.add('hidden');
+            screens.result.classList.remove('hidden');
+
+            // Staggered result entrance
+            gsap.set(screens.result, {opacity: 1});
+            gsap.fromTo('.result-circle-wrap', {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.5)", delay: 0.1});
+            gsap.fromTo('.result-title', {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.5, delay: 0.3});
+            gsap.fromTo('.result-sub', {opacity: 0}, {opacity: 1, duration: 0.5, delay: 0.45});
+            gsap.fromTo('.rs-card', {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.12, duration: 0.5, delay: 0.55, ease: "power2.out"});
+            gsap.fromTo('.btn-restart', {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.5, delay: 0.9, ease: "back.out(2)"});
+
+            document.getElementById('rs-correct').textContent = correctAnswers;
+            document.getElementById('rs-wrong').textContent = wrongAnswers;
+            document.getElementById('rs-pct2').textContent = finalPct + '%';
+
+            let title, sub;
+            if (finalPct >= 90) {
+              title = "🏆 ممتاز - جاهز للامتحان!";
+              sub = `أداء رائع! أجبت على ${correctAnswers} من ${total} إجابة بشكل صحيح.`;
+            } else if (finalPct >= 70) {
+              title = "🌟 جيد جداً";
+              sub = `أداؤك مميز. حصلت على ${correctAnswers} من ${total} إجابة صحيحة. راجع النقاط التي أخطأت فيها.`;
+            } else if (finalPct >= 50) {
+              title = "👍 مقبول";
+              sub = `حصلت على ${correctAnswers} من ${total} إجابة صحيحة. تحتاج لمراجعة المادة مرة أخرى.`;
+            } else {
+              title = "📚 تحتاج إلى مذاكرة";
+              sub = `حصلت على ${correctAnswers} من ${total} إجابة صحيحة. لا تقلق، راجع المادة وحاول الاختبار مرة أخرى.`;
+            }
+
+            document.getElementById('res-title').textContent = title;
+            document.getElementById('res-sub').textContent = sub;
+
+            // Update review system conditions
+            localStorage.setItem('quizFinished', 'true');
+            if (typeof window.triggerReviewAfterQuiz === 'function') {
+                window.triggerReviewAfterQuiz();
+            }
+
+            let proxy = { val: 0 };
+            const circleEl = document.getElementById('result-circle');
+            const pctTextEl = document.getElementById('res-pct');
+
+            gsap.to(proxy, {
+              val: finalPct,
+              duration: 1.8,
+              delay: 0.4,
+              ease: "power3.out",
+              onUpdate: function () {
+                let currentVal = Math.round(proxy.val);
+                pctTextEl.textContent = currentVal + "%";
+                let deg = (currentVal / 100) * 360;
+                circleEl.style.background = `conic-gradient(var(--gold) 0deg, var(--purple) ${deg}deg, var(--bg3) ${deg}deg)`;
+              }
+            });
+          }
+        });
+
+        clearProgress();
+      }
+
+      function resetQuiz() {
+        currentIdx = 0;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        clearProgress();
+
+        gsap.to(screens.result, {
+          opacity: 0, y: 30, scale: 0.96, duration: 0.45, ease: "power2.in",
+          onComplete: () => {
+            screens.result.classList.add('hidden');
+            screens.quiz.classList.remove('hidden');
+            gsap.set(screens.quiz, {opacity: 1, scale: 1});
+            shuffledQuestions = shuffleArray(questionsData);
+            renderQuestion();
+          }
+        });
+      }
+    </script>
+    <script src="../../reviews/reviews.js"></script>
+  </body>
+</html>

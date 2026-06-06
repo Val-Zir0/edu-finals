@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطأ 401 - يتطلب تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --primary-hover: #5A4FCF;
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Animated Background Particles */
+        .background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.2);
+            animation: float 20s infinite linear both;
+            opacity: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        /* Glass Container */
+        .glass-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        @keyframes popIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Error Code */
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7, #0984e3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(108,92,231,0.5)); }
+            100% { filter: drop-shadow(0 0 25px rgba(108,92,231,0.8)); }
+        }
+        /* Title and Description */
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #fff; }
+        p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
+        
+        /* Buttons */
+        .btn-group { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Technical Info */
+        .tech-info {
+            text-align: right;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .tech-header {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .tech-header:hover { background: rgba(255,255,255,0.05); }
+        .tech-content {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        .tech-content.open {
+            padding: 1rem;
+            max-height: 300px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .tech-item { margin-bottom: 0.5rem; }
+        .tech-item strong { color: #94a3b8; }
+        
+        @media (max-width: 480px) {
+            .error-code { font-size: 5rem; }
+            .glass-container { padding: 2rem; width: 95%; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="particles"></div>
+    <div class="glass-container">
+        <div class="error-code">401</div>
+        <h1>يتطلب تسجيل الدخول</h1>
+        <p>يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة.</p>
+
+        <div class="btn-group">
+            <a href="/" class="btn btn-primary">العودة للصفحة الرئيسية</a>
+            <button onclick="history.back()" class="btn btn-secondary">الرجوع للسابق</button>
+            <a href="https://fares-hamed.kesug.com/AR/" target="_blank" class="btn btn-secondary">التواصل مع المطور</a>
+        </div>
+
+        <div class="tech-info">
+            <div class="tech-header" onclick="toggleTechInfo()">
+                <span>معلومات تقنية للخطأ</span>
+                <span id="tech-icon">▼</span>
+            </div>
+            <div class="tech-content" id="tech-content">
+                <div class="tech-item"><strong>Error Code:</strong> 401 Unauthorized</div>
+                <div class="tech-item"><strong>URL:</strong> <span id="current-url"></span></div>
+                <div class="tech-item"><strong>Time:</strong> <span id="current-time"></span></div>
+                <button onclick="copyTechInfo()" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; margin-top: 1rem; width: 100%;">نسخ معلومات الخطأ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particles Animation
+        const bg = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            let particle = document.createElement('div');
+            particle.className = 'particle';
+            let size = Math.random() * 30 + 10;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 5) + 's';
+            bg.appendChild(particle);
+        }
+
+        // Tech Info
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('current-time').textContent = new Date().toLocaleString('ar-EG');
+
+        function toggleTechInfo() {
+            const content = document.getElementById('tech-content');
+            const icon = document.getElementById('tech-icon');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('open');
+                icon.textContent = '▲';
+            }
+        }
+
+        function copyTechInfo() {
+            const url = document.getElementById('current-url').textContent;
+            const time = document.getElementById('current-time').textContent;
+            const info = `Error: 401 Unauthorized\nURL: ${url}\nTime: ${time}`;
+            navigator.clipboard.writeText(info).then(() => {
+                alert('تم نسخ معلومات الخطأ بنجاح!');
+            });
+        }
+    </script>
+</body>
+</html>
