@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مراجعة مهارات الأتصال</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #06041a;
+        --bg2: #0f0933;
+        --bg3: #1b124a;
+        --primary: #4338ca;
+        --primary-light: #6366f1;
+        --gold: #f43f5e;
+        --gold-light: #fb7185;
+        --purple: #0ea5e9;
+        --purple-light: #38bdf8;
+        --text: #e8ecf1;
+        --text-muted: #8b99a8;
+        --ch1: #6366f1;
+        --ch2: #8b5cf6;
+        --ch3: #06b6d4;
+        --ch4: #d97706;
+        --ch5: #10b981;
+        --ch6: #ec4899;
+        --ch7: #ef4444;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      /* ═══════════════════════════════════════════
+         HERO
+      ═══════════════════════════════════════════ */
+      .hero {
+        background: var(--bg2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 60px 20px 40px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(244, 63, 94, 0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(244, 63, 94, 0.4);
+        color: var(--gold-light);
+        padding: 8px 24px;
+        border-radius: 24px;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        margin-bottom: 24px;
+        opacity: 0;
+      }
+.hero-badge a span {
+color: var(--gold-light);
+
+}
+      .hero h1 {
+        font-family: "Amiri", serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        color: var(--gold);
+        text-shadow: 0 0 60px rgba(244, 63, 94, 0.35), 0 4px 20px rgba(0, 0, 0, 0.4);
+        margin-bottom: 12px;
+        opacity: 0;
+      }
+
+      .hero > p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 35px;
+        opacity: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TOC
+      ═══════════════════════════════════════════ */
+      .toc {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .toc a {
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 12px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      .toc a:hover {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .toc a:nth-child(1) {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.4);
+        color: var(--ch1);
+      }
+      .toc a:nth-child(1):hover {
+        background: rgba(99, 102, 241, 0.2);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+      }
+
+      .toc a:nth-child(2) {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.4);
+        color: var(--ch2);
+      }
+      .toc a:nth-child(2):hover {
+        background: rgba(139, 92, 246, 0.2);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+      }
+
+      .toc a:nth-child(3) {
+        background: rgba(6, 182, 212, 0.1);
+        border-color: rgba(6, 182, 212, 0.4);
+        color: var(--ch3);
+      }
+      .toc a:nth-child(3):hover {
+        background: rgba(6, 182, 212, 0.2);
+        box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
+      }
+
+      .toc a:nth-child(4) {
+        background: rgba(217, 119, 6, 0.1);
+        border-color: rgba(217, 119, 6, 0.4);
+        color: var(--ch4);
+      }
+      .toc a:nth-child(4):hover {
+        background: rgba(217, 119, 6, 0.2);
+        box-shadow: 0 8px 25px rgba(217, 119, 6, 0.2);
+      }
+
+      .toc a:nth-child(5) {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: var(--ch5);
+      }
+      .toc a:nth-child(5):hover {
+        background: rgba(16, 185, 129, 0.2);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+      }
+
+      .toc a:nth-child(6) {
+        background: rgba(236, 72, 153, 0.1);
+        border-color: rgba(236, 72, 153, 0.4);
+        color: var(--ch6);
+      }
+      .toc a:nth-child(6):hover {
+        background: rgba(236, 72, 153, 0.2);
+        box-shadow: 0 8px 25px rgba(236, 72, 153, 0.2);
+      }
+
+      .toc a:nth-child(7) {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: var(--ch7);
+      }
+      .toc a:nth-child(7):hover {
+        background: rgba(239, 68, 68, 0.2);
+        box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+      }
+
+      /* ═══════════════════════════════════════════
+         CONTAINER
+      ═══════════════════════════════════════════ */
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 25px 20px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER
+      ═══════════════════════════════════════════ */
+      .chapter {
+        background: var(--bg2);
+        border-radius: 18px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .chapter:hover {
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .chapter-header {
+        padding: 22px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s ease;
+      }
+
+      .chapter-header:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .chapter-num {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        font-weight: 900;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      .chapter-header:hover .chapter-num {
+        transform: scale(1.1);
+      }
+
+      .chapter-header h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex: 1;
+      }
+
+      .toggle-icon {
+        font-size: 1.2rem;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-muted);
+      }
+
+      .chapter.open .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .chapter-body {
+        padding: 0 28px;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .chapter.open .chapter-body {
+        padding-bottom: 28px;
+        max-height: none;
+      }
+
+      /* ═══════════════════════════════════════════
+         SECTIONS
+      ═══════════════════════════════════════════ */
+      .section {
+        margin-bottom: 22px;
+      }
+
+      .section-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(244, 63, 94, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-title::before {
+        content: "◆";
+        font-size: 0.6rem;
+        color: var(--gold-light);
+      }
+
+      /* ═══════════════════════════════════════════
+         CARDS
+      ═══════════════════════════════════════════ */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px 18px;
+        border-right: 3px solid;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(4px);
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         LISTS
+      ═══════════════════════════════════════════ */
+      .item-list {
+        list-style: none;
+      }
+
+      .item-list li {
+        padding: 10px 14px;
+        margin-bottom: 8px;
+        background: var(--bg3);
+        border-radius: 10px;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .item-list li:hover {
+        transform: translateX(-4px);
+        background: rgba(27, 18, 74, 0.9);
+      }
+
+      .item-list li::before {
+        content: "✦";
+        font-size: 0.65rem;
+        margin-top: 5px;
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TWO-COL
+      ═══════════════════════════════════════════ */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        
+        
+      }
+ .card:not(.cards .card) {
+margin-top: 10px;
+width: fit-content;
+}
+
+
+      @media (max-width: 640px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         HIGHLIGHT
+      ═══════════════════════════════════════════ */
+      .highlight {
+        background: rgba(244, 63, 94, 0.07);
+        border: 1px solid rgba(244, 63, 94, 0.22);
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: 0.88rem;
+        margin-bottom: 16px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+
+      .highlight strong {
+        color: var(--gold-light);
+      }
+
+      .highlight .item-list {
+        margin-top: 8px;
+      }
+
+      /* ═══════════════════════════════════════════
+         STAGES
+      ═══════════════════════════════════════════ */
+      .stages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stage {
+        display: flex;
+        gap: 14px;
+        background: var(--bg3);
+        border-radius: 12px;
+        padding: 16px;
+        align-items: flex-start;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .stage:hover {
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .stage-num {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .stage-content h4 {
+        font-size: 0.93rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .stage-content p {
+        font-size: 0.83rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ═══════════════════════════════════════════
+         DIVIDER
+      ═══════════════════════════════════════════ */
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        margin: 20px 0;
+      }
+
+      /* ═══════════════════════════════════════════
+         TEXT HELPERS
+      ═══════════════════════════════════════════ */
+      .text-intro {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .text-conclusion-ch2 {
+        font-size: 0.85rem;
+        color: var(--ch2);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-conclusion-ch3 {
+        font-size: 0.85rem;
+        color: var(--ch3);
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .text-note {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 8px;
+      }
+
+      .text-critical {
+        font-size: 0.85rem;
+        color: var(--ch7);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .text-critical-ch4 {
+        font-size: 0.85rem;
+        color: var(--ch4);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .note-span {
+        color: var(--ch7);
+        font-weight: bold;
+      }
+
+      .cards-single-col {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        .cards-three-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .highlight-mt {
+        margin-top: 15px;
+      }
+
+      /* ═══════════════════════════════════════════
+         CHAPTER COLORS
+      ═══════════════════════════════════════════ */
+      /* CH1 — Blue */
+      .ch1 .chapter-header { border-top: 3px solid var(--ch1); }
+      .ch1 .chapter-num { background: rgba(99, 102, 241, 0.15); color: var(--ch1); }
+      .ch1 .card { border-color: var(--ch1); }
+      .ch1 .item-list li::before { color: var(--ch1); }
+      .ch1 .stage-num { background: rgba(99, 102, 241, 0.15); color: var(--ch1); }
+
+      /* CH2 — Purple */
+      .ch2 .chapter-header { border-top: 3px solid var(--ch2); }
+      .ch2 .chapter-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+      .ch2 .card { border-color: var(--ch2); }
+      .ch2 .item-list li::before { color: var(--ch2); }
+      .ch2 .stage-num { background: rgba(139, 92, 246, 0.15); color: var(--ch2); }
+
+      /* CH3 — Cyan */
+      .ch3 .chapter-header { border-top: 3px solid var(--ch3); }
+      .ch3 .chapter-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+      .ch3 .card { border-color: var(--ch3); }
+      .ch3 .item-list li::before { color: var(--ch3); }
+      .ch3 .stage-num { background: rgba(6, 182, 212, 0.15); color: var(--ch3); }
+
+      /* CH4 — Amber */
+      .ch4 .chapter-header { border-top: 3px solid var(--ch4); }
+      .ch4 .chapter-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+      .ch4 .card { border-color: var(--ch4); }
+      .ch4 .item-list li::before { color: var(--ch4); }
+      .ch4 .stage-num { background: rgba(217, 119, 6, 0.15); color: var(--ch4); }
+
+      /* CH5 — Green */
+      .ch5 .chapter-header { border-top: 3px solid var(--ch5); }
+      .ch5 .chapter-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+      .ch5 .card { border-color: var(--ch5); }
+      .ch5 .item-list li::before { color: var(--ch5); }
+      .ch5 .stage-num { background: rgba(16, 185, 129, 0.15); color: var(--ch5); }
+
+      /* CH6 — Pink */
+      .ch6 .chapter-header { border-top: 3px solid var(--ch6); }
+      .ch6 .chapter-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+      .ch6 .card { border-color: var(--ch6); }
+      .ch6 .item-list li::before { color: var(--ch6); }
+      .ch6 .stage-num { background: rgba(236, 72, 153, 0.15); color: var(--ch6); }
+
+      /* CH7 — Red */
+      .ch7 .chapter-header { border-top: 3px solid var(--ch7); }
+      .ch7 .chapter-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+      .ch7 .card { border-color: var(--ch7); }
+      .ch7 .item-list li::before { color: var(--ch7); }
+      .ch7 .stage-num { background: rgba(239, 68, 68, 0.15); color: var(--ch7); }
+
+      /* ═══════════════════════════════════════════
+         FOOTER
+      ═══════════════════════════════════════════ */
+      footer {
+        text-align: center;
+        padding: 35px 20px;
+        color: var(--text-muted);
+        font-size: 0.84rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 30px;
+        background: var(--bg2);
+      }
+
+      footer span {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* ═══════════════════════════════════════════
+         RESPONSIVE
+      ═══════════════════════════════════════════ */
+      @media (max-width: 640px) {
+        .hero {
+          padding: 50px 16px 35px;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          padding: 16px 12px;
+        }
+
+        .chapter-header {
+          padding: 16px 18px;
+        }
+
+        .chapter-body {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .chapter.open .chapter-body {
+          padding-bottom: 20px;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .toc a {
+          font-size: 0.78rem;
+          padding: 8px 12px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+         SCROLLBAR
+      ═══════════════════════════════════════════ */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--bg3);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 153, 168, 0.3);
+      }
+         ::selection {
+        background: none;
+        color: none;
+      }
+
+      /* ═══════════════════════════════════════════
+   إعدادات الطباعة (منع انقسام العناصر)
+═══════════════════════════════════════════ */
+@media print {
+  .chapter, 
+  .section, 
+  .card, 
+  .stage, 
+  .highlight, 
+  .item-list li {
+    page-break-inside: avoid; /* للمتصفحات القديمة */
+    break-inside: avoid;      /* للمتصفحات الحديثة */
+  }
+}
+    </style>
+
+      <link rel="stylesheet" href="quiz-style.css" />
+      <link rel="stylesheet" href="../../reviews/reviews.css" />
+  </head>
+
+
+<body data-subject="solook-tanzemy">
+  
+  <div class="hero">
+      <div class="hero-badge">
+       تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      </div>
+
+      <h1>مراجعة مهارات الأتصال</h1>
+      <p>ملخص شامل لجميع المحاضرات</p>
+      <nav class="toc">
+        <a href="#ch1">الفصل ١ — مدخل الي السلوك التنظيمي</a>
+        <a href="#ch2">الفصل ٢ — السلوك الانساني والنظرية الإدارية</a>
+        <a href="#ch3">الفصل ٣ — الشخصية داخل بيئة العمل</a>
+        <a href="#ch4">الفصل ٤ — جماعات العمل وتماسك الجماعة</a>
+        <a href="#ch5">الفصل ٥ — الثقافة التنظيمية و الانتماءالوظيفي</a>
+        <a href="#ch6">الفصل ٦ — ضغوط العمل و مسبباتها و علاجها</a>
+      </nav>
+    </div>
+
+    <div class="container">
+
+
+      <!-- CHAPTER 1 -->
+<div class="chapter ch1" id="ch1">
+  <div class="chapter-header">
+    <div class="chapter-num">١</div>
+    <h2>الفصل الأول: السلوك التنظيمي ومدخل إلى علم المنظمات</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: مفهوم السلوك التنظيمي وأهدافه</div>
+      <div class="highlight">
+        <strong>السلوك التنظيمي:</strong> هو دراسة علمية منهجية لكيفية تصرف وتفاعل الأفراد والجماعات داخل البيئة التنظيمية. وهو يعتمد على معارف مستمدة من علم النفس، وعلم الاجتماع، وعلم الإنسان (الأنثروبولوجيا).
+      </div>
+      
+      <p class="text-intro">يركز السلوك التنظيمي على ثلاثة مستويات مترابطة:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">١. الفرد</div>
+          <p>دراسة دوافع الفرد، شخصيته، واتجاهاته داخل العمل.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٢. الجماعة</div>
+          <p>دراسة ديناميكيات الفريق، كيفية التفاعل، والقيادة.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٣. المنظمة</div>
+          <p>دراسة الثقافة التنظيمية، الهيكل، والبيئة العامة.</p>
+        </div>
+      </div>
+
+      <p class="text-intro" style="margin-top: 15px;">الأهداف الرئيسية للسلوك التنظيمي:</p>
+      <div class="two-col">
+        <ul class="item-list">
+          <li><strong>الفهم:</strong> فهم أسباب تصرفات الموظفين.</li>
+          <li><strong>التنبؤ:</strong> التنبؤ بسلوكياتهم مستقبلاً.</li>
+          <li><strong>التأثير:</strong> التأثير في السلوك وتوجيهه لتحقيق أهداف المنظمة.</li>
+        </ul>
+        <div class="highlight" style="margin-bottom: 0;">
+          <span class="note-span">الأساس الظرفي:</span><br>
+          تختلف الإدارة الفعالة باختلاف السياق والظروف، ولا توجد حلول جاهزة تصلح لكل المواقف.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: مفهوم المنظمة وتكوينها</div>
+      <div class="highlight">
+        <strong>المنظمة:</strong> نظام متكامل هادف ومتفاعل من العلاقات المترابطة، يوضح كيف يحقق أفراد المنظمة أهدافها من خلال تقسيم العمل، آليات التنسيق، وحجم وطريقة اتخاذ القرارات.
+      </div>
+      
+      <p class="text-intro">تُصنف المنظمات تبعاً لطبيعة تكوينها إلى:</p>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">المنظمات الطبيعية</div>
+          <p>تتكون بصورة تلقائية، يجد الفرد نفسه عضواً فيها بحكم انتمائه (مثل: الأسرة، القبيلة، الأمة).</p>
+        </div>
+        <div class="card">
+          <div class="card-title">المنظمات المُكونة</div>
+          <p>تتكون بغرض تحقيق أهداف معينة وإشباع حاجات إنسانية (مثل: الشركات، المنظمات العامة والخاصة).</p>
+        </div>
+      </div>
+
+      <p class="text-intro" style="margin-top: 15px;">من أبرز خصائص المنظمات الفعالة:</p>
+      <ul class="item-list">
+        <li><strong>القدرة على التعلم:</strong> التكيف مع البيئة المفتوحة وتلبية رغبات العملاء.</li>
+        <li><strong>نظام اتصال فعال:</strong> إتاحة المعلومات في الوقت المناسب لاتخاذ القرارات.</li>
+        <li><strong>المرونة والإبداع:</strong> مواكبة التغيير المستمر في التكنولوجيا وأذواق المستهلكين.</li>
+        <li><strong>التكامل الوظيفي والانسجام:</strong> منع تعارض الأهداف الفرعية مع الأهداف العامة وخلق بيئة عمل محفزة.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: بيئة المنظمة (الداخلية والخارجية)</div>
+      <p class="text-intro">المنظمة نظام مفتوح يتفاعل باستمرار مع بيئته. تصنف هذه البيئة إلى عدة أنواع:</p>
+      
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>البيئة العامة والبيئة الخاصة</h4>
+            <p><strong>العامة:</strong> الإطار الجغرافي والثقافي والاقتصادي الذي تعمل فيه جميع المنظمات.<br>
+            <strong>الخاصة:</strong> علاقة المنظمة مع الجهات ذات التأثير المباشر (المنافسون، الموردون، المستهلكون).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>البيئة الخارجية والبيئة الداخلية</h4>
+            <p><strong>الخارجية:</strong> تقع خارج المنظمة (اقتصادية، اجتماعية).<br>
+            <strong>الداخلية:</strong> داخل إطار المنظمة (النواحي الفنية والإجرائية لأداء الأعمال).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>البيئة المستقرة والبيئة المتغيرة</h4>
+            <p><strong>المستقرة:</strong> تستمر على وتيرة واحدة (مثل المناخ والتضاريس).<br>
+            <strong>المتغيرة:</strong> تتسم بالتغير السريع (مثل التكنولوجيا، أسعار العملات، والمنافسة).</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-intro" style="margin-top: 15px;">عناصر البيئة وتأثيراتها:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">عناصر البيئة العامة</div>
+          <p>تشمل الثقافة (عادات وتقاليد)، العوامل الاجتماعية، العوامل الاقتصادية (التضخم، البطالة)، والقانونية والتكنولوجية.</p>
+        </div>
+        <div class="card" style="border-color: var(--ch7);">
+          <div class="card-title" style="color: var(--ch7);">عناصر البيئة الخاصة</div>
+          <p>تشمل المنافسين على الموارد، المستهلكين وخصائصهم، الموردين (شركاء المدخلات)، والمنظمات العمالية (النقابات).</p>
+        </div>
+      </div>
+
+      <div class="highlight highlight-mt">
+        <strong>العلاقة التبادلية الاعتمادية:</strong><br>
+        تعتمد المنظمة لضمان نجاحها واستمرارها على درجة تكيفها مع بيئتها، حيث تأخذ منها "المدخلات" (قوى عاملة، تمويل، مواد خام) وتقدم إليها "المخرجات" (سلع، خدمات)، مع الالتزام بالقيود والمحددات البيئية (لوائح، أعراف).
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(1)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 2 -->
+<div class="chapter ch2" id="ch2">
+  <div class="chapter-header">
+    <div class="chapter-num">٢</div>
+    <h2>الفصل الثاني: السلوك الإنساني والنظريات الإدارية</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: السلوك الإنساني والسلوك التنظيمي</div>
+      <p class="text-intro">الهدف من دراسة السلوك الإنساني والتنظيمي هو تحسين الأداء، والإنتاجية، والفعالية الإدارية، والرضاء الوظيفي للعاملين.</p>
+      
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">السلوك الإنساني (Human Behavior)</div>
+          <ul class="item-list">
+            <li>مفهوم شامل يدرس تصرفات الفرد في مواقف مختلفة (اجتماعية، نفسية، اقتصادية).</li>
+            <li>يهتم بالدوافع، الاتجاهات، القيم، والشخصية (فهم الإنسان بشكل عام).</li>
+            <li>مجال واسع يشمل علم النفس، علم الاجتماع، والأنثروبولوجيا.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">السلوك التنظيمي (Organizational Behavior)</div>
+          <ul class="item-list">
+            <li>دراسة تطبيقية ومحددة لسلوك الأفراد والجماعات داخل بيئة العمل (المؤسسات).</li>
+            <li>يهتم بموضوعات كالقيادة، التحفيز، الاتصال، الثقافة التنظيمية.</li>
+            <li>هدفه تحسين الأداء وزيادة الفعالية التنظيمية.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top: 15px;">
+        <span class="note-span">أوجه التشابه:</span><br>
+        كلاهما يدرس الإنسان وتصرفاته، يعتمدان على العلوم الاجتماعية، ويستخدمان أساليب البحث العلمي لفهم السلوك.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: السلوك الإنساني في نظريات الإدارة</div>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>المدرسة الكلاسيكية</h4>
+            <p><strong>نظرية الإدارة العلمية (فردريك تيلر):</strong> ركزت على زيادة الإنتاج وتقليل التكلفة كمعيار للنجاح، ولم تهتم بالديمقراطية أو النواحي الاجتماعية للعامل.<br>
+            <strong>نظرية المبادئ الإدارية (هنري فايول):</strong> وضع ١٤ مبدأ للسيطرة على السلوك من خلال ضوابط الأداء (مثل: تقسيم العمل، السلطة والمسؤولية، وحدة القيادة، المركزية، والمكافآت العادلة).<br>
+            <strong>نظرية البيروقراطية (ماكس فيبر):</strong> تفترض سيطرة الاعتبارات الشخصية، لذا عالجتها بنظام رسمي يعتمد على التخصص، التسلسل الرئاسي، سيطرة الأنظمة والقواعد المكتوبة، والعلاقات غير الشخصية.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>مدرسة العلاقات الإنسانية</h4>
+            <p>دعت للاعتراف بالجماعات الصغيرة داخل المؤسسة، والتعاطف مع العاملين كشركاء لا كأُجراء. وأوضحت أن للعاملين تطلعات قد تتعارض مع أهداف المنظمة، مما يتطلب مناقشتها معهم لاتخاذ قرارات تُشعرهم بالكرامة والإنسانية لزيادة العطاء.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>المدرسة السلوكية</h4>
+            <p>نظرت لسلوك الأفراد بإيجابية؛ فالفرد لا يكره العمل بل يسعى لتحمل المسؤولية ليكون ناجحاً، ويرغب في الاستقلالية ويكره الرقابة الكثيفة والمباشرة، ويسعى لتحقيق تقابل بين أهدافه وأهداف المنظمة.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٤</div>
+          <div class="stage-content">
+            <h4>مدرسة النظم</h4>
+            <p>تدرس المنظمة كنظام يتكون من: <strong>المدخلات</strong> (الإمكانيات من البيئة)، <strong>العملية الإدارية</strong> (النشاطات لتحويل المدخلات)، <strong>المخرجات</strong> (السلع والخدمات)، و<strong>التغذية العكسية</strong> (الاتصال التراجعي لضبط المدخلات بناءً على أثر المخرجات).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: العوامل والمحددات المؤثرة في السلوك</div>
+      <p class="text-intro">العوامل المحددة لسلوك الإنسان بشكل عام تشمل: العوامل النفسية، الاجتماعية، الحضارية، التنظيمية (كنظم الحوافز والإشراف)، والاقتصادية.</p>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">المحددات النفسية (للسلوك الفردي)</div>
+          <ul class="item-list">
+            <li><strong>التعلم:</strong> التغير في الاستجابة بتأثير الخبرة المكتسبة.</li>
+            <li><strong>الإدراك:</strong> طريقة فهم الفرد للواقع وللعمل الذي يقوم به.</li>
+            <li><strong>الدوافع:</strong> الحاجات والرغبات غير المشبعة المؤثرة على التفكير.</li>
+            <li><strong>الشخصية:</strong> التنظيم الثابت للطباع والمزاج الذي يحدد تميز الفرد.</li>
+            <li><strong>القدرات:</strong> المهارات اليدوية، الذهنية، البدنية، والوراثية.</li>
+            <li><strong>الاتجاهات:</strong> درجة الاستجابة وتقييم المواقف.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">المحددات الاجتماعية (للسلوك الجماعي)</div>
+          <ul class="item-list">
+            <li><strong>الجماعات:</strong> تفاعل الأفراد وإحساسهم بالانتماء لجماعة واحدة.</li>
+            <li><strong>القيادة:</strong> توجيه سلوك الآخرين والتأثير في أفكارهم.</li>
+            <li><strong>الاتصال:</strong> تبادل المعلومات للتأثير على الطرف الآخر.</li>
+            <li><strong>القيم:</strong> المعتقدات الثابتة نسبياً التي تحدد السلوك المقبول والمرفوض.</li>
+            <li><strong>البيئة والثقافة التنظيمية:</strong> الموروث الحضاري والقيمي والبيئة المحيطة التي تحكم تصرفات أفراد المنظمة.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(2)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+      <!-- CHAPTER 3 -->
+<div class="chapter ch3" id="ch3">
+  <div class="chapter-header">
+    <div class="chapter-num">٣</div>
+    <h2>الفصل الثالث: الشخصية داخل بيئة العمل</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: مفهوم الشخصية وخصائصها</div>
+      <div class="highlight">
+        <strong>تعريف الشخصية:</strong> هي النظام المتكامل من الخصائص المميزة للفرد والعلاقة بين هذه الخصائص، والتي تساعد الفرد على مواءمة وتكييف نفسه مع الآخرين والبيئة من حوله.
+      </div>
+      
+      <p class="text-intro">الخصائص الأساسية التي يجب توافرها في مفهوم الشخصية:</p>
+      <ul class="item-list">
+        <li><strong>التمايز:</strong> يوجد اختلاف وتمايز بين الناس، وكل فرد تتميز خصائص شخصيته عن غيره.</li>
+        <li><strong>التعددية:</strong> تحتوي الشخصية على العديد من المكونات من حيث (النوع ودرجتها).</li>
+        <li><strong>التفاعل البيئي:</strong> تأخذ مكونات الشخصية طبيعتها من تفاعلها واحتكاكها بالبيئة مثل (الأسرة).</li>
+        <li><strong>التكامل:</strong> مكونات الشخصية عبارة عن نظام متكامل يفسر كيف يسلك الفرد تجاه نفسه، الآخرين، والبيئة.</li>
+      </ul>
+      
+      <div class="highlight" style="margin-top: 15px;">
+        <span class="note-span">سؤال هام: هل يمكن الاعتماد على السمات (مثل: انفعالي، جاد، خاضع، واثق) للتنبؤ بسلوك الناس داخل العمل؟</span><br>
+        الإجابة: <strong>يصعب ذلك</strong>؛ لأن سمات الفرد تكون محصلة لمجموعة معقدة ومتداخلة من السمات، مما يجعل تفسير السلوك والتنبؤ به أمراً صعباً بالاعتماد على سمة واحدة.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: مكونات وجوانب الشخصية الستة</div>
+      <p class="text-intro">يتفق علماء النفس على أن الشخصية تتشكل من المكونات الأساسية التالية:</p>
+
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>القيم (Values)</h4>
+            <p>هي ما ينظر من خلالها الفرد إلى ما يجب أن يكون عليه سلوكه وسلوك الآخرين (مثل الأمانة، والمساواة). ومن أمثلتها في العمل: علاقة العمل بالدين (كمصدر للمكافأة)، مدى الالتزام والمواظبة، واحترام قوانين ولوائح العمل.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>الانفعالات (Emotions)</h4>
+            <p>تشير إلى خصائص الحالة المزاجية للفرد ومدى استقراره الانفعالي أو تقلبه. الحالة الانفعالية والمزاجية لها تأثير مباشر وواضح على الأداء والتركيز في العمل.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>الحاجات (Needs)</h4>
+            <p>هي الشعور بالنقص والعوز لشيء معين، مما يدفع الفرد لسلوك معين لسد هذا النقص. تنقسم إلى: <strong>حاجات وقتية</strong> (طعام، شراب، راحة)، و<strong>حاجات مستقرة</strong> (الإنجاز، القوة والنفوذ، الانتماء).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٤</div>
+          <div class="stage-content">
+            <h4>القدرات والاستعدادات (Abilities & Aptitudes)</h4>
+            <p><strong>القدرات:</strong> الإمكانيات الحالية للفرد (عقلية/ذكاء، ميكانيكية/فهم الأبعاد، حركية/استجابة عضلية).<br>
+            <strong>الاستعدادات:</strong> الإمكانيات المرتقبة (كامنة يمكن إطلاقها بتوفير الظروف).<br>
+            <strong>المهارات:</strong> الاستخدام الفعلي للقدرات في الواقع العملي والتطبيقي.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٥</div>
+          <div class="stage-content">
+            <h4>الاتجاهات النفسية (Attitudes)</h4>
+            <p>نظام المعتقدات والمفاهيم والمشاعر التي تؤدي إلى سلوك معين نحو مواقف معينة (مثل: الرضا عن العمل، عدالة الأجور، الروح المعنوية). ولها دور أساسي في التكيف والمواءمة الاجتماعية. يتوقف تغييرها على (بساطة الاتجاه، صفات المغيّر والمُتغيّر، وتوافر الدوافع).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٦</div>
+          <div class="stage-content">
+            <h4>الاهتمامات والميول (Interests)</h4>
+            <p>الرغبة أو عدم الرغبة لشيء معين، وتؤثر في التوجيه النفسي للأفراد لأداء أعمال تتناسب مع ميولهم. تقاس باختبارات شهيرة مثل: <strong>اختبار سترونج</strong> (600 بند للحب/الكره)، و<strong>اختبار كودر للميول</strong> (500 بند لترتيب الأنشطة).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(3)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+      <!-- CHAPTER 4 -->
+<div class="chapter ch4" id="ch4">
+  <div class="chapter-header">
+    <div class="chapter-num">٤</div>
+    <h2>الفصل الرابع: جماعات العمل وتماسك الجماعة</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: ماهية الجماعات وأنواعها</div>
+      <div class="highlight">
+        <strong>تعريف الجماعة:</strong> هي عبارة عن مجموعة من اثنين أو أكثر من الأفراد المعتمدين على بعضهم والمتفاعلين في أداء وظائف معينة، لتحقيق أهداف مشتركة.
+      </div>
+      
+      <p class="text-intro">أهم أنواع الجماعات داخل بيئة العمل:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">١. الجماعات الرسمية وغير الرسمية</div>
+          <p><strong>الرسمية:</strong> تأخذ شرعيتها من المنظمة وتهدف لتحقيق أهدافها.<br>
+          <strong>غير الرسمية:</strong> تتكون عفوياً وتلقائياً ولا ترتبط بالضرورة بأهداف المنظمة.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٢. الجماعات الوظيفية</div>
+          <p>جماعات رسمية تتحدد علاقاتها بالهيكل التنظيمي (رئيس ومرؤوسين) لأداء العمل الوظيفي اليومي (مثل: الإدارات والأقسام).</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٣. جماعات المهام الخاصة</div>
+          <p>يتم تشكيلها لأداء مهام مؤقتة أو دائمة حسب احتياجات العمل (مثل: اللجان، فرق تخطيط المشروعات، ولجان حل المشاكل).</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٤. جماعات الصداقة والاهتمامات</div>
+          <p>تنشأ لتشابه خصائص الأفراد (سن، اهتمامات). قد تكون رسمية (كنقابة العمال) أو غير رسمية (كالشلل والتحالفات).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: أسباب تكوين الجماعات وتماسكها</div>
+      <div class="two-col">
+        <ul class="item-list">
+          <li>إنجاز أعمال يصعب حلها بواسطة فرد واحد.</li>
+          <li>التشابه في الصفات والاهتمامات.</li>
+          <li>قوة الاتصالات والعلاقات الشخصية.</li>
+          <li>الحماية من المخاطر (في الاتحاد قوة).</li>
+          <li>إشباع احتياجات الانتماء والترابط الجماعي.</li>
+        </ul>
+        <div class="highlight" style="margin-bottom: 0;">
+          <span class="note-span">نظرية التبادل:</span><br>
+          يفسر بقاء الأفراد في الجماعة بمعادلة: (إشباع الحاجات + الفائدة العائدة) يجب أن تكون أكبر من أو تساوي (مساهمات الأفراد من وقت وجهد).
+        </div>
+      </div>
+
+      <p class="text-intro" style="margin-top: 15px;">العوامل التي تزيد من تماسك الجماعة:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">عوامل داخلية</div>
+          <p>الإجماع على الأهداف، صغر حجم الجماعة، كثافة التفاعلات، جاذبية الأفراد لبعضهم، واستقرار الجماعة.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">عوامل خارجية</div>
+          <p>التنافس مع جماعات أخرى، الانعزال الجغرافي أو الاجتماعي، والضغوط والمخاطر الخارجية (مثل ظهور رئيس جديد أو بيئة عمل غير آمنة).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: نتائج تماسك الجماعة</div>
+      <p class="text-intro">تؤثر الجماعة المتماسكة بشكل كبير على أعضائها من خلال:</p>
+      
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>معايير العمل (Norms)</h4>
+            <p>تشمل أنماط التصرف وقواعد الأداء (مثل الالتزام بنوع الملابس، الألقاب، ومرونة الوقت). <strong>الإنتاجية العالية</strong> تتحقق عندما يكون هناك تماسك عالي للجماعة مدعوماً بتأييد كامل من الإدارة.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>الأدوار (Roles)</h4>
+            <p><strong>الدور المتوقع:</strong> المهام المكتوبة في الوصف الوظيفي.<br>
+            <strong>الدور المدرك:</strong> ما يفهمه ويشعر الفرد أنه يجب أداؤه.<br>
+            <strong>الدور المعمول به:</strong> المهام التي يقوم بها الفرد فعلياً.<br>
+            <span class="text-critical-ch4">ينتج عن اختلافها:</span> <em>غموض الدور</em> (عدم الفهم والوضوح) و <em>تعارض الدور</em> (تلقي تعليمات متضاربة وزيادة الأعباء مما يسبب توتراً عصبياً).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>المرتبة (Status) و النتائج السلبية</h4>
+            <p>تحدد الجماعة المكانة والنفوذ لأعضائها. من <strong>النتائج السلبية</strong> للتماسك الشديد: فقدان شخصية الفرد المستقلة (تفكير الجماعة Groupthink)، واحتمالية عمل الجماعة ضد مصلحة المنظمة (كالشلل وتخفيض الإنتاج).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: الفريق مقابل الجماعة</div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">جماعة العمل (Group)</div>
+          <ul class="item-list">
+            <li>الأداء يعتمد على مجهود الأفراد بشكل منفصل.</li>
+            <li>المسئولية عن النواتج فردية.</li>
+            <li>الأفراد مهتمون بالأهداف المشتركة فقط.</li>
+            <li>الأفراد يستجيبون لتعليمات الإدارة.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color: var(--ch4);">
+          <div class="card-title" style="color: var(--ch4);">فريق العمل (Team)</div>
+          <ul class="item-list">
+            <li>الأداء يعتمد على التناغم والتآزر بين الأفراد.</li>
+            <li>تضامن ومسئولية جماعية عن النواتج.</li>
+            <li>الأفراد يتعهدون التزاماً ذاتياً بتنفيذ الأهداف.</li>
+            <li>الاستجابة تنبع من التوجهات الذاتية للفريق.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(4)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+      <!-- CHAPTER 5 -->
+
+<div class="chapter ch5" id="ch5">
+  <div class="chapter-header">
+    <div class="chapter-num">٥</div>
+    <h2>الفصل الخامس: الثقافة التنظيمية والانتماء الوظيفي</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: مفهوم الثقافة التنظيمية وأنواعها</div>
+      <div class="highlight">
+        <strong>الثقافة التنظيمية:</strong> هي معاني مشتركة تنتقل بين الأفراد من خلال اللغة، القيم، المشاعر، والاتجاهات لتحديد أساليب السلوك وطرق إدراك المواقف داخل المنظمة. وهي تُعد من الملامح المميزة للمنظمة ومصدر فخر واعتزاز للعاملين.
+      </div>
+      
+      <p class="text-intro">تختلف الثقافة التنظيمية باختلاف بيئة العمل، ومن أبرز أنواعها:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">ثقافة البيروقراطية والدور</div>
+          <p>تركز الأولى على التسلسل الهرمي، التحكم، والالتزام. بينما تركز الثانية على التخصص الوظيفي وتوفير الأمن وثبات الأداء أكثر من التركيز على الفرد.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">الثقافة الإبداعية والمساندة</div>
+          <p><strong>الإبداعية:</strong> تشجع الجرأة والمخاطرة في القرارات.<br><strong>المساندة:</strong> تركز على الجانب الإنساني، الصداقة، جو الأسرة، الثقة، والمساواة.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">ثقافة العمليات والمهمة</div>
+          <p><strong>العمليات:</strong> تهتم بطريقة إنجاز العمل (الحذر والاهتمام بالتفاصيل).<br><strong>المهمة:</strong> تركز على النتائج وتحقيق الأهداف بأقل التكاليف.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: خصائص الثقافة التنظيمية ووظائفها</div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">خصائص الثقافة التنظيمية</div>
+          <ul class="item-list">
+            <li><strong>الإنسانية:</strong> العنصر الإنساني هو مصدرها الرئيسي.</li>
+            <li><strong>الاستمرارية والتراكمية:</strong> تحتفظ بكيانها لأجيال وتتراكم سماتها عبر الزمن.</li>
+            <li><strong>الانتقائية:</strong> انتقاء الخبرات لتكوين رأس المال الفكري.</li>
+            <li><strong>القابلية للانتشار والتغير:</strong> تنتقل بين الأفراد وتتغير استجابة للأحداث لإشباع الاحتياجات الجديدة.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color: var(--ch5);">
+          <div class="card-title" style="color: var(--ch5);">أهم وظائفها داخل المنظمة</div>
+          <ul class="item-list">
+            <li>تقديم إطار للفهم المشترك وتحديد السلوكيات المتوقعة.</li>
+            <li>تشكيل نظام للرقابة التنظيمية يستند لمعايير الجماعة.</li>
+            <li>تحقيق الاستقرار الداخلي وتنمية الشعور بالهوية (الذاتية).</li>
+            <li>خلق الالتزام والولاء للتغلب على المصالح الذاتية.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: الانتماء الوظيفي وأنواعه ومراحله</div>
+      <div class="highlight">
+        <strong>الانتماء الوظيفي:</strong> هو الرغبة القوية للبقاء عضواً في المنظمة، والاستعداد لبذل جهود كبيرة لصالحها، والارتباط النفسي الذي يدفع الفرد للاندماج وتبني قيم المنظمة.
+      </div>
+
+      <p class="text-intro">أنواع انتماء العامل في المنظمة:</p>
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>الانتماء العاطفي</h4>
+            <p>يُبنى على الشعور القوي بالاندماج وتطابق قيم الموظف مع قيم المنظمة (البقاء لأنهم <strong>يريدون</strong> ذلك).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>الانتماء المستمر</h4>
+            <p>يعتمد على حجم الاستثمارات (الوقت، الجهد، المزايا المكتسبة) التي تمنع الموظف من البحث عن بديل (البقاء لأنهم <strong>يحتاجون</strong> لذلك لحماية مكتسباتهم).</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>الانتماء المعياري</h4>
+            <p>يعكس الإحساس بالاستمرارية نتيجة المشاركة الإيجابية والمساهمة في وضع الأهداف (البقاء لأنهم يشعرون <strong>بالتزام</strong> أدبي بذلك).</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-intro" style="margin-top: 15px;">مراحل تطور الانتماء:</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">١. ما بعد التعيين المباشر</div>
+          <p>فترة التجربة (نحو عام). السعي للحصول على القبول والأمن الوظيفي.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٢. مرحلة العمل والإنجاز</div>
+          <p>من (2-4) سنوات. تأكيد الإنجاز، الخوف من الفشل، وبداية ظهور قيم الانتماء.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">٣. مرحلة الثقة بالمنظمة</div>
+          <p>السنة الخامسة فما فوق. تعزز الاتجاهات والانتقال لمرحلة النضج الوظيفي.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: تسرب العاملين وكيفية تعزيز الانتماء</div>
+      <p class="text-intro">غياب الانتماء يؤدي إلى <strong>تسرب العاملين</strong> (ترك الوظيفة)، مما ينتج عنه نتائج سلبية خطيرة مثل:</p>
+      <ul class="item-list">
+        <li><strong>التكاليف المرتفعة:</strong> مصاريف الإعلان، الإعداد، والتدريب للبدائل.</li>
+        <li><strong>تعطيل الأداء وارتباك الاتصالات:</strong> فقدان الكفاءات يؤثر على تماسك الجماعة وتكاملها.</li>
+        <li><strong>انخفاض المعنويات:</strong> إحباط الموظفين الباقين عند رؤية زملائهم يتركون العمل.</li>
+      </ul>
+
+      <div class="highlight highlight-mt">
+        <strong>آليات زيادة الانتماء الوظيفي:</strong><br>
+        تحسين المناخ التنظيمي وتوفير بيئة مستقرة - المساعدة في إشباع الحاجات الإنسانية (الأمن، الاحترام، وليس العائد المادي فقط) - زيادة إشراك العاملين في التخطيط ليشعروا بأن المنظمة تعبر عنهم "نحن" - توفير نظام حوافز مزدوج (مادي ومعنوي) - الوضوح التام للأهداف وتحديد الأدوار لتجنب الصراع والغموض.
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(5)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+      <!-- CHAPTER 6 -->
+<div class="chapter ch6" id="ch6">
+  <div class="chapter-header">
+    <div class="chapter-num">٦</div>
+    <h2>الفصل السادس: ضغوط العمل ومسبباتها وعلاجها</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">أولاً: مسببات ضغوط العمل</div>
+      <p class="text-intro">تنشأ ضغوط العمل من أسباب كثيرة، ويعتمد ذلك بشكل كبير على إدراك الفرد وتفاعله مع بيئة العمل. من أهم المسببات:</p>
+      
+      <div class="tow-col">
+            <div class="card">
+          <div class="card-title">مسببات متعلقة بالدور وبيئة العمل</div>
+          <ul class="item-list">
+            <li><strong>صراع الأدوار:</strong> تلقي توقعات أو تعليمات متعارضة من الرؤساء.</li>
+            <li><strong>غموض الدور:</strong> عدم وضوح المهام والاختصاصات.</li>
+            <li><strong>اختلال ظروف العمل المادية:</strong> سوء الإضاءة، الضوضاء، والحرارة.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">مسببات متعلقة بالعمل والتنظيم</div>
+          <ul class="item-list">
+            <li><strong>صعوبة العمل:</strong> زيادة كمية العمل عن الوقت المتاح أو القدرات.</li>
+            <li><strong>مشاكل الخضوع للسلطة:</strong> التوتر الناتج عن الامتثال الصارم للرؤساء.</li>
+            <li><strong>عدم توافق الشخصية مع التنظيم:</strong> تعارض رغبة الفرد في الحرية مع البيروقراطية.</li>
+            <li><strong>التنافس على الموارد:</strong> الصراع المستمر للحصول على الموارد المحددة.</li>
+          </ul>
+        </div>
+    
+        <div class="card">
+          <div class="card-title">مسببات شخصية واجتماعية</div>
+          <ul class="item-list">
+            <li><strong>اختلال العلاقات الشخصية:</strong> الصراعات، المناورات السياسية، أو العزلة.</li>
+            <li><strong>الأحداث الشخصية:</strong> تأثير المشاكل العائلية، الزواج، أو المرض على العمل.</li>
+            <li><strong>تأثير الشخصية:</strong> الشخصيات الحادة (التي تعمل بلا توقف) تتحمل ضغوطاً عالية لكنها تنهار بقوة عند الأزمات.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثانياً: تأثير ضغوط العمل على الأداء</div>
+      <div class="highlight">
+        لا تُعد جميع الضغوط سلبية دائماً؛ فالمقدار المناسب منها يُحفز الإنجاز، بينما المقدار المفرط يؤدي لنتائج عكسية.
+      </div>
+      
+      <div class="two-col">
+        <div class="card" style="border-color: var(--ch5);">
+          <div class="card-title" style="color: var(--ch5);">مقدار "مناسب" من الضغوط</div>
+          <p>يؤدي إلى <strong>أداء عالي</strong> يتمثل في:<br>
+          - حلول مبتكرة.<br>
+          - دافعية عالية للعمل.<br>
+          - انضباط عالي في الأداء.</p>
+        </div>
+        <div class="card" style="border-color: var(--ch7);">
+          <div class="card-title" style="color: var(--ch7);">مقدار "غير مناسب" (زائد) من الضغوط</div>
+          <p>يؤدي إلى <strong>أداء منخفض</strong> يتمثل في:<br>
+          - عدم القدرة على التركيز.<br>
+          - انخفاض الدافعية.<br>
+          - عدم الانضباط واللامبالاة.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">ثالثاً: طرق علاج ضغوط العمل (على مستوى الفرد)</div>
+      <p class="text-intro">تعتمد فعالية العلاج على إرادة الفرد واقتناعه بالطريقة المستخدمة. من أبرز الطرق الفردية:</p>
+      
+      <div class="stages">
+        <div class="stage">
+          <div class="stage-num">١</div>
+          <div class="stage-content">
+            <h4>التأمل والاسترخاء</h4>
+            <p><strong>التأمل:</strong> تصفية الذهن وتحقيق الهدوء العقلي (مثل التدبر والصلاة).<br>
+            <strong>الاسترخاء:</strong> إراحة الجسم والتنفس العميق لتهدئة الجهاز العصبي.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٢</div>
+          <div class="stage-content">
+            <h4>التدريب على تتبع تغيرات الجسم (Biofeedback)</h4>
+            <p>استخدام أجهزة إلكترونية تقيس مؤشرات التوتر (سرعة النبض، ضغط الدم، توتر العضلات) لتنبيه الفرد، مما يساعده على التحكم الإرادي في استرخائه وتخفيض هذه المؤشرات.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">٣</div>
+          <div class="stage-content">
+            <h4>التركيز والنظام الغذائي</h4>
+            <p><strong>التركيز:</strong> الانشغال التام بنشاط ذي معنى أو هواية لصرف المخ عن مصادر التوتر.<br>
+            <strong>النظام الغذائي والرياضة:</strong> تناول طعام صحي متكامل لدعم وظائف الجسم وحرق السعرات الناتجة عن التوتر بالرياضة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title">رابعاً: الطرق التنظيمية لعلاج ومنع ضغوط العمل</div>
+      <p class="text-intro">يمكن للمنظمات تبني سياسات فعالة لتقليل الضغوط على موظفيها، منها:</p>
+      <ul class="item-list">
+        <li><strong>التطبيق الجيد لمبادئ الإدارة:</strong> تجنب تحميل المرؤوسين مسؤولية دون منحهم السلطة المناسبة، لضمان الانضباط الإداري.</li>
+        <li><strong>تصميم وظائف ذات معنى:</strong> تجنب التخصص الممل الروتيني، وتصميم وظائف تمنح حرية التصرف وتتطلب مهارات متنوعة لتعزيز الإنجاز.</li>
+        <li><strong>إعادة تصميم هيكل التنظيم:</strong> تخفيض مستويات الإشراف، تبسيط الإجراءات، وتقليل أعباء العمل الزائدة.</li>
+        <li><strong>نظم المشاركة في اتخاذ القرارات:</strong> تفويض السلطات، إشراك العاملين في اللجان، والمشاركة في الأرباح لتقليل الشعور بالغربة.</li>
+        <li><strong>الكشف عن المسببات وعلاجها:</strong> التعرف على ظروف العمل السيئة (ضوضاء، أبخرة) أو التضارب في التعليمات وحلها جذرياً.</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-bottom: 20px;">
+      <button class="btn-open-quiz" onclick="openQuiz(6)">اختبر نفسك</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+    </div>
+
+    <footer>
+    
+    تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      
+    </footer>
+
+
+    <!-- Quiz Overlay -->
+    <div id="quiz-overlay">
+      <div class="quiz-container">
+        <div class="quiz-close" onclick="closeQuizWarning()">✖</div>
+        
+        <div class="quiz-header">
+          <h2 id="quiz-title">اختبار الفصل</h2>
+          <div class="quiz-progress-wrap">
+            <div class="quiz-progress-info">
+              <span id="quiz-progress-text">سؤال 1 من 10</span>
+              <span id="quiz-badge-num" class="quiz-q-badge">1</span>
+            </div>
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="quiz-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-body" id="quiz-q-box">
+          <div class="quiz-scoreboard">
+            <div class="quiz-score-card correct">
+              <span class="val" id="quiz-score-c">0</span>
+              <span class="lbl">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-score-card wrong">
+              <span class="val" id="quiz-score-w">0</span>
+              <span class="lbl">إجابة خاطئة</span>
+            </div>
+            <div class="quiz-score-card total">
+              <span class="val" id="quiz-score-t">10</span>
+              <span class="lbl">إجمالي الأسئلة</span>
+            </div>
+          </div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-question-text" id="quiz-q-text">هنا يكتب السؤال؟</div>
+            <div class="quiz-options" id="quiz-options">
+              <!-- Options injected here -->
+            </div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+          </div>
+        </div>
+
+        <div class="quiz-body quiz-result-screen" id="quiz-result-screen">
+          <div class="quiz-result-circle" id="quiz-rs-circle">
+            <div class="quiz-result-pct" id="quiz-rs-pct">0%</div>
+          </div>
+          <div class="quiz-result-title">النتيجة النهائية</div>
+          <div class="quiz-result-eval" id="quiz-rs-eval"></div>
+          
+          <div class="quiz-result-stats">
+            <div class="quiz-rs-card cc">
+              <span class="v" id="quiz-rs-c">0</span>
+              <span class="l">إجابة صحيحة</span>
+            </div>
+            <div class="quiz-rs-card ww">
+              <span class="v" id="quiz-rs-w">0</span>
+              <span class="l">إجابة خاطئة</span>
+            </div>
+          </div>
+
+          <div class="quiz-result-actions">
+            <button class="quiz-btn-restart" onclick="restartQuiz()">إعادة الاختبار</button>
+            <button class="quiz-btn-close" onclick="closeQuizForce()">أكمل المراجعة</button>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextAction()">السؤال التالي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="quiz-confirm-modal">
+      <div class="quiz-modal-box">
+        <h3>هل تود إنهاء الاختبار؟</h3>
+        <p>سيتم فقدان تقدمك الحالي إذا قمت بالخروج.</p>
+        <div class="quiz-modal-btns">
+          <button class="quiz-modal-btn quiz-modal-yes" onclick="closeQuizForce()">نعم</button>
+          <button class="quiz-modal-btn quiz-modal-no" onclick="cancelClose()">لا</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      (() => {
+        "use strict";
+
+        /* ═══════════════════════════════════════════
+           GSAP — Hero entrance
+        ═══════════════════════════════════════════ */
+        const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        heroTL
+          .from(".hero-badge", {
+            opacity: 0,
+            y: 30,
+            duration: 0.7,
+            onComplete() {
+              document.querySelector(".hero-badge").style.opacity = "1";
+            },
+          })
+          .from(
+            ".hero h1",
+            {
+              opacity: 0,
+              y: 40,
+              duration: 0.8,
+              onComplete() {
+                document.querySelector(".hero h1").style.opacity = "1";
+              },
+            },
+            "-=0.4"
+          )
+          .from(
+            ".hero > p",
+            {
+              opacity: 0,
+              y: 25,
+              duration: 0.6,
+              onComplete() {
+                document.querySelector(".hero > p").style.opacity = "1";
+              },
+            },
+            "-=0.3"
+          )
+          .to(
+            ".toc a",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.08,
+              ease: "back.out(1.4)",
+            },
+            "-=0.2"
+          );
+
+        /* ═══════════════════════════════════════════
+           GSAP — Chapters staggered fade-up
+        ═══════════════════════════════════════════ */
+        const chapters = document.querySelectorAll(".chapter");
+
+        gsap.to(chapters, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.8,
+        });
+
+        /* ═══════════════════════════════════════════
+           Accordion toggle via GSAP
+        ═══════════════════════════════════════════ */
+        function openChapter(chapter) {
+          chapter.classList.add("open");
+          const body = chapter.querySelector(".chapter-body");
+          gsap.set(body, { height: "auto" });
+          const fullHeight = body.scrollHeight;
+          gsap.fromTo(
+            body,
+            { height: 0, overflow: "hidden" },
+            {
+              height: fullHeight,
+              duration: 0.5,
+              ease: "power2.out",
+              onComplete() {
+                body.style.height = "auto";
+                body.style.overflow = "visible";
+              },
+            }
+          );
+        }
+
+        function closeChapter(chapter, onComplete) {
+          const body = chapter.querySelector(".chapter-body");
+          body.style.overflow = "hidden";
+          gsap.to(body, {
+            height: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            onComplete() {
+              chapter.classList.remove("open");
+              body.style.height = "";
+              body.style.overflow = "";
+              if (onComplete) onComplete();
+            },
+          });
+        }
+
+        function toggleChapter(targetChapter) {
+          const isOpen = targetChapter.classList.contains("open");
+
+          // Close any currently open chapter
+          const currentlyOpen = document.querySelector(".chapter.open");
+          if (currentlyOpen && currentlyOpen !== targetChapter) {
+            closeChapter(currentlyOpen);
+          }
+
+          if (isOpen) {
+            closeChapter(targetChapter);
+          } else {
+            openChapter(targetChapter);
+          }
+        }
+
+        // Attach click handlers to chapter headers (no inline onclick)
+        chapters.forEach((chapter) => {
+          const header = chapter.querySelector(".chapter-header");
+          header.addEventListener("click", () => {
+            toggleChapter(chapter);
+          });
+        });
+
+        /* ═══════════════════════════════════════════
+           TOC links — open chapter + scroll
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            const targetChapter = document.getElementById(targetId);
+            if (!targetChapter) return;
+
+            // Close any open chapter first
+            const currentlyOpen = document.querySelector(".chapter.open");
+            if (currentlyOpen && currentlyOpen !== targetChapter) {
+              closeChapter(currentlyOpen, () => {
+                openChapter(targetChapter);
+                scrollToChapter(targetChapter);
+              });
+            } else if (!targetChapter.classList.contains("open")) {
+              openChapter(targetChapter);
+              scrollToChapter(targetChapter);
+            } else {
+              scrollToChapter(targetChapter);
+            }
+          });
+        });
+
+        function scrollToChapter(chapter) {
+          setTimeout(() => {
+            chapter.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 80);
+        }
+
+        /* ═══════════════════════════════════════════
+           Hover micro-interactions on TOC
+        ═══════════════════════════════════════════ */
+        document.querySelectorAll(".toc a").forEach((btn) => {
+          btn.addEventListener("mouseenter", () => {
+            gsap.to(btn, {
+              scale: 1.05,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+              scale: 1,
+              duration: 0.25,
+              ease: "power2.out",
+            });
+          });
+        });
+      })();
+    </script>
+  
+<script src="quiz-data.js?v=2"></script>
+<script src="quiz-ui.js?v=2"></script>
+    <script src="../../reviews/reviews.js"></script>
+
+  </body>
+</html>

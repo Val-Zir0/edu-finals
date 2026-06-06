@@ -1,0 +1,2357 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار مهارات الأتصال</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../reviews/reviews.css" />
+    <style>
+      :root {
+        --bg: #06041a;
+        --bg2: #0f0933;
+        --bg3: #1b124a;
+        --gold: #f43f5e;
+        --gold2: #fb7185;
+        --primary: #4338ca;
+        --primary-light: #6366f1;
+        --teal: #10b981;
+        --red: #ef4444;
+        --blue: #6366f1;
+        --text: #e8ecf1;
+        --muted: #8b99a8;
+        --correct: #10b981;
+        --wrong: #ef4444;
+        --radius: 14px;
+        --purple: #0ea5e9;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* ===== BACKGROUND EFFECTS ===== */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        right: -30%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(67, 56, 202, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: -40%;
+        left: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ===== HEADER ===== */
+      .header {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header h1 {
+        font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        color: var(--gold);
+        font-weight: 900;
+        text-shadow: 0 2px 20px rgba(244, 63, 94, 0.2);
+        letter-spacing: -0.5px;
+      }
+
+      .header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 8px;
+        opacity: 0.85;
+      }
+      .header a {
+        color: var(--gold2);
+      }
+
+      .header-line {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--purple));
+        margin: 14px auto 0;
+        border-radius: 10px;
+      }
+
+      /* ===== PROGRESS ===== */
+      .progress-wrap {
+        width: 100%;
+        max-width: 760px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .progress-bar {
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--teal));
+        border-radius: 10px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ===== SCOREBOARD ===== */
+      .scoreboard {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .score-card {
+        flex: 1;
+        background: rgba(15, 9, 51, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .score-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .score-card .val {
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+
+      .score-card .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .score-card.correct .val {
+        color: var(--correct);
+      }
+
+      .score-card.wrong .val {
+        color: var(--wrong);
+      }
+
+      .score-card.total .val {
+        color: var(--gold);
+      }
+
+      /* ===== CARD (GLASSMORPHISM) ===== */
+      .card {
+        width: 100%;
+        max-width: 760px;
+        background: rgba(15, 9, 51, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.3), transparent);
+      }
+
+      .q-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .q-badge {
+        background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(14, 165, 233, 0.15));
+        color: var(--gold);
+        border: 1px solid rgba(244, 63, 94, 0.25);
+        padding: 5px 16px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .q-chapter {
+        font-size: 0.76rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+
+      .question {
+        font-size: 1.08rem;
+        font-weight: 700;
+        line-height: 1.9;
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      /* ===== OPTIONS ===== */
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .opt {
+        background: rgba(27, 18, 74, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: right;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .opt::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(244, 63, 94, 0.06), transparent);
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+
+      .opt:hover:not(.disabled)::before {
+        opacity: 1;
+      }
+
+      .opt:hover:not(.disabled) {
+        border-color: var(--gold);
+        transform: translateX(-4px);
+        box-shadow: 0 4px 16px rgba(244, 63, 94, 0.1);
+      }
+
+      .opt-letter {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.25s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .opt.selected {
+        border-color: var(--blue);
+        background: rgba(99, 102, 241, 0.1);
+      }
+
+      .opt.selected .opt-letter {
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+      }
+
+      .opt.correct {
+        border-color: var(--correct);
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .opt.correct .opt-letter {
+        background: var(--correct);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+      }
+
+      .opt.wrong {
+        border-color: var(--wrong);
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .opt.wrong .opt-letter {
+        background: var(--wrong);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+      }
+
+      .opt.disabled {
+        cursor: default;
+      }
+
+      /* ===== FEEDBACK ===== */
+      .feedback {
+        margin-top: 18px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+        line-height: 1.8;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct-fb {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        color: var(--correct);
+      }
+
+      .feedback.wrong-fb {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: var(--wrong);
+      }
+
+      .feedback strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      /* ===== BUTTONS ===== */
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-next {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        display: none;
+        box-shadow: 0 4px 16px rgba(244, 63, 94, 0.2);
+      }
+
+      .btn-next:hover {
+        transform: scale(1.04) translateY(-1px);
+        box-shadow: 0 6px 24px rgba(244, 63, 94, 0.3);
+      }
+
+      .btn-next.show {
+        display: inline-block;
+      }
+
+      /* ===== INTRO SCREEN ===== */
+      #intro-screen {
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-card {
+        background: rgba(15, 9, 51, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 22px;
+        padding: 40px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .intro-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .intro-icon {
+        font-size: 3.5rem;
+        margin-bottom: 18px;
+        display: block;
+      }
+
+      .intro-card h2 {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 12px;
+        font-weight: 900;
+      }
+
+      .intro-card p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+
+      .intro-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .feat {
+        background: rgba(27, 18, 74, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s, border-color 0.3s;
+      }
+
+      .feat:hover {
+        transform: translateY(-2px);
+        border-color: rgba(244, 63, 94, 0.2);
+      }
+
+      .feat span {
+        color: var(--gold);
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+
+      .btn-start {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 54px;
+        font-size: 1.08rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 6px 24px rgba(244, 63, 94, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-start::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .btn-start:hover::before {
+        left: 100%;
+      }
+
+      .btn-start:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(244, 63, 94, 0.35);
+      }
+
+      /* ===== QUIZ SCREEN ===== */
+      #quiz-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ===== RESULT SCREEN ===== */
+      #result-screen {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      #result-screen.show {
+        display: block;
+      }
+
+      .result-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: conic-gradient(var(--gold) 0%, var(--teal) 50%, var(--bg3) 50%);
+        margin: 0 auto 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(244, 63, 94, 0.15);
+      }
+
+      .result-circle::after {
+        content: "";
+        position: absolute;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        background: var(--bg2);
+      }
+
+      .result-pct {
+        position: relative;
+        z-index: 1;
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+      }
+
+      .result-title {
+        font-size: 1.7rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+
+      .result-sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 26px;
+      }
+
+      .result-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .rs-card {
+        background: rgba(15, 9, 51, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .rs-card .v {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      .rs-card .l {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .btn-restart {
+        background: linear-gradient(135deg, var(--gold), var(--gold2));
+        color: #000;
+        padding: 14px 44px;
+        font-size: 1rem;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-weight: 900;
+        transition: all 0.3s;
+        box-shadow: 0 6px 24px rgba(244, 63, 94, 0.2);
+      }
+
+      .btn-restart:hover {
+        transform: scale(1.04) translateY(-2px);
+        box-shadow: 0 8px 30px rgba(244, 63, 94, 0.3);
+      }
+
+      /* ===== RESUME MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-box {
+        background: rgba(15, 9, 51, 0.92);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 42px 38px;
+        max-width: 460px;
+        width: 92%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .modal-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold), var(--purple));
+      }
+
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .modal-box p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+
+      .modal-box .modal-small-text {
+        font-size: 0.85rem;
+      }
+
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 14px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .modal-progress .mp-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary-light), var(--gold));
+        border-radius: 10px;
+      }
+
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+
+      .modal-btn-yes {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(67, 56, 202, 0.3);
+      }
+
+      .modal-btn-yes:hover {
+        transform: scale(1.04);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .modal-btn-no {
+        background: var(--bg3);
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 600px) {
+        body {
+          padding: 12px;
+        }
+
+        .card {
+          padding: 22px 18px;
+          border-radius: 16px;
+        }
+
+        .intro-card {
+          padding: 28px 20px;
+        }
+
+        .intro-features {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .result-stats {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .scoreboard {
+          gap: 8px;
+        }
+
+        .score-card {
+          padding: 10px 6px;
+        }
+
+        .score-card .val {
+          font-size: 1.3rem;
+        }
+
+        .q-meta {
+          flex-direction: column;
+          gap: 8px;
+          align-items: flex-start;
+        }
+
+        .modal-box {
+          padding: 30px 22px;
+        }
+
+        .modal-btns {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .header h1 {
+          font-size: 1.3rem;
+        }
+        
+
+        .question {
+          font-size: 0.98rem;
+        }
+
+        .opt {
+          padding: 12px 14px;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* ===== INITIAL HIDDEN STATES FOR GSAP ===== */
+      .gsap-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      @font-face {
+        font-family: "Emoji";
+        src: url(../fonts/Emojis.ttf) format("truetype");
+      }
+
+            .emoji,
+      .intro-icon {
+        font-family: "Emoji";
+      }
+   ::selection {
+        background: none;
+        color: none;
+      }
+
+    </style>
+  </head>
+
+
+<body data-subject="solook-tanzemy">
+
+    <div class="header">
+      <h1><span class="emoji">📣</span> اختبار مهارات الأتصال</h1>
+      <p>نم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a></p>
+      <div class="header-line"></div>
+    </div>
+
+    <!-- INTRO -->
+    <div id="intro-screen">
+      <div class="intro-card">
+        <div class="intro-icon">🖨</div>
+        <h2>مرحباً بك في الاختبار التدريبي</h2>
+        <p>
+          اختبار شامل وصعب يغطي جميع فصول مادة مهارات الأتصال . اختر الإجابة
+          الصحيحة واحصل على تغذية راجعة فورية مع شرح مفصّل لكل سؤال.
+        </p>
+        <div class="intro-features">
+          <div class="feat"><span class="emoji">📚</span> أسئلة متقدمة</div>
+          <div class="feat"><span class="emoji">⚡</span> تغذية فورية</div>
+          <div class="feat"><span class="emoji">🎯</span> متعدد الخيارات</div>
+          <div class="feat"><span class="emoji">📊</span> نتيجة نهائية</div>
+        </div>
+        <button class="btn-start" id="btn-start">ابدأ الاختبار ←</button>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quiz-screen">
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="val" id="sc-correct">0</div>
+          <div class="lbl">✔ صحيح</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="val" id="sc-wrong">0</div>
+          <div class="lbl"><span class="emoji">✘</span> خطأ</div>
+        </div>
+        <div class="score-card total">
+          <div class="val" id="sc-remain">--</div>
+          <div class="lbl">متبقي</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="q-counter">--</span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+      <div class="card" id="q-card">
+        <div class="q-meta">
+          <span class="q-badge" id="q-num-badge">سؤال ١</span>
+          <span class="q-chapter" id="q-chapter-lbl"></span>
+        </div>
+        <div class="question" id="q-text"></div>
+        <div class="options" id="q-options"></div>
+        <div class="feedback" id="q-feedback"></div>
+        <div class="actions">
+          <button class="btn btn-next" id="btn-next">السؤال التالي ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result-screen">
+      <div class="intro-card">
+        <div class="result-circle">
+          <div class="result-pct" id="res-pct">0%</div>
+        </div>
+        <div class="result-title" id="res-title">نتيجتك</div>
+        <div class="result-sub" id="res-sub"></div>
+        <div class="result-stats">
+          <div class="rs-card">
+            <div class="v" id="rs-correct">0</div>
+            <div class="l">إجابات صحيحة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-wrong">0</div>
+            <div class="l">إجابات خاطئة</div>
+          </div>
+          <div class="rs-card">
+            <div class="v" id="rs-pct2">0%</div>
+            <div class="l">النسبة المئوية</div>
+          </div>
+        </div>
+        <button class="btn-restart" id="btn-restart">🔄 إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <!-- RESUME MODAL -->
+    <div class="modal-overlay" id="resume-modal">
+      <div class="modal-box">
+        <span class="modal-icon">📋</span>
+        <h3>لديك اختبار آخر لم يكتمل!</h3>
+        <p>يبدو أنك بدأت اختبار بنك الأسئلة الشامل ولم تنهِه بعد.</p>
+        <div class="modal-progress">
+          <div class="mp-bar">
+            <div class="mp-fill" id="modal-progress-fill"></div>
+          </div>
+          <span class="mp-text" id="modal-progress-text">0%</span>
+        </div>
+        <p class="modal-small-text">هل تريد إكمال الاختبار من حيث توقفت؟</p>
+        <div class="modal-btns">
+          <button class="modal-btn modal-btn-yes" id="modal-yes">نعم، أكمل ←</button>
+          <button class="modal-btn modal-btn-no" id="modal-no">لا، ابدأ من جديد</button>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+      /* ===== QUESTIONS DATA ===== */
+const questions = [
+  
+{
+chapter: "الفصل الأول — مقدمة في السلوك التنظيمي",
+q: "إذا قرر مدير تطبيق نظام حوافز نجح في شركة سابقة على شركته الحالية دون دراسة المتغيرات، فإنه يخالف مبدأً أساسياً في السلوك التنظيمي وهو:",
+opts: [
+"التحليل الكلي لمستويات المنظمة",
+"الأساس الظرفي للإدارة",
+"الاعتماد على الأنثروبولوجيا",
+"التنبؤ المستقبلي للسلوك"
+],
+correct: 1,
+explain: "الأساس الظرفي يؤكد أنه لا توجد حلول جاهزة تصلح لكل المواقف، بل تعتمد الإدارة الفعالة على السياق."
+},
+{
+chapter: "الفصل الأول — مقدمة في السلوك التنظيمي",
+q: "يعتمد السلوك التنظيمي على 'علم الاجتماع' بشكل أساسي عند دراسة:",
+opts: [
+"دوافع الفرد وتكوين شخصيته",
+"تأثير الهيكل التنظيمي وديناميكيات الجماعة",
+"القدرات الذهنية للموظفين",
+"الإدراك الفردي لبيئة العمل"
+],
+correct: 1,
+explain: "علم الاجتماع يركز على دراسة النظم الاجتماعية والجماعات، بينما علم النفس يركز على الفرد."
+},
+{
+chapter: "الفصل الأول — مقدمة في السلوك التنظيمي",
+q: "الهدف الأسمى والأكثر تعقيداً لدراسة السلوك التنظيمي والذي يمثل قمة التدخل الإداري هو:",
+opts: [
+"التنبؤ بردود أفعال الموظفين",
+"فهم أسباب غياب العاملين",
+"التأثير في السلوك وتوجيهه",
+"تحليل الهيكل التنظيمي"
+],
+correct: 2,
+explain: "التأثير في السلوك وتوجيهه لتحقيق أهداف المنظمة هو الهدف النهائي والأكثر تطبيقية."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "عندما تقوم شركة بتعديل منتجاتها بناءً على شكاوى العملاء، فإنها تفعل خاصية 'النظام المفتوح' من خلال عنصر:",
+opts: [
+"العمليات الإدارية",
+"المدخلات البيئية",
+"المخرجات الصناعية",
+"التغذية العكسية"
+],
+correct: 3,
+explain: "التغذية العكسية هي التي تنقل أثر المخرجات في البيئة لتقوم المنظمة بتعديل مدخلاتها وعملياتها."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "التغير المفاجئ في أسعار الصرف والسياسات الجمركية يُصنف ضمن:",
+opts: [
+"البيئة الخاصة المتغيرة",
+"البيئة العامة المتغيرة",
+"البيئة الخاصة المستقرة",
+"البيئة العامة المستقرة"
+],
+correct: 1,
+explain: "أسعار الصرف والسياسات تمثل بيئة اقتصادية وسياسية (عامة)، وتغيرها المفاجئ يجعلها بيئة (متغيرة)."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "الأسرة والقبيلة تُعتبر من أمثلة المنظمات المُكوّنة التي تنشأ لإشباع حاجات محددة ومخطط لها.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الأسرة والقبيلة هي منظمات (طبيعية) يتواجد فيها الفرد بصورة تلقائية."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "أي من العناصر التالية يُعد من مكونات 'البيئة الخاصة' للمنظمة وتأثيره مباشر عليها؟",
+opts: [
+"معدلات البطالة والتضخم",
+"القيم الثقافية والتقاليد",
+"النقابات العمالية والموردون",
+"القوانين والتشريعات الحكومية"
+],
+correct: 2,
+explain: "البيئة الخاصة تشمل الجهات ذات التأثير المباشر كالعملاء، الموردين، المنافسين، والنقابات."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "المدرسة الكلاسيكية (تيلر) ركزت على الجانب النفسي للعامل واعتبرت رضاه الوظيفي هو المعيار الأول لزيادة الإنتاج.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، مدرسة تيلر ركزت فقط على زيادة الإنتاج وتقليل التكلفة وتجاهلت النواحي الاجتماعية والنفسية."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "مدير يصر على تطبيق لوائح صارمة وفصل العلاقات الشخصية تماماً عن العمل لضمان الموضوعية. هذا المدير يتبنى فكر:",
+opts: [
+"مدرسة العلاقات الإنسانية",
+"النظرية البيروقراطية لماكس فيبر",
+"المدرسة السلوكية",
+"نظرية النظم المفتوحة"
+],
+correct: 1,
+explain: "نموذج فيبر البيروقراطي يعتمد على القواعد المكتوبة والعلاقات غير الشخصية لمنع التحيز."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "أي من النظريات التالية افترضت أن الفرد يميل بطبعه لتحمل المسؤولية ويكره الرقابة المباشرة والملاصقة؟",
+opts: [
+"الإدارة العلمية",
+"المبادئ الإدارية لفايول",
+"المدرسة السلوكية",
+"المدرسة البيروقراطية"
+],
+correct: 2,
+explain: "المدرسة السلوكية نظرت للفرد بإيجابية واعتبرته باحثاً عن الاستقلالية والنجاح الذاتي."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "الفرق الجوهري بين 'السلوك الإنساني' و'السلوك التنظيمي' يكمن في:",
+opts: [
+"النطاق؛ فالأول شامل لكل مجالات الحياة والثاني محدد ببيئة المؤسسات",
+"الأدوات؛ فالأول يعتمد على الفلسفة والثاني على الرياضيات",
+"الهدف؛ فالأول يدرس الإنتاجية والثاني يدرس الأسرة",
+"لا يوجد فرق جوهري بينهما"
+],
+correct: 0,
+explain: "السلوك الإنساني مفهوم عام يشمل كل سياقات الحياة، بينما التنظيمي مخصص لبيئة العمل لتحسين الأداء."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "مبدأ 'وحدة القيادة' عند هنري فايول يهدف بشكل أساسي إلى:",
+opts: [
+"توجيه جميع الأقسام نحو هدف استراتيجي واحد",
+"منع تعارض الأوامر بتلقي الموظف تعليماته من مدير واحد فقط",
+"تقسيم العمل لزيادة التخصص الدقيق",
+"توزيع السلطة بالتساوي بين جميع المديرين"
+],
+correct: 1,
+explain: "وحدة القيادة تعني أن يكون الموظف مسؤولاً أمام مشرف واحد فقط لتجنب التضارب والارتباك."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "أي من الآتي يُصنف كـ 'محدد اجتماعي' يؤثر في سلوك العاملين وليس 'محدداً نفسياً'؟",
+opts: [
+"الإدراك والتعلم",
+"القدرات الذهنية",
+"الدوافع والاحتياجات",
+"القيم وثقافة المنظمة"
+],
+correct: 3,
+explain: "القيم والثقافة والاتصال والقيادة هي محددات اجتماعية نابعة من تفاعل الفرد مع غيره."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "إذا اعتمد مدير على سمة 'الخجل' فقط لتوقع فشل موظف في أداء مهمة تفاوضية، فإنه يقع في خطأ إداري لأن:",
+opts: [
+"الخجل سمة مكتسبة لا يمكن تغييرها",
+"الشخصية محصلة معقدة لسمات متداخلة ويصعب التنبؤ بناءً على سمة واحدة",
+"السمات تتأثر بالعوامل الوراثية فقط دون البيئة",
+"التفاوض يحتاج قدرات ميكانيكية وليس سمات شخصية"
+],
+correct: 1,
+explain: "لا يمكن الاعتماد على سمة واحدة (كالخجل) للتنبؤ بالسلوك، فالشخصية نظام متكامل ومعقد من السمات."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "مفهوم 'الاستعدادات' كأحد مكونات الشخصية يشير إلى:",
+opts: [
+"الاستخدام الفعلي للقدرات في الواقع",
+"المهارات الحالية التي يتمتع بها الفرد",
+"الإمكانيات الكامنة المرتقبة التي يمكن إطلاقها بتوفر الظروف",
+"القوة العضلية والبدنية فقط"
+],
+correct: 2,
+explain: "الاستعدادات هي الطاقات الكامنة، بينما القدرات هي الإمكانيات الحالية، والمهارات هي التطبيق الفعلي."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "اختبار 'سترونج' واختبار 'كودر' يُستخدمان في علم النفس التنظيمي بشكل أساسي لقياس:",
+opts: [
+"القدرات الحركية",
+"الحاجات الفسيولوجية",
+"الميول والاهتمامات المهنية",
+"مستوى الذكاء المنطقي"
+],
+correct: 2,
+explain: "صُممت هذه الاختبارات لتحديد رغبات الأفراد وتوجيههم للأعمال التي تتناسب مع ميولهم واهتماماتهم."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "'الرضا عن العمل' و'عدالة الأجور' تُمثل نظاماً من المعتقدات والمشاعر يندرج تحت مكون:",
+opts: [
+"القدرات الذهنية",
+"الاتجاهات النفسية",
+"الانفعالات المزاجية",
+"القيم الأخلاقية"
+],
+correct: 1,
+explain: "الاتجاهات النفسية هي نظام المشاعر والمفاهيم تجاه مواقف محددة في بيئة العمل وتؤثر في التكيف الاجتماعي."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "الحاجة إلى 'الاحترام والإنجاز' تعتبر من الحاجات الوقتية التي تزول بمجرد إشباعها المؤقت.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، هي من الحاجات (المستقرة) المستمرة الدافعية، بينما الحاجات الوقتية هي كالجوع والراحة."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "رفض الموظف تجاوز لوائح الشركة حتى في غياب الرقابة يعكس تأثره القوي بمكون:",
+opts: [
+"القدرات الميكانيكية",
+"الحاجات الوقتية",
+"القيم",
+"الاستعداد الحركي"
+],
+correct: 2,
+explain: "القيم هي المعيار الداخلي الذي يحدد الصواب والخطأ وينعكس على الالتزام باحترام القوانين والأمانة."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "وفقاً لـ 'نظرية التبادل'، الموظف سيبقى في جماعة العمل غير الرسمية طالما أن:",
+opts: [
+"المدير يفرض عليه ذلك رسمياً",
+"إشباع الحاجات والفائدة العائدة أكبر من أو تساوي الجهد والوقت المبذول",
+"الجماعة لا تتنافس مع جماعات أخرى",
+"أهداف الجماعة تتعارض مع المنظمة"
+],
+correct: 1,
+explain: "النظرية تقوم على فكرة المنفعة المتبادلة؛ فالبقاء مشروط بأن تكون العوائد موازية أو تفوق التكاليف والمساهمات."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "تتحقق 'أعلى إنتاجية' ممكنة لجماعة العمل عندما تجتمع صفتان هما:",
+opts: [
+"تماسك منخفض مع دعم عالٍ من الإدارة",
+"تماسك عالٍ مع عداء من الإدارة",
+"تماسك عالٍ مع تأييد ودعم كامل من الإدارة",
+"تماسك منخفض مع عدم اهتمام من الإدارة"
+],
+correct: 2,
+explain: "التماسك العالي يوجه طاقة الجماعة، ودعم الإدارة يضمن توجيه هذه الطاقة نحو أهداف المؤسسة لرفع الإنتاجية."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "تلقي الموظف تعليمات متناقضة من مديرين مختلفين يوقعه في أزمة نفسية وتنظيمية تُعرف بـ:",
+opts: [
+"غموض الدور",
+"الدور المدرك",
+"تفكير الجماعة",
+"تعارض الدور"
+],
+correct: 3,
+explain: "تعارض الدور يحدث عند تلقي أوامر متضاربة أو زيادة الأعباء، بينما غموض الدور هو عدم فهم المهام من الأساس."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "الفرق الجوهري بين 'فريق العمل' و'جماعة العمل' يبرز بوضوح في أن:",
+opts: [
+"الفريق يعتمد على المجهود الفردي المستقل",
+"المسؤولية في الجماعة تضامنية وفي الفريق فردية",
+"المسؤولية في الفريق جماعية وتضامنية بينما في الجماعة فردية",
+"لا يوجد فرق بينهما إدارياً"
+],
+correct: 2,
+explain: "في فريق العمل (Team) يتحمل الجميع تضامنياً مسؤولية النواتج، بينما في الجماعة (Group) يحاسب كل فرد على عمله."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "من النتائج السلبية (المدمرة) للتماسك المفرط داخل جماعات العمل:",
+opts: [
+"ذوبان شخصية الفرد (Groupthink) والعمل أحياناً ضد مصلحة المنظمة",
+"وضوح وتحديد معايير الأداء",
+"سرعة دمج الموظفين الجدد",
+"الحد من تعارض الأدوار"
+],
+correct: 0,
+explain: "التماسك الشديد قد يلغي التفكير النقدي المستقل للفرد ويجعل الجماعة تتعصب لأفكارها حتى لو أضرت بالمؤسسة."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "لجنة البت في العطاءات المالية تعتبر مثالاً على:",
+opts: [
+"جماعة غير رسمية",
+"جماعة صداقة",
+"جماعة مهام خاصة",
+"فريق إدارة الأزمات"
+],
+correct: 2,
+explain: "جماعات المهام الخاصة هي لجان رسمية تُشكل لأداء غرض محدد (دائم أو مؤقت) حسب حاجة العمل."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "كلما كان حجم الجماعة كبيراً جداً، زاد تماسكها بسبب تنوع المهارات بداخلها.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الجماعات الصغيرة تميل لأن تكون أكثر تماسكاً لسهولة التواصل، بينما الحجم الكبير يضعف التفاعل ويخلق الانقسامات."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "المخاطر والضغوط الخارجية (مثل الإشاعات عن تسريح عمال) غالباً ما تؤدي إلى تفكك جماعة العمل داخلياً.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الضغوط والمخاطر الخارجية غالباً ما توحد صفوف الجماعة وتزيد من تماسكها لمواجهة الخطر المشترك."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "الثقافة التي ينحصر اهتمامها في 'التفاصيل وطريقة إنجاز العمل' بدلاً من النتائج، ويسودها الحذر بين الموظفين، هي:",
+opts: [
+"ثقافة الدور",
+"الثقافة المساندة",
+"ثقافة العمليات",
+"ثقافة المهمة"
+],
+correct: 2,
+explain: "ثقافة العمليات تهتم بالخطوات والدقة الإجرائية (كيف نعمل) على حساب النتائج النهائية، مما ينشر الحذر لتجنب الأخطاء."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "تمتاز الثقافة التنظيمية بخاصية 'التراكمية'، والتي تعني أنها:",
+opts: [
+"تتشكل من خبرات متراكمة ومعقدة عبر الزمن تنتقل بين الأجيال",
+"تتغير جذرياً كل عام المالي",
+"تعتمد على تراكم الأرباح المالية فقط",
+"لا تتأثر بالعنصر الإنساني"
+],
+correct: 0,
+explain: "التراكمية تعني أن السمات الثقافية تتراكم وتتعقد بمرور الزمن لتصبح ميراثاً قيماً يوجه سلوك الأجيال اللاحقة."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "موظف يرفض الانتقال لشركة منافسة رغم الراتب الأعلى، لأنه يتبنى قيم شركته الحالية ويشعر بالفخر للعمل بها. نوع انتمائه:",
+opts: [
+"انتماء مستمر",
+"انتماء عاطفي",
+"انتماء معياري",
+"انتماء اقتصادي"
+],
+correct: 1,
+explain: "الانتماء العاطفي يبنى على التطابق الوجداني والقيمي مع المنظمة، فالموظف يبقى لأنه (يريد) ذلك."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "موظف يستمر في وظيفته لأنه يخشى فقدان 'المزايا المتراكمة والمعاش ومجهود السنوات'. هذا يُصنف كـ:",
+opts: [
+"انتماء معياري",
+"انتماء عاطفي",
+"انتماء وظيفي زائف",
+"انتماء مستمر"
+],
+correct: 3,
+explain: "الانتماء المستمر يعتمد على حساب (الاستثمارات) التي يخاف الفرد خسارتها إذا استقال، فهو يبقى لأنه (مضطر أو محتاج)."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "في مراحل تطور الانتماء الوظيفي، متى يبدأ الفرد في البحث عن 'تأكيد الإنجاز' وتجنب الفشل كأولوية؟",
+opts: [
+"في فترة التجربة (السنة الأولى)",
+"في مرحلة الثقة بالمنظمة (بعد 5 سنوات)",
+"في مرحلة العمل والإنجاز (2 إلى 4 سنوات)",
+"قبل التعيين الرسمي"
+],
+correct: 2,
+explain: "المرحلة الثانية (2-4 سنوات) تركز على إثبات الذات وتحقيق إنجازات وتتميز بالخوف من الفشل الوظيفي."
+},
+{
+chapter: "الفصل الخامس — الثقافة والتسرب",
+q: "من أخطر نتائج 'عدم الانتماء' هو تسرب العاملين، والذي يؤثر إدارياً على المنظمة من خلال:",
+opts: [
+"خفض التكاليف التشغيلية بوضوح",
+"تحديث دماء الشركة بثقافات جديدة دائماً",
+"ارتباك شبكات الاتصال وضعف تماسك الجماعة المتبقية",
+"زيادة الانتماء المعياري للموظفين الجدد"
+],
+correct: 2,
+explain: "التسرب يخلق فجوات في المعرفة ويربك الأنماط الاجتماعية ويحبط الموظفين الباقين، مما يضعف تماسك المنظمة."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "إذا كانت ثقافة المنظمة قوية ويؤمن بها الأغلبية، فإن الإدارة ستحتاج إلى مضاعفة الإجراءات والقواعد الرسمية للسيطرة عليهم.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الثقافة القوية توجه السلوك ذاتياً، مما 'يقلل' من حاجة الإدارة للجوء إلى القواعد والإجراءات الرسمية الصارمة."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "المنظمة التي تعتمد حصرياً على الحوافز المالية دون توفير الاحترام والمشاركة، ستنجح في بناء انتماء مهني عميق ومستدام.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الفرد يطلب التقدير والأمن والانتماء لجماعة، وإهمال الحوافز النفسية والمعنوية يضعف الانتماء الوظيفي الحقيقي."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "الشخصيات (الحيوية والحادة) التي تعمل باستمرار حتى في أوقات فراغها، تتميز في مواجهة ضغوط العمل بأنها:",
+opts: [
+"الأكثر استرخاءً وأقل إنتاجية",
+"تتحمل التوتر طويلاً لكنها تنهار بشكل حاد عند الأزمات الكبيرة",
+"لا تتأثر نهائياً بأي ضغوط نفسية خارجية",
+"تهرب دائماً من المسؤوليات الإضافية"
+],
+correct: 1,
+explain: "هذا النمط يعيش في سباق مع الزمن ولا يظهر تأثره السلبي إلا عندما يتعرض لصدمة أو أزمة ضخمة تؤدي لانهياره."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "أي من المواقف التالية يُعتبر مثالاً على مسبب الضغط المسمى 'صعوبة العمل' وليس 'غموض الدور'؟",
+opts: [
+"موظف لا يعرف بالضبط من هو مديره المباشر",
+"حجم المهام الموكلة للموظف يتطلب 12 ساعة بينما وقت الدوام 8 ساعات",
+"تلقي أوامر متناقضة لإنهاء نفس المهمة",
+"العمل في مكتب منعدم التهوية الجيدة"
+],
+correct: 1,
+explain: "صعوبة العمل تنتج إما لغياب المهارة أو لزيادة حجم العمل عن الوقت المتاح، بينما الغموض يعني عدم الفهم، والتناقض يعني تعارضاً."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "وفقاً لمنحنى 'الضغوط والأداء'، فإن انعدام الضغوط تماماً في بيئة العمل يؤدي إلى:",
+opts: [
+"تحقيق أعلى معدلات الابتكار",
+"أداء عالٍ ومستدام",
+"أداء منخفض ودافعية متدنية",
+"تماسك شديد بين أعضاء الجماعة"
+],
+correct: 2,
+explain: "المقدار المنخفض جداً (أو المنعدم) من الضغوط يؤدي لللامبالاة وانخفاض الدافعية، بينما المقدار 'المناسب' هو الذي يحفز الأداء."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "جهاز (Biofeedback) يُستخدم في علاج ضغوط العمل عن طريق:",
+opts: [
+"تفريغ الذهن بترديد كلمات محددة كاليوجا",
+"إعادة تصميم الهيكل التنظيمي للشركة",
+"تقديم معلومات فسيولوجية (كالنبض والضغط) لتدريب الفرد على التحكم اللاإرادي بجسمه",
+"تنظيم النظام الغذائي للعامل"
+],
+correct: 2,
+explain: "التغذية العكسية الحيوية تعتمد على جهاز يقيس المؤشرات الجسدية ليعي الفرد توتره ويحاول إبطاء تنفسه للسيطرة عليها."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "من الإجراءات التنظيمية الفعالة لعلاج 'الروتين الممل' الذي يسبب ضغوطاً نفسية للموظفين:",
+opts: [
+"زيادة ساعات الرقابة الدقيقة",
+"إعادة تصميم الوظائف لتكون ذات معنى وتتيح حرية التصرف",
+"إضافة مستويات إدارية جديدة لزيادة الهرمية",
+"الفصل التام للقرارات وجعلها مركزية"
+],
+correct: 1,
+explain: "إثراء الوظيفة وإعادة تصميمها لتشمل مهام متنوعة ومسؤولية ذاتية يعيد لها المعنى ويقلل من ضغط الملل والروتين."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "قيام المدير بتحميل الموظف مسؤولية الإخفاق في مشروع دون منحه الصلاحيات اللازمة لاتخاذ القرارات، يُعد خللاً في:",
+opts: [
+"الأساس الظرفي",
+"التطبيق الجيد لمبادئ الإدارة والتنظيم",
+"نظم المشاركة في الأرباح",
+"البيئة الخارجية للمنظمة"
+],
+correct: 1,
+explain: "عدم تكافؤ السلطة مع المسؤولية هو خلل في المبادئ الإدارية الكلاسيكية، ويُعد مسبباً رئيسياً للتوتر والظلم الوظيفي."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "طريقة 'التركيز' لعلاج الضغوط تعتمد على صرف انتباه المخ عن مصادر التوتر بالانخراط التام في أداء هواية أو عمل ذهني محدد.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 0,
+explain: "صح، التركيز يوجه الحواس والعقل لنشاط ذي معنى (كحل لغز أو إصلاح شيء) مما يريح الأعصاب من التفكير في مسببات القلق."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "الأحداث الشخصية البحتة كالزواج أو التقاعد لا يمكن أن تُصنف إدارياً كأسباب لضغوط العمل لأنها تقع خارج أسوار الشركة.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الأحداث الشخصية الكبرى تحمل مقداراً من الإثارة والتوتر الذي ينتقل تأثيره حتماً إلى تركيز الفرد وأدائه داخل العمل."
+},
+{
+chapter: "ربط وتحليل — الفصول 1 و 5",
+q: "المنظمة 'المُكونة' التي تتبنى 'ثقافة الإبداع' كاستراتيجية بقاء، تستجيب بشكل أساسي لضغط ناتج عن:",
+opts: [
+"البيئة المستقرة المغلقة",
+"البيئة العامة المتغيرة سريعة التجدد التكنولوجي",
+"ثقافة العمليات المفرطة",
+"انخفاض طموح العاملين"
+],
+correct: 1,
+explain: "ثقافة الإبداع والابتكار ضرورية عندما تعمل المنظمة في بيئة تتسم بالتغير السريع والمنافسة العالية."
+},
+{
+chapter: "ربط وتحليل — الفصول 4 و 6",
+q: "عندما تبالغ جماعة العمل في 'التماسك' لتصل لمرحلة (Groupthink) وفرض معايير أداء منخفضة، فإن أفضل علاج تنظيمي من قِبل الإدارة العليا هو:",
+opts: [
+"زيادة الدعم الإداري والثناء على الجماعة لرفع الروح المعنوية",
+"إعادة تصميم الهيكل لدمج الوظائف أو تقسيم الجماعة لكسر العزلة السلبية",
+"منع التنافس بين الإدارات المختلفة",
+"الاعتماد على جهاز Biofeedback لتقليل توترهم"
+],
+correct: 1,
+explain: "التغيير الهيكلي (إعادة تصميم التنظيم) يعتبر حلاً تنظيمياً فعالاً لتفتيت الشلل المعرقلة وتوزيع المهام بشكل يكسر الانعزال السلبي."
+},
+{
+chapter: "ربط وتحليل — الفصول 2 و 4",
+q: "مدرسة 'العلاقات الإنسانية' مهدت الطريق لاحقاً لفهم أهمية بناء 'جماعات العمل' لأنها كانت أول من اعترف بـ:",
+opts: [
+"السلطة الرئاسية الصارمة لضبط الأداء",
+"الدور المحوري للجماعات الصغيرة والتنظيمات غير الرسمية داخل العمل",
+"التخصص الدقيق والتقسيم الآلي للعمل",
+"ربط الأجر بالقطعة لزيادة الانتماء"
+],
+correct: 1,
+explain: "هذه المدرسة قلبت الموازين بالاعتراف بأن العامل ليس آلة، وأن علاقاته مع زملائه (الجماعات الصغيرة) تؤثر بقوة في إنتاجيته."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "وفقاً لمدرسة النظم، 'المخرجات' لا تقتصر على السلع المباعة بل تشمل أيضاً:",
+opts: [
+"الأموال المقترضة من البنوك",
+"المواد الخام والمعدات",
+"الخدمات المقدمة والأثر الذي تتركه المنظمة في بيئتها",
+"اللوائح الداخلية لتنظيم شؤون الموظفين"
+],
+correct: 2,
+explain: "المخرجات في مدرسة النظم تعني كل ما تصدره المنظمة لبيئتها، سواء كان سلعاً مادية أو خدمات غير ملموسة."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "الموظف الذي يرفض الانضمام لنقابة عمالية رغم الفوائد المادية، لأنه يعتقد أن أهدافها تتناقض مع 'المساواة' كقيمة يؤمن بها، يعكس قوة تأثير مكون:",
+opts: [
+"القدرات الاستنباطية",
+"القيم",
+"الحاجات الفسيولوجية",
+"الميول المهنية"
+],
+correct: 1,
+explain: "القيم هي الإطار الأخلاقي والاعتقادي العميق الذي يوجه سلوك الفرد وتحديد ما هو مقبول أو مرفوض لديه."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "عند رغبة الإدارة في تغيير 'اتجاه نفسي' سلبي لموظف نحو نظام الحوافز الجديد، يجب أن تدرك أن هذا التغيير يعتمد على:",
+opts: [
+"قوته العضلية وخبراته الفنية الميكانيكية",
+"إلغاء النظام السابق تماماً وبشكل فوري دون مقدمات",
+"بساطة الاتجاه، وتوافر الدوافع للتغيير، وصفات الشخص المُغيِّر",
+"لا يمكن تغيير الاتجاهات النفسية بعد سن معين أبداً"
+],
+correct: 2,
+explain: "تغيير الاتجاهات معقد ويعتمد على مرونة الموقف، ثقة الموظف في الإدارة، وتوفير دافع مقنع لتقبل النظام الجديد."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "'الدور المدرك' للموظف قد يختلف عن 'الدور المتوقع' إذا كان التوصيف الوظيفي الذي استلمه غامضاً أو صيغ بلغة معقدة.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 0,
+explain: "صح، الدور المدرك (ما يفهمه الموظف) يتأثر بمدى وضوح الدور المتوقع (ما يُطلب منه)، والغموض يوسع الفجوة بينهما."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "الفرق بين الانتماء 'العاطفي' و'المعياري' هو أن الأول نابع من شعور بالالتزام الأخلاقي، بينما الثاني نابع من الرغبة الذاتية والمطابقة القيمية.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، العكس هو الصحيح. العاطفي هو نابع من الرغبة والتطابق، بينما المعياري ينبع من الشعور بالالتزام ورد الجميل."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "عندما يواجه موظف ضغط عمل بسبب عدم تناسب حجم الموارد المتاحة له مع أهداف خطة المبيعات المطلوبة منه، فإن السبب التنظيمي هنا هو:",
+opts: [
+"التنافس على الموارد المحدودة",
+"اختلال ظروف العمل المادية (كالتهوية والإضاءة)",
+"صراع الأدوار بسبب تعدد الرؤساء",
+"الأحداث الشخصية المفاجئة"
+],
+correct: 0,
+explain: "نقص الموارد أو محدوديتها يجبر الموظفين والإدارات على التنافس والمساومة للحصول عليها، مما يولد ضغطاً مستمراً للوفاء بالأهداف."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "تعتبر 'القدرات والخبرات' من ضمن المحددات (الاجتماعية) للسلوك التي تتشكل فقط من خلال الاحتكاك بالزملاء والمديرين.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، القدرات (ذهنية وحركية وميكانيكية) تندرج ضمن المحددات 'النفسية/الفردية' للسلوك، وتتأثر بالوراثة والتعلم الشخصي."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "إذا كانت سياسة الشركة هي تقييم الموظف بناءً على 'دقة التزامه باللوائح وتوثيق كل خطوة ورقية' بغض النظر عن تحقيق الربح السريع، فإنها تتبنى ثقافة:",
+opts: [
+"المهمة",
+"الإبداع والمخاطرة",
+"الدور والعمليات",
+"الثقافة المساندة"
+],
+correct: 2,
+explain: "ثقافة الدور والعمليات تقدس الإجراءات، التخصص، والالتزام بالقواعد على حساب المرونة أو التركيز البحت على النتيجة النهائية."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "السمات الشخصية للفرد تتصف بـ 'التكامل'، وهذا يعني أن:",
+opts: [
+"جميع الأفراد يمتلكون نفس درجات الذكاء والانفعال",
+"شخصية الفرد ثابتة لا تتأثر ببيئته أو أسرته",
+"كل سمة تعمل بمعزل عن الأخرى ولا تتدخل في القرار",
+"مكونات الشخصية تترابط وتتفاعل كنظام يفسر كيفية استجابة الفرد"
+],
+correct: 3,
+explain: "التكامل يعني أن الخصائص لا تعمل كجزر منعزلة، بل تندمج لتشكل الإطار العام الذي يحدد ردود أفعال الإنسان تجاه بيئته."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "أظهرت الدراسات أن العلاقة بين تماسك الجماعة والإنتاجية علاقة طردية مطلقة؛ فكلما زاد التماسك زادت الإنتاجية في كل الأحوال.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الإنتاجية العالية تتطلب (تماسكاً عالياً + معايير أداء إيجابية ودعماً إدارياً). التماسك العالي بمعايير سلبية يؤدي لإنتاجية منخفضة."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "'التكامل الوظيفي' كأحد خصائص المنظمة الفعالة يهدف بشكل رئيسي إلى:",
+opts: [
+"توحيد رواتب جميع الموظفين في جميع الأقسام",
+"منع تعارض الأهداف الفرعية للأقسام مع الأهداف الاستراتيجية العامة للمنظمة",
+"إلغاء التخصص وتقسيم العمل ليقوم موظف واحد بكل شيء",
+"تحويل المنظمة من نظام مفتوح إلى نظام مغلق ومستقر"
+],
+correct: 1,
+explain: "التكامل والتنسيق يضمن أن جهود قسم الإنتاج وقسم التسويق وغيرها تصب جميعها في نهر الهدف الشامل دون تضارب."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "من الوسائل الفعالة لتعزيز الانتماء الوظيفي إشراك الموظفين في التخطيط، لأن ذلك يؤدي نفسياً إلى:",
+opts: [
+"انتقال مسؤولية الخسارة المادية للموظف بالكامل",
+"تحويل لغة الموظف من الحديث بـ (أنا/هم) إلى (نحن) وشعوره بملكية القرار",
+"إضعاف سلطة الإدارة العليا وتقويض الهيكل التنظيمي",
+"تقليل الحاجة لدفع رواتب ومكافآت مالية"
+],
+correct: 1,
+explain: "المشاركة تشبع حاجة الفرد للاحترام والتقدير، وتخلق لديه شعوراً بالمسؤولية الذاتية بأن أهداف الشركة هي أهدافه الشخصية."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "المدير الذي يلجأ لإضافة 'مستوى إشرافي جديد' لتخفيف العبء عن المشرفين الحاليين، يستخدم طريقة علاجية لضغوط العمل تندرج تحت:",
+opts: [
+"الاسترخاء المنطقي البسيط",
+"إعادة تصميم الهيكل التنظيمي",
+"برامج المشاركة في اتخاذ القرار",
+"التدريب على تتبع تغيرات الجسم"
+],
+correct: 1,
+explain: "إضافة مستويات أو دمج أقسام هي تعديلات في 'الهيكل التنظيمي' تهدف لتوزيع الأعباء وتقليل صراع وغموض الأدوار."
+},
+{
+chapter: "ربط وتحليل — الفصول 3 و 5",
+q: "إذا كانت (الميول والاهتمامات) كأحد مكونات الشخصية لا تتوافق مع (ثقافة المهمة والنتائج) التي تفرضها الشركة، فما هو الخطر الأكبر المتوقع وفقاً لنظرية الانتماء؟",
+opts: [
+"أن يزداد الانتماء العاطفي بشكل غير مبرر",
+"أن يُصاب الموظف بغرور القدرة الذهنية",
+"أن ينخفض الرضا الوظيفي ويرتفع معدل التسرب (دوران العمالة)",
+"أن تتغير القوانين الحكومية الخارجية استجابة لطلبه"
+],
+correct: 2,
+explain: "عدم التوافق (Mismatch) بين خصائص الفرد الداخلية وثقافة بيئة العمل يدمر الانتماء ويحفز ظاهرة ترك الوظيفة (التسرب)."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "في نظرية الإدارة العلمية (تيلر)، العقلانية والموضوعية تمثلت في الاهتمام المبالغ فيه بالتحفيز المادي واعتبار العامل كترس في آلة الإنتاج.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 0,
+explain: "صح، تيلر ركز على الجانب الاقتصادي والهندسي للإنتاج (كيف نحصل على أقصى إنتاج بأقل تكلفة مادية) وتجاهل النواحي الإنسانية."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "أي المواقف التالية تعكس نجاحاً في تحديد 'معايير العمل' الإيجابية (Norms) داخل جماعة غير رسمية؟",
+opts: [
+"توجيه الأعضاء لتقليل الإنتاج للضغط على الإدارة لزيادة الرواتب",
+"اتفاق شفهي بين العمال على نظافة الماكينات وعدم إهدار الخامات من أول مرة",
+"فرض الإدارة العليا زياً رسمياً بالقوة على جميع الموظفين",
+"ذوبان شخصية الفرد ومخالفته لقيم الأمانة لصالح الجماعة"
+],
+correct: 1,
+explain: "المعايير (Norms) هي قواعد السلوك غير المكتوبة أحياناً التي تتبناها الجماعة، وإذا كانت إيجابية (كالاهتمام بالجودة) فهي ترفع الإنتاجية."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "من خصائص الثقافة التنظيمية 'الانتقائية'، ويقصد بها قدرة المنظمة على الاستجابة للتغيرات البيئية والتخلي عن كامل ماضيها لتبني ثقافة جديدة كلية كل عقد.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، 'الانتقائية' تعني انتقاء الخبرات المفيدة من الرصيد المتراكم لتكوين رأس مال فكري، بينما الثقافة تتسم بالاستمرارية ولا تُمحى كلياً بل تتكيف."
+},
+{
+chapter: "الفصل الأول — مقدمة في السلوك التنظيمي",
+q: "السلوك التنظيمي يركز على دراسة الفرد في عزلة تامة عن بيئته لفهم سلوكه الفطري الخالص.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، السلوك التنظيمي يدرس الفرد، الجماعة، والمنظمة بشكل 'مترابط' لفهم تأثير البيئة والهيكل على تصرفاته داخل بيئة العمل."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "تعتبر 'التغذية العكسية' في مدرسة النظم مجرد إجراء رقابي لإلقاء اللوم على المخطئ بعد فشل بيع المنتج.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، التغذية العكسية هي عملية اتصال دائمة لضبط وتعديل المدخلات والعمليات بناءً على استجابة البيئة للمخرجات، لضمان استمرار المنظمة، وليس للوم."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "أي المكونات التالية هو المسؤول عن تقييم موقف 'عدم الترقية' وتحديد رد فعل الفرد تجاهه بناءً على مشاعره ومفاهيمه المتراكمة؟",
+opts: [
+"القدرة الميكانيكية",
+"الاتجاهات النفسية",
+"الحاجة الفسيولوجية (الراحة)",
+"الميول المهنية الفطرية"
+],
+correct: 1,
+explain: "الاتجاه النفسي يمثل الاستعداد الداخلي وتقييم المواقف (الرضا أو عدم الرضا عن الترقية) مما يحدد سلوك الشخص وانفعاله تجاه الموقف."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "من العوامل (الخارجية) التي تزيد من تماسك الجماعة:",
+opts: [
+"صغر حجم الجماعة وسهولة التواصل المستمر",
+"جاذبية الأفراد لبعضهم البعض وانسجام طباعهم",
+"الإجماع الداخلي على أهداف الجماعة",
+"وجود منافسة شرسة مع إدارات أخرى على ترقيات محدودة"
+],
+correct: 3,
+explain: "التنافس، الأخطار، والانعزال تعتبر عوامل بيئية (خارجية) عن كيان الجماعة وتجبر الأعضاء على التكتل والترابط للدفاع عن مصالحهم."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "كلما كان الهيكل التنظيمي 'غامضاً' والمهام 'غير واضحة'، كلما زادت مساحة الابتكار العشوائي مما يرفع بالتبعية معدلات الانتماء الوظيفي بشكل كبير.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، وضوح الأهداف وتحديد الأدوار هما من أهم العوامل 'الجاذبة' التي تمنع الصراع وتخلق استقراراً نفسياً يعزز الانتماء."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "المدير الذي يطبق مبدأ 'إثراء الوظيفة' بمنح المرؤوسين مهام تتطلب تفكيراً ومهارات متنوعة وتمنحهم سلطة قرار، يساهم في:",
+opts: [
+"مضاعفة تعارض الأدوار",
+"خلق ضغوط عمل سلبية مدمرة",
+"علاج ضغوط العمل الناجمة عن الوظائف الروتينية الخالية من المعنى",
+"تشجيع ظاهرة التسرب الوظيفي"
+],
+correct: 2,
+explain: "تصميم وظائف 'ذات معنى' يقضي على الملل والروتين القاتل ويمنح الفرد شعوراً بالإنجاز الذاتي المقلل للتوتر."
+},
+{
+chapter: "ربط وتحليل — الفصول 4 و 6",
+q: "المرتبة أو المكانة (Status) التي تمنحها الجماعة لأحد أفرادها قد تتسبب في 'تعارض الدور' إذا:",
+opts: [
+"منحته الجماعة صلاحيات تخالف مسؤولياته المحددة في الوصف الوظيفي الرسمي",
+"كانت الجماعة صغيرة الحجم وتجتمع في أوقات الراحة فقط",
+"تطابقت توقعات الجماعة مع سياسات الإدارة العليا 100%",
+"تم تخصيص ألوان ملابس موحدة لجميع العاملين"
+],
+correct: 0,
+explain: "التعارض ينشأ عندما تفرض الجماعة دوراً (كقائد فعلي غير رسمي) يتصادم مع التعليمات أو المسمى الوظيفي الذي حددته الإدارة للموظف."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "المنافسون يعتبرون جزءاً من 'البيئة العامة' لأنهم يتواجدون خارج أسوار المنظمة ويؤثرون في قراراتها الاقتصادية بشكل عام.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، المنافسون، الموردون، والعملاء هم جزء من 'البيئة الخاصة' لأن تأثيرهم واحتكاكهم بالمنظمة تأثير 'مباشر' ومخصص لقطاعها."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "مبدأ 'المركزية' عند فايول يعني بالضرورة احتكار المدير العام لكل صغيرة وكبيرة دون تفويض أي سلطة للمستويات الأدنى في جميع الأحوال.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، المركزية عند فايول هي مفهوم مرن يقصد به تحديد مدى ومستوى تركيز السلطة بناءً على قدرات المرؤوسين وظروف المؤسسة، وليس بالضرورة احتكاراً كاملاً."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "يُصنف 'الفهم الميكانيكي' (كفهم الأبعاد والكثافة والمساحة) كأحد أشكال:",
+opts: [
+"الاستعدادات الحركية",
+"القدرات",
+"الميول المهنية",
+"الانفعالات"
+],
+correct: 1,
+explain: "القدرات العقلية والميكانيكية والحركية هي إمكانيات فعلية متوفرة لدى الفرد تمكنه من استيعاب العلاقات وأداء المهام."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "تُعد 'اللجان المؤقتة لحل الأزمات' مثالاً واضحاً على:",
+opts: [
+"التنظيم الطبيعي الممتد",
+"جماعات المهام الخاصة",
+"الجماعات الوظيفية الأساسية",
+"جماعات الصداقة التلقائية"
+],
+correct: 1,
+explain: "لجان الأزمات تُشكل لهدف مؤقت ذي طبيعة خاصة لمعالجة مشكلة بعينها ثم تنحل، وهو تعريف جماعات المهام المحددة."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "تمتلك 'الثقافة التنظيمية' وظيفة رقابية غير رسمية تتفوق أحياناً على اللوائح الصارمة، وذلك من خلال:",
+opts: [
+"تحديد المكافآت المالية بشكل دقيق لكل عملية",
+"توقيع جزاءات إدارية خصماً من الراتب",
+"تشكيل نظام للرقابة يستند إلى معايير الجماعة وضغط النظراء",
+"الاستعانة بالمنافسين لتقييم الأداء"
+],
+correct: 2,
+explain: "عندما تترسخ ثقافة معينة، يصبح الزملاء (الجماعة) هم من يراقبون ويقومون سلوك الموظف المنحرف عن القيم المقبولة، وهو أقوى من الرقابة الإدارية."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "اتباع 'نظام غذائي متكامل' يلعب دوراً ثانوياً جداً في مواجهة الضغوط النفسية للعمل، فالعلاج الأساسي يقتصر على التأمل والتدريب فقط.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، التغذية الجيدة تمد الجسم بالطاقة لرفع كفاءة التمثيل الغذائي وتحمل الاستنزاف الفسيولوجي الناتج عن الضغوط المتراكمة."
+},
+{
+chapter: "الفصل الأول — مدخل إلى علم المنظمات",
+q: "القدرة على 'التعلم' كصفة للمنظمات الفعالة ترتبط تنظيمياً بمفهوم:",
+opts: [
+"البيئة المغلقة المستقرة",
+"التكيف مع تغيرات البيئة وتلبية الرغبات المتطورة للعملاء",
+"تطبيق البيروقراطية الجامدة لحماية الموارد",
+"التخلي عن التخطيط طويل المدى"
+],
+correct: 1,
+explain: "تعلم المنظمة يعني قدرتها على قراءة معطيات البيئة المفتوحة والاستجابة لها بمرونة لضمان البقاء."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "إذا كانت القدرة هي الإمكانية 'الحالية'، فإن 'الاستعداد' يمثل الإمكانية 'المرتقبة' الكامنة التي يمكن تفجيرها بتوفير التدريب المناسب.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 0,
+explain: "صح، الاستعداد هو الطاقة الكامنة القابلة للتطوير، بينما القدرة هي ما يمتلكه الفرد ويستخدمه فعلياً في الوقت الحاضر."
+},
+{
+chapter: "الفصل الرابع — جماعات العمل وتماسك الجماعة",
+q: "أي الأدوار التالية هو المسؤول بشكل مباشر عن ظهور الإحباط وفقدان الشغف نتيجة تكليف الموظف بمهام أقل من طموحه وقدراته الفعلية؟",
+opts: [
+"الدور المتوقع",
+"الدور المعمول به (الفعلي)",
+"الدور المدرك",
+"الدور الاجتماعي"
+],
+correct: 1,
+explain: "الدور المعمول به هو ما يقوم به الفرد فعلياً في الواقع، وإذا كان أقل من توقعاته وحجم قدراته، سيشعر بالإحباط."
+},
+{
+chapter: "الفصل الخامس — الانتماء الوظيفي",
+q: "'الانتماء العاطفي' القوي ينتج عنه موظف يؤدي الحد الأدنى من العمل فقط للحفاظ على راتبه دون استعداد لتقديم تضحيات لصالح المنظمة.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الانتماء العاطفي يخلق ولاءً يدفع الموظف لتقديم جهود تطوعية وأداء استثنائي يتجاوز المطلوب منه لأنه يؤمن بالمنظمة."
+},
+{
+chapter: "الفصل السادس — ضغوط العمل",
+q: "من الإجراءات الإدارية الناجحة للحد من ضغط 'عدم توافق شخصية الفرد مع متطلبات التنظيم הבيروقراطية':",
+opts: [
+"فرض لوائح أكثر صرامة لكسر التمرد",
+"اتباع سياسات اللامركزية وتوسيع نظم المشاركة في اتخاذ القرار",
+"تقليص الحوافز لإجباره على الخضوع",
+"زيادة الكاميرات لمراقبته بشكل دائم"
+],
+correct: 1,
+explain: "المشاركة والتفويض وتخفيف حدة المركزية تعطي مساحة من الحرية وتلبي حاجة الفرد للنمو وتحقيق الذات المكبوتة بالبيروقراطية."
+},
+{
+chapter: "ربط وتحليل — الفصول 2 و 5",
+q: "المنظمة التي تعتمد على مبادئ 'الإدارة العلمية' لتيلر كأساس وحيد للتعامل مع الموظفين، غالباً ما تفشل في بناء:",
+opts: [
+"إجراءات عمل نمطية واضحة",
+"تقسيم دقيق للعمل",
+"انتماء عاطفي ومعياري مستدام",
+"مخرجات إنتاجية كمية"
+],
+correct: 2,
+explain: "تيلر يتجاهل الجانب النفسي والروابط الإنسانية التي تعتبر الأساس الأهم لبناء الانتماءين العاطفي والمعياري القويين."
+},
+{
+chapter: "الفصل الثاني — السلوك الإنساني والنظريات الإدارية",
+q: "'الإدراك' كأحد المحددات النفسية، يعني قدرة الأفراد على رؤية بيئة العمل وتفسيرها بطريقة متطابقة تماماً وخالية من الاختلافات الذاتية.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، الإدراك يختلف جذرياً من شخص لآخر حسب خلفيته، فما يراه أحدهم فرصة لتحدي جديد، قد يدركه الآخر كتهديد أمني."
+},
+{
+chapter: "الفصل الثالث — الشخصية داخل بيئة العمل",
+q: "الاختلاف في استجابة الموظفين لحوافز مالية متطابقة، يُفسر علمياً بأن الشخصية:",
+opts: [
+"تفتقر لخاصية التكامل",
+"تعتمد كلياً على الوراثة",
+"تتصف بـ 'التمايز' فكل فرد له نظام فريد لترتيب قيمه ودوافعه",
+"غير قادرة على التفاعل البيئي"
+],
+correct: 2,
+explain: "خاصية التمايز تؤكد أنه لا يوجد شخصان متطابقان تماماً، فدوافع وأولويات شخص تختلف عن الآخر، مما يغير الاستجابة لنفس المحفز."
+},
+{
+chapter: "الفصل الخامس — الثقافة التنظيمية",
+q: "نجاح المنظمات الرائدة في جذب المبدعين يكمن في امتلاكها ثقافة قوية تركز على الاستقرار ورفض التغيير لحماية العاملين من المخاطرة.",
+opts: [
+"صح",
+"خطأ"
+],
+correct: 1,
+explain: "خطأ، المبدعون ينجذبون لثقافة 'الإبداع والابتكار' التي تشجع المخاطرة وتتبنى الأفكار الجديدة، وليس للثقافات الجامدة."
+}
+]
+
+
+
+
+      /* ===== STATE ===== */
+      let current = 0;
+      let correctCount = 0;
+      let wrongCount = 0;
+      let answered = false;
+      let shuffled = [];
+
+      
+      function saveProgress() {
+        try {
+          const data = {
+            inProgress: true,
+            currentIdx: current,
+            correctAnswers: correctCount,
+            wrongAnswers: wrongCount,
+            totalQuestions: shuffled.length,
+            questionOrder: shuffled.map(q => questions.indexOf(q)),
+            quizFilename: "index.html",
+            timestamp: Date.now()
+          };
+          localStorage.setItem('hr_quiz_progress', JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      function clearProgress() {
+        try { localStorage.removeItem('hr_quiz_progress'); } catch (e) {}
+      }
+
+      function loadProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return null;
+          const data = JSON.parse(saved);
+          return (data && data.inProgress) ? data : null;
+        } catch (e) { return null; }
+      }
+
+      function resumeQuiz(data) {
+        shuffled = data.questionOrder.map(idx => questions[idx]);
+        current = data.currentIdx;
+        correctCount = data.correctAnswers || 0;
+        wrongCount = data.wrongAnswers || 0;
+        
+        const intro = document.getElementById("intro-screen");
+        const quiz = document.getElementById("quiz-screen");
+        intro.style.display = "none";
+        quiz.style.display = "block";
+        gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+        renderQuestion();
+      }
+
+      /* ===== DOM REFS ===== */
+      const $ = (id) => document.getElementById(id);
+
+      /* ===== SHUFFLE ===== */
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      /* ===== START QUIZ ===== */
+      function startQuiz() {
+        shuffled = shuffle(questions);
+        const intro = $("intro-screen");
+        const quiz = $("quiz-screen");
+
+        gsap.to(intro, {
+          opacity: 0,
+          y: -30,
+          duration: 0.4,
+          ease: "power2.in",
+          onComplete: () => {
+            intro.style.display = "none";
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            saveProgress();
+            renderQuestion();
+          }
+        });
+      }
+
+      /* ===== RENDER QUESTION ===== */
+      function renderQuestion() {
+        answered = false;
+        const q = shuffled[current];
+        const total = shuffled.length;
+
+        $("q-num-badge").textContent = `سؤال ${current + 1}`;
+        $("q-chapter-lbl").textContent = q.chapter;
+        $("q-text").textContent = q.q;
+        $("q-counter").textContent = `سؤال ${current + 1} من ${total}`;
+        const pct = Math.round((current / total) * 100);
+        $("q-pct").textContent = pct + "%";
+        $("progress-fill").style.width = pct + "%";
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+        $("sc-remain").textContent = total - current;
+
+        const fb = $("q-feedback");
+        fb.className = "feedback";
+        fb.innerHTML = "";
+
+        $("btn-next").className = "btn btn-next";
+
+        const letters = ["أ", "ب", "ج", "د"];
+        const optsDiv = $("q-options");
+        optsDiv.innerHTML = "";
+
+        q.opts.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.className = "opt";
+          btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+          btn.addEventListener("click", () => selectAnswer(i));
+          optsDiv.appendChild(btn);
+        });
+
+        /* Animate options in with GSAP */
+        gsap.fromTo(
+          ".opt",
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.35, stagger: 0.07, ease: "power2.out" }
+        );
+      }
+
+      /* ===== SELECT ANSWER ===== */
+      function selectAnswer(idx) {
+        if (answered) return;
+        answered = true;
+
+        const q = shuffled[current];
+        const opts = document.querySelectorAll(".opt");
+        opts.forEach((o) => o.classList.add("disabled"));
+
+        const fb = $("q-feedback");
+
+        if (idx === q.correct) {
+          correctCount++;
+          opts[idx].classList.add("correct");
+          fb.className = "feedback correct-fb show";
+          fb.innerHTML = `<strong>✔ إجابة صحيحة!</strong>${q.explain}`;
+        } else {
+          wrongCount++;
+          opts[idx].classList.add("wrong");
+          opts[q.correct].classList.add("correct");
+          fb.className = "feedback wrong-fb show";
+          fb.innerHTML = `<strong>✘ إجابة خاطئة</strong>${q.explain}`;
+        }
+
+        saveProgress();
+
+        /* Animate feedback in */
+        gsap.fromTo(fb, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+
+        $("sc-correct").textContent = correctCount;
+        $("sc-wrong").textContent = wrongCount;
+
+        const nextBtn = $("btn-next");
+        nextBtn.className = "btn btn-next show";
+        nextBtn.textContent = current < shuffled.length - 1 ? "السؤال التالي ←" : "عرض النتيجة ←";
+
+        gsap.fromTo(nextBtn, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+      }
+
+      /* ===== NEXT QUESTION ===== */
+      function nextQuestion() {
+        current++;
+        if (current >= shuffled.length) {
+          showResult();
+        } else {
+          const card = $("q-card");
+          gsap.to(card, {
+            opacity: 0,
+            x: -40,
+            duration: 0.25,
+            ease: "power2.in",
+            onComplete: () => {
+              renderQuestion();
+              gsap.fromTo(card, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" });
+            }
+          });
+        }
+      }
+
+      /* ===== SHOW RESULT ===== */
+      function showResult() {
+        const quizScreen = $("quiz-screen");
+        const rs = $("result-screen");
+
+        gsap.to(quizScreen, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            quizScreen.style.display = "none";
+            clearProgress();
+            rs.classList.add("show");
+
+            const total = shuffled.length;
+            const pct = Math.round((correctCount / total) * 100);
+            const circle = document.querySelector(".result-circle");
+            const deg = (pct / 100) * 360;
+            circle.style.background = `conic-gradient(var(--gold) 0deg, var(--teal) ${deg}deg, var(--bg3) ${deg}deg)`;
+
+            $("res-pct").textContent = pct + "%";
+            $("rs-correct").textContent = correctCount;
+            $("rs-wrong").textContent = total - correctCount;
+            $("rs-pct2").textContent = pct + "%";
+
+            let title, sub;
+            if (pct >= 90) {
+              title = "🏆 ممتاز!";
+              sub = "أداء رائع! أنت مستعد تماماً للاختبار.";
+            } else if (pct >= 75) {
+              title = "🌟 جيد جداً!";
+              sub = "أداء قوي — راجع الأسئلة التي أخطأت فيها.";
+            } else if (pct >= 60) {
+              title = "👍 جيد";
+              sub = "مستوى جيد — حاول مراجعة المحاضرات مجدداً.";
+            } else {
+              title = "📚 تحتاج مزيداً من المذاكرة";
+              sub = "راجع المراجعة الشاملة وحاول الاختبار مجدداً.";
+            }
+
+            $("res-title").textContent = title;
+            $("res-sub").textContent = sub;
+
+            // Update review system conditions
+            localStorage.setItem('quizFinished', 'true');
+            if (typeof window.triggerReviewAfterQuiz === 'function') {
+                window.triggerReviewAfterQuiz();
+            }
+
+            /* Animate result in */
+            gsap.fromTo(rs, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            gsap.fromTo(".result-circle", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", delay: 0.2 });
+            gsap.fromTo(".rs-card", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, delay: 0.4, ease: "power2.out" });
+          }
+        });
+      }
+
+      /* ===== RESTART QUIZ ===== */
+      function restartQuiz() {
+        current = 0;
+        correctCount = 0;
+        wrongCount = 0;
+
+        const rs = $("result-screen");
+        gsap.to(rs, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            rs.classList.remove("show");
+            shuffled = shuffle(questions);
+            const quiz = $("quiz-screen");
+            quiz.style.display = "block";
+            gsap.fromTo(quiz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+            renderQuestion();
+          }
+        });
+      }
+
+      
+      // ===== RESUME QUIZ MODAL =====
+      function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("resume") === "true") {
+                if (typeof resumeQuiz === 'function' && window.location.pathname.includes(data.quizFilename)) {
+                    resumeQuiz(data);
+                }
+                return;
+            }
+
+            const modal = document.getElementById('resume-modal');
+            if(!modal) return;
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 500);
+
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? data.quizFilename : 'index2.html';
+              if (window.location.pathname.includes(target)) {
+                 modal.classList.remove('active');
+                 if (typeof resumeQuiz === 'function') resumeQuiz(data);
+              } else {
+                 window.location.href = target + '?resume=true';
+              }
+            });
+
+            document.getElementById('modal-no').addEventListener('click', () => {
+              if (typeof clearProgress === 'function') clearProgress();
+              else localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkQuizProgress);
+
+      /* ===== EVENT LISTENERS (NO INLINE) ===== */
+      document.addEventListener("DOMContentLoaded", () => {
+        $("btn-start").addEventListener("click", startQuiz);
+        $("btn-next").addEventListener("click", nextQuestion);
+        $("btn-restart").addEventListener("click", () => { clearProgress(); restartQuiz(); });
+
+        /* ===== PAGE LOAD ANIMATIONS ===== */
+        gsap.fromTo(
+          ".header",
+          { opacity: 0, y: -30 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".intro-card",
+          { opacity: 0, y: 40, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power2.out", delay: 0.15 }
+        );
+
+        gsap.fromTo(
+          ".intro-icon",
+          { opacity: 0, scale: 0.3, rotation: -20 },
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)", delay: 0.3 }
+        );
+
+        gsap.fromTo(
+          ".feat",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, delay: 0.45, ease: "power2.out" }
+        );
+
+        gsap.fromTo(
+          ".btn-start",
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.4, delay: 0.7, ease: "back.out(1.7)" }
+        );
+
+        gsap.fromTo(
+          ".header-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.6, delay: 0.4, ease: "power2.out" }
+        );
+      });
+
+
+    </script>
+
+
+    <script src="../../reviews/reviews.js"></script>
+  </body>
+</html>
