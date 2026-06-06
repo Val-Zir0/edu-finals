@@ -1,1 +1,598 @@
-const a0_0x4ca917=a0_0x3b29;(function(_0x20b956,_0x2e0a0c){const _0x50a7bd=a0_0x3b29,_0x59ce6f=_0x20b956();while(!![]){try{const _0x34fa52=parseInt(_0x50a7bd(0x148))/0x1*(parseInt(_0x50a7bd(0xa5))/0x2)+-parseInt(_0x50a7bd(0x109))/0x3+parseInt(_0x50a7bd(0x117))/0x4+parseInt(_0x50a7bd(0xfa))/0x5*(parseInt(_0x50a7bd(0x1b0))/0x6)+-parseInt(_0x50a7bd(0xe4))/0x7*(parseInt(_0x50a7bd(0x18f))/0x8)+parseInt(_0x50a7bd(0xc0))/0x9*(parseInt(_0x50a7bd(0x12e))/0xa)+-parseInt(_0x50a7bd(0xf6))/0xb;if(_0x34fa52===_0x2e0a0c)break;else _0x59ce6f['push'](_0x59ce6f['shift']());}catch(_0x565684){_0x59ce6f['push'](_0x59ce6f['shift']());}}}(a0_0x4b21,0x37148));const subjectSlug=document[a0_0x4ca917(0x19d)][a0_0x4ca917(0x1ad)][a0_0x4ca917(0x10a)]||a0_0x4ca917(0x16e),RATED_KEY=a0_0x4ca917(0xa1)+subjectSlug,STORAGE_VERSION='2026_V1',currentVersion=localStorage['getItem']('site_version');function initReviewTracking(){const _0x1e4bc1=a0_0x4ca917,_0x22145a={'eupnt':_0x1e4bc1(0x192),'WhzSu':'sessionStart','bsFhb':function(_0x591fee,_0x54a261,_0x437252){return _0x591fee(_0x54a261,_0x437252);}};_0x22145a[_0x1e4bc1(0x1a4)]!==localStorage[_0x1e4bc1(0xbd)](RATED_KEY)&&(localStorage[_0x1e4bc1(0xbd)](_0x1e4bc1(0x11a))||localStorage[_0x1e4bc1(0x1b3)](_0x22145a[_0x1e4bc1(0xc7)],Date[_0x1e4bc1(0x105)]()),_0x22145a[_0x1e4bc1(0x187)](setInterval,checkReviewConditions,0x2710));}function checkReviewConditions(){const _0x3f24b1=a0_0x4ca917,_0x546585={'ZSoYx':function(_0xdd1785,_0x4759e5){return _0xdd1785===_0x4759e5;},'gJeYW':_0x3f24b1(0x192),'vUeVj':function(_0x1c849d,_0x57b35f){return _0x1c849d(_0x57b35f);},'iQdTw':'sessionStart','JPqxT':function(_0x2b94fb,_0x560556){return _0x2b94fb-_0x560556;},'QnEoW':_0x3f24b1(0x16d),'kKlxH':function(_0x5860fa,_0x2d4145){return _0x5860fa===_0x2d4145;},'IODiF':_0x3f24b1(0xd7),'zNKFg':_0x3f24b1(0x162),'SVNME':function(_0x4912f0,_0x4fc13e){return _0x4912f0>=_0x4fc13e;},'GkGfw':function(_0x530f33){return _0x530f33();}};if(_0x546585[_0x3f24b1(0x17d)](_0x546585[_0x3f24b1(0x10d)],localStorage['getItem'](RATED_KEY)))return;if(_0x546585[_0x3f24b1(0x17d)](!0x0,window[_0x3f24b1(0xa7)]))return;const _0xb39e16=_0x546585[_0x3f24b1(0x19b)](parseInt,localStorage[_0x3f24b1(0xbd)](_0x546585[_0x3f24b1(0x17f)])),_0xfb7d0=_0x546585[_0x3f24b1(0x178)](Date[_0x3f24b1(0x105)](),_0xb39e16),_0x2f8032=parseInt(localStorage[_0x3f24b1(0xbd)](_0x546585[_0x3f24b1(0x135)])||'0'),_0x253d6d=_0x546585[_0x3f24b1(0xc9)](_0x546585[_0x3f24b1(0x10d)],localStorage[_0x3f24b1(0xbd)](_0x546585['IODiF']));document[_0x3f24b1(0x116)](_0x546585[_0x3f24b1(0x136)])||_0x546585['SVNME'](_0xfb7d0,0x2bf20)&&(_0x2f8032>=0x2||_0x253d6d)&&_0x546585[_0x3f24b1(0xf2)](initiateReviewProcess);}function trackOpenedChapters(){const _0x2bdd50=a0_0x4ca917,_0x1070dc={'TwQCn':'openedChapters','AmYVe':'click','QcXiO':_0x2bdd50(0xb3),'MjFdn':_0x2bdd50(0x152)},_0x18d981=document[_0x2bdd50(0x176)](_0x1070dc['QcXiO']);if(_0x18d981[_0x2bdd50(0x150)]>0x0){let _0x101a18=JSON[_0x2bdd50(0xfc)](localStorage[_0x2bdd50(0xbd)](_0x1070dc[_0x2bdd50(0xd0)])||'[]');_0x18d981['forEach']((_0x2402e3,_0x391177)=>{const _0x47eab7=_0x2bdd50,_0x5b8031={'Zgtqe':_0x1070dc[_0x47eab7(0x160)]};_0x2402e3[_0x47eab7(0x182)](_0x1070dc[_0x47eab7(0x11e)],()=>{const _0x577426=_0x47eab7;_0x101a18[_0x577426(0x13e)](_0x391177)||(_0x101a18[_0x577426(0x12d)](_0x391177),localStorage['setItem'](_0x577426(0x152),JSON[_0x577426(0x11f)](_0x101a18)),localStorage[_0x577426(0x1b3)](_0x5b8031['Zgtqe'],_0x101a18[_0x577426(0x150)]['toString']()));});});}}function a0_0x3b29(_0x1c5358,_0x70a3e1){_0x1c5358=_0x1c5358-0x9f;const _0x4b218e=a0_0x4b21();let _0x3b29ed=_0x4b218e[_0x1c5358];if(a0_0x3b29['kVhtnV']===undefined){var _0x38f822=function(_0x56d024){const _0x599be1='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x11f441='',_0x415131='';for(let _0x1701bd=0x0,_0x248621,_0x56a777,_0x2cd293=0x0;_0x56a777=_0x56d024['charAt'](_0x2cd293++);~_0x56a777&&(_0x248621=_0x1701bd%0x4?_0x248621*0x40+_0x56a777:_0x56a777,_0x1701bd++%0x4)?_0x11f441+=String['fromCharCode'](0xff&_0x248621>>(-0x2*_0x1701bd&0x6)):0x0){_0x56a777=_0x599be1['indexOf'](_0x56a777);}for(let _0x5d12af=0x0,_0xbf9227=_0x11f441['length'];_0x5d12af<_0xbf9227;_0x5d12af++){_0x415131+='%'+('00'+_0x11f441['charCodeAt'](_0x5d12af)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x415131);};a0_0x3b29['ozncFt']=_0x38f822,a0_0x3b29['osGMNk']={},a0_0x3b29['kVhtnV']=!![];}const _0xf5ce20=_0x4b218e[0x0],_0x5bca08=_0x1c5358+_0xf5ce20,_0x4d31a0=a0_0x3b29['osGMNk'][_0x5bca08];return!_0x4d31a0?(_0x3b29ed=a0_0x3b29['ozncFt'](_0x3b29ed),a0_0x3b29['osGMNk'][_0x5bca08]=_0x3b29ed):_0x3b29ed=_0x4d31a0,_0x3b29ed;}async function initiateReviewProcess(){const _0x2a7dd3=a0_0x4ca917,_0x3bb840={'lWvNJ':function(_0x478561){return _0x478561();},'ATJyg':function(_0x2678c9,_0x7cd76e){return _0x2678c9(_0x7cd76e);},'NFKfr':function(_0x2e73d3,_0x3dcc69){return _0x2e73d3(_0x3dcc69);},'sqSmT':function(_0x258f73,_0x154e83,_0xf2b117){return _0x258f73(_0x154e83,_0xf2b117);},'bjiMa':_0x2a7dd3(0x189),'yacSD':function(_0x2ff5ca,_0x39af80){return _0x2ff5ca!==_0x39af80;},'jtvgq':_0x2a7dd3(0x192)};if(document[_0x2a7dd3(0x116)]('review-popup-overlay'))return;const _0xee44df=await _0x3bb840[_0x2a7dd3(0x107)](generateFingerprint);try{const _0x4784e2=await _0x3bb840['ATJyg'](fetch,APP_BASE_PATH+'/reviews/generate_token.php?fp='+_0x3bb840['NFKfr'](encodeURIComponent,_0xee44df)+_0x2a7dd3(0xc5)+encodeURIComponent(subjectSlug)),_0x3cb46a=await _0x4784e2['json']();_0x3cb46a&&_0x3cb46a[_0x2a7dd3(0x13c)]&&_0x3cb46a[_0x2a7dd3(0x193)]?_0x3bb840[_0x2a7dd3(0x133)](showReviewPopup,_0x3cb46a[_0x2a7dd3(0x193)],_0xee44df):(console['warn']('Could\x20not\x20retrieve\x20review\x20token:',_0x3cb46a[_0x2a7dd3(0xea)]),_0x3bb840[_0x2a7dd3(0x18c)]!==_0x3cb46a[_0x2a7dd3(0xea)]&&_0x3bb840['yacSD'](_0x2a7dd3(0x104),_0x3cb46a['message'])||localStorage[_0x2a7dd3(0x1b3)](RATED_KEY,_0x3bb840[_0x2a7dd3(0x10e)]));}catch(_0x4e74a7){console[_0x2a7dd3(0x179)]('Token\x20fetch\x20failed.');}}async function generateFingerprint(){const _0x546c8b=a0_0x4ca917,_0x126f0a={'mfLea':function(_0x357528,_0x12136e){return _0x357528+_0x12136e;},'TlhFJ':function(_0x4fcebe,_0x18b92b){return _0x4fcebe+_0x18b92b;},'uYARH':function(_0x2d4352,_0x5def91){return _0x2d4352+_0x5def91;},'xyGFQ':function(_0x59a5c8,_0x48aada){return _0x59a5c8+_0x48aada;},'hUDVV':_0x546c8b(0x158),'Ffkah':function(_0x63ca6a,_0x2f810c){return _0x63ca6a(_0x2f810c);}},_0x164870=window['navigator'],_0x1e0ad5=window['screen'];let _0x135a22=_0x126f0a[_0x546c8b(0x124)](_0x126f0a[_0x546c8b(0x1a8)](_0x126f0a['uYARH'](_0x126f0a[_0x546c8b(0x101)](_0x164870[_0x546c8b(0xb0)],_0x164870[_0x546c8b(0xd6)]),_0x1e0ad5[_0x546c8b(0x169)])+_0x1e0ad5['width'],_0x1e0ad5['height']),new Date()[_0x546c8b(0x137)]());try{const _0x5350e4=new TextEncoder()[_0x546c8b(0xcc)](_0x135a22),_0x1d9d8c=await crypto[_0x546c8b(0x177)][_0x546c8b(0x121)](_0x126f0a[_0x546c8b(0xec)],_0x5350e4);return Array[_0x546c8b(0x16c)](new Uint8Array(_0x1d9d8c))['map'](_0x42e944=>_0x42e944['toString'](0x10)[_0x546c8b(0x132)](0x2,'0'))[_0x546c8b(0x184)]('');}catch(_0x4b580c){return _0x126f0a[_0x546c8b(0xe6)](btoa,_0x135a22)[_0x546c8b(0xe0)](0x0,0x80);}}'2026_V1'!==currentVersion&&(Object[a0_0x4ca917(0x1ab)](localStorage)[a0_0x4ca917(0xce)](_0x26a166=>{const _0x23e99f=a0_0x4ca917,_0x5196f2={'SfoLf':function(_0x4b07bb,_0x74a624){return _0x4b07bb===_0x74a624;},'qksyG':_0x23e99f(0xa1),'wSaJe':_0x23e99f(0xfd),'nxgQd':_0x23e99f(0xa3),'XKKjI':function(_0x410234,_0x45f41b){return _0x410234===_0x45f41b;},'BkCDX':_0x23e99f(0x16d),'DURQT':_0x23e99f(0x152)};(_0x5196f2[_0x23e99f(0xbe)](_0x23e99f(0xab),_0x26a166)||_0x26a166[_0x23e99f(0x1ac)](_0x5196f2[_0x23e99f(0xb8)])||_0x26a166['startsWith'](_0x23e99f(0xf9))||_0x26a166[_0x23e99f(0x1ac)](_0x5196f2[_0x23e99f(0x11d)])||_0x5196f2[_0x23e99f(0xbe)](_0x5196f2[_0x23e99f(0x13a)],_0x26a166)||_0x5196f2['XKKjI'](_0x5196f2[_0x23e99f(0x198)],_0x26a166)||_0x5196f2[_0x23e99f(0x123)]===_0x26a166)&&localStorage['removeItem'](_0x26a166);}),localStorage['setItem'](a0_0x4ca917(0x164),'2026_V1'),console[a0_0x4ca917(0xe5)](a0_0x4ca917(0x159),a0_0x4ca917(0xbb))),document[a0_0x4ca917(0x182)](a0_0x4ca917(0xe1),()=>{const _0x2bde39=a0_0x4ca917,_0x52badf={'GWLcP':function(_0x1d7415){return _0x1d7415();},'NcFBh':_0x2bde39(0xad),'cwvta':function(_0x5b3ac1){return _0x5b3ac1();}};_0x52badf[_0x2bde39(0x175)](initReviewTracking),document['getElementById'](_0x52badf[_0x2bde39(0xe7)])&&_0x52badf[_0x2bde39(0x139)](loadTestimonials);}),document[a0_0x4ca917(0x182)]('DOMContentLoaded',()=>{const _0x289ca3=a0_0x4ca917,_0x8d863e={'sMuMl':function(_0x80bff){return _0x80bff();}};_0x8d863e[_0x289ca3(0x102)](trackOpenedChapters);}),window[a0_0x4ca917(0x14a)]=function(){const _0x3708f8=a0_0x4ca917,_0x2c3c4f={'wRzsu':function(_0x4bb3c9){return _0x4bb3c9();},'BFjzP':function(_0x51a350,_0x3e6f17){return _0x51a350!==_0x3e6f17;},'XpAsQ':_0x3708f8(0x192),'GrCET':function(_0x26cf66,_0x51ab14,_0x107f2f){return _0x26cf66(_0x51ab14,_0x107f2f);}};_0x2c3c4f['BFjzP'](_0x2c3c4f[_0x3708f8(0x1a9)],localStorage[_0x3708f8(0xbd)](RATED_KEY))&&_0x2c3c4f[_0x3708f8(0x11c)](setTimeout,()=>{const _0x443c49=_0x3708f8;_0x2c3c4f[_0x443c49(0xff)](initiateReviewProcess);},0x5dc);};let selectedRating=0x0;function a0_0x4b21(){const _0x2780b6=['y1Pxq2O','BKLiq3m','y2XPy2S','u0Hblti1nG','4PYfifnPDguGzgf0ysbJBgvHCMvKigzVCIbUzxCGDMvYC2LVBJO','ue9tva','knIN2k7yQTMk2kFySDMkksdyP9Md2kRyQcdySDIJ2yRzGYdyO9MiinIN2ylyQTIX2kFyRDMdlI4U','sgnwywO','tufSrum','uxf6vwS','uNr1ug4','vhDrq24','A3fRwxC','CMv2Awv3lxbVChvWlw92zxjSyxK','A1jbDLC','C2L0zv92zxjZAw9U','s1zdAfq','CMf0Aw5N','vwTfrK0','DMfSDwu','y29SB3jezxb0Aa','u2vJDxjPDhKGv2fYBMLUzZOGug9WDxaGDhjPz2DLCMvKihDPDgHVDxqGDg9Rzw4Uifn1yM1PC3nPB25ZihDPBgWGyMuGCMvQzwn0zwqGyNKGC2vYDMvYlG','y1fnA0e','zNjVBq','B3bLBMvKq2HHChrLCNm','BgvNywn5','zgLZywjSzwq','CgXHy2vOB2XKzxi','ywjVCNq','qvPls2C','CMvTB3zLrxzLBNrmAxn0zw5LCG','zxz6r2O','r1Dmy1a','CxvLCNLtzwXLy3rVCKfSBa','C3vIDgXL','sLbXEfq','zxjYB3i','ywn0AxzL','BwLU','v05gC3G','wLnVwxG','zeL1sNC','AvfKvhC','Bw91C2vVDxq','y29TBwvUDa','ywrKrxzLBNrmAxn0zw5LCG','CMv2Awv3CW','AM9PBG','z1Lls24','vK5YyK0','yNngAgi','vhvjCxC','quXsrufewv9sqvrfra','DMLZAwjPBgL0Evn0yxrL','pgrPDIbJBgfZCZ0IDc1JB21Tzw50iJ4','yMPPtwe','C2vSzwn0zwq','Dg90ywXFCMv2Awv3CW','mtaZnti4uNnpzwDd','y2XHC3noyw1L','ChjLDMvUDerLzMf1Bhq','Dhj1zq','Dg9Rzw4','lNjLDMLLDY1WB3b1Cc1ZAgvLDa','EfDRB2i','2ltyP9IX2ymG2kRzGTMk2yRzHDMdinMi2lpyP9I52k/zHTINinMg2k3yS9MginIN2ytyQTIS2lhyQnIPlJXICJ48C3bHBIbZDhLSzt0Iy29SB3i6ihjLzdSIpTIN2ypyQTIOinIZ2kJyQcdyQTMc2yRzITMf2ymGkdeWinIJ2k3ySDMbinI52ytzIsdyP9Me2kpzGTMeinMf2lKG2kFzHnIN2ytyQTIY2kFzHsdyQnIN2ytyOTIV2kFyQcdyP9Me2lNyP9Mf2kKPlJWVC3bHBJ4','Ahr0Chm6lY9LzhuTzMLUywXZlM9UCMvUzgvYlMnVBq','qMTdrfG','BgL2zs10B3rHBc1YzxzPzxDZ','sLntruW','DLvLvMO','CK9iDM4','yM9KEq','wgTmD1a','y2HPBgrYzw4','ve5Wwfe','CNHXANO','se9eA0O','pc9KAxy+','zxvWBNq','cIaGicaGicaGpgrPDIbJBgfZCZ0ICMv2Awv3lxbVChvWlw92zxjSyxKIigLKpsjYzxzPzxCTCg9WDxaTB3zLCMXHEsi+cIaGicaGicaGicaGidXKAxyGy2XHC3m9iNjLDMLLDY1WB3b1Cc1ZAgvLDci+cIaGicaGicaGicaGicaGica8zgL2ignSyxnZpsjYzxzPzxCTCg9WDxaTzhjHzYi+pc9KAxy+cIaGicaGicaGicaGicaGica8Adm+2yFzHcdyS9IN2lNyR9MdinIN2ytzHDMi2ylyUDIFiokTKdWVAdm+cIaGicaGicaGicaGicaGica8CcbPzd0ICMv2Awv3lwrLC2mIpTI02kFySDMdinIQ2ylzITMk2yxzGYdzInIZ2kFyUDIV2yByPYdzHTIT2lpzHIdyP9Me2kRyRnIX2kJyQs48l3a+cIaGicaGicaGicaGicaGicakicaGicaGicaGicaGicaGidXKAxyGy2XHC3m9iNjLDMLLDY1ZDgfYCY1JB250ywLUzxiIigLKpsjYzxzPzxCTC3rHCNmIpGOGicaGicaGicaGicaGicaGicaGidXZCgfUignSyxnZpsjZDgfYiIbKyxrHlxzHBd0Insi+4PIfpc9ZCgfUpGOGicaGicaGicaGicaGicaGicaGidXZCgfUignSyxnZpsjZDgfYiIbKyxrHlxzHBd0Inci+4PIfpc9ZCgfUpGOGicaGicaGicaGicaGicaGicaGidXZCgfUignSyxnZpsjZDgfYiIbKyxrHlxzHBd0ImYi+4PIfpc9ZCgfUpGOGicaGicaGicaGicaGicaGicaGidXZCgfUignSyxnZpsjZDgfYiIbKyxrHlxzHBd0ImIi+4PIfpc9ZCgfUpGOGicaGicaGicaGicaGicaGicaGidXZCgfUignSyxnZpsjZDgfYiIbKyxrHlxzHBd0Imsi+4PIfpc9ZCgfUpGOGicaGicaGicaGicaGicaGpc9KAxy+cGOGicaGicaGicaGicaGicaGphrLEhrHCMvHigLKpsjYzxzPzxCTy29TBwvUDciGy2XHC3m9iNjLDMLLDY10zxH0yxjLysiGCgXHy2vOB2XKzxi9iIJyP9IU2kRzITIN2lhzIIKG2kFzG9IQ2kGG2lhyO9Mk2ymG2kpzIcdyP9Mc2kRySDIN2k3zGY4UlIi+pc90zxH0yxjLyt4kicaGicaGicaGicaGicaGiaOGicaGicaGicaGicaGicaGpgrPDIbJBgfZCZ0ICMv2Awv3lwj0BNmIpGOGicaGicaGicaGicaGicaGicaGidXIDxr0B24Gy2XHC3m9iNjLDMLLDY1IDg4GCMv2Awv3lwj0BI1ZDwjTAxqIigLKpsjIDg4TC3vIBwL0lxjLDMLLDYiGzgLZywjSzwq+2kRyO9Md2yRyRYdyP9Me2kRzGTMk2yRzHtWVyNv0Dg9UpGOGicaGicaGicaGicaGicaGpc9KAxy+cIaGicaGicaGicaGicaGicakicaGicaGicaGicaGicaGidXKAxyGAwq9iNjLDMLLDY1TC2CIignSyxnZpsjYzxzPzxCTBxnNiJ48l2rPDJ4kicaGicaGicaGicaGpc9KAxy+cIaGicaGicaGpc9KAxy+cIaGica','C3r1zgvUDf9Uyw1L','uNL0vNu','vgXOrKO','whbbC1e','ic8GnsdIRza8l2rPDJ4kicaGicaGicaGicaGicaGicaGicaGicaGpgrPDIbJBgfZCZ0IC3rHDhmTC3vIiIbPzd0IBgL2zs10B3rHBc1YzxzPzxDZiJ7yQnMg2kFyODMlinI52ytzIsa','A2v5CW','C3rHCNrZv2L0Aa','zgf0yxnLDa','t3LgtNa','D3LfD24','odi5mdq0BgXVtxDs','yxzLCMfNzv9YyxrPBMC','vLPPy1m','C2v0sxrLBq','l3jLDMLLD3mVC3vIBwL0x3jLDMLLDY5WAha','uNPfvvy','cIaGicaGicaGpgrPDIbJBgfZCZ0IDgvZDgLTB25PywWTy2fYza','CMvXDwLYzwq','AeHTuuO','rMfPBgvKihrVigXVywqGBw9YzsbYzxzPzxDZoG','BwLUBgvUz3rO','v2jZCMe','DMLZAwjPBgL0EwnOyw5Nzq','CMf0zwrtAxrLxW','C3rHDc11CgrHDguTyw5PBq','DMLZAxrLzenOyxb0zxjZ','rMfPBgvKihrVigXVywqGDgvZDgLTB25PywXZoG','mNPryvnVDq','swH2AuO','AxnrDwL6t3bLBG','CKPJq1q','BND2D3m','CMvWBgfJzq','CMf0zwrtAxrL','yuLLyKC','DgvZDgLTB25PywXZlwnVBNrHAw5LCG','DgvZDgLTB25PywXZlwfJDgLVBNm','inIQ2ylzITMk2yu8l2rPDJ4kicaGicaGicaGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGicaGidWVzgL2pGOGicaGicaGicaGicaGicaGpgrPDIbJBgfZCZ0IDgvZDgLTB25PywXZlwDYAwqIigLKpsjSAxzLlxjLDMLLD3mTz3jPzci+cIaGicaGicaGicaGia','DxnLCKfNzw50','BgL2zs1HDMCTCMf0Aw5N','z2v0qxr0CMLIDxrL','lMnOyxb0zxiTAgvHzgvY','CMvTB3zL','B2vrtwS','2kZyP9IX2yOG2kFzHnIQ2k3zHDMk2yqUlI4','weHqs0m','CwTZEuC','AwjxAxe','sgHZrLa','mJaYnL9wmq','2ltyP9IX2ymG2kRzGTMk2yRzHDMdinMi2lpyP9I52k/zHTINinMg2k3yS9MginIN2ytyQTIS2lhyQnIPlG','z2v0sxrLBq','u2zVtgy','DMLZAwjSzq','mZeWoty2mNr6CfHjrG','zM9YBwf0DgvKx2rHDgu','C3rVCfbYB3bHz2f0Aw9U','CervsMe','C2v0qxr0CMLIDxrL','jNn1yMPLy3q9','zgfotNy','v2H6u3u','B2zMC2v0v2LKDgG','A0TSEeG','D2f4vg4','2k3yR9IRinIU2lFyOYdzGDMkinIN2ytyP9IQ2lxyP9MelIdzITIX2kZzIsdyP9Me2yxyRDIN2yJzHnIPinMe2kFyRDMc2kFzIY4','zw5JB2rL','vuPYyKu','zM9YrwfJAa','yxbWBgLJyxrPB24VANnVBG','twPgzg4','2kJzHTIN2khzIYdyUDMe2yKG','swLYqLK','uur0q00','ELbYthG','ywXSB3DdBg9Zzq','BgfUz3vHz2u','CxvPEKzPBMLZAgvK','Bw91C2vVDMvY','CMv2Awv3lw1ZzYbLCNjVCG','CNvtBhy','tMLLyLO','cIaGicaGicaGicaGicaGica8zgL2ignSyxnZpsj0zxn0Aw1VBMLHBhmTAgvHzgvYiJ4kicaGicaGicaGicaGicaGicaGica8Adi+2klySDIN2keG2kFzHnI32ytyP9IOpc9OmJ4kicaGicaGicaGicaGicaGicaGica8zgL2ignSyxnZpsj0zxn0Aw1VBMLHBhmTC3rHDhmIpGOGicaGicaGicaGicaGicaGicaGicaGica8zgL2ignSyxnZpsjZDgf0CY1Zy29YzsiGAwq9iMXPDMuTyxzNlxjHDgLUzYi+','AevYt3C','CLDAtuS','uwPls0q','C3vIC3rYAw5N','re9nq29UDgvUDeXVywrLza','sxb0yxe','qvHcqKS','mJm4AuHzuu1T','Bg9N','rMzRywG','tMngqMG','A2v5zg93BG','jMD0oW','BwvZC2fNzq','AgXnEwq','AfvevLy','Bw1XqwG','ANDvywW','sMflBwK','s1LtCeW','r0rqqvK','r2ThzNC','Bg9Hzc1TB3jLlxjLDMLLD3mTyNrU','rgLjBgy','BLnpvLq','mJuZmtm0mKjgD2rtzq','2k3yP9Mi2yqG2yxySDIPinIJ2k7ySDMj','CMvWzwf0','CMv2Awv3','mtvxs0XKtfq','Aw5Zzxj0qwrQywnLBNrive1m','CgfYC2u','CxvPEG','vwPkywu','D1j6C3u','2yxyS9IO2ylyP9Ml','EhLhrLe','C011twW','A0v0DNu','uevstuforu5ux0jbtG','BM93','BLrOCuO','BfD2tKO','EwfgEgq','ndiWmduXB3zMChPx','C3vIAMvJDa','CMv2Awv3lwrLC2m','CMv2zxjZzq','z0PLwvC','ANr2z3e','l3jLDMLLD3mVz2v0x3jLDMLLD3mUCgHW','B1zizKu','ww1Vq3y','BgL2zs1YzxzPzxDZlwDYAwq','y2XHC3nmAxn0','BLfQueG','DvPjsui','z2v0rwXLBwvUDej5swq','mZq5nJa4Dvfbtgzv','BhnRA0y','pc9KAxy+cIaGicaGicaGicaGidWVzgL2pGOGicaG','C2vZC2LVBLn0yxj0','Aw5UzxjuzxH0','r3jdrvq','D1nHsMu','qw1zvMu','C3rYAw5NAwz5','t290s0K','zgLNzxn0','ALDmzK0','rfvsuvq','Bwzmzwe','zgf0ys12ywW','zKfzCKi','ANnVBG','CMvTB3zLqxr0CMLIDxrL','Aw5Uzxjive1m','l3jLDMLLD3mVz2v0x3jLDMLLD3mUCgHWp2XHC3rFAwq9','BM8TC3rVCMu','CMv2Awv3lw1ZzW','ChvZAa','mtbZwLvktwi','A2v5','yKDlyM0','r0XjA1m','CgfKu3rHCNq','C3ftBvq','qLrvwwy','uw5fB1C','EK5lrMC','z2v0vgLTzxPVBMvpzMzZzxq','BfbczvG','y3D2Dge','BNHNuwq','CMv2Awv3lwnVBw1LBNq','C3vJy2vZCW','yMvMB3jLzw5K','Aw5JBhvKzxm','qKfhzw4','z0r2wgq','ywz0zxjIzwDPBG','pc9KAxy+cIaGicaGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGicaGidXKAxyGy2XHC3m9iNqTC3rHCNmIpG','ic8GnsdIRza','ywrK','EgLwy0q','2yhyTnMeinIN2ytyPDIX2lpyP9MelG','CM1OzM4','mtG4mJK5BKXIAgrr','DhjPBq','DhjPz2DLCLjLDMLLD0fMDgvYuxvPEG','rxnJ','v0X3D0K','pgj1DhrVBIbPzd0IBg9Hzc1TB3jLlxjLDMLLD3mTyNrUiIbJBgfZCZ0IBg9Hzc1TB3jLlxjLDMLLD3mTyNrUiJ7yUDIX2lyG2kFzHnMf2llzITIVpc9IDxr0B24+','Bwf4','A2fcC2O','BgvUz3rO','jMX0oW','DhjHy2TLzenOyxb0zxjjzhm','yNf5AK8','uNPMEuG'];a0_0x4b21=function(){return _0x2780b6;};return a0_0x4b21();}function showReviewPopup(_0x485c13='',_0x1453a4=''){const _0x527eb1=a0_0x4ca917,_0x1fab84={'RzfyH':function(_0x28c8a8,_0x434c3a){return _0x28c8a8!==_0x434c3a;},'KVChT':'Escape','xkKBe':function(_0x258110,_0x4c638a){return _0x258110!==_0x4c638a;},'YEOSh':'active','JSSEL':function(_0x7d2fee,_0x1fab08){return _0x7d2fee(_0x1fab08);},'GDPAY':_0x527eb1(0x125),'lPBeX':_0x527eb1(0x18d),'oyakZ':function(_0x4b19b1,_0x2be3e0){return _0x4b19b1<=_0x2be3e0;},'nQjPH':_0x527eb1(0x196),'HHVNA':'required','lskkF':_0x527eb1(0x1ba),'NiebZ':_0x527eb1(0xbc),'evzGj':_0x527eb1(0x15b),'ibWiq':_0x527eb1(0xd8),'OyFNp':_0x527eb1(0x180),'cghUO':function(_0x34a92c,_0x34aa39){return _0x34a92c(_0x34aa39);},'VswOT':function(_0x7cd380,_0x5e0389){return _0x7cd380<=_0x5e0389;},'sOCjn':function(_0x3b1797,_0x2ecbd1){return _0x3b1797<_0x2ecbd1;},'iITJr':'عذراً،\x20يجب\x20أن\x20يحتوي\x20سبب\x20التقييم\x20على\x2010\x20أحرف\x20على\x20الأقل.','jWLfM':_0x527eb1(0xd9),'lXbTM':'جاري\x20الإرسال...','NnFAD':_0x527eb1(0x12c),'OotKI':_0x527eb1(0x15a),'rOHvn':'تم\x20حفظ\x20التقييم.','TuIqw':_0x527eb1(0x13c),'HhsFP':_0x527eb1(0x192),'oVHfE':_0x527eb1(0xad),'fDVwH':function(_0x50d4a3){return _0x50d4a3();},'RytVu':_0x527eb1(0xe8),'bGKbm':function(_0x49729f,_0x3d81d5,_0xab032c){return _0x49729f(_0x3d81d5,_0xab032c);},'oTcuC':_0x527eb1(0x100),'adHyx':function(_0x4f1a05,_0x518b9c,_0x477cc2){return _0x4f1a05(_0x518b9c,_0x477cc2);},'xiVcD':_0x527eb1(0x146),'XkLwP':_0x527eb1(0x179),'UkEFM':'تأكيد\x20التقييم','nThqJ':_0x527eb1(0xcb),'gYKKn':_0x527eb1(0x162),'iyVxC':_0x527eb1(0x13d),'dJRQw':_0x527eb1(0x1a5),'VNrbM':'.review-stars-container\x20.star','mmqAh':_0x527eb1(0x13b),'AZKKg':function(_0x266165,_0x56cd09){return _0x266165||_0x56cd09;},'BTUYf':'false','WNFsx':_0x527eb1(0x194),'kaBsj':function(_0x4e06fa,_0x4171d0,_0x350940){return _0x4e06fa(_0x4171d0,_0x350940);},'uZIIB':_0x527eb1(0x157)};if(_0x485c13||console['warn'](_0x527eb1(0x16a)),document['getElementById'](_0x1fab84['gYKKn']))return;document[_0x527eb1(0x19d)]['insertAdjacentHTML'](_0x1fab84['iyVxC'],_0x1fab84['dJRQw']);const _0x1ab4a0=document[_0x527eb1(0x116)](_0x1fab84[_0x527eb1(0x185)]);if(!_0x1ab4a0)return;const _0x157bdb=document[_0x527eb1(0x176)](_0x1fab84[_0x527eb1(0x186)]),_0x12fcc0=document[_0x527eb1(0x116)]('btn-submit-review'),_0x25303c=document[_0x527eb1(0x116)](_0x1fab84[_0x527eb1(0xed)]),_0x1aa336=document['getElementById'](_0x527eb1(0x12c));if(_0x1fab84[_0x527eb1(0x172)](!_0x12fcc0,!_0x1aa336))return;_0x1ab4a0[_0x527eb1(0x1ad)][_0x527eb1(0xd5)]=_0x1fab84[_0x527eb1(0x134)];const _0x4cd07f=_0x333b1b=>{const _0x3d203e=_0x527eb1;_0x1fab84[_0x3d203e(0x154)](_0x1fab84[_0x3d203e(0x165)],_0x333b1b[_0x3d203e(0x12f)])&&_0x1fab84['xkKBe'](_0x3d203e(0x14b),_0x333b1b[_0x3d203e(0x12f)])||(_0x333b1b[_0x3d203e(0x191)](),_0x333b1b[_0x3d203e(0xc2)]());};document[_0x527eb1(0x182)](_0x1fab84['RytVu'],_0x4cd07f,!0x0),_0x1ab4a0[_0x527eb1(0x182)](_0x527eb1(0x157),_0x3fdef6=>{const _0x5901d8=_0x527eb1;_0x3fdef6[_0x5901d8(0xc2)](),_0x3fdef6[_0x5901d8(0x191)]();});const _0x1503fb=_0x1ab4a0['querySelector'](_0x1fab84[_0x527eb1(0x17c)]);_0x1503fb&&_0x1503fb[_0x527eb1(0x182)](_0x527eb1(0x157),_0x193b9d=>{const _0x3dc240=_0x527eb1;_0x193b9d[_0x3dc240(0xc2)]();}),_0x1fab84[_0x527eb1(0x14f)](setTimeout,()=>{const _0x109ec7=_0x527eb1;_0x1ab4a0[_0x109ec7(0x113)][_0x109ec7(0x144)](_0x1fab84['YEOSh']);},0x32),_0x157bdb&&_0x157bdb[_0x527eb1(0x150)]>0x0?_0x157bdb[_0x527eb1(0xce)](_0x40062e=>{const _0x392b61=_0x527eb1,_0x573bc3={'Iptaq':function(_0x313067,_0x5ab21d){return _0x313067<=_0x5ab21d;},'nwvws':function(_0x10528a,_0x534a50){const _0x576d6f=a0_0x3b29;return _0x1fab84[_0x576d6f(0x19a)](_0x10528a,_0x534a50);},'hlMyd':_0x1fab84[_0x392b61(0xf1)],'nSOVT':'hover-active','fAYrB':_0x1fab84[_0x392b61(0x138)],'DiIlf':function(_0x5e7798,_0x2d9b92){return _0x5e7798(_0x2d9b92);},'dIuJw':_0x392b61(0x10b),'cQMkA':function(_0x3bf888,_0x455dab){return _0x1fab84['oyakZ'](_0x3bf888,_0x455dab);},'gDvXd':_0x1fab84[_0x392b61(0x114)],'rWZMK':'(مطلوب)\x20اكتب\x20سبب\x20التقييم\x20هنا...','ezqaw':_0x1fab84['HHVNA'],'qOHdD':'true','xWkob':_0x1fab84[_0x392b61(0x118)],'ruSlv':_0x1fab84[_0x392b61(0xdb)],'hErOw':_0x1fab84[_0x392b61(0x174)]};_0x40062e['addEventListener'](_0x1fab84[_0x392b61(0xb9)],function(){const _0x2c39ab=_0x392b61;let _0x183d12=_0x1fab84[_0x2c39ab(0x19a)](parseInt,this[_0x2c39ab(0xb2)](_0x1fab84[_0x2c39ab(0xf1)]));_0x157bdb[_0x2c39ab(0xce)](_0x239dc3=>{const _0x929bae=_0x2c39ab;_0x573bc3[_0x929bae(0xe2)](_0x573bc3['nwvws'](parseInt,_0x239dc3[_0x929bae(0xb2)](_0x573bc3['hlMyd'])),_0x183d12)?_0x239dc3[_0x929bae(0x113)][_0x929bae(0x144)](_0x573bc3[_0x929bae(0xf5)]):_0x239dc3[_0x929bae(0x113)]['remove'](_0x573bc3[_0x929bae(0xf5)]);});}),_0x40062e[_0x392b61(0x182)](_0x1fab84[_0x392b61(0x1ae)],function(){const _0x258e5f=_0x392b61;_0x157bdb[_0x258e5f(0xce)](_0x4507f4=>_0x4507f4[_0x258e5f(0x113)][_0x258e5f(0xb4)]('hover-active'));}),_0x40062e[_0x392b61(0x182)](_0x392b61(0x157),function(){const _0xac2285=_0x392b61,_0x4d45ef={'hHmQJ':function(_0x278d2e,_0x10c05f){const _0xaf0e5e=a0_0x3b29;return _0x573bc3[_0xaf0e5e(0xa9)](_0x278d2e,_0x10c05f);},'QDtCM':_0xac2285(0x125),'HpMOt':_0x573bc3[_0xac2285(0x126)]};selectedRating=_0x573bc3[_0xac2285(0xf4)](parseInt,this[_0xac2285(0xb2)](_0x573bc3[_0xac2285(0xeb)])),_0x157bdb[_0xac2285(0xce)](_0x282a99=>{const _0x342d6d=_0xac2285;_0x4d45ef[_0x342d6d(0x1b8)](parseInt,_0x282a99[_0x342d6d(0xb2)](_0x4d45ef[_0x342d6d(0xd3)]))<=selectedRating?_0x282a99['classList'][_0x342d6d(0x144)](_0x342d6d(0x18d)):_0x282a99[_0x342d6d(0x113)][_0x342d6d(0xb4)](_0x4d45ef['HpMOt']);}),_0x12fcc0[_0xac2285(0x16f)]=!0x1;const _0x5ad019=document['getElementById'](_0x573bc3[_0xac2285(0x17e)]);_0x573bc3[_0xac2285(0x16b)](selectedRating,0x3)?(_0x5ad019&&(_0x5ad019[_0xac2285(0x129)]=_0x573bc3[_0xac2285(0x140)]),_0x25303c&&(_0x25303c[_0xac2285(0x170)]=_0x573bc3[_0xac2285(0xde)],_0x25303c[_0xac2285(0xc4)](_0x573bc3['ezqaw'],_0x573bc3['qOHdD']),_0x25303c[_0xac2285(0xc4)](_0x573bc3[_0xac2285(0x195)],'10'))):(_0x5ad019&&(_0x5ad019[_0xac2285(0x129)]=_0x573bc3[_0xac2285(0xda)]),_0x25303c&&(_0x25303c[_0xac2285(0x170)]=_0x573bc3[_0xac2285(0xdd)],_0x25303c[_0xac2285(0x128)](_0xac2285(0x1b7))));});}):_0x12fcc0[_0x527eb1(0x16f)]=!0x0,_0x12fcc0[_0x527eb1(0x182)](_0x1fab84[_0x527eb1(0x115)],async()=>{const _0x4562ca=_0x527eb1;if(0x0===selectedRating)return;const _0x2dca13=_0x25303c?_0x25303c[_0x4562ca(0x168)]['trim']():'';if(_0x1fab84['VswOT'](selectedRating,0x3)&&_0x1fab84['sOCjn'](_0x2dca13[_0x4562ca(0x150)],0xa))return _0x1aa336[_0x4562ca(0x11b)]=_0x1fab84['iITJr'],void(_0x1aa336[_0x4562ca(0x190)]=_0x1fab84[_0x4562ca(0x122)]);_0x12fcc0['disabled']=!0x0,_0x12fcc0[_0x4562ca(0x11b)]=_0x1fab84['lXbTM'],_0x1aa336['className']=_0x1fab84['NnFAD'];try{const _0x18a791=await fetch(APP_BASE_PATH+_0x4562ca(0x1b4),{'method':_0x1fab84[_0x4562ca(0x120)],'headers':{'Content-Type':_0x4562ca(0xcf)},'body':JSON[_0x4562ca(0x11f)]({'rating':selectedRating,'comment':_0x2dca13,'subject':subjectSlug,'token':_0x485c13,'fingerprint':_0x1453a4})}),_0x36186c=await _0x18a791[_0x4562ca(0x127)]();_0x36186c&&_0x36186c[_0x4562ca(0x13c)]?(_0x1aa336['innerText']=_0x36186c[_0x4562ca(0xea)]||_0x1fab84[_0x4562ca(0x19c)],_0x1aa336[_0x4562ca(0x113)][_0x4562ca(0x144)](_0x1fab84[_0x4562ca(0x188)]),localStorage[_0x4562ca(0x1b3)](RATED_KEY,_0x1fab84['HhsFP']),document[_0x4562ca(0x116)](_0x1fab84[_0x4562ca(0x110)])&&_0x1fab84['fDVwH'](loadTestimonials),_0x1ab4a0[_0x4562ca(0x1ad)][_0x4562ca(0xd5)]=_0x1fab84['HhsFP'],document[_0x4562ca(0x173)](_0x1fab84[_0x4562ca(0x1a7)],_0x4cd07f,!0x0),_0x1fab84[_0x4562ca(0x130)](setTimeout,()=>{closePopup(_0x1ab4a0);},0x4b0)):_0x36186c&&_0x36186c[_0x4562ca(0xea)]&&_0x36186c[_0x4562ca(0xea)][_0x4562ca(0x13e)](_0x1fab84['oTcuC'])?(_0x1aa336['innerText']=_0x36186c['message'],_0x1aa336[_0x4562ca(0x113)][_0x4562ca(0x144)](_0x1fab84['TuIqw']),localStorage[_0x4562ca(0x1b3)](RATED_KEY,_0x4562ca(0x192)),_0x1ab4a0[_0x4562ca(0x1ad)][_0x4562ca(0xd5)]=_0x1fab84[_0x4562ca(0xba)],document[_0x4562ca(0x173)](_0x1fab84[_0x4562ca(0x1a7)],_0x4cd07f,!0x0),_0x1fab84['adHyx'](setTimeout,()=>{_0x1fab84['cghUO'](closePopup,_0x1ab4a0);},0x7d0)):(_0x1aa336['innerText']=_0x36186c&&_0x36186c[_0x4562ca(0xea)]?_0x36186c['message']:_0x1fab84[_0x4562ca(0x145)],_0x1aa336[_0x4562ca(0x113)][_0x4562ca(0x144)](_0x1fab84[_0x4562ca(0x19e)]),_0x12fcc0[_0x4562ca(0x16f)]=!0x1,_0x12fcc0[_0x4562ca(0x11b)]=_0x1fab84[_0x4562ca(0x167)]);}catch(_0x1d8d7f){_0x1aa336[_0x4562ca(0x11b)]=_0x1fab84[_0x4562ca(0x106)],_0x1aa336['classList'][_0x4562ca(0x144)](_0x1fab84[_0x4562ca(0x19e)]),_0x12fcc0['disabled']=!0x1,_0x12fcc0[_0x4562ca(0x11b)]=_0x1fab84[_0x4562ca(0x167)];}});}function closePopup(_0x25455b){const _0xc22fee=a0_0x4ca917,_0x2b60f8={'qOcRz':function(_0x46bf89,_0x36a970){return _0x46bf89!==_0x36a970;},'IGDrH':_0xc22fee(0x192),'HcVaj':_0xc22fee(0x17a),'bqyjO':function(_0x7ddd27,_0x37b60f,_0x3ed635){return _0x7ddd27(_0x37b60f,_0x3ed635);}};_0x25455b&&(_0x25455b['dataset']&&_0x2b60f8['qOcRz'](_0x2b60f8['IGDrH'],_0x25455b['dataset']['allowClose'])||(_0x25455b[_0xc22fee(0x113)]['remove'](_0x2b60f8[_0xc22fee(0x15c)]),_0x2b60f8[_0xc22fee(0x153)](setTimeout,()=>{try{_0x25455b['remove']();}catch(_0x4c8185){}},0x1f4)));}let lastReviewId=0x0,oldestReviewId=0x0,totalReviewsAvailable=0x0,isLoadingMoreReviews=!0x1;const REVIEWS_PAGE_SIZE=0x14;let reviewPollInterval=0x3a98,reviewPollTimer=null,reviewAbortController=null,isPollingReviews=!0x1;const APP_BASE_PATH=a0_0x4ca917(0x197);async function loadTestimonials(){const _0x3561d4=a0_0x4ca917,_0x344f41={'VZicS':function(_0x4d721e,_0x490ace,_0x2a2dd9){return _0x4d721e(_0x490ace,_0x2a2dd9);},'bobzH':'testimonials-container','aIebG':function(_0x1b1d6b,_0x54e90f){return _0x1b1d6b(_0x54e90f);},'kRAvW':function(_0x2dd1e0,_0x2e3147){return _0x2dd1e0>_0x2e3147;},'Rhflm':function(_0x2c82a4,_0x1b372d){return _0x2c82a4>_0x1b372d;},'daNNv':function(_0x5b8d1e){return _0x5b8d1e();},'dIfJi':function(_0xb77255){return _0xb77255();},'ANMXf':_0x3561d4(0xa4)},_0x19862d=document[_0x3561d4(0x116)](_0x344f41['bobzH']);if(_0x19862d)try{const _0x3373a7=await _0x344f41[_0x3561d4(0xac)](fetch,APP_BASE_PATH+_0x3561d4(0x10f)),_0x10f678=await _0x3373a7[_0x3561d4(0x127)]();if(_0x10f678[_0x3561d4(0x13c)]&&_0x344f41[_0x3561d4(0x163)](_0x10f678[_0x3561d4(0x18e)],0x0)){totalReviewsAvailable=_0x10f678[_0x3561d4(0x18e)],_0x344f41['Rhflm'](_0x10f678[_0x3561d4(0x183)][_0x3561d4(0x150)],0x0)&&(lastReviewId=_0x10f678[_0x3561d4(0x183)][0x0]['id'],oldestReviewId=_0x10f678[_0x3561d4(0x183)][_0x10f678[_0x3561d4(0x183)]['length']-0x1]['id']);let _0x270abf=_0x3561d4(0xdc)+_0x10f678['average_rating']+_0x3561d4(0x1aa)+_0x10f678[_0x3561d4(0x18e)]+_0x3561d4(0xaf);_0x10f678[_0x3561d4(0x183)][_0x3561d4(0xce)](_0x54d747=>{const _0x4eb51a=_0x3561d4;_0x270abf+=_0x344f41[_0x4eb51a(0x1b2)](generateReviewCardHTML,_0x54d747,!0x1);}),_0x270abf+='</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22testimonials-actions\x22\x20id=\x22testimonials-actions\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',_0x19862d[_0x3561d4(0x129)]=_0x270abf,_0x344f41['daNNv'](updateLoadMoreButton),_0x344f41[_0x3561d4(0xc6)](updateLoadMoreButton),reviewPollTimer||_0x344f41['dIfJi'](scheduleReviewPoll);}else _0x19862d[_0x3561d4(0x129)]='';}catch(_0x5e6012){console['error'](_0x344f41['ANMXf'],_0x5e6012);}}function updateLoadMoreButton(){const _0x4e23f7=a0_0x4ca917,_0x4c75dd={'jwUal':_0x4e23f7(0x112),'aApDp':function(_0x551abe,_0x2bbb24){return _0x551abe||_0x2bbb24;},'rmhfn':function(_0x17ae14,_0x14fa2b){return _0x17ae14<_0x14fa2b;},'MAlEC':_0x4e23f7(0x14d),'IhviJ':_0x4e23f7(0xf3),'oeQMk':_0x4e23f7(0x157)},_0x18f209=document[_0x4e23f7(0x116)](_0x4e23f7(0xae)),_0x425bee=document[_0x4e23f7(0x116)](_0x4c75dd[_0x4e23f7(0xee)]);if(_0x4c75dd['aApDp'](!_0x18f209,!_0x425bee))return;if(_0x4c75dd[_0x4e23f7(0x147)](_0x425bee[_0x4e23f7(0x19f)][_0x4e23f7(0x150)],totalReviewsAvailable)){_0x18f209['innerHTML']=_0x4c75dd[_0x4e23f7(0x15d)];const _0x20bc92=document[_0x4e23f7(0x116)](_0x4c75dd[_0x4e23f7(0xa6)]);_0x20bc92&&_0x20bc92[_0x4e23f7(0x182)](_0x4c75dd[_0x4e23f7(0xb5)],loadMoreReviews);}else _0x18f209[_0x4e23f7(0x129)]='';}async function loadMoreReviews(){const _0x41a251=a0_0x4ca917,_0x37c649={'AXBBK':_0x41a251(0x13d),'UJrbE':function(_0x4e5705,_0x464d37,_0x4c9dcb){return _0x4e5705(_0x464d37,_0x4c9dcb);},'UlGkR':function(_0x4187d3,_0x10d0a8){return _0x4187d3||_0x10d0a8;},'QqzUk':_0x41a251(0xb6),'yaFxd':function(_0x3c36df,_0x1804c4){return _0x3c36df(_0x1804c4);},'TNpXQ':function(_0x132ab0,_0x456dd7){return _0x132ab0>_0x456dd7;},'YmoCv':'live-reviews-grid','CpGPz':function(_0x209c6e){return _0x209c6e();},'wyEwn':_0x41a251(0xae),'yINHP':_0x41a251(0x1b9),'cZWCj':'عرض\x20المزيد'};if(_0x37c649['UlGkR'](isLoadingMoreReviews,!oldestReviewId))return;const _0x22b257=document[_0x41a251(0x116)](_0x41a251(0xf3));if(_0x22b257){isLoadingMoreReviews=!0x0,_0x22b257[_0x41a251(0x16f)]=!0x0,_0x22b257[_0x41a251(0x11b)]=_0x37c649[_0x41a251(0x15e)];try{const _0x4d961f=await _0x37c649[_0x41a251(0x108)](fetch,APP_BASE_PATH+'/reviews/get_reviews.php?before_id='+oldestReviewId),_0x296351=await _0x4d961f[_0x41a251(0x127)]();if(_0x296351[_0x41a251(0x13c)]&&_0x37c649[_0x41a251(0x1a0)](_0x296351['reviews'][_0x41a251(0x150)],0x0)){const _0x5edf29=document[_0x41a251(0x116)](_0x37c649[_0x41a251(0x111)]);_0x296351[_0x41a251(0x183)]['forEach'](_0x42a891=>{const _0x2640c1=_0x41a251;_0x5edf29['insertAdjacentHTML'](_0x37c649[_0x2640c1(0xe3)],_0x37c649[_0x2640c1(0xcd)](generateReviewCardHTML,_0x42a891,!0x1));}),oldestReviewId=_0x296351['reviews'][_0x296351[_0x41a251(0x183)][_0x41a251(0x150)]-0x1]['id'],_0x37c649['CpGPz'](updateLoadMoreButton);}else{const _0x2f032d=document[_0x41a251(0x116)](_0x37c649[_0x41a251(0x1af)]);_0x2f032d&&(_0x2f032d[_0x41a251(0x129)]='');}}catch(_0x4c2a0f){console[_0x41a251(0x179)](_0x37c649['yINHP'],_0x4c2a0f),_0x22b257[_0x41a251(0x11b)]=_0x41a251(0xf7);}finally{isLoadingMoreReviews=!0x1,_0x22b257&&(_0x22b257['disabled']=!0x1,_0x22b257[_0x41a251(0x11b)]=_0x37c649[_0x41a251(0x155)]);}}}function generateReviewCardHTML(_0xf4dbf,_0x332af1=!0x1){const _0x1668e6=a0_0x4ca917,_0x452dd3={'RtuPn':function(_0x114f6a,_0x120136){return _0x114f6a+_0x120136;},'IirBY':'\x20new-review-anim','AOqAn':function(_0x16487e,_0x333eba){return _0x16487e!==_0x333eba;},'qsAut':_0x1668e6(0x151),'BhhKX':_0x1668e6(0xe9),'XHPKC':'</div>'};let _0x545b31=_0x452dd3[_0x1668e6(0x15f)]('★'[_0x1668e6(0xf8)](_0xf4dbf['rating']),'☆'['repeat'](0x5-_0xf4dbf[_0x1668e6(0x166)])),_0x36f635=_0x1668e6(0x1b6)+(_0x332af1?_0x452dd3[_0x1668e6(0xd2)]:'')+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22t-card-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22t-avatar\x22><svg\x20viewBox=\x220\x200\x2024\x2024\x22><path\x20d=\x22M12\x2012c2.21\x200\x204-1.79\x204-4s-1.79-4-4-4-4\x201.79-4\x204\x201.79\x204\x204\x204zm0\x202c-2.67\x200-8\x201.34-8\x204v2h16v-2c0-2.66-5.33-4-8-4z\x22/></svg></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22t-user-info\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22t-name\x22>'+_0xf4dbf[_0x1668e6(0x1a6)]+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22t-date\x22>'+_0xf4dbf[_0x1668e6(0xc1)]+_0x1668e6(0x142)+_0x545b31+_0x1668e6(0x119);return _0xf4dbf[_0x1668e6(0x181)]&&_0x452dd3['AOqAn']('',_0xf4dbf[_0x1668e6(0x181)][_0x1668e6(0x149)]())&&(_0x36f635+=_0x1668e6(0x18b)+_0xf4dbf[_0x1668e6(0x181)]['replace'](/</g,_0x452dd3['qsAut'])[_0x1668e6(0xaa)](/>/g,_0x452dd3['BhhKX'])+_0x1668e6(0x1a3)),(_0x36f635+=_0x452dd3[_0x1668e6(0xb7)],_0x36f635);}function scheduleReviewPoll(){const _0x50b887=a0_0x4ca917,_0x121325={'RzEUV':function(_0xdaceb0,_0x4dde28,_0x5a4f92){return _0xdaceb0(_0x4dde28,_0x5a4f92);}};clearTimeout(reviewPollTimer),reviewPollTimer=_0x121325[_0x50b887(0x1b5)](setTimeout,pollReviews,reviewPollInterval);}async function pollReviews(){const _0x386be6=a0_0x4ca917,_0x2d80f9={'bgUOd':function(_0x36bb58,_0x486062,_0x216b21){return _0x36bb58(_0x486062,_0x216b21);},'WLwwI':_0x386be6(0x141),'KYSpL':function(_0x3df647,_0x5b80f2){return _0x3df647!==_0x5b80f2;},'Wbsra':_0x386be6(0xbf),'HODkJ':function(_0x5db89e){return _0x5db89e();},'nIHCs':function(_0x20ca34,_0x50d305,_0x3b41cc){return _0x20ca34(_0x50d305,_0x3b41cc);},'rxqjz':_0x386be6(0x12b),'UxyYK':'live-reviews-grid','pDUJa':_0x386be6(0xb1),'rJcCT':_0x386be6(0x199),'JaKmi':function(_0x49f195){return _0x49f195();},'zPrLx':function(_0x344ab4,_0x102d0a){return _0x344ab4!=_0x102d0a;},'BAGen':_0x386be6(0xa2),'waxTn':function(_0x4e7f92,_0x1e4f2a){return _0x4e7f92>_0x1e4f2a;},'GLIkS':function(_0x552cc9){return _0x552cc9();},'QjKKD':function(_0x1583a5,_0x3ad92d){return _0x1583a5-_0x3ad92d;},'kEtvu':function(_0x20e9bc,_0xdf4d95){return _0x20e9bc+_0xdf4d95;},'lMZMR':function(_0x151e4d){return _0x151e4d();}};if(_0x2d80f9[_0x386be6(0xf0)](_0x2d80f9[_0x386be6(0x9f)],document[_0x386be6(0x18a)])||isPollingReviews)_0x2d80f9[_0x386be6(0x1a2)](scheduleReviewPoll);else{isPollingReviews=!0x0,reviewAbortController&&reviewAbortController[_0x386be6(0x171)](),reviewAbortController=new AbortController();try{const _0x3eda83=await _0x2d80f9[_0x386be6(0x156)](fetch,APP_BASE_PATH+_0x386be6(0x12a)+lastReviewId,{'signal':reviewAbortController['signal'],'cache':_0x2d80f9[_0x386be6(0x1a1)]}),_0x27abf2=await _0x3eda83[_0x386be6(0x127)]();if(_0x27abf2[_0x386be6(0x13c)]){const _0x48f3a2=document[_0x386be6(0x116)](_0x2d80f9['UxyYK']),_0x3affd9=document[_0x386be6(0x116)](_0x2d80f9[_0x386be6(0xc3)]),_0x38162e=document[_0x386be6(0x116)](_0x2d80f9[_0x386be6(0xa8)]);if(!_0x48f3a2||!_0x3affd9||!_0x38162e)return isPollingReviews=!0x1,void _0x2d80f9[_0x386be6(0xef)](scheduleReviewPoll);let _0x2986b1=!0x1;(_0x2d80f9[_0x386be6(0xd4)](_0x3affd9[_0x386be6(0x11b)]['split']('\x20')[0x0],_0x27abf2[_0x386be6(0x1b1)])&&(_0x3affd9[_0x386be6(0x11b)]=_0x27abf2[_0x386be6(0x1b1)]+_0x386be6(0x143),_0x3affd9[_0x386be6(0x113)][_0x386be6(0xb4)](_0x2d80f9[_0x386be6(0x13f)]),_0x3affd9[_0x386be6(0xc8)],_0x3affd9['classList'][_0x386be6(0x144)](_0x386be6(0xa2)),_0x2986b1=!0x0),_0x38162e[_0x386be6(0x11b)][_0x386be6(0xaa)](/[^0-9]/g,'')!=_0x27abf2[_0x386be6(0x18e)]&&(_0x38162e[_0x386be6(0x11b)]=_0x386be6(0xd1)+_0x27abf2[_0x386be6(0x18e)]+'\x20تقييم',totalReviewsAvailable=_0x27abf2[_0x386be6(0x18e)],_0x2986b1=!0x0),_0x27abf2[_0x386be6(0x183)]&&_0x2d80f9[_0x386be6(0xca)](_0x27abf2[_0x386be6(0x183)]['length'],0x0))&&([..._0x27abf2[_0x386be6(0x183)]][_0x386be6(0x10c)]()[_0x386be6(0xce)](_0x479ca6=>{const _0x2056bd=_0x386be6,_0x329247=_0x2d80f9['bgUOd'](generateReviewCardHTML,_0x479ca6,!0x0);_0x48f3a2[_0x2056bd(0xfb)](_0x2d80f9[_0x2056bd(0x14c)],_0x329247);}),lastReviewId=_0x27abf2[_0x386be6(0x183)][0x0]['id'],_0x2986b1=!0x0),_0x2d80f9[_0x386be6(0x131)](updateLoadMoreButton),reviewPollInterval=_0x2986b1?Math[_0x386be6(0x14e)](_0x2d80f9[_0x386be6(0xdf)](reviewPollInterval,0x1388),0x2710):Math[_0x386be6(0x17b)](_0x2d80f9[_0x386be6(0x103)](reviewPollInterval,0x1388),0xea60);}}catch(_0x386fad){_0x386fad['name'];}finally{isPollingReviews=!0x1,_0x2d80f9['lMZMR'](scheduleReviewPoll);}}}document[a0_0x4ca917(0x182)](a0_0x4ca917(0xa0),()=>{const _0x46b483=a0_0x4ca917,_0x355b8a={'kqkYw':function(_0x1270d2,_0x9d511a){return _0x1270d2===_0x9d511a;},'UjJae':_0x46b483(0xbf)};_0x355b8a[_0x46b483(0x161)](_0x355b8a[_0x46b483(0xfe)],document[_0x46b483(0x18a)])&&reviewPollTimer&&(clearTimeout(reviewPollTimer),pollReviews());});
+const subjectSlug = document.body.dataset.subject || 'legacy';
+const RATED_KEY = `ratedSite_${subjectSlug}`;
+
+const STORAGE_VERSION = '2026_V1';
+const currentVersion = localStorage.getItem('site_version');
+
+if (currentVersion !== STORAGE_VERSION) {
+    Object.keys(localStorage).forEach(key => {
+        if (
+            key === 'ratedSite' ||
+            key.startsWith('ratedSite_') ||
+            key.startsWith('review') ||
+            key.startsWith('quiz') ||
+            key === 'visitedChapters' ||
+            key === 'openedChapters' ||
+            key === 'trackedChapterIds'
+        ) {
+            localStorage.removeItem(key);
+        }
+    });
+    localStorage.setItem('site_version', STORAGE_VERSION);
+    console.log("✅ Site data cleared for new version:", STORAGE_VERSION);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize logic for tracking time and conditions
+    initReviewTracking();
+    
+    // 2. Fetch and render reviews on homepage
+    if (document.getElementById('testimonials-container')) {
+        loadTestimonials();
+    }
+});
+
+function initReviewTracking() {
+    // Check if user already rated
+    if (localStorage.getItem(RATED_KEY) === 'true') {
+        return; // User already rated, do nothing
+    }
+
+    // Initialize session start time if not exists
+    if (!localStorage.getItem('sessionStart')) {
+        localStorage.setItem('sessionStart', Date.now());
+    }
+
+    // Check periodically if conditions are met
+    setInterval(checkReviewConditions, 10000); // Check every 10 seconds
+}
+
+function checkReviewConditions() {
+    // Condition 1: Already rated
+    if (localStorage.getItem(RATED_KEY) === 'true') {
+        return;
+    }
+
+    // Removed "Later" logic (reviewLaterTime) per requirements
+
+    // Condition 3: Is currently in a quiz?
+    if (window.isQuizOpen === true) {
+        return; // Don't interrupt quiz
+    }
+
+    // Condition 4: Time spent (3 minutes = 180,000 ms)
+    const sessionStart = parseInt(localStorage.getItem('sessionStart'));
+    const timeSpent = Date.now() - sessionStart;
+    
+    // Condition 5: Chapters opened or Quiz finished
+    const openedChapters = parseInt(localStorage.getItem('openedChapters') || '0');
+    const quizFinished = localStorage.getItem('quizFinished') === 'true';
+
+    // If already showing
+    if (document.getElementById('review-popup-overlay')) {
+        return;
+    }
+
+    if (timeSpent >= 180000 && (openedChapters >= 2 || quizFinished)) {
+        initiateReviewProcess();
+    }
+}
+
+// Track chapter openings automatically on read page
+function trackOpenedChapters() {
+    const chapterHeaders = document.querySelectorAll('.chapter-header');
+    if (chapterHeaders.length > 0) {
+        let trackedChapters = JSON.parse(localStorage.getItem('trackedChapterIds') || '[]');
+        chapterHeaders.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                if (!trackedChapters.includes(index)) {
+                    trackedChapters.push(index);
+                    localStorage.setItem('trackedChapterIds', JSON.stringify(trackedChapters));
+                    localStorage.setItem('openedChapters', trackedChapters.length.toString());
+                }
+            });
+        });
+    }
+}
+
+// Call chapter tracking initializer
+document.addEventListener('DOMContentLoaded', () => {
+    trackOpenedChapters();
+});
+
+// Function to trigger immediately after a quiz finishes with high score (called externally)
+window.triggerReviewAfterQuiz = function() {
+    if (localStorage.getItem(RATED_KEY) !== 'true') {
+        setTimeout(() => {
+            initiateReviewProcess();
+        }, 1500); // Small delay after closing quiz result
+    }
+}
+
+async function initiateReviewProcess() {
+    if (document.getElementById('review-popup-overlay')) return;
+    
+    const fp = await generateFingerprint();
+    
+    try {
+        const response = await fetch(`${APP_BASE_PATH}/reviews/generate_token.php?fp=${encodeURIComponent(fp)}&subject=${encodeURIComponent(subjectSlug)}`);
+        const data = await response.json();
+        
+        if (data && data.success && data.token) {
+            showReviewPopup(data.token, fp);
+        } else {
+            console.warn("Could not retrieve review token:", data.message);
+            // Hide forever if already rated or permanently banned
+            if (data.message === 'ALREADY_RATED' || data.message === 'PERMANENT_BAN') {
+                localStorage.setItem(RATED_KEY, 'true');
+            }
+        }
+    } catch (e) {
+        console.error("Token fetch failed.");
+    }
+}
+
+async function generateFingerprint() {
+    const nav = window.navigator;
+    const screen = window.screen;
+    let raw = nav.userAgent + nav.language + screen.colorDepth + screen.width + screen.height + new Date().getTimezoneOffset();
+    try {
+        const msgBuffer = new TextEncoder().encode(raw);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+        return btoa(raw).substring(0, 128);
+    }
+}
+
+let selectedRating = 0;
+
+function showReviewPopup(token = '', fingerprint = '') {
+    if (!token) {
+        console.warn("Security Warning: Popup triggered without token. Submissions will be rejected by server.");
+    }
+    if (document.getElementById('review-popup-overlay')) return;
+
+    const popupHTML = `
+        <div class="review-popup-overlay" id="review-popup-overlay">
+            <div class="review-popup-sheet">
+                <div class="review-popup-drag"></div>
+                <h3>هل ساعدك الموقع؟ ⭐</h3>
+                <p id="review-desc">شارك تقييمك وساعدنا نحسن التجربة.</p>
+                
+                <div class="review-stars-container" id="review-stars">
+                    <span class="star" data-val="5">★</span>
+                    <span class="star" data-val="4">★</span>
+                    <span class="star" data-val="3">★</span>
+                    <span class="star" data-val="2">★</span>
+                    <span class="star" data-val="1">★</span>
+                </div>
+
+                <textarea id="review-comment" class="review-textarea" placeholder="(اختياري) اكتب رأيك أو اقتراحك..."></textarea>
+                
+                <div class="review-btns">
+                    <button class="review-btn review-btn-submit" id="btn-submit-review" disabled>تأكيد التقييم</button>
+                </div>
+                
+                <div id="review-msg" class="review-msg"></div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+    const overlay = document.getElementById('review-popup-overlay');
+    if (!overlay) return; // safety
+
+    const stars = document.querySelectorAll('.review-stars-container .star');
+    const submitBtn = document.getElementById('btn-submit-review');
+    const commentBox = document.getElementById('review-comment');
+    const msgBox = document.getElementById('review-msg');
+
+    if (!submitBtn || !msgBox) return; // essential elements must exist
+
+    // Prevent closing until explicitly allowed after successful submit
+    overlay.dataset.allowClose = 'false';
+
+    // Key handler to block Escape and similar
+    const keyHandler = (e) => {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    };
+    document.addEventListener('keydown', keyHandler, true);
+
+    // Ensure clicks on overlay/sheet don't close it or propagate
+    overlay.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); });
+    const sheet = overlay.querySelector('.review-popup-sheet');
+    if (sheet) sheet.addEventListener('click', (e) => { e.stopPropagation(); });
+
+    // Trigger animation
+    setTimeout(() => {
+        overlay.classList.add('active');
+    }, 50);
+
+    // Star logic (RTL visually because of row-reverse, but logic is based on data-val)
+    if (stars && stars.length > 0) {
+        stars.forEach(star => {
+        star.addEventListener('mouseover', function() {
+            let val = parseInt(this.getAttribute('data-val'));
+            stars.forEach(s => {
+                if (parseInt(s.getAttribute('data-val')) <= val) {
+                    s.classList.add('hover-active');
+                } else {
+                    s.classList.remove('hover-active');
+                }
+            });
+        });
+
+        star.addEventListener('mouseout', function() {
+            stars.forEach(s => s.classList.remove('hover-active'));
+        });
+
+        star.addEventListener('click', function() {
+            selectedRating = parseInt(this.getAttribute('data-val'));
+            stars.forEach(s => {
+                if (parseInt(s.getAttribute('data-val')) <= selectedRating) {
+                    s.classList.add('selected');
+                } else {
+                    s.classList.remove('selected');
+                }
+            });
+            submitBtn.disabled = false;
+
+            const descBox = document.getElementById('review-desc');
+            if (selectedRating <= 3) {
+                if (descBox) descBox.innerHTML = 'شارك تقييمك وساعدنا نحسن التجربة.<br><span style="color: red;">اكتب سبب تقييمك (10 أحرف على الأقل مع الالتزام بالآداب العامة).</span>';
+                if (commentBox) {
+                    commentBox.placeholder = '(مطلوب) اكتب سبب التقييم هنا...';
+                    commentBox.setAttribute('required', 'true');
+                    commentBox.setAttribute('minlength', '10');
+                }
+            } else {
+                if (descBox) descBox.innerHTML = 'شارك تقييمك وساعدنا نحسن التجربة.';
+                if (commentBox) {
+                    commentBox.placeholder = '(اختياري) اكتب رأيك أو اقتراحك...';
+                    commentBox.removeAttribute('required');
+                }
+            }
+        });
+        });
+    } else {
+        // No stars -> disable submit to prevent accidental close
+        submitBtn.disabled = true;
+    }
+
+    // Submit handler (guarded)
+    submitBtn.addEventListener('click', async () => {
+        // Rating is mandatory
+        if (selectedRating === 0) return;
+
+        const comment = commentBox ? commentBox.value.trim() : '';
+
+        if (selectedRating <= 3) {
+            if (comment.length < 10) {
+                msgBox.innerText = 'عذراً، يجب أن يحتوي سبب التقييم على 10 أحرف على الأقل.';
+                msgBox.className = 'review-msg error';
+                return;
+            }
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'جاري الإرسال...';
+        msgBox.className = 'review-msg';
+
+        try {
+            const response = await fetch(`${APP_BASE_PATH}/reviews/submit_review.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    rating: selectedRating, 
+                    comment: comment, 
+                    subject: subjectSlug,
+                    token: token,
+                    fingerprint: fingerprint
+                })
+            });
+
+            const result = await response.json();
+
+            if (result && result.success) {
+                msgBox.innerText = result.message || 'تم حفظ التقييم.';
+                msgBox.classList.add('success');
+                localStorage.setItem(RATED_KEY, 'true');
+
+                // Refresh testimonials if on homepage
+                if (document.getElementById('testimonials-container')) {
+                    loadTestimonials();
+                }
+
+                // Allow closing and remove key handler, then close
+                overlay.dataset.allowClose = 'true';
+                document.removeEventListener('keydown', keyHandler, true);
+                setTimeout(() => { closePopup(overlay); }, 1200);
+            } else if (result && result.message && result.message.includes('مسبقاً')) {
+                // User already rated (caught by server IP check) -> hide and never show again
+                msgBox.innerText = result.message;
+                msgBox.classList.add('success');
+                localStorage.setItem(RATED_KEY, 'true');
+                
+                overlay.dataset.allowClose = 'true';
+                document.removeEventListener('keydown', keyHandler, true);
+                setTimeout(() => { closePopup(overlay); }, 2000); // Wait 2s to let them read the message
+            } else {
+                msgBox.innerText = (result && result.message) ? result.message : 'فشل الإرسال.';
+                msgBox.classList.add('error');
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'تأكيد التقييم';
+            }
+        } catch (error) {
+            msgBox.innerText = 'حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.';
+            msgBox.classList.add('error');
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'تأكيد التقييم';
+        }
+    });
+}
+
+function closePopup(overlay) {
+    if (!overlay) return;
+    // Only allow close if explicitly permitted (set after successful submit)
+    if (overlay.dataset && overlay.dataset.allowClose !== 'true') return;
+
+    overlay.classList.remove('active');
+    setTimeout(() => {
+        try { overlay.remove(); } catch (e) { /* ignore */ }
+    }, 500); // Wait for transition
+}
+
+let lastReviewId = 0;
+let oldestReviewId = 0;
+let totalReviewsAvailable = 0;
+let isLoadingMoreReviews = false;
+const REVIEWS_PAGE_SIZE = 20;
+
+// Smart Polling Variables
+let reviewPollInterval = 15000; // Start at 15s
+let reviewPollTimer = null;
+let reviewAbortController = null;
+let isPollingReviews = false;
+
+//local testing path
+
+
+// const APP_BASE_PATH = 'http://127.0.0.1/%d8%a7%d9%84%d9%85%d9%88%d9%82%d8%b9%20%d8%a7%d9%84%d8%b4%d8%a7%d9%85%d9%84/'; // Adjust this to your actual base path if needed
+
+//domains testing path
+
+
+const APP_BASE_PATH = 'https://github.com/Val-Zir0/edu-finals/tree/main'; // Adjust this to your actual base path if needed
+
+async function loadTestimonials() {
+    const container = document.getElementById('testimonials-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch(`${APP_BASE_PATH}/reviews/get_reviews.php`);
+        const data = await response.json();
+        
+        if (data.success && data.total_reviews > 0) {
+            totalReviewsAvailable = data.total_reviews;
+
+            if (data.reviews.length > 0) {
+                lastReviewId = data.reviews[0].id; // The newest review is first
+                oldestReviewId = data.reviews[data.reviews.length - 1].id;
+            }
+            
+            // Build the HTML framework
+            let html = `
+                <div class="testimonials-header">
+                    <h2>آراء الطلاب</h2>
+                    <div class="testimonials-stats">
+                        <div class="stats-score" id="live-avg-rating">${data.average_rating} / 5 ⭐</div>
+                        <div class="stats-sub" id="live-total-reviews">بناءً على ${data.total_reviews} تقييم</div>
+                    </div>
+                </div>
+                <div class="testimonials-grid" id="live-reviews-grid">
+            `;
+            
+            data.reviews.forEach(review => {
+                html += generateReviewCardHTML(review, false);
+            });
+            
+            html += `</div>
+                <div class="testimonials-actions" id="testimonials-actions"></div>
+            `;
+            container.innerHTML = html;
+            
+            updateLoadMoreButton();
+
+            updateLoadMoreButton();
+
+            // Start smart polling if not started
+            if (!reviewPollTimer) {
+                scheduleReviewPoll();
+            }
+        } else {
+            container.innerHTML = ''; // Hide if no reviews
+        }
+    } catch (error) {
+        console.error('Failed to load testimonials:', error);
+    }
+}
+
+function updateLoadMoreButton() {
+    const actions = document.getElementById('testimonials-actions');
+    const grid = document.getElementById('live-reviews-grid');
+    if (!actions || !grid) return;
+
+    const loadedCount = grid.children.length;
+    if (loadedCount < totalReviewsAvailable) {
+        actions.innerHTML = `<button id="load-more-reviews-btn" class="load-more-reviews-btn">عرض المزيد</button>`;
+        const loadMoreBtn = document.getElementById('load-more-reviews-btn');
+        if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMoreReviews);
+    } else {
+        actions.innerHTML = '';
+    }
+}
+
+async function loadMoreReviews() {
+    if (isLoadingMoreReviews || !oldestReviewId) return;
+
+    const loadMoreBtn = document.getElementById('load-more-reviews-btn');
+    if (!loadMoreBtn) return;
+
+    isLoadingMoreReviews = true;
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.innerText = 'جاري التحميل...';
+
+    try {
+        const response = await fetch(`${APP_BASE_PATH}/reviews/get_reviews.php?before_id=${oldestReviewId}`);
+        const data = await response.json();
+
+        if (data.success && data.reviews.length > 0) {
+            const grid = document.getElementById('live-reviews-grid');
+            data.reviews.forEach(review => {
+                grid.insertAdjacentHTML('beforeend', generateReviewCardHTML(review, false));
+            });
+
+            oldestReviewId = data.reviews[data.reviews.length - 1].id;
+            updateLoadMoreButton();
+        } else {
+            const actions = document.getElementById('testimonials-actions');
+            if (actions) actions.innerHTML = '';
+        }
+    } catch (error) {
+        console.error('Failed to load more reviews:', error);
+        loadMoreBtn.innerText = 'حاول مرة أخرى';
+    } finally {
+        isLoadingMoreReviews = false;
+        if (loadMoreBtn) {
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.innerText = 'عرض المزيد';
+        }
+    }
+}
+
+function generateReviewCardHTML(review, isNew = false) {
+    let starsHTML = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    const avatarSvg = `<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+    
+    let animClass = isNew ? ' new-review-anim' : '';
+    
+    let html = `
+        <div class="testimonial-card${animClass}">
+            <div class="t-card-header">
+                <div class="t-avatar">${avatarSvg}</div>
+                <div class="t-user-info">
+                    <div class="t-name">${review.student_name}</div>
+                    <div class="t-date">${review.formatted_date}</div>
+                </div>
+                <div class="t-stars">${starsHTML}</div>
+            </div>
+    `;
+    
+    if (review.comment && review.comment.trim() !== '') {
+        let safeComment = review.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        html += `<div class="t-comment">${safeComment}</div>`;
+    }
+    
+    html += `</div>`;
+    return html;
+}
+
+function scheduleReviewPoll() {
+    clearTimeout(reviewPollTimer);
+    reviewPollTimer = setTimeout(pollReviews, reviewPollInterval);
+}
+
+async function pollReviews() {
+    // Smart Polling: Pause if tab is inactive or currently polling
+    if (document.visibilityState !== 'visible' || isPollingReviews) {
+        scheduleReviewPoll();
+        return;
+    }
+
+    isPollingReviews = true;
+    if (reviewAbortController) reviewAbortController.abort();
+    reviewAbortController = new AbortController();
+
+    try {
+        const response = await fetch(`${APP_BASE_PATH}/reviews/get_reviews.php?last_id=${lastReviewId}`, {
+            signal: reviewAbortController.signal,
+            cache: 'no-store'
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            const grid = document.getElementById('live-reviews-grid');
+            const avgEl = document.getElementById('live-avg-rating');
+            const totalEl = document.getElementById('live-total-reviews');
+            
+            if (!grid || !avgEl || !totalEl) {
+                isPollingReviews = false;
+                scheduleReviewPoll();
+                return;
+            }
+
+            let changed = false;
+
+            // Check if stats changed
+            let currentAvg = avgEl.innerText.split(' ')[0];
+            // Format data.average_rating to match the string comparison
+            if (currentAvg != data.average_rating) {
+                avgEl.innerText = `${data.average_rating} / 5 ⭐`;
+                avgEl.classList.remove('stat-update-anim');
+                void avgEl.offsetWidth; // trigger reflow
+                avgEl.classList.add('stat-update-anim');
+                changed = true;
+            }
+
+            let currentTotal = totalEl.innerText.replace(/[^0-9]/g, '');
+            if (currentTotal != data.total_reviews) {
+                totalEl.innerText = `بناءً على ${data.total_reviews} تقييم`;
+                totalReviewsAvailable = data.total_reviews;
+                changed = true;
+            }
+
+            // Check if there are new reviews to insert
+            if (data.reviews && data.reviews.length > 0) {
+                const newReviews = [...data.reviews].reverse(); 
+                
+                newReviews.forEach(review => {
+                    const cardHTML = generateReviewCardHTML(review, true);
+                    grid.insertAdjacentHTML('afterbegin', cardHTML);
+                });
+                
+                lastReviewId = data.reviews[0].id;
+                changed = true;
+            }
+
+            updateLoadMoreButton();
+
+            // Adaptive polling logic
+            if (changed) {
+                reviewPollInterval = Math.max(reviewPollInterval - 5000, 10000); // More activity -> poll faster (min 10s)
+            } else {
+                reviewPollInterval = Math.min(reviewPollInterval + 5000, 60000); // Less activity -> poll slower (max 60s)
+            }
+        }
+    } catch (error) {
+        if (error.name !== 'AbortError') {
+            // Silent fail for polling to prevent console spam
+        }
+    } finally {
+        isPollingReviews = false;
+        scheduleReviewPoll();
+    }
+}
+
+// Add visibility event listener to resume instantly when visible
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === 'visible' && reviewPollTimer) {
+        clearTimeout(reviewPollTimer);
+        pollReviews();
+    }
+});
