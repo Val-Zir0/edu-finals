@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المراجعة الشاملة</title>
+    <meta
+      name="description"
+      content="موقع تعليمي غير ربحي لمواد الفرقه الاولي"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <style>
+      :root {
+        --bg: #050505;
+        --bg2: #0f0f11;
+        --bg3: #1a1a1e;
+        
+        /* Comm - Sky/Cyan */
+        --comm-primary: #0ea5e9;
+        --comm-glow: rgba(14, 165, 233, 0.2);
+        
+        /* Pol - Emerald/Bronze */
+        --pol-primary: #059669;
+        --pol-glow: rgba(5, 150, 105, 0.2);
+        
+        /* Org - Indigo/Coral */
+        --org-primary: #4338ca;
+        --org-glow: rgba(67, 56, 202, 0.2);
+        
+        /* Shared */
+        --gold: #f59e0b;
+        --gold-light: #fbbf24;
+        --text: #f3f4f6;
+        --text-muted: #9ca3af;
+        --radius: 18px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        position: relative;
+        text-align: center;
+        padding: 80px 20px 60px;
+        overflow: hidden;
+      }
+      .hero > *:not(.particles) {
+        position: relative;
+        z-index: 1;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(245, 158, 11, 0.08) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 20% 80%,
+            var(--comm-glow) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 80%,
+            var(--org-glow) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            var(--pol-glow) 0%,
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--comm-primary), var(--pol-primary), var(--org-primary), transparent);
+      }
+
+      /* Floating particles */
+      .particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0;
+      }
+
+      /* Hero scales icon */
+      .hero-scales {
+        font-size: clamp(3rem, 8vw, 4.5rem);
+        display: block;
+        margin-bottom: 18px;
+        opacity: 0;
+        filter: drop-shadow(0 0 30px rgba(212, 160, 32, 0.35));
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(212, 160, 32, 0.1);
+        border: 1px solid rgba(212, 160, 32, 0.35);
+        color: var(--gold);
+        padding: 8px 24px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 24px;
+        opacity: 0;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+.hero-badge a span {
+color: var(--gold-light);
+
+}
+      .hero h1 {
+        font-family: "Amiri", serif;
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 40px rgba(212, 160, 32, 0.25));
+        margin-bottom: 14px;
+        opacity: 0;
+      }
+
+      .hero-sub {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        max-width: 580px;
+        margin: 0 auto 16px;
+        line-height: 1.9;
+        opacity: 0;
+      }
+
+      .hero-line {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--comm-primary), var(--pol-primary), var(--org-primary));
+        border-radius: 10px;
+        margin: 0 auto;
+        opacity: 0;
+      }
+
+      /* ===== STATS BAR ===== */
+      .stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 30px 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-val {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--gold);
+      }
+      .stat-lbl {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+      }
+
+      /* ===== CARDS SECTION ===== */
+      .cards-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 20px 60px;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+        max-width: 1100px;
+        width: 100%;
+      }
+
+      .nav-card {
+        position: relative;
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: var(--radius);
+        padding: 36px 30px 32px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.3s;
+      }
+
+      .nav-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--radius);
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+      }
+
+      .nav-card:hover::before {
+        opacity: 1;
+      }
+      .nav-card:hover {
+        border-color: rgba(255, 255, 255, 0.12);
+        transform: translateY(-4px);
+      }
+
+      .card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.4rem;
+        margin-bottom: 22px;
+        position: relative;
+      }
+
+      .card-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding: 4px 14px;
+        border-radius: 20px;
+        display: inline-block;
+      }
+
+      .nav-card h2 {
+        font-size: 1.35rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        color: var(--text);
+      }
+
+      .nav-card p {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 24px;
+      }
+
+      .card-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        margin-bottom: 24px;
+      }
+      .feat-item {
+        background: var(--bg3);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .feat-item span {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 2px;
+        font-size: 0.82rem;
+      }
+
+      .card-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 32px;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s;
+        text-decoration: none;
+      }
+      
+      .card-btn .arrow {
+        transition: transform 0.25s;
+        font-size: 1.1rem;
+      }
+      .nav-card:hover .card-btn .arrow {
+        transform: translateX(-4px);
+      }
+
+      /* --- Card Themes Variables --- */
+      .nav-card.card-comm {
+        --c-bg2-rgb: 21, 32, 43; /* #15202b */
+        --c-bg3: #223447;
+        --c-accent: #0284c7;
+        --c-accent-light: #38bdf8;
+        --c-glow: rgba(56, 189, 248, 0.2);
+        --c-icon-bg: rgba(56, 189, 248, 0.2);
+        --c-icon-bg2: rgba(56, 189, 248, 0.05);
+        --c-icon-shadow: rgba(56, 189, 248, 0.1);
+        --c-hover-shadow1: rgba(56, 189, 248, 0.15);
+        --c-hover-shadow2: rgba(56, 189, 248, 0.2);
+      }
+      .nav-card.card-pol {
+        --c-bg2-rgb: 7, 34, 27; /* #07221b */
+        --c-bg3: #0c382b;
+        --c-accent: #059669;
+        --c-accent-light: #10b981;
+        --c-glow: rgba(5, 150, 105, 0.2);
+        --c-icon-bg: rgba(5, 150, 105, 0.2);
+        --c-icon-bg2: rgba(5, 150, 105, 0.05);
+        --c-icon-shadow: rgba(5, 150, 105, 0.1);
+        --c-hover-shadow1: rgba(5, 150, 105, 0.15);
+        --c-hover-shadow2: rgba(5, 150, 105, 0.2);
+      }
+      .nav-card.card-org {
+        --c-bg2-rgb: 15, 9, 51; /* #0f0933 */
+        --c-bg3: #1b124a;
+        --c-accent: #4338ca;
+        --c-accent-light: #6366f1;
+        --c-glow: rgba(99, 102, 241, 0.2);
+        --c-icon-bg: rgba(99, 102, 241, 0.2);
+        --c-icon-bg2: rgba(99, 102, 241, 0.05);
+        --c-icon-shadow: rgba(99, 102, 241, 0.1);
+        --c-hover-shadow1: rgba(99, 102, 241, 0.15);
+        --c-hover-shadow2: rgba(99, 102, 241, 0.2);
+      }
+
+      /* --- Unified Card Styles Applied via Variables --- */
+      .nav-card.card-comm, .nav-card.card-pol, .nav-card.card-org {
+        background: rgba(var(--c-bg2-rgb), 0.7);
+      }
+      .nav-card.card-comm::before, .nav-card.card-pol::before, .nav-card.card-org::before {
+        background: radial-gradient(ellipse at 50% 100%, var(--c-glow) 0%, transparent 70%);
+      }
+      .nav-card.card-comm:hover, .nav-card.card-pol:hover, .nav-card.card-org:hover {
+        box-shadow: 0 8px 40px var(--c-hover-shadow1), 0 0 0 1px var(--c-hover-shadow2);
+      }
+      .card-comm .card-icon, .card-pol .card-icon, .card-org .card-icon {
+        background: linear-gradient(135deg, var(--c-icon-bg), var(--c-icon-bg2));
+        box-shadow: 0 0 30px var(--c-icon-shadow);
+      }
+      .card-comm .card-label, .card-pol .card-label, .card-org .card-label {
+        color: var(--c-accent);
+        background: var(--c-icon-shadow);
+      }
+      .card-comm .feat-item span, .card-pol .feat-item span, .card-org .feat-item span { 
+        color: var(--c-accent); 
+      }
+      .card-comm .feat-item, .card-pol .feat-item, .card-org .feat-item {
+        background: var(--c-bg3);
+      }
+      .card-comm .card-btn, .card-pol .card-btn, .card-org .card-btn { 
+        background: var(--c-accent); 
+        color: #fff; 
+      }
+      .card-comm .card-btn:hover, .card-pol .card-btn:hover, .card-org .card-btn:hover { 
+        background: var(--c-accent-light); 
+        transform: scale(1.04); 
+      }
+
+      .card-btn .arrow {
+        transition: transform 0.25s;
+        font-size: 1.1rem;
+      }
+      .nav-card:hover .card-btn .arrow {
+        transform: translateX(-4px);
+      }
+
+      /* Shimmer effect on cards */
+      .nav-card .shimmer {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.03),
+          transparent
+        );
+        transform: skewX(-15deg);
+        pointer-events: none;
+      }
+      .nav-card:hover .shimmer {
+        animation: shimmer 0.8s ease;
+      }
+      @keyframes shimmer {
+        to {
+          right: 150%;
+        }
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        line-height: 2;
+      }
+      footer span {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .footer-notice {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 107, 107, 0.08);
+        border: 1px solid rgba(255, 107, 107, 0.2);
+        color: #ff8a8a;
+        padding: 6px 18px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+      }
+      .footer-notice .emoji {
+        font-size: 1.5rem;
+
+      }
+
+      /* ===== RESUME MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        background: rgba(17, 24, 39, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        padding: 40px 36px;
+        max-width: 440px;
+        width: 90%;
+        text-align: center;
+        box-shadow:
+          0 24px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+        transform: translateY(30px) scale(0.95);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .modal-overlay.active .modal-box {
+        transform: translateY(0) scale(1);
+      }
+      .modal-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .modal-box h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+      .modal-box p {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 8px;
+      }
+      .modal-box .modal-sub {
+        font-size: 0.85rem;
+      }
+      .modal-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0 24px;
+        padding: 12px 20px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .modal-progress .mp-bar {
+        flex: 1;
+        height: 6px;
+        background: var(--bg3);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .modal-progress .mp-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        border-radius: 10px;
+        width: 0%;
+      }
+      .modal-progress .mp-text {
+        font-size: 0.82rem;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .modal-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .modal-btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .modal-btn-yes {
+        background: var(--gold);
+        color: var(--bg);
+      }
+      .modal-btn-yes:hover {
+        background: var(--gold-light);
+        transform: scale(1.04);
+      }
+      .modal-btn-no {
+        background: var(--bg3);
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .modal-btn-no:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 700px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+          max-width: 420px;
+        }
+        .hero {
+          padding: 60px 20px 40px;
+        }
+        .stats-bar {
+          gap: 24px;
+        }
+        .modal-box {
+          padding: 30px 24px;
+        }
+      }
+
+      @font-face {
+        font-family: "Emoji";
+        src: url(fonts/Emojis.ttf) format("truetype");
+      }
+      .card-icon, .hero-scales, .modal-icon, .emoji {
+        font-family: "Emoji";
+      }
+
+      ::selection {
+        background: none;
+        color: none;
+      }
+    </style>
+    <link rel="stylesheet" href="reviews/reviews.css" />
+  </head>
+  <body>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="particles" id="particles"></div>
+      <div class="hero-scales" id="hero-scales">📚</div>
+      <div class="hero-badge" id="hero-badge">
+        تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+      </div>
+      <h1 id="hero-title">المراجعة الشاملة</h1>
+      <p class="hero-sub" id="hero-sub">
+        منصة تعليمية تفاعلية تساعدك على مراجعة واختبار معلوماتك في مواد الفرقة الاولي الترم الثاني بشكل فعال وممتع، مع تغطية شاملة لجميع الفصول الدراسية واختبارات تدريبية منظمة لتثبيت المعلومات بشكل أفضل.
+      </p>
+      <div class="hero-line" id="hero-line"></div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-item">
+        <div class="stat-val">3</div>
+        <div class="stat-lbl">مواد دراسية</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">+200</div>
+        <div class="stat-lbl">سؤال تدريبي</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">∞</div>
+        <div class="stat-lbl">محاولات غير محدودة</div>
+      </div>
+      <div class="stat-item">
+  <div class="stat-val" id="visitor-count">0</div>
+  <div class="stat-lbl">عدد الزوار</div>
+</div>
+    </div>
+
+    <!-- CARDS -->
+    <main class="cards-section">
+      <div class="cards-grid">     
+           <!-- READ CARD -->
+        <a
+          href="maharat-etsal/"
+          class="nav-card card-comm"
+          id="card-comm"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">📥</div>
+          <div class="card-label">اتصال</div>
+          <h2>مراجعة مهارات الأتصال</h2>
+          <p>
+            ملخص شامل ومنظم لجميع الفصول مع اختبارات شامله للمنهج كاملاً
+             لتثبيت المعلومات بشكل فعال.
+          </p>
+          <div class="card-features">
+            <div class="feat-item"><span class="emoji">📑</span> 4 فصول</div>
+            <div class="feat-item"><span class="emoji">🗂️</span> اختبارات منظمة</div>
+            <div class="feat-item"><span class="emoji">🔍</span> تفاصيل دقيقة تغطية شاملة</div>
+            <div class="feat-item"><span class="emoji">📱</span> متجاوب يعمل على كل الأجهزة</div>
+          </div>
+          <div class="card-btn">اذهب للمراجعة <span class="arrow">←</span></div>
+        </a>
+
+        <!-- QUIZ CARD -->
+        <a
+          href="3olom-syaseya/"
+          class="nav-card card-pol"
+          id="card-pol"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">📖</div>
+          <div class="card-label">سياسة</div>
+          <h2>مراجعة علوم سياسية</h2>
+         <p>
+            ملخص شامل ومنظم لجميع الفصول مع اختبارات شامله للمنهج كاملاً
+             لتثبيت المعلومات بشكل فعال.
+          </p>
+          <div class="card-features">
+         <div class="feat-item"><span class="emoji">📑</span> 5 فصول</div>
+            <div class="feat-item"><span class="emoji">🗂️</span> اختبارات منظمة</div>
+            <div class="feat-item"><span class="emoji">🔍</span> تفاصيل دقيقة تغطية شاملة</div>
+            <div class="feat-item"><span class="emoji">📱</span> متجاوب يعمل على كل الأجهزة</div>
+          </div>
+          <div class="card-btn">اذهب للمراجعه<span class="arrow">←</span></div>
+        </a>
+
+        <!-- QUIZ BANK CARD -->
+        <a
+          href="solook-tanzemy/"
+          class="nav-card card-org"
+          id="card-org"
+        >
+          <div class="shimmer"></div>
+          <div class="card-icon">🗃️</div>
+          <div class="card-label">تنظيم</div>
+          <h2>مراجعة سلوك تنظيمي</h2>
+          <p>
+            ملخص شامل ومنظم لجميع الفصول مع اختبارات شامله للمنهج كاملاً
+             لتثبيت المعلومات بشكل فعال.
+          </p>
+          <div class="card-features">
+         <div class="feat-item"><span class="emoji">📑</span> 6 فصول</div>
+            <div class="feat-item"><span class="emoji">🗂️</span> اختبارات منظمة</div>
+            <div class="feat-item"><span class="emoji">🔍</span> تفاصيل دقيقة تغطية شاملة</div>
+            <div class="feat-item"><span class="emoji">📱</span> متجاوب يعمل على كل الأجهزة</div>
+          </div>
+          <div class="card-btn">اذهب للمراجعه<span class="arrow">←</span></div>
+        </a>
+
+
+      </div>
+    </main>
+
+    <!-- TESTIMONIALS SECTION (Injected by JS) -->
+    <section class="testimonials-section" id="testimonials-container"></section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-notice">
+  <span class="emoji">⚠️</span>
+  تنبيه: هذا الموقع مشروع تعليمي مستقل وغير ربحي، تم إنشاؤه لأغراض المساعدة الدراسية فقط.
+  <br />
+  الموقع غير تابع رسميًا للجامعة أو المعهد أو أعضاء هيئة التدريس، ولا يمثل أي جهة أكاديمية.
+  <br />
+  لا يتم جمع أي بيانات شخصية من الزوار، وجميع المحتوى المعروض مستند إلى مراجعات وملاحظات تعليمية شخصية.
+</div>
+      <br />
+
+    تم انشأة بواسطة : <a href="https://fares-hamed.kesug.com/AR/" target="_blank" rel="noopener noreferrer"><span> Fares Hamed</span></a>
+    </footer>
+
+    <script>
+      // ===== GSAP ANIMATIONS =====
+      document.addEventListener("DOMContentLoaded", () => {
+      // Create floating particles
+      const particlesContainer = document.getElementById("particles");
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.width = Math.random() * 4 + 2 + "px";
+        p.style.height = p.style.width;
+        particlesContainer.appendChild(p);
+      }
+
+      // Animate particles infinitely
+      document.querySelectorAll(".particle").forEach((p, i) => {
+        gsap.to(p, {
+          opacity: Math.random() * 0.5 + 0.1,
+          y: -80 - Math.random() * 120,
+          x: (Math.random() - 0.5) * 100,
+          duration: 4 + Math.random() * 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.2,
+        });
+      });
+
+      // Hero entrance timeline
+      const heroTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      heroTL
+        .fromTo(
+          "#hero-scales",
+          { opacity: 0, scale: 0.5, rotation: -15 },
+          { opacity: 1, scale: 1, rotation: 0, duration: 0.9 }
+        )
+        .to("#hero-badge", { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+        .fromTo(
+          "#hero-title",
+          { opacity: 0, y: 30, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.9 },
+          "-=0.3",
+        )
+        .to("#hero-sub", { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+        .fromTo(
+          "#hero-line",
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.5 },
+          "-=0.3",
+        )
+        .to("#stats-bar", { opacity: 1, y: 0, duration: 0.6 }, "-=0.2");
+
+      // Animate stat numbers
+      heroTL.add(() => {
+        document.querySelectorAll(".stat-val").forEach((el) => {
+          gsap.from(el, {
+            scale: 0.5,
+            opacity: 0,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          });
+        });
+      }, "-=0.4");
+
+      // Cards stagger entrance
+      gsap.to(".nav-card", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 1.2,
+      });
+
+      // Card icon floating animation
+      gsap.to(".card-icon", {
+        y: -6,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.3,
+      });
+
+      // Subtle scales rotation for hero icon
+      gsap.to("#hero-scales", {
+        rotation: 3,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 1,
+      });
+
+      // Footer fade in
+      gsap.from("footer", {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 2,
+        ease: "power2.out",
+      });
+      });
+
+      // ===== RESUME QUIZ MODAL =====
+      (function checkQuizProgress() {
+        try {
+          const saved = localStorage.getItem('hr_quiz_progress');
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          // Check if quiz is in progress (not completed)
+          if (data && data.inProgress && data.currentIdx !== undefined && data.totalQuestions) {
+            const modal = document.getElementById('resume-modal');
+            const pct = Math.round((data.currentIdx / data.totalQuestions) * 100);
+            document.getElementById('modal-progress-fill').style.width = pct + '%';
+            document.getElementById('modal-progress-text').textContent = 
+              `سؤال ${data.currentIdx + 1} من ${data.totalQuestions}`;
+            
+            // Show modal with delay
+            setTimeout(() => {
+              modal.classList.add('active');
+            }, 1500);
+
+            // Yes button - go to quiz with resume flag
+            document.getElementById('modal-yes').addEventListener('click', () => {
+              const target = data.quizFilename ? ('quz/' + data.quizFilename) : 'quz/index2.html';
+              window.location.href = target + '?resume=true';
+            });
+
+            // No button - clear progress and close
+            document.getElementById('modal-no').addEventListener('click', () => {
+              localStorage.removeItem('hr_quiz_progress');
+              modal.classList.remove('active');
+            });
+
+            // Close on overlay click
+            modal.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                modal.classList.remove('active');
+              }
+            });
+          }
+        } catch (e) {
+          console.warn('Error reading quiz progress:', e);
+        }
+      })();
+
+
+      let currentCount = 0;
+      let initialAnimationDone = false;
+      let visitorPollInterval = 30000; // Start with 30s
+      let visitorTimer = null;
+      let visitorAbortController = null;
+
+      async function loadVisitors() {
+        if (document.visibilityState !== 'visible') return;
+
+        if (visitorAbortController) visitorAbortController.abort();
+        visitorAbortController = new AbortController();
+
+        try {
+          const response = await fetch("api_visitors.php?t=" + Date.now(), { signal: visitorAbortController.signal });
+          const data = await response.json();
+          const newCount = parseInt(data.c || data.count, 10);
+          
+          if (newCount === currentCount) {
+             visitorPollInterval = Math.min(visitorPollInterval + 10000, 60000); // max 60s
+             scheduleVisitorPoll();
+             return;
+          }
+          
+          visitorPollInterval = Math.max(visitorPollInterval - 10000, 30000); // min 30s
+          
+          if (!initialAnimationDone) {
+            if(window.gsap) {
+                gsap.to({ val: 0 }, {
+                  val: newCount,
+                  duration: 2,
+                  ease: "power2.out",
+                  onUpdate: function() {
+                    document.getElementById("visitor-count").textContent = Math.floor(this.targets()[0].val);
+                  },
+                  onComplete: function() {
+                    currentCount = newCount;
+                    initialAnimationDone = true;
+                  }
+                });
+            } else {
+                document.getElementById("visitor-count").textContent = newCount;
+                currentCount = newCount;
+                initialAnimationDone = true;
+            }
+          } else {
+            if(window.gsap) {
+                gsap.to({ val: currentCount }, {
+                  val: newCount,
+                  duration: 1,
+                  ease: "power1.inOut",
+                  onUpdate: function() {
+                    document.getElementById("visitor-count").textContent = Math.floor(this.targets()[0].val);
+                  },
+                  onComplete: function() {
+                    currentCount = newCount;
+                  }
+                });
+            } else {
+                document.getElementById("visitor-count").textContent = newCount;
+                currentCount = newCount;
+            }
+          }
+          scheduleVisitorPoll();
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+             console.error("Visitor Polling Error");
+             scheduleVisitorPoll();
+          }
+        }
+      }
+
+      function scheduleVisitorPoll() {
+          clearTimeout(visitorTimer);
+          visitorTimer = setTimeout(loadVisitors, visitorPollInterval);
+      }
+
+      async function trackVisitAndLoad() {
+        try {
+          await fetch("track_visitor.php", { method: 'POST' });
+        } catch (e) {}
+        loadVisitors();
+      }
+
+      document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === 'visible') {
+              loadVisitors();
+          }
+      });
+
+      trackVisitAndLoad();
+    </script>
+
+
+    <script src="reviews/reviews.js" defer></script>
+    
+  </body>
+</html>
