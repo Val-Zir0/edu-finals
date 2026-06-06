@@ -368,7 +368,7 @@ let isPollingReviews = false;
 //domains testing path
 
 
-const APP_BASE_PATH = 'https://github.com/Val-Zir0/edu-finals/tree/main'; // Adjust this to your actual base path if needed
+const APP_BASE_PATH = 'https://github.com/Val-Zir0/edu-finals/tree/main/'; // Adjust this to your actual base path if needed
 
 async function loadTestimonials() {
     const container = document.getElementById('testimonials-container');
